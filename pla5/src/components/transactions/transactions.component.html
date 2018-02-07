@@ -1,0 +1,22 @@
+﻿<div class="transactions">
+    <p *ngIf="!transactions"><em>Loading...</em></p>
+    
+    <table>
+        <caption>Transactions</caption>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Debit Account</th>
+                <th>Credit Account</th>
+                <th>Tax?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <transaction-item *ngFor="let transaction of transactions" [transaction]="transaction" />
+        </tbody>
+    </table>
+    <button (click)="addTransaction()">Add Transaction</button>
+</div>

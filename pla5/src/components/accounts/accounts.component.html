@@ -1,0 +1,23 @@
+﻿<div class="accounts">
+    <p *ngIf="!accounts"><em>Loading...</em></p>
+    
+    <table>
+        <caption>Accounts</caption>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Institution</th>
+                <th>Number</th>
+                <th>Interest</th>
+                <th>Limit</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <account-item *ngFor="let account of accounts" [account]="account"/>
+        </tbody>
+    </table>
+    <button (click)="addAccount()">Add Account</button>
+</div>

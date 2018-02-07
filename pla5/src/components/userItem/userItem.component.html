@@ -1,0 +1,6 @@
+﻿<tr class="userItem">
+    <td>{{user.id}}</td>
+    <td>{{user.userName}}</td>
+    <td><input type='checkbox' checked={{user.admin}} (Change)="toggleAdmin()" /></td>
+    <td class='deleteLink'><a (click)="confirm('Are you sure you want to delete this user?'); deleteUser();">Delete</a></td>
+</tr>

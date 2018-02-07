@@ -1,0 +1,12 @@
+﻿<tr class="accountItem">
+    <td>{{account.id}}</td>
+    <td>{{account.debit}} ? 'Asset' : 'Liability'}</td>
+    <td>{{account.name}}</td>
+    <td>{{account.institution}}</td>
+    <td>{{account.number}}</td>
+    <td className='right'>displayAsPercent({{account.interest}})</td>
+    <td className='right'>{{limit}} ? this.displayAsDollar({{account.limit}}) : '--'</td>
+    <td className='right'>displayAsDollar({{account.balance}})</td>
+    <td><a [routerLink]="['/accountEdit']">Edit</a></td>
+    <td><a (click)="confirm('are you sure you want to delete this account?'); deleteAccount();">Delete</a></td>
+</tr>

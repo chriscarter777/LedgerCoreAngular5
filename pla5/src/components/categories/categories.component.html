@@ -1,0 +1,19 @@
+﻿<div class="categories">
+    <p *ngIf="!categories"><em>Loading...</em></p>
+    
+    <table>
+        <caption>Categories</caption>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Tax?</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <category-item *ngFor="let category of categories" [category]="category" />
+        </tbody>
+    </table>
+    <button (click)="addCategory()">Add Category</button>
+</div>
