@@ -1,4 +1,4 @@
-﻿<div class="categories">
+<div class="categories">
     <p *ngIf="!categories"><em>Loading...</em></p>
     
     <table>
@@ -12,7 +12,7 @@
             </tr>
         </thead>
         <tbody>
-            <category-item *ngFor="let category of categories" [category]="category" />
+            <category-item *ngFor="let category of categories" [category]="category"></category-item>
         </tbody>
     </table>
     <button (click)="addCategory()">Add Category</button>

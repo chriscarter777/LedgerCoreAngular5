@@ -1,4 +1,4 @@
-﻿<div class="users">
+<div class="users">
     <p *ngIf="!users"><em>Loading...</em></p>
 
     <table>
@@ -11,7 +11,7 @@
             </tr>
         </thead>
         <tbody>
-            <user-item *ngFor="let user of users" [user]="user"/>
+            <user-item *ngFor="let user of users" [user]="user"></user-item>
         </tbody>
     </table>
     <button (click)="addUser()">Add User</button>

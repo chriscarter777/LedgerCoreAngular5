@@ -1,4 +1,4 @@
-﻿<div class="accounts">
+<div class="accounts">
     <p *ngIf="!accounts"><em>Loading...</em></p>
     
     <table>
@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody>
-            <account-item *ngFor="let account of accounts" [account]="account"/>
+            <account-item *ngFor="let account of accounts" [account]="account"></account-item>
         </tbody>
     </table>
     <button (click)="addAccount()">Add Account</button>
