@@ -6,4 +6,4 @@ A personal finance application, using traditional credit-debit methodology.
 Uses .NET <b>Identity</b> for multiple user authentication, and <b>xUnit</> for testing.
 
 For instructions regarding how Angular 5 was scaffolded inside the .NET Core solution,
-see <a href="http://cscarter.net/A5netcore">cscarter.net</a>.
+see <a href="http://cscarter.net/Home/A5netcore">cscarter.net</a>.
