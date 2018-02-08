@@ -16,16 +16,17 @@ var DataService = /** @class */ (function () {
         this.http = http;
     }
     DataService.prototype.getAccounts = function () {
-        return this.http.get(this.baseUrl + 'api/Accounts');
+        return this.http.get('/Accounts//AccountsAsync');
+        //return this.http.get<Account[]>(this.baseUrl + 'Accounts//AccountsAsync');
     };
     DataService.prototype.getCategories = function () {
-        return this.http.get(this.baseUrl + 'api/Categories');
+        return this.http.get('/Categories/CategoriesAsync');
     };
     DataService.prototype.getTransactions = function () {
-        return this.http.get(this.baseUrl + 'api/Transactions');
+        return this.http.get('/Transactions/TransactionsAsync');
     };
     DataService.prototype.getUsers = function () {
-        return this.http.get(this.baseUrl + 'api/Users');
+        return this.http.get('/Users/UsersAsync');
     };
     __decorate([
         core_1.Inject('BASE_URL'),

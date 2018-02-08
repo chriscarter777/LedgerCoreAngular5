@@ -1,4 +1,4 @@
-﻿import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Account, Category, Transaction, User } from './interfaces'; 
 import { Observable } from 'rxjs/Observable';
@@ -10,18 +10,19 @@ export class DataService{
     constructor(private http: HttpClient) { }
 
     getAccounts(): Observable<Account[]> {
-        return this.http.get<Account[]>(this.baseUrl + 'api/Accounts');
+      return this.http.get<Account[]>('/Accounts//AccountsAsync');
+      //return this.http.get<Account[]>(this.baseUrl + 'Accounts//AccountsAsync');
     }
 
     getCategories(): Observable<Category[]> {
-        return this.http.get<Category[]>(this.baseUrl + 'api/Categories');
+        return this.http.get<Category[]>('/Categories/CategoriesAsync');
     }
 
     getTransactions(): Observable<Transaction[]> {
-        return this.http.get<Transaction[]>(this.baseUrl + 'api/Transactions');
+        return this.http.get<Transaction[]>('/Transactions/TransactionsAsync');
     }
 
     getUsers(): Observable<User[]> {
-        return this.http.get<User[]>(this.baseUrl + 'api/Users');
+        return this.http.get<User[]>('/Users/UsersAsync');
     }
 }

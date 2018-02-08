@@ -24,7 +24,7 @@ var UsersComponent = /** @class */ (function () {
     };
     UsersComponent = __decorate([
         core_1.Component({
-            selector: 'users',
+            selector: 'pl-users',
             templateUrl: './users.component.html',
             styleUrls: ['./users.component.css']
         }),

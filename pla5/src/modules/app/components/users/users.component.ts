@@ -3,7 +3,7 @@ import { User } from '../../../shared/interfaces';
 import { DataService } from '../../../shared/data.service';
 
 @Component({
-    selector: 'users',
+    selector: 'pl-users',
     templateUrl: './users.component.html',
     styleUrls: ['./users.component.css']
 })

@@ -14,6 +14,8 @@ var data_service_1 = require("../../../shared/data.service");
 var AccountsComponent = /** @class */ (function () {
     function AccountsComponent(dataService) {
         this.dataService = dataService;
+        this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
+        this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
     AccountsComponent.prototype.ngOnInit = function () {
         this.getAccounts();
@@ -22,9 +24,22 @@ var AccountsComponent = /** @class */ (function () {
         var _this = this;
         this.dataService.getAccounts().subscribe(function (accounts) { return _this.accounts = accounts; });
     };
+    AccountsComponent.prototype.onDelete = function (id) {
+        var confirmation = confirm('are you sure you want to delete ' + this.accounts.find(function (element) { return element.id == id; }).name + '?');
+        if (confirmation) {
+            alert("Ha! Account " + id + " is GONE!");
+        }
+        ;
+    };
+    AccountsComponent.prototype.onAdd = function (newAccount) {
+        alert("You just added " + newAccount.name + ".");
+    };
+    AccountsComponent.prototype.onUpdate = function (account) {
+        alert("You just updated " + account.name + ".");
+    };
     AccountsComponent = __decorate([
         core_1.Component({
-            selector: 'accounts',
+            selector: 'pl-accounts',
             templateUrl: './accounts.component.html',
             styleUrls: ['./accounts.component.css']
         }),

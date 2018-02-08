@@ -1,19 +1,29 @@
 <div class="categories">
-    <p *ngIf="!categories"><em>Loading...</em></p>
-    
-    <table>
-        <caption>Categories</caption>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Tax?</th>
-                <th>Type</th>
-            </tr>
-        </thead>
-        <tbody>
-            <category-item *ngFor="let category of categories" [category]="category"></category-item>
-        </tbody>
-    </table>
-    <button (click)="addCategory()">Add Category</button>
+  <p *ngIf="!categories"><em>Loading...</em></p>
+
+  <table>
+    <caption>Categories</caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Tax?</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <td>{{category.id}}</td>
+        <td>{{category.name}}</td>
+        <td>&nbsp;{{category.tax && <span class='glyphicon glyphicon-copy' style='color:green;'></span>}}</td>
+        <td>{{category.type}}</td>
+        <td><a [routerLink]="['/categorytEdit']">Edit</a></td>
+        <td><a (click)="confirm('are you sure you want to delete this category?'); deleteCategory();">Delete</a></td>
+        <!--<category-item *ngFor="let category of categories" [category]="category"></category-item>-->
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="addCategory()">Add Category</button>
+  <category-add (add)="onAdd($event)"></category-add>
+  <category-edit *ngIf="categories" [editCategory]="categories[0]" (update)="onUpdate($event)"></category-edit>
 </div>

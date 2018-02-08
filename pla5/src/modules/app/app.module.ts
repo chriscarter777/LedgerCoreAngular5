@@ -26,6 +26,7 @@ import { UserItemComponent } from './components/userItem/userItem.component';
 import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
+//make non-module items available
   declarations: [
     AppComponent,
     NavMenuComponent,
@@ -47,7 +48,9 @@ import { UsersComponent } from './components/users/users.component';
     TransactionsComponent,
 
     UserItemComponent,
-    UsersComponent  ],
+    UsersComponent
+  ],
+    //import other modules
   imports: [
     BrowserModule,
     CommonModule,
@@ -81,6 +84,7 @@ import { UsersComponent } from './components/users/users.component';
     { provide: 'BASE_URL', useFactory: getBaseUrl },
     DataService
   ],
+  //set entry point
   bootstrap: [AppComponent]
 })
 export class AppModule { }

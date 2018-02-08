@@ -1,12 +1,13 @@
 using System;
 using Xunit;
+using Moq;
 
 namespace pla5Tests
 {
-    public class UnitTest1
+    public class GetUserTest
     {
         [Fact]
-        public void Test1()
+        public void GetUserId()
         {
 
         }

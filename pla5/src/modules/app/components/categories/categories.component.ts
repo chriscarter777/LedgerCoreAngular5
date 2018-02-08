@@ -3,7 +3,7 @@ import { Category } from '../../../shared/interfaces';
 import { DataService } from '../../../shared/data.service';
 
 @Component({
-    selector: 'categories',
+    selector: 'pl-categories',
     templateUrl: './categories.component.html',
     styleUrls: ['./categories.component.css']
 })
@@ -18,5 +18,20 @@ export class CategoriesComponent {
 
     getCategories(): void {
         this.dataService.getCategories().subscribe(categories => this.categories = categories);
+    }
+
+    onDelete(id: number): void {
+      var confirmation = confirm('are you sure you want to delete ' + this.categories.find((element) => element.id == id).name + '?');
+      if (confirmation) {
+        alert("Ha! Category " + id + " is GONE!")
+      };
+    }
+
+    onAdd(newCategory: Category) {
+      alert("You just added " + newCategory.name + ".");
+    }
+
+    onUpdate(category: Category) {
+      alert("You just updated " + category.name + ".");
     }
 }

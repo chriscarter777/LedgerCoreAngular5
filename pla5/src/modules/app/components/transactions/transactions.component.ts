@@ -3,7 +3,7 @@ import { Transaction } from '../../../shared/interfaces';
 import { DataService } from '../../../shared/data.service';
 
 @Component({
-    selector: 'transactions',
+    selector: 'pl-transactions',
     templateUrl: './transactions.component.html',
     styleUrls: ['./transactions.component.css']
 })

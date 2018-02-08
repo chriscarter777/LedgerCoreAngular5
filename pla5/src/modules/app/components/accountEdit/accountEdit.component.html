@@ -1,18 +1,49 @@
-﻿<div class="modal accountEdit">
-    <form>
-        <label>Type</label>
-        <input type='radio' value='true' checked={{debit}} (Change)="handleDebitButton()" /> Asset
-        <input type='radio' value='false' checked={{!debit}} (Change)="handleDebitButton()" /> Liability
-        <label>Name</label>
-        <input type='text' />
-        <label>Institution</label>
-        <input type='text' />
-        <label>Number</label>
-        <input type='text' />
-        <label>Interest Rate</label>
-        <input type='number' />%
-        <label>Limit</label>
-        $<input type='number' />
-        <input type='submit' value="Update" />
-    </form>
+<div class="accountEdit">
+  <h4>Edit</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Institution</th>
+        <th>Number</th>
+        <th>Interest</th>
+        <th>Limit</th>
+        <th>Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{editAccount.id}}</td>
+        <td>{{editAccount.debit ? 'Asset' : 'Liability'}}</td>
+        <td>{{editAccount.name}}</td>
+        <td>{{editAccount.institution}}</td>
+        <td>{{editAccount.number}}</td>
+        <td className='right'>{{displayAsPercent(editAccount.interest)}}</td>
+        <td className='right'>{{account.limit ? displayAsDollar(editAccount.limit) : '--'}}</td>
+        <td className='right'>{{displayAsDollar(editAccount.balance)}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="onSubmit()">Update</button>
+
+
+
+  <!--<form>
+      <label>Type</label>
+      <input type='radio' value='true' checked={{debit}} (Change)="handleDebitButton()" /> Asset
+      <input type='radio' value='false' checked={{!debit}} (Change)="handleDebitButton()" /> Liability
+      <label>Name</label>
+      <input type='text' />
+      <label>Institution</label>
+      <input type='text' />
+      <label>Number</label>
+      <input type='text' />
+      <label>Interest Rate</label>
+      <input type='number' />%
+      <label>Limit</label>
+      $<input type='number' />
+      <input type='submit' value="Update" />
+  </form>-->
 </div>

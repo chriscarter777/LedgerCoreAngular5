@@ -24,7 +24,7 @@ var CategoriesComponent = /** @class */ (function () {
     };
     CategoriesComponent = __decorate([
         core_1.Component({
-            selector: 'categories',
+            selector: 'pl-categories',
             templateUrl: './categories.component.html',
             styleUrls: ['./categories.component.css']
         }),

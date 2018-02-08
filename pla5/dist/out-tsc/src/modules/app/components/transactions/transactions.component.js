@@ -24,7 +24,7 @@ var TransactionsComponent = /** @class */ (function () {
     };
     TransactionsComponent = __decorate([
         core_1.Component({
-            selector: 'transactions',
+            selector: 'pl-transactions',
             templateUrl: './transactions.component.html',
             styleUrls: ['./transactions.component.css']
         }),

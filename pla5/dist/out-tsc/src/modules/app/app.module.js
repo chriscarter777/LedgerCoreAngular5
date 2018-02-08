@@ -35,6 +35,7 @@ var AppModule = /** @class */ (function () {
     }
     AppModule = __decorate([
         core_1.NgModule({
+            //make non-module items available
             declarations: [
                 app_component_1.AppComponent,
                 navmenu_component_1.NavMenuComponent,
@@ -54,6 +55,7 @@ var AppModule = /** @class */ (function () {
                 userItem_component_1.UserItemComponent,
                 users_component_1.UsersComponent
             ],
+            //import other modules
             imports: [
                 platform_browser_1.BrowserModule,
                 common_1.CommonModule,
@@ -83,6 +85,7 @@ var AppModule = /** @class */ (function () {
                 { provide: 'BASE_URL', useFactory: getBaseUrl },
                 data_service_1.DataService
             ],
+            //set entry point
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

@@ -18,15 +18,16 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_lazy_route_resource lazy re
 /***/ }),
 
 /***/ "../../../../../src/environments/environment.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
+
 // The file contents for the current environment will overwrite these during build.
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
-var environment = {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.environment = {
     production: false
 };
 
@@ -34,149 +35,126 @@ var environment = {
 /***/ }),
 
 /***/ "../../../../../src/main.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__("../../../platform-browser-dynamic/esm5/platform-browser-dynamic.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_app_app_module__ = __webpack_require__("../../../../../src/modules/app/app.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 
-
-
-
-if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* enableProdMode */])();
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var platform_browser_dynamic_1 = __webpack_require__("../../../platform-browser-dynamic/esm5/platform-browser-dynamic.js");
+var app_module_1 = __webpack_require__("../../../../../src/modules/app/app.module.ts");
+var environment_1 = __webpack_require__("../../../../../src/environments/environment.ts");
+if (environment_1.environment.production) {
+    core_1.enableProdMode();
 }
-Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__modules_app_app_module__["a" /* AppModule */])
+platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(app_module_1.AppModule)
     .catch(function (err) { return console.log(err); });
 
 
 /***/ }),
 
 /***/ "../../../../../src/modules/app/app.module.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* unused harmony export getBaseUrl */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__("../../../common/esm5/common.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_data_service__ = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_app_app_component__ = __webpack_require__("../../../../../src/modules/app/components/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_navmenu_navmenu_component__ = __webpack_require__("../../../../../src/modules/app/components/navmenu/navmenu.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_home_home_component__ = __webpack_require__("../../../../../src/modules/app/components/home/home.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_accountAdd_accountAdd_component__ = __webpack_require__("../../../../../src/modules/app/components/accountAdd/accountAdd.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_accountEdit_accountEdit_component__ = __webpack_require__("../../../../../src/modules/app/components/accountEdit/accountEdit.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_accountItem_accountItem_component__ = __webpack_require__("../../../../../src/modules/app/components/accountItem/accountItem.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_accounts_accounts_component__ = __webpack_require__("../../../../../src/modules/app/components/accounts/accounts.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_categories_categories_component__ = __webpack_require__("../../../../../src/modules/app/components/categories/categories.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_categoryAdd_categoryAdd_component__ = __webpack_require__("../../../../../src/modules/app/components/categoryAdd/categoryAdd.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_categoryEdit_categoryEdit_component__ = __webpack_require__("../../../../../src/modules/app/components/categoryEdit/categoryEdit.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_categoryItem_categoryItem_component__ = __webpack_require__("../../../../../src/modules/app/components/categoryItem/categoryItem.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_transactionAdd_transactionAdd_component__ = __webpack_require__("../../../../../src/modules/app/components/transactionAdd/transactionAdd.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_transactionEdit_transactionEdit_component__ = __webpack_require__("../../../../../src/modules/app/components/transactionEdit/transactionEdit.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_transactionItem_transactionItem_component__ = __webpack_require__("../../../../../src/modules/app/components/transactionItem/transactionItem.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_transactions_transactions_component__ = __webpack_require__("../../../../../src/modules/app/components/transactions/transactions.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_userItem_userItem_component__ = __webpack_require__("../../../../../src/modules/app/components/userItem/userItem.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__components_users_users_component__ = __webpack_require__("../../../../../src/modules/app/components/users/users.component.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var platform_browser_1 = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var common_1 = __webpack_require__("../../../common/esm5/common.js");
+var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
+var http_1 = __webpack_require__("../../../common/esm5/http.js");
+var router_1 = __webpack_require__("../../../router/esm5/router.js");
+var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+var app_component_1 = __webpack_require__("../../../../../src/modules/app/components/app/app.component.ts");
+var navmenu_component_1 = __webpack_require__("../../../../../src/modules/app/components/navmenu/navmenu.component.ts");
+var home_component_1 = __webpack_require__("../../../../../src/modules/app/components/home/home.component.ts");
+var accountAdd_component_1 = __webpack_require__("../../../../../src/modules/app/components/accountAdd/accountAdd.component.ts");
+var accountEdit_component_1 = __webpack_require__("../../../../../src/modules/app/components/accountEdit/accountEdit.component.ts");
+var accountItem_component_1 = __webpack_require__("../../../../../src/modules/app/components/accountItem/accountItem.component.ts");
+var accounts_component_1 = __webpack_require__("../../../../../src/modules/app/components/accounts/accounts.component.ts");
+var categories_component_1 = __webpack_require__("../../../../../src/modules/app/components/categories/categories.component.ts");
+var categoryAdd_component_1 = __webpack_require__("../../../../../src/modules/app/components/categoryAdd/categoryAdd.component.ts");
+var categoryEdit_component_1 = __webpack_require__("../../../../../src/modules/app/components/categoryEdit/categoryEdit.component.ts");
+var categoryItem_component_1 = __webpack_require__("../../../../../src/modules/app/components/categoryItem/categoryItem.component.ts");
+var transactionAdd_component_1 = __webpack_require__("../../../../../src/modules/app/components/transactionAdd/transactionAdd.component.ts");
+var transactionEdit_component_1 = __webpack_require__("../../../../../src/modules/app/components/transactionEdit/transactionEdit.component.ts");
+var transactionItem_component_1 = __webpack_require__("../../../../../src/modules/app/components/transactionItem/transactionItem.component.ts");
+var transactions_component_1 = __webpack_require__("../../../../../src/modules/app/components/transactions/transactions.component.ts");
+var userItem_component_1 = __webpack_require__("../../../../../src/modules/app/components/userItem/userItem.component.ts");
+var users_component_1 = __webpack_require__("../../../../../src/modules/app/components/users/users.component.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */])({
+        core_1.NgModule({
+            //make non-module items available
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_7__components_app_app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_8__components_navmenu_navmenu_component__["a" /* NavMenuComponent */],
-                __WEBPACK_IMPORTED_MODULE_9__components_home_home_component__["a" /* HomeComponent */],
-                __WEBPACK_IMPORTED_MODULE_10__components_accountAdd_accountAdd_component__["a" /* AccountAddComponent */],
-                __WEBPACK_IMPORTED_MODULE_11__components_accountEdit_accountEdit_component__["a" /* AccountEditComponent */],
-                __WEBPACK_IMPORTED_MODULE_12__components_accountItem_accountItem_component__["a" /* AccountItemComponent */],
-                __WEBPACK_IMPORTED_MODULE_13__components_accounts_accounts_component__["a" /* AccountsComponent */],
-                __WEBPACK_IMPORTED_MODULE_14__components_categories_categories_component__["a" /* CategoriesComponent */],
-                __WEBPACK_IMPORTED_MODULE_15__components_categoryAdd_categoryAdd_component__["a" /* CategoryAddComponent */],
-                __WEBPACK_IMPORTED_MODULE_16__components_categoryEdit_categoryEdit_component__["a" /* CategoryEditComponent */],
-                __WEBPACK_IMPORTED_MODULE_17__components_categoryItem_categoryItem_component__["a" /* CategoryItemComponent */],
-                __WEBPACK_IMPORTED_MODULE_18__components_transactionAdd_transactionAdd_component__["a" /* TransactionAddComponent */],
-                __WEBPACK_IMPORTED_MODULE_19__components_transactionEdit_transactionEdit_component__["a" /* TransactionEditComponent */],
-                __WEBPACK_IMPORTED_MODULE_20__components_transactionItem_transactionItem_component__["a" /* TransactionItemComponent */],
-                __WEBPACK_IMPORTED_MODULE_21__components_transactions_transactions_component__["a" /* TransactionsComponent */],
-                __WEBPACK_IMPORTED_MODULE_22__components_userItem_userItem_component__["a" /* UserItemComponent */],
-                __WEBPACK_IMPORTED_MODULE_23__components_users_users_component__["a" /* UsersComponent */]
+                app_component_1.AppComponent,
+                navmenu_component_1.NavMenuComponent,
+                home_component_1.HomeComponent,
+                accountAdd_component_1.AccountAddComponent,
+                accountEdit_component_1.AccountEditComponent,
+                accountItem_component_1.AccountItemComponent,
+                accounts_component_1.AccountsComponent,
+                categories_component_1.CategoriesComponent,
+                categoryAdd_component_1.CategoryAddComponent,
+                categoryEdit_component_1.CategoryEditComponent,
+                categoryItem_component_1.CategoryItemComponent,
+                transactionAdd_component_1.TransactionAddComponent,
+                transactionEdit_component_1.TransactionEditComponent,
+                transactionItem_component_1.TransactionItemComponent,
+                transactions_component_1.TransactionsComponent,
+                userItem_component_1.UserItemComponent,
+                users_component_1.UsersComponent
             ],
+            //import other modules
             imports: [
-                __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-                __WEBPACK_IMPORTED_MODULE_2__angular_common__["b" /* CommonModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_common_http__["b" /* HttpClientModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* RouterModule */].forRoot([
+                platform_browser_1.BrowserModule,
+                common_1.CommonModule,
+                http_1.HttpClientModule,
+                forms_1.FormsModule,
+                router_1.RouterModule.forRoot([
                     { path: '', redirectTo: 'home', pathMatch: 'full' },
-                    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_9__components_home_home_component__["a" /* HomeComponent */] },
-                    { path: 'account-add', component: __WEBPACK_IMPORTED_MODULE_10__components_accountAdd_accountAdd_component__["a" /* AccountAddComponent */] },
-                    { path: 'account-edit', component: __WEBPACK_IMPORTED_MODULE_11__components_accountEdit_accountEdit_component__["a" /* AccountEditComponent */] },
-                    { path: 'account-item', component: __WEBPACK_IMPORTED_MODULE_12__components_accountItem_accountItem_component__["a" /* AccountItemComponent */] },
-                    { path: 'accounts', component: __WEBPACK_IMPORTED_MODULE_13__components_accounts_accounts_component__["a" /* AccountsComponent */] },
-                    { path: 'category-add', component: __WEBPACK_IMPORTED_MODULE_15__components_categoryAdd_categoryAdd_component__["a" /* CategoryAddComponent */] },
-                    { path: 'category-edit', component: __WEBPACK_IMPORTED_MODULE_16__components_categoryEdit_categoryEdit_component__["a" /* CategoryEditComponent */] },
-                    { path: 'category-item', component: __WEBPACK_IMPORTED_MODULE_16__components_categoryEdit_categoryEdit_component__["a" /* CategoryEditComponent */] },
-                    { path: 'categories', component: __WEBPACK_IMPORTED_MODULE_14__components_categories_categories_component__["a" /* CategoriesComponent */] },
-                    { path: 'transaction-add', component: __WEBPACK_IMPORTED_MODULE_18__components_transactionAdd_transactionAdd_component__["a" /* TransactionAddComponent */] },
-                    { path: 'transaction-edit', component: __WEBPACK_IMPORTED_MODULE_19__components_transactionEdit_transactionEdit_component__["a" /* TransactionEditComponent */] },
-                    { path: 'transaction-item', component: __WEBPACK_IMPORTED_MODULE_20__components_transactionItem_transactionItem_component__["a" /* TransactionItemComponent */] },
-                    { path: 'transactions', component: __WEBPACK_IMPORTED_MODULE_21__components_transactions_transactions_component__["a" /* TransactionsComponent */] },
-                    { path: 'user-item', component: __WEBPACK_IMPORTED_MODULE_22__components_userItem_userItem_component__["a" /* UserItemComponent */] },
-                    { path: 'users', component: __WEBPACK_IMPORTED_MODULE_23__components_users_users_component__["a" /* UsersComponent */] },
+                    { path: 'home', component: home_component_1.HomeComponent },
+                    { path: 'account-add', component: accountAdd_component_1.AccountAddComponent },
+                    { path: 'account-edit', component: accountEdit_component_1.AccountEditComponent },
+                    { path: 'account-item', component: accountItem_component_1.AccountItemComponent },
+                    { path: 'accounts', component: accounts_component_1.AccountsComponent },
+                    { path: 'category-add', component: categoryAdd_component_1.CategoryAddComponent },
+                    { path: 'category-edit', component: categoryEdit_component_1.CategoryEditComponent },
+                    { path: 'category-item', component: categoryEdit_component_1.CategoryEditComponent },
+                    { path: 'categories', component: categories_component_1.CategoriesComponent },
+                    { path: 'transaction-add', component: transactionAdd_component_1.TransactionAddComponent },
+                    { path: 'transaction-edit', component: transactionEdit_component_1.TransactionEditComponent },
+                    { path: 'transaction-item', component: transactionItem_component_1.TransactionItemComponent },
+                    { path: 'transactions', component: transactions_component_1.TransactionsComponent },
+                    { path: 'user-item', component: userItem_component_1.UserItemComponent },
+                    { path: 'users', component: users_component_1.UsersComponent },
                     { path: '**', redirectTo: 'home' }
                 ])
             ],
             providers: [
                 { provide: 'BASE_URL', useFactory: getBaseUrl },
-                __WEBPACK_IMPORTED_MODULE_6__shared_data_service__["a" /* DataService */]
+                data_service_1.DataService
             ],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_7__components_app_app_component__["a" /* AppComponent */]]
+            //set entry point
+            bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);
     return AppModule;
 }());
-
+exports.AppModule = AppModule;
 function getBaseUrl() {
     return document.getElementsByTagName('base')[0].href;
 }
+exports.getBaseUrl = getBaseUrl;
 
 
 /***/ }),
@@ -202,34 +180,48 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/accountAdd/accountAdd.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal accountAdd\">\r\n    <form>\r\n        <label>Type</label>\r\n        <input type='radio' value='true' checked={{debit}} onChange=\"handleDebitButton()\" /> Asset\r\n        <input type='radio' value='false' checked={{!debit}} onChange=\"handleDebitButton()\" /> Liability\r\n        <label>Name</label>\r\n        <input type='text' />\r\n        <label>Institution</label>\r\n        <input type='text' />\r\n        <label>Number</label>\r\n        <input type='text' />\r\n        <label>Interest Rate</label>\r\n        <input type='number' />%\r\n        <label>Limit</label>\r\n        $<input type='number' />\r\n        <input type='submit' value=\"Add\" />\r\n    </form>\r\n</div>"
+module.exports = "<div class=\"accountAdd\">\r\n  <h4>Add</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{newAccount.id}}</td>\r\n        <td>{{newAccount.debit ? 'Asset' : 'Liability'}}</td>\r\n        <td>{{newAccount.name}}</td>\r\n        <td>{{newAccount.institution}}</td>\r\n        <td>{{newAccount.number}}</td>\r\n        <td className='right'>{{displayAsPercent(newAccount.interest)}}</td>\r\n        <td className='right'>{{account.limit ? displayAsDollar(newAccount.limit) : '--'}}</td>\r\n        <td className='right'>{{displayAsDollar(newAccount.balance)}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n<button (click)=\"onSubmit()\">Add</button>\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <input type='radio' value='true' checked={{debit}} onChange=\"handleDebitButton()\" /> Asset\r\n      <input type='radio' value='false' checked={{!debit}} onChange=\"handleDebitButton()\" /> Liability\r\n      <label>Name</label>\r\n      <input type='text' />\r\n      <label>Institution</label>\r\n      <input type='text' />\r\n      <label>Number</label>\r\n      <input type='text' />\r\n      <label>Interest Rate</label>\r\n      <input type='number' />%\r\n      <label>Limit</label>\r\n      $<input type='number' />\r\n      <input type='submit' value=\"Add\" />\r\n  </form>-->\r\n</div>\r\n"
 
 /***/ }),
 
 /***/ "../../../../../src/modules/app/components/accountAdd/accountAdd.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountAddComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var AccountAddComponent = /** @class */ (function () {
     function AccountAddComponent() {
+        this.add = new core_1.EventEmitter();
         this.debit = true;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
+    AccountAddComponent.prototype.ngOnInit = function () {
+        this.newAccount = { id: null, balance: 0, debit: true, institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true };
+    };
     AccountAddComponent.prototype.handleDebitButton = function () {
         this.debit = !this.debit;
     };
+    AccountAddComponent.prototype.onSubmit = function () {
+        this.add.emit(this.newAccount);
+    };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], AccountAddComponent.prototype, "add", void 0);
     AccountAddComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        core_1.Component({
             selector: 'account-add',
             template: __webpack_require__("../../../../../src/modules/app/components/accountAdd/accountAdd.component.html"),
             styles: [__webpack_require__("../../../../../src/modules/app/components/accountAdd/accountAdd.component.css")]
@@ -237,7 +229,7 @@ var AccountAddComponent = /** @class */ (function () {
     ], AccountAddComponent);
     return AccountAddComponent;
 }());
-
+exports.AccountAddComponent = AccountAddComponent;
 
 
 /***/ }),
@@ -263,25 +255,29 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/accountEdit/accountEdit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal accountEdit\">\r\n    <form>\r\n        <label>Type</label>\r\n        <input type='radio' value='true' checked={{debit}} (Change)=\"handleDebitButton()\" /> Asset\r\n        <input type='radio' value='false' checked={{!debit}} (Change)=\"handleDebitButton()\" /> Liability\r\n        <label>Name</label>\r\n        <input type='text' />\r\n        <label>Institution</label>\r\n        <input type='text' />\r\n        <label>Number</label>\r\n        <input type='text' />\r\n        <label>Interest Rate</label>\r\n        <input type='number' />%\r\n        <label>Limit</label>\r\n        $<input type='number' />\r\n        <input type='submit' value=\"Update\" />\r\n    </form>\r\n</div>"
+module.exports = "<div class=\"accountEdit\">\r\n  <h4>Edit</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{editAccount.id}}</td>\r\n        <td>{{editAccount.debit ? 'Asset' : 'Liability'}}</td>\r\n        <td>{{editAccount.name}}</td>\r\n        <td>{{editAccount.institution}}</td>\r\n        <td>{{editAccount.number}}</td>\r\n        <td className='right'>{{displayAsPercent(editAccount.interest)}}</td>\r\n        <td className='right'>{{account.limit ? displayAsDollar(editAccount.limit) : '--'}}</td>\r\n        <td className='right'>{{displayAsDollar(editAccount.balance)}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Update</button>\r\n\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <input type='radio' value='true' checked={{debit}} (Change)=\"handleDebitButton()\" /> Asset\r\n      <input type='radio' value='false' checked={{!debit}} (Change)=\"handleDebitButton()\" /> Liability\r\n      <label>Name</label>\r\n      <input type='text' />\r\n      <label>Institution</label>\r\n      <input type='text' />\r\n      <label>Number</label>\r\n      <input type='text' />\r\n      <label>Interest Rate</label>\r\n      <input type='number' />%\r\n      <label>Limit</label>\r\n      $<input type='number' />\r\n      <input type='submit' value=\"Update\" />\r\n  </form>-->\r\n</div>\r\n"
 
 /***/ }),
 
 /***/ "../../../../../src/modules/app/components/accountEdit/accountEdit.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountEditComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var AccountEditComponent = /** @class */ (function () {
     function AccountEditComponent() {
+        this.update = new core_1.EventEmitter();
         this.debit = true;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
@@ -289,8 +285,19 @@ var AccountEditComponent = /** @class */ (function () {
     AccountEditComponent.prototype.handleDebitButton = function () {
         this.debit = !this.debit;
     };
+    AccountEditComponent.prototype.onSubmit = function () {
+        this.update.emit(this.editAccount);
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], AccountEditComponent.prototype, "editAccount", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], AccountEditComponent.prototype, "update", void 0);
     AccountEditComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        core_1.Component({
             selector: 'account-edit',
             template: __webpack_require__("../../../../../src/modules/app/components/accountEdit/accountEdit.component.html"),
             styles: [__webpack_require__("../../../../../src/modules/app/components/accountEdit/accountEdit.component.css")]
@@ -298,7 +305,7 @@ var AccountEditComponent = /** @class */ (function () {
     ], AccountEditComponent);
     return AccountEditComponent;
 }());
-
+exports.AccountEditComponent = AccountEditComponent;
 
 
 /***/ }),
@@ -324,16 +331,15 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/accountItem/accountItem.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<tr class=\"accountItem\">\r\n    <td>{{account.id}}</td>\r\n    <td>{{account.debit}} ? 'Asset' : 'Liability'}</td>\r\n    <td>{{account.name}}</td>\r\n    <td>{{account.institution}}</td>\r\n    <td>{{account.number}}</td>\r\n    <td className='right'>displayAsPercent({{account.interest}})</td>\r\n    <td className='right'>{{limit}} ? this.displayAsDollar({{account.limit}}) : '--'</td>\r\n    <td className='right'>displayAsDollar({{account.balance}})</td>\r\n    <td><a [routerLink]=\"['/accountEdit']\">Edit</a></td>\r\n    <td><a (click)=\"confirm('are you sure you want to delete this account?'); deleteAccount();\">Delete</a></td>\r\n</tr>\r\n"
+module.exports = "<tr class=\"accountItem\">\r\n    <td>{{account.id}}</td>\r\n    <td>{{account.debit ? 'Asset' : 'Liability'}}</td>\r\n    <td>{{account.name}}</td>\r\n    <td>{{account.institution}}</td>\r\n    <td>{{account.number}}</td>\r\n    <td className='right'>{{displayAsPercent(account.interest)}}</td>\r\n    <td className='right'>{{limit ? displayAsDollar(account.limit) : '--'}}</td>\r\n    <td className='right'>{{displayAsDollar(account.balance)}}</td>\r\n    <td><a [routerLink]=\"['/accountEdit']\">Edit</a></td>\r\n    <td><a (click)=\"confirm('are you sure you want to delete this account?'); deleteAccount();\">Delete</a></td>\r\n</tr>\r\n"
 
 /***/ }),
 
 /***/ "../../../../../src/modules/app/components/accountItem/accountItem.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountItemComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -343,18 +349,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var AccountItemComponent = /** @class */ (function () {
     function AccountItemComponent() {
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        core_1.Input(),
         __metadata("design:type", Object)
     ], AccountItemComponent.prototype, "account", void 0);
     AccountItemComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        core_1.Component({
             selector: 'account-item',
             template: __webpack_require__("../../../../../src/modules/app/components/accountItem/accountItem.component.html"),
             styles: [__webpack_require__("../../../../../src/modules/app/components/accountItem/accountItem.component.css")]
@@ -362,7 +369,7 @@ var AccountItemComponent = /** @class */ (function () {
     ], AccountItemComponent);
     return AccountItemComponent;
 }());
-
+exports.AccountItemComponent = AccountItemComponent;
 
 
 /***/ }),
@@ -388,17 +395,15 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/accounts/accounts.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"accounts\">\r\n    <p *ngIf=\"!accounts\"><em>Loading...</em></p>\r\n    \r\n    <table>\r\n        <caption>Accounts</caption>\r\n        <thead>\r\n            <tr>\r\n                <th>ID</th>\r\n                <th>Type</th>\r\n                <th>Name</th>\r\n                <th>Institution</th>\r\n                <th>Number</th>\r\n                <th>Interest</th>\r\n                <th>Limit</th>\r\n                <th>Balance</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <account-item *ngFor=\"let account of accounts\" [account]=\"account\"></account-item>\r\n        </tbody>\r\n    </table>\r\n    <button (click)=\"addAccount()\">Add Account</button>\r\n</div>\r\n"
+module.exports = "<div class=\"accounts\">\r\n  <p *ngIf=\"!accounts\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Accounts</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let account of accounts\">\r\n        <td>{{account.id}}</td>\r\n        <td>{{account.debit ? 'Asset' : 'Liability'}}</td>\r\n        <td>{{account.name}}</td>\r\n        <td>{{account.institution}}</td>\r\n        <td>{{account.number}}</td>\r\n        <td className='right'>{{displayAsPercent(account.interest)}}</td>\r\n        <td className='right'>{{account.limit ? displayAsDollar(account.limit) : '--'}}</td>\r\n        <td className='right'>{{displayAsDollar(account.balance)}}</td>\r\n        <td><a [routerLink]=\"['/accountEdit']\">Edit</a></td>\r\n        <td><a (click)=\"onDelete(account.id);\">Delete</a></td>\r\n      </tr>\r\n      <!--<account-item *ngFor=\"let account of accounts\" [account]=\"account\"></account-item>-->\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"addAccount()\">Add Account</button>\r\n  <account-add (add)=\"onAdd($event)\"></account-add>\r\n  <account-edit *ngIf=\"accounts\" [editAccount] =\"accounts[0]\" (update)=\"onUpdate($event)\"></account-edit>\r\n</div>\r\n"
 
 /***/ }),
 
 /***/ "../../../../../src/modules/app/components/accounts/accounts.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountsComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_data_service__ = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -408,11 +413,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
 var AccountsComponent = /** @class */ (function () {
     function AccountsComponent(dataService) {
         this.dataService = dataService;
+        this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
+        this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
     AccountsComponent.prototype.ngOnInit = function () {
         this.getAccounts();
@@ -421,17 +429,30 @@ var AccountsComponent = /** @class */ (function () {
         var _this = this;
         this.dataService.getAccounts().subscribe(function (accounts) { return _this.accounts = accounts; });
     };
+    AccountsComponent.prototype.onDelete = function (id) {
+        var confirmation = confirm('are you sure you want to delete ' + this.accounts.find(function (element) { return element.id == id; }).name + '?');
+        if (confirmation) {
+            alert("Ha! Account " + id + " is GONE!");
+        }
+        ;
+    };
+    AccountsComponent.prototype.onAdd = function (newAccount) {
+        alert("You just added " + newAccount.name + ".");
+    };
+    AccountsComponent.prototype.onUpdate = function (account) {
+        alert("You just updated " + account.name + ".");
+    };
     AccountsComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'accounts',
+        core_1.Component({
+            selector: 'pl-accounts',
             template: __webpack_require__("../../../../../src/modules/app/components/accounts/accounts.component.html"),
             styles: [__webpack_require__("../../../../../src/modules/app/components/accounts/accounts.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_data_service__["a" /* DataService */]])
+        __metadata("design:paramtypes", [data_service_1.DataService])
     ], AccountsComponent);
     return AccountsComponent;
 }());
-
+exports.AccountsComponent = AccountsComponent;
 
 
 /***/ }),
@@ -462,23 +483,23 @@ module.exports = "<div class='container-fluid'>\r\n    <div class='row'>\r\n    
 /***/ }),
 
 /***/ "../../../../../src/modules/app/components/app/app.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
     }
     AppComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        core_1.Component({
             selector: 'app-root',
             template: __webpack_require__("../../../../../src/modules/app/components/app/app.component.html"),
             styles: [__webpack_require__("../../../../../src/modules/app/components/app/app.component.css")]
@@ -486,7 +507,7 @@ var AppComponent = /** @class */ (function () {
     ], AppComponent);
     return AppComponent;
 }());
-
+exports.AppComponent = AppComponent;
 
 
 /***/ }),
@@ -512,17 +533,15 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/categories/categories.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"categories\">\r\n    <p *ngIf=\"!categories\"><em>Loading...</em></p>\r\n    \r\n    <table>\r\n        <caption>Categories</caption>\r\n        <thead>\r\n            <tr>\r\n                <th>ID</th>\r\n                <th>Name</th>\r\n                <th>Tax?</th>\r\n                <th>Type</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <category-item *ngFor=\"let category of categories\" [category]=\"category\"></category-item>\r\n        </tbody>\r\n    </table>\r\n    <button (click)=\"addCategory()\">Add Category</button>\r\n</div>\r\n"
+module.exports = "<div class=\"categories\">\r\n  <p *ngIf=\"!categories\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Categories</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Name</th>\r\n        <th>Tax?</th>\r\n        <th>Type</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let category of categories\">\r\n        <td>{{category.id}}</td>\r\n        <td>{{category.name}}</td>\r\n        <td>&nbsp;{{category.tax && <span class='glyphicon glyphicon-copy' style='color:green;'></span>}}</td>\r\n        <td>{{category.type}}</td>\r\n        <td><a [routerLink]=\"['/categorytEdit']\">Edit</a></td>\r\n        <td><a (click)=\"confirm('are you sure you want to delete this category?'); deleteCategory();\">Delete</a></td>\r\n        <!--<category-item *ngFor=\"let category of categories\" [category]=\"category\"></category-item>-->\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"addCategory()\">Add Category</button>\r\n  <category-add (add)=\"onAdd($event)\"></category-add>\r\n  <category-edit *ngIf=\"categories\" [editCategory]=\"categories[0]\" (update)=\"onUpdate($event)\"></category-edit>\r\n</div>\r\n"
 
 /***/ }),
 
 /***/ "../../../../../src/modules/app/components/categories/categories.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CategoriesComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_data_service__ = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -532,8 +551,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
 var CategoriesComponent = /** @class */ (function () {
     function CategoriesComponent(dataService) {
         this.dataService = dataService;
@@ -545,17 +565,30 @@ var CategoriesComponent = /** @class */ (function () {
         var _this = this;
         this.dataService.getCategories().subscribe(function (categories) { return _this.categories = categories; });
     };
+    CategoriesComponent.prototype.onDelete = function (id) {
+        var confirmation = confirm('are you sure you want to delete ' + this.categories.find(function (element) { return element.id == id; }).name + '?');
+        if (confirmation) {
+            alert("Ha! Category " + id + " is GONE!");
+        }
+        ;
+    };
+    CategoriesComponent.prototype.onAdd = function (newCategory) {
+        alert("You just added " + newCategory.name + ".");
+    };
+    CategoriesComponent.prototype.onUpdate = function (category) {
+        alert("You just updated " + category.name + ".");
+    };
     CategoriesComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'categories',
+        core_1.Component({
+            selector: 'pl-categories',
             template: __webpack_require__("../../../../../src/modules/app/components/categories/categories.component.html"),
             styles: [__webpack_require__("../../../../../src/modules/app/components/categories/categories.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_data_service__["a" /* DataService */]])
+        __metadata("design:paramtypes", [data_service_1.DataService])
     ], CategoriesComponent);
     return CategoriesComponent;
 }());
-
+exports.CategoriesComponent = CategoriesComponent;
 
 
 /***/ }),
@@ -581,28 +614,48 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/categoryAdd/categoryAdd.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"categoryAdd\">\r\n    <form>\r\n        <label>Type</label>\r\n        <label>Name</label>\r\n        <label>Institution</label>\r\n        <label>Number</label>\r\n        <label>Interest Rate</label>\r\n        <label>Limit</label>\r\n        <input type='submit' value='Add' />\r\n    </form>\r\n</div>"
+module.exports = "<div class=\"categoryAdd\">\r\n  <h4>Add</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{newAccount.id}}</td>\r\n        <td>{{newAccount.debit ? 'Asset' : 'Liability'}}</td>\r\n        <td>{{newAccount.name}}</td>\r\n        <td>{{newAccount.institution}}</td>\r\n        <td>{{newAccount.number}}</td>\r\n        <td className='right'>{{displayAsPercent(newAccount.interest)}}</td>\r\n        <td className='right'>{{account.limit ? displayAsDollar(newAccount.limit) : '--'}}</td>\r\n        <td className='right'>{{displayAsDollar(newAccount.balance)}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Add</button>\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <label>Name</label>\r\n      <label>Institution</label>\r\n      <label>Number</label>\r\n      <label>Interest Rate</label>\r\n      <label>Limit</label>\r\n      <input type='submit' value='Add' />\r\n  </form>-->\r\n</div>\r\n"
 
 /***/ }),
 
 /***/ "../../../../../src/modules/app/components/categoryAdd/categoryAdd.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CategoryAddComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var CategoryAddComponent = /** @class */ (function () {
     function CategoryAddComponent() {
+        this.add = new core_1.EventEmitter();
+        this.tax = false;
+        this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
+        this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
+    CategoryAddComponent.prototype.ngOnInit = function () {
+        this.newCategory = { id: null, name: 'New Category', tax: false, type: '' };
+    };
+    CategoryAddComponent.prototype.handleTaxButton = function () {
+        this.tax = !this.tax;
+    };
+    CategoryAddComponent.prototype.onSubmit = function () {
+        this.add.emit(this.newCategory);
+    };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], CategoryAddComponent.prototype, "add", void 0);
     CategoryAddComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        core_1.Component({
             selector: 'category-add',
             template: __webpack_require__("../../../../../src/modules/app/components/categoryAdd/categoryAdd.component.html"),
             styles: [__webpack_require__("../../../../../src/modules/app/components/categoryAdd/categoryAdd.component.css")]
@@ -610,7 +663,7 @@ var CategoryAddComponent = /** @class */ (function () {
     ], CategoryAddComponent);
     return CategoryAddComponent;
 }());
-
+exports.CategoryAddComponent = CategoryAddComponent;
 
 
 /***/ }),
@@ -641,23 +694,23 @@ module.exports = "<div class=\"categoryEdit\">\r\n    <form>\r\n        <label>T
 /***/ }),
 
 /***/ "../../../../../src/modules/app/components/categoryEdit/categoryEdit.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CategoryEditComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var CategoryEditComponent = /** @class */ (function () {
     function CategoryEditComponent() {
     }
     CategoryEditComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        core_1.Component({
             selector: 'category-edit',
             template: __webpack_require__("../../../../../src/modules/app/components/categoryEdit/categoryEdit.component.html"),
             styles: [__webpack_require__("../../../../../src/modules/app/components/categoryEdit/categoryEdit.component.css")]
@@ -665,7 +718,7 @@ var CategoryEditComponent = /** @class */ (function () {
     ], CategoryEditComponent);
     return CategoryEditComponent;
 }());
-
+exports.CategoryEditComponent = CategoryEditComponent;
 
 
 /***/ }),
@@ -696,11 +749,10 @@ module.exports = "<tr class=\"categoryItem\">\r\n    <td>{{category.id}}</td>\r\
 /***/ }),
 
 /***/ "../../../../../src/modules/app/components/categoryItem/categoryItem.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CategoryItemComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -710,16 +762,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var CategoryItemComponent = /** @class */ (function () {
     function CategoryItemComponent() {
     }
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        core_1.Input(),
         __metadata("design:type", Object)
     ], CategoryItemComponent.prototype, "category", void 0);
     CategoryItemComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        core_1.Component({
             selector: 'category-item',
             template: __webpack_require__("../../../../../src/modules/app/components/categoryItem/categoryItem.component.html"),
             styles: [__webpack_require__("../../../../../src/modules/app/components/categoryItem/categoryItem.component.css")]
@@ -727,7 +780,7 @@ var CategoryItemComponent = /** @class */ (function () {
     ], CategoryItemComponent);
     return CategoryItemComponent;
 }());
-
+exports.CategoryItemComponent = CategoryItemComponent;
 
 
 /***/ }),
@@ -740,30 +793,30 @@ module.exports = "<div class=\"mainTitle\">\r\n    <p class=\"mainTitle-sub\">Ch
 /***/ }),
 
 /***/ "../../../../../src/modules/app/components/home/home.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomeComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var HomeComponent = /** @class */ (function () {
     function HomeComponent() {
     }
     HomeComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        core_1.Component({
             selector: 'home',
             template: __webpack_require__("../../../../../src/modules/app/components/home/home.component.html")
         })
     ], HomeComponent);
     return HomeComponent;
 }());
-
+exports.HomeComponent = HomeComponent;
 
 
 /***/ }),
@@ -794,23 +847,23 @@ module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-invers
 /***/ }),
 
 /***/ "../../../../../src/modules/app/components/navmenu/navmenu.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NavMenuComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var NavMenuComponent = /** @class */ (function () {
     function NavMenuComponent() {
     }
     NavMenuComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        core_1.Component({
             selector: 'nav-menu',
             template: __webpack_require__("../../../../../src/modules/app/components/navmenu/navmenu.component.html"),
             styles: [__webpack_require__("../../../../../src/modules/app/components/navmenu/navmenu.component.css")]
@@ -818,7 +871,7 @@ var NavMenuComponent = /** @class */ (function () {
     ], NavMenuComponent);
     return NavMenuComponent;
 }());
-
+exports.NavMenuComponent = NavMenuComponent;
 
 
 /***/ }),
@@ -844,28 +897,44 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/transactionAdd/transactionAdd.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionAdd\">\r\n    <form>\r\n        <label>Type</label>\r\n        <label>Name</label>\r\n        <label>Institution</label>\r\n        <label>Number</label>\r\n        <label>Interest Rate</label>\r\n        <label>Limit</label>\r\n        <input type='submit' value='Add' />\r\n    </form>\r\n</div>"
+module.exports = "<div class=\"transactionAdd\">\r\n  <h4>Add</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{newAccount.id}}</td>\r\n        <td>{{newAccount.debit ? 'Asset' : 'Liability'}}</td>\r\n        <td>{{newAccount.name}}</td>\r\n        <td>{{newAccount.institution}}</td>\r\n        <td>{{newAccount.number}}</td>\r\n        <td className='right'>{{displayAsPercent(newAccount.interest)}}</td>\r\n        <td className='right'>{{account.limit ? displayAsDollar(newAccount.limit) : '--'}}</td>\r\n        <td className='right'>{{displayAsDollar(newAccount.balance)}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Add</button>\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <label>Name</label>\r\n      <label>Institution</label>\r\n      <label>Number</label>\r\n      <label>Interest Rate</label>\r\n      <label>Limit</label>\r\n      <input type='submit' value='Add' />\r\n  </form>-->\r\n</div>\r\n"
 
 /***/ }),
 
 /***/ "../../../../../src/modules/app/components/transactionAdd/transactionAdd.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TransactionAddComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var TransactionAddComponent = /** @class */ (function () {
     function TransactionAddComponent() {
+        this.add = new core_1.EventEmitter();
+        this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
+        this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
+    TransactionAddComponent.prototype.ngOnInit = function () {
+        this.newTransaction = { id: null, amount: 0, category: 0, crAcct: 0, date: '', drAcct: 0, tax: false, };
+    };
+    TransactionAddComponent.prototype.onSubmit = function () {
+        this.add.emit(this.newTransaction);
+    };
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], TransactionAddComponent.prototype, "add", void 0);
     TransactionAddComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        core_1.Component({
             selector: 'transaction-add',
             template: __webpack_require__("../../../../../src/modules/app/components/transactionAdd/transactionAdd.component.html"),
             styles: [__webpack_require__("../../../../../src/modules/app/components/transactionAdd/transactionAdd.component.css")]
@@ -873,7 +942,7 @@ var TransactionAddComponent = /** @class */ (function () {
     ], TransactionAddComponent);
     return TransactionAddComponent;
 }());
-
+exports.TransactionAddComponent = TransactionAddComponent;
 
 
 /***/ }),
@@ -904,23 +973,23 @@ module.exports = "<div class=\"transactionEdit\">\r\n    <form>\r\n        <labe
 /***/ }),
 
 /***/ "../../../../../src/modules/app/components/transactionEdit/transactionEdit.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TransactionEditComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var TransactionEditComponent = /** @class */ (function () {
     function TransactionEditComponent() {
     }
     TransactionEditComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        core_1.Component({
             selector: 'transaction-edit',
             template: __webpack_require__("../../../../../src/modules/app/components/transactionEdit/transactionEdit.component.html"),
             styles: [__webpack_require__("../../../../../src/modules/app/components/transactionEdit/transactionEdit.component.css")]
@@ -928,7 +997,7 @@ var TransactionEditComponent = /** @class */ (function () {
     ], TransactionEditComponent);
     return TransactionEditComponent;
 }());
-
+exports.TransactionEditComponent = TransactionEditComponent;
 
 
 /***/ }),
@@ -959,11 +1028,10 @@ module.exports = "<tr class=\"transactionItem\">\r\n    <td>{{transaction.id}}</
 /***/ }),
 
 /***/ "../../../../../src/modules/app/components/transactionItem/transactionItem.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TransactionItemComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -973,16 +1041,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var TransactionItemComponent = /** @class */ (function () {
     function TransactionItemComponent() {
     }
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        core_1.Input(),
         __metadata("design:type", Object)
     ], TransactionItemComponent.prototype, "transaction", void 0);
     TransactionItemComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        core_1.Component({
             selector: 'transaction-item',
             template: __webpack_require__("../../../../../src/modules/app/components/transactionItem/transactionItem.component.html"),
             styles: [__webpack_require__("../../../../../src/modules/app/components/transactionItem/transactionItem.component.css")]
@@ -990,7 +1059,7 @@ var TransactionItemComponent = /** @class */ (function () {
     ], TransactionItemComponent);
     return TransactionItemComponent;
 }());
-
+exports.TransactionItemComponent = TransactionItemComponent;
 
 
 /***/ }),
@@ -1021,12 +1090,10 @@ module.exports = "<div class=\"transactions\">\r\n    <p *ngIf=\"!transactions\"
 /***/ }),
 
 /***/ "../../../../../src/modules/app/components/transactions/transactions.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TransactionsComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_data_service__ = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1036,8 +1103,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
 var TransactionsComponent = /** @class */ (function () {
     function TransactionsComponent(dataService) {
         this.dataService = dataService;
@@ -1050,16 +1118,16 @@ var TransactionsComponent = /** @class */ (function () {
         this.dataService.getTransactions().subscribe(function (transactions) { return _this.transactions = transactions; });
     };
     TransactionsComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'transactions',
+        core_1.Component({
+            selector: 'pl-transactions',
             template: __webpack_require__("../../../../../src/modules/app/components/transactions/transactions.component.html"),
             styles: [__webpack_require__("../../../../../src/modules/app/components/transactions/transactions.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_data_service__["a" /* DataService */]])
+        __metadata("design:paramtypes", [data_service_1.DataService])
     ], TransactionsComponent);
     return TransactionsComponent;
 }());
-
+exports.TransactionsComponent = TransactionsComponent;
 
 
 /***/ }),
@@ -1090,11 +1158,10 @@ module.exports = "<tr class=\"userItem\">\r\n    <td>{{user.id}}</td>\r\n    <td
 /***/ }),
 
 /***/ "../../../../../src/modules/app/components/userItem/userItem.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserItemComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1104,16 +1171,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var UserItemComponent = /** @class */ (function () {
     function UserItemComponent() {
     }
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        core_1.Input(),
         __metadata("design:type", Object)
     ], UserItemComponent.prototype, "user", void 0);
     UserItemComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        core_1.Component({
             selector: 'user-item',
             template: __webpack_require__("../../../../../src/modules/app/components/userItem/userItem.component.html"),
             styles: [__webpack_require__("../../../../../src/modules/app/components/userItem/userItem.component.css")]
@@ -1121,7 +1189,7 @@ var UserItemComponent = /** @class */ (function () {
     ], UserItemComponent);
     return UserItemComponent;
 }());
-
+exports.UserItemComponent = UserItemComponent;
 
 
 /***/ }),
@@ -1152,12 +1220,10 @@ module.exports = "<div class=\"users\">\r\n    <p *ngIf=\"!users\"><em>Loading..
 /***/ }),
 
 /***/ "../../../../../src/modules/app/components/users/users.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UsersComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_data_service__ = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1167,8 +1233,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
 var UsersComponent = /** @class */ (function () {
     function UsersComponent(dataService) {
         this.dataService = dataService;
@@ -1181,27 +1248,25 @@ var UsersComponent = /** @class */ (function () {
         this.dataService.getUsers().subscribe(function (users) { return _this.users = users; });
     };
     UsersComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'users',
+        core_1.Component({
+            selector: 'pl-users',
             template: __webpack_require__("../../../../../src/modules/app/components/users/users.component.html"),
             styles: [__webpack_require__("../../../../../src/modules/app/components/users/users.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_data_service__["a" /* DataService */]])
+        __metadata("design:paramtypes", [data_service_1.DataService])
     ], UsersComponent);
     return UsersComponent;
 }());
-
+exports.UsersComponent = UsersComponent;
 
 
 /***/ }),
 
 /***/ "../../../../../src/modules/shared/data.service.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1211,35 +1276,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var http_1 = __webpack_require__("../../../common/esm5/http.js");
 var DataService = /** @class */ (function () {
     function DataService(http) {
         this.http = http;
     }
     DataService.prototype.getAccounts = function () {
-        return this.http.get(this.baseUrl + 'api/Accounts');
+        return this.http.get('/Accounts//AccountsAsync');
+        //return this.http.get<Account[]>(this.baseUrl + 'Accounts//AccountsAsync');
     };
     DataService.prototype.getCategories = function () {
-        return this.http.get(this.baseUrl + 'api/Categories');
+        return this.http.get('/Categories/CategoriesAsync');
     };
     DataService.prototype.getTransactions = function () {
-        return this.http.get(this.baseUrl + 'api/Transactions');
+        return this.http.get('/Transactions/TransactionsAsync');
     };
     DataService.prototype.getUsers = function () {
-        return this.http.get(this.baseUrl + 'api/Users');
+        return this.http.get('/Users/UsersAsync');
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Inject */])('BASE_URL'),
+        core_1.Inject('BASE_URL'),
         __metadata("design:type", String)
     ], DataService.prototype, "baseUrl", void 0);
     DataService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.HttpClient])
     ], DataService);
     return DataService;
 }());
-
+exports.DataService = DataService;
 
 
 /***/ }),
