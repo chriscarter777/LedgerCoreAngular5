@@ -10,7 +10,7 @@ export class DataService{
     constructor(private http: HttpClient) { }
 
     getAccounts(): Observable<Account[]> {
-      return this.http.get<Account[]>('/Accounts//AccountsAsync');
+      return this.http.get<Account[]>('/Accounts/AccountsAsync');
       //return this.http.get<Account[]>(this.baseUrl + 'Accounts//AccountsAsync');
     }
 
@@ -23,6 +23,6 @@ export class DataService{
     }
 
     getUsers(): Observable<User[]> {
-        return this.http.get<User[]>('/Users/UsersAsync');
+        return this.http.get<User[]>('/Users/GetUsersAsync');
     }
 }

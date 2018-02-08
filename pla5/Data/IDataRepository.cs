@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using pla5.Models;
 
 namespace pla5.Data
@@ -22,5 +23,7 @@ namespace pla5.Data
         Task<int> AddTransactionAsync(Transaction t);
         Task<int> DeleteTransactionAsync(int id);
         Task<int> UpdateTransactionAsync(Transaction t);
-    }  //interface
+
+        Task<AppUser[]> GetUsersAsync();
+  }  //interface
 }  //namespace

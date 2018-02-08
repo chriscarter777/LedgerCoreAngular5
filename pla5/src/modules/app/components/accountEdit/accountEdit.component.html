@@ -21,7 +21,7 @@
         <td>{{editAccount.institution}}</td>
         <td>{{editAccount.number}}</td>
         <td class='right'>{{displayAsPercent(editAccount.interest)}}</td>
-        <td class='right'>{{account.limit ? displayAsDollar(editAccount.limit) : '--'}}</td>
+        <td class='right'>{{editAccount.limit ? displayAsDollar(editAccount.limit) : '--'}}</td>
         <td class='right'>{{displayAsDollar(editAccount.balance)}}</td>
       </tr>
     </tbody>

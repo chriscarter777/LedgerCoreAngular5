@@ -11,27 +11,28 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using pla5.Data;
 using pla5.Models;
 
 namespace pla5.Controllers
 {
-    [Route("api/[controller]")]
     public class UsersController : Controller
     {
         private readonly ILogger _logger;
+        private readonly IDataRepository _repo;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly string _userName;
 
-        public UsersController(UserManager<IdentityUser> userManager, ILogger<AccessController> logger, SignInManager<IdentityUser> signInManager)
+        public UsersController(UserManager<IdentityUser> userManager, ILogger<AccessController> logger, IDataRepository repo, SignInManager<IdentityUser> signInManager)
         {
             _logger = logger;
+            _repo = repo;
             _signInManager = signInManager;
             _userManager = userManager;
             _userName = signInManager.Context.User.Identity.Name;
         }  //ctor
 
-        [HttpGet("[action]")]
         [Authorize(Policy = "Administrator")]
         public async Task<IActionResult> MakeAdminAsync(string id)
         {
@@ -47,7 +48,6 @@ namespace pla5.Controllers
             }
         }  //MakeAdminAsync
 
-        [HttpGet("[action]")]
         [Authorize(Policy = "Administrator")]
         public async Task<IActionResult> UnmakeAdminAsync(string id)
         {
@@ -63,14 +63,9 @@ namespace pla5.Controllers
             }
         }  //UnmakeAdminAsync
 
-        [HttpGet("[action]")]
         [Authorize(Policy = "Administrator")]
         public async Task<IActionResult> AppUsersAsync()
         {
-            //try
-            //{
-            //    return Ok(await Task.Run(() => _userManager.Users.ToArray()));
-            //}
             try
             {
                 IdentityUser[] iUsers = await Task.Run(() => _userManager.Users.ToArray());
@@ -102,7 +97,22 @@ namespace pla5.Controllers
             return View();
         }
 
-        [HttpPost]
+    [Authorize(Policy = "Administrator")]
+    [HttpGet]
+    public async Task<IActionResult> GetUsersAsync()
+    {
+      try
+      {
+        return Ok(await _repo.GetUsersAsync());
+      }
+      catch (Exception e)
+      {
+        HandleException(e, ControllerContext.RouteData.Values["action"].ToString(), "", false);
+        return NotFound();
+      }
+    }  //GetUsersAsync
+
+    [HttpPost]
         public async Task<IActionResult> UsersAsync(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -135,7 +145,6 @@ namespace pla5.Controllers
             return View(model);
         }  //UsersAsync
 
-        [HttpGet("[action]")]
         [Authorize(Policy = "Administrator")]
         public async Task<IActionResult> DeleteUserAsync(string name)
         {

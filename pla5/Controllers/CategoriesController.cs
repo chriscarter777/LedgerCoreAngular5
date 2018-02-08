@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Identity;
 
 namespace pla5.Controllers
 {
-    [Route("api/[controller]")]
     public class CategoriesController : Controller
     {
         private HtmlEncoder _htmlEncoder;
@@ -29,7 +28,6 @@ namespace pla5.Controllers
             _userName = signInManager.Context.User.Identity.Name;
         }  //ctor
 
-        [HttpGet("[action]")]
         public async Task<IActionResult> CategoriesAsync()
         {
             try
@@ -43,7 +41,6 @@ namespace pla5.Controllers
             }
         }
 
-        [HttpGet("[action]")]
         public async Task<IActionResult> AddCategoryAsync(Category c)
         {
             //API returns the database ID of the added item
@@ -58,7 +55,6 @@ namespace pla5.Controllers
             }
         }
 
-        [HttpGet("[action]")]
         public async Task<IActionResult> DeleteCategoryAsync(int id)
         {
             try
@@ -73,7 +69,6 @@ namespace pla5.Controllers
             }
         }
 
-        [HttpGet("[action]")]
         public async Task<IActionResult> UpdateCategoryAsync(Category c)
         {
             try

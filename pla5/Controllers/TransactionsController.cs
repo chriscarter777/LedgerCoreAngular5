@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Identity;
 
 namespace pla5.Controllers
 {
-    [Route("api/[controller]")]
     [Authorize]
     public class TransactionsController : Controller
     {
@@ -30,7 +29,6 @@ namespace pla5.Controllers
             _userName = signInManager.Context.User.Identity.Name;
         }  //ctor
 
-        [HttpGet("[action]")]
         public async Task<IActionResult> TransactionsAsync()
         {
             try
@@ -44,7 +42,6 @@ namespace pla5.Controllers
             }
         }
 
-        [HttpGet("[action]")]
         public async Task<IActionResult> AddTransactionAsync(Transaction t)
         {
             //API returns the database ID of the added item
@@ -59,7 +56,6 @@ namespace pla5.Controllers
             }
         }
 
-        [HttpGet("[action]")]
         public async Task<IActionResult> DeleteTransactionAsync(int id)
         {
             try
@@ -74,7 +70,6 @@ namespace pla5.Controllers
             }
         }
 
-        [HttpGet("[action]")]
         public async Task<IActionResult> UpdateTransactionAsync(Transaction t)
         {
             try

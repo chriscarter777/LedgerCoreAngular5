@@ -254,7 +254,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/accountEdit/accountEdit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"accountEdit\">\r\n  <h4>Edit</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{editAccount.id}}</td>\r\n        <td>{{editAccount.debit ? 'Asset' : 'Liability'}}</td>\r\n        <td>{{editAccount.name}}</td>\r\n        <td>{{editAccount.institution}}</td>\r\n        <td>{{editAccount.number}}</td>\r\n        <td class='right'>{{displayAsPercent(editAccount.interest)}}</td>\r\n        <td class='right'>{{account.limit ? displayAsDollar(editAccount.limit) : '--'}}</td>\r\n        <td class='right'>{{displayAsDollar(editAccount.balance)}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Update</button>\r\n\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <input type='radio' value='true' checked={{debit}} (Change)=\"handleDebitButton()\" /> Asset\r\n      <input type='radio' value='false' checked={{!debit}} (Change)=\"handleDebitButton()\" /> Liability\r\n      <label>Name</label>\r\n      <input type='text' />\r\n      <label>Institution</label>\r\n      <input type='text' />\r\n      <label>Number</label>\r\n      <input type='text' />\r\n      <label>Interest Rate</label>\r\n      <input type='number' />%\r\n      <label>Limit</label>\r\n      $<input type='number' />\r\n      <input type='submit' value=\"Update\" />\r\n  </form>-->\r\n</div>\r\n"
+module.exports = "<div class=\"accountEdit\">\r\n  <h4>Edit</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{editAccount.id}}</td>\r\n        <td>{{editAccount.debit ? 'Asset' : 'Liability'}}</td>\r\n        <td>{{editAccount.name}}</td>\r\n        <td>{{editAccount.institution}}</td>\r\n        <td>{{editAccount.number}}</td>\r\n        <td class='right'>{{displayAsPercent(editAccount.interest)}}</td>\r\n        <td class='right'>{{editAccount.limit ? displayAsDollar(editAccount.limit) : '--'}}</td>\r\n        <td class='right'>{{displayAsDollar(editAccount.balance)}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Update</button>\r\n\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <input type='radio' value='true' checked={{debit}} (Change)=\"handleDebitButton()\" /> Asset\r\n      <input type='radio' value='false' checked={{!debit}} (Change)=\"handleDebitButton()\" /> Liability\r\n      <label>Name</label>\r\n      <input type='text' />\r\n      <label>Institution</label>\r\n      <input type='text' />\r\n      <label>Number</label>\r\n      <input type='text' />\r\n      <label>Interest Rate</label>\r\n      <input type='number' />%\r\n      <label>Limit</label>\r\n      $<input type='number' />\r\n      <input type='submit' value=\"Update\" />\r\n  </form>-->\r\n</div>\r\n"
 
 /***/ }),
 
@@ -684,7 +684,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/categoryEdit/categoryEdit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"categoryEdit\">\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Name</th>\r\n        <th>Tax?</th>\r\n        <th>Type</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{editCategory.id}}</td>\r\n        <td>{{editCategory.name}}</td>\r\n        <td>&nbsp;<span *ngIf=\"editCategory.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n        <td>{{editCategory.type}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Update</button>\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <label>Name</label>\r\n      <label>Institution</label>\r\n      <label>Number</label>\r\n      <label>Interest Rate</label>\r\n      <label>Limit</label>\r\n      <input type='submit' value=\"Update\" />\r\n  </form>-->\r\n</div>\r\n"
+module.exports = "<div class=\"categoryEdit\">\r\n  <h4>Edit</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Name</th>\r\n        <th>Tax?</th>\r\n        <th>Type</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{editCategory.id}}</td>\r\n        <td>{{editCategory.name}}</td>\r\n        <td>&nbsp;<span *ngIf=\"editCategory.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n        <td>{{editCategory.type}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Update</button>\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <label>Name</label>\r\n      <label>Institution</label>\r\n      <label>Number</label>\r\n      <label>Interest Rate</label>\r\n      <label>Limit</label>\r\n      <input type='submit' value=\"Update\" />\r\n  </form>-->\r\n</div>\r\n"
 
 /***/ }),
 
@@ -983,7 +983,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/transactionEdit/transactionEdit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionEdit\">\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Data</th>\r\n        <th>Amount</th>\r\n        <th>Category</th>\r\n        <th>Debit Account</th>\r\n        <th>Credit Account</th>\r\n        <th>Tax</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{editTransaction.id}}</td>\r\n        <td>{{editTransaction.date}}</td>\r\n        <td class='right'>{{displayAsDollar(editTransaction.amount)}}</td>\r\n        <td>{{editTransaction.category}}</td>\r\n        <td>{{editTransaction.drAcct}}</td>\r\n        <td>{{editTransaction.crAcct}}</td>\r\n        <td>&nbsp;<span *ngIf=\"editTransaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Update</button>\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <label>Name</label>\r\n      <label>Institution</label>\r\n      <label>Number</label>\r\n      <label>Interest Rate</label>\r\n      <label>Limit</label>\r\n      <input type='submit' value=\"Update\" />\r\n  </form>-->\r\n</div>\r\n"
+module.exports = "<div class=\"transactionEdit\">\r\n  <h4>Edit</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Data</th>\r\n        <th>Amount</th>\r\n        <th>Category</th>\r\n        <th>Debit Account</th>\r\n        <th>Credit Account</th>\r\n        <th>Tax</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{editTransaction.id}}</td>\r\n        <td>{{editTransaction.date}}</td>\r\n        <td class='right'>{{displayAsDollar(editTransaction.amount)}}</td>\r\n        <td>{{editTransaction.category}}</td>\r\n        <td>{{editTransaction.drAcct}}</td>\r\n        <td>{{editTransaction.crAcct}}</td>\r\n        <td>&nbsp;<span *ngIf=\"editTransaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Update</button>\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <label>Name</label>\r\n      <label>Institution</label>\r\n      <label>Number</label>\r\n      <label>Interest Rate</label>\r\n      <label>Limit</label>\r\n      <input type='submit' value=\"Update\" />\r\n  </form>-->\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1345,7 +1345,7 @@ var DataService = /** @class */ (function () {
         this.http = http;
     }
     DataService.prototype.getAccounts = function () {
-        return this.http.get('/Accounts//AccountsAsync');
+        return this.http.get('/Accounts/AccountsAsync');
         //return this.http.get<Account[]>(this.baseUrl + 'Accounts//AccountsAsync');
     };
     DataService.prototype.getCategories = function () {
@@ -1355,7 +1355,7 @@ var DataService = /** @class */ (function () {
         return this.http.get('/Transactions/TransactionsAsync');
     };
     DataService.prototype.getUsers = function () {
-        return this.http.get('/Users/UsersAsync');
+        return this.http.get('/Users/GetUsersAsync');
     };
     __decorate([
         core_1.Inject('BASE_URL'),

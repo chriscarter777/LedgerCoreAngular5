@@ -24,6 +24,7 @@ namespace pla5.Data
         private readonly string _userName;
         private readonly bool _userSI;
         private readonly bool _userAdmin;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly List<Category> _defaultCategories = new List<Category>{
             //OTHER
             new Category
@@ -283,7 +284,7 @@ namespace pla5.Data
         };
         #endregion
 
-        public LedgerDbRepository(LedgerDbContext context, HtmlEncoder htmlEncoder, ILogger<LedgerDbRepository> logger, SignInManager<IdentityUser> signInManager)
+        public LedgerDbRepository(LedgerDbContext context, HtmlEncoder htmlEncoder, ILogger<LedgerDbRepository> logger, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _htmlEncoder = htmlEncoder;
@@ -291,10 +292,11 @@ namespace pla5.Data
             _userName = signInManager.Context.User.Identity.Name;
             _userSI = signInManager.Context.User.Identity.IsAuthenticated;
             _userAdmin = signInManager.Context.User.IsInRole("Administrator");
-        }  //ctor
+            _userManager = userManager;
+    }  //ctor
 
-        #region Accounts
-        public async Task<Account[]> GetAccountsAsync()
+    #region Accounts
+    public async Task<Account[]> GetAccountsAsync()
         {
             _logger.LogTrace("DataRepository is getting Accounts for user: {0}.", _userName);
             try
@@ -507,10 +509,41 @@ namespace pla5.Data
                 return -1;
             }
         }
-        #endregion
+    #endregion
+    #region Users
+    public async Task<AppUser[]> GetUsersAsync()
+    {
+      _logger.LogTrace("DataRepository is getting Users for user: {0}.", _userName);
+      try
+      {
+        IdentityUser[] ius = await _context.Users.ToArrayAsync() ?? new IdentityUser[0];
+        if(ius.Length > 0)
+        {
+          AppUser[] aus = new AppUser[ius.Length];
+          for (int i = 0; i < ius.Length; i++)
+          {
+            aus[i] = new AppUser();
+            aus[i].Id = ius[i].Id;
+            aus[i].UserName = ius[i].UserName;
+            aus[i].Admin = await _userManager.IsInRoleAsync(ius[i], "Adminstrator");
+          }
+          return aus;
+        }
+        else
+        {
+          return new AppUser[0];
+        }
+      }
+      catch (Exception e)
+      {
+        HandleException(e, nameof(GetUsersAsync), "");
+        return new AppUser[0];
+      }
+    }
+    #endregion
 
-        #region Infrastructure
-        private void HandleException(Exception e, string method, string userMessage)
+    #region Infrastructure
+    private void HandleException(Exception e, string method, string userMessage)
         {
             _logger.LogError("{0}: An error occurred in DataRepository/{1} for user: {2}.\n{3}\n{4}", DateTime.Now, method, _userName, e.Message, userMessage);
         }  //HandleException
