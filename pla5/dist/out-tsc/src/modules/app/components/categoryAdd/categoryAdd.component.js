@@ -13,15 +13,12 @@ var core_1 = require("@angular/core");
 var CategoryAddComponent = /** @class */ (function () {
     function CategoryAddComponent() {
         this.add = new core_1.EventEmitter();
-        this.tax = false;
-        this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
-        this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
     CategoryAddComponent.prototype.ngOnInit = function () {
         this.newCategory = { id: null, name: 'New Category', tax: false, type: '' };
     };
     CategoryAddComponent.prototype.handleTaxButton = function () {
-        this.tax = !this.tax;
+        this.newCategory.tax = !this.newCategory.tax;
     };
     CategoryAddComponent.prototype.onSubmit = function () {
         this.add.emit(this.newCategory);

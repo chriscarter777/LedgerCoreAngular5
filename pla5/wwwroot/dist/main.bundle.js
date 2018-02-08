@@ -180,7 +180,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/accountAdd/accountAdd.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"accountAdd\">\r\n  <h4>Add</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{newAccount.id}}</td>\r\n        <td>{{newAccount.debit ? 'Asset' : 'Liability'}}</td>\r\n        <td>{{newAccount.name}}</td>\r\n        <td>{{newAccount.institution}}</td>\r\n        <td>{{newAccount.number}}</td>\r\n        <td className='right'>{{displayAsPercent(newAccount.interest)}}</td>\r\n        <td className='right'>{{account.limit ? displayAsDollar(newAccount.limit) : '--'}}</td>\r\n        <td className='right'>{{displayAsDollar(newAccount.balance)}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n<button (click)=\"onSubmit()\">Add</button>\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <input type='radio' value='true' checked={{debit}} onChange=\"handleDebitButton()\" /> Asset\r\n      <input type='radio' value='false' checked={{!debit}} onChange=\"handleDebitButton()\" /> Liability\r\n      <label>Name</label>\r\n      <input type='text' />\r\n      <label>Institution</label>\r\n      <input type='text' />\r\n      <label>Number</label>\r\n      <input type='text' />\r\n      <label>Interest Rate</label>\r\n      <input type='number' />%\r\n      <label>Limit</label>\r\n      $<input type='number' />\r\n      <input type='submit' value=\"Add\" />\r\n  </form>-->\r\n</div>\r\n"
+module.exports = "<div class=\"accountAdd\">\r\n  <h4>Add</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{newAccount.id}}</td>\r\n        <td>{{newAccount.debit ? 'Asset' : 'Liability'}}</td>\r\n        <td>{{newAccount.name}}</td>\r\n        <td>{{newAccount.institution}}</td>\r\n        <td>{{newAccount.number}}</td>\r\n        <td class='right'>{{displayAsPercent(newAccount.interest)}}</td>\r\n        <td class='right'>{{newAccount.limit ? displayAsDollar(newAccount.limit) : '--'}}</td>\r\n        <td class='right'>{{displayAsDollar(newAccount.balance)}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n<button (click)=\"onSubmit()\">Add</button>\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <input type='radio' value='true' checked={{debit}} onChange=\"handleDebitButton()\" /> Asset\r\n      <input type='radio' value='false' checked={{!debit}} onChange=\"handleDebitButton()\" /> Liability\r\n      <label>Name</label>\r\n      <input type='text' />\r\n      <label>Institution</label>\r\n      <input type='text' />\r\n      <label>Number</label>\r\n      <input type='text' />\r\n      <label>Interest Rate</label>\r\n      <input type='number' />%\r\n      <label>Limit</label>\r\n      $<input type='number' />\r\n      <input type='submit' value=\"Add\" />\r\n  </form>-->\r\n</div>\r\n"
 
 /***/ }),
 
@@ -203,7 +203,6 @@ var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var AccountAddComponent = /** @class */ (function () {
     function AccountAddComponent() {
         this.add = new core_1.EventEmitter();
-        this.debit = true;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
@@ -211,7 +210,7 @@ var AccountAddComponent = /** @class */ (function () {
         this.newAccount = { id: null, balance: 0, debit: true, institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true };
     };
     AccountAddComponent.prototype.handleDebitButton = function () {
-        this.debit = !this.debit;
+        this.newAccount.debit = !this.newAccount.debit;
     };
     AccountAddComponent.prototype.onSubmit = function () {
         this.add.emit(this.newAccount);
@@ -255,7 +254,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/accountEdit/accountEdit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"accountEdit\">\r\n  <h4>Edit</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{editAccount.id}}</td>\r\n        <td>{{editAccount.debit ? 'Asset' : 'Liability'}}</td>\r\n        <td>{{editAccount.name}}</td>\r\n        <td>{{editAccount.institution}}</td>\r\n        <td>{{editAccount.number}}</td>\r\n        <td className='right'>{{displayAsPercent(editAccount.interest)}}</td>\r\n        <td className='right'>{{account.limit ? displayAsDollar(editAccount.limit) : '--'}}</td>\r\n        <td className='right'>{{displayAsDollar(editAccount.balance)}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Update</button>\r\n\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <input type='radio' value='true' checked={{debit}} (Change)=\"handleDebitButton()\" /> Asset\r\n      <input type='radio' value='false' checked={{!debit}} (Change)=\"handleDebitButton()\" /> Liability\r\n      <label>Name</label>\r\n      <input type='text' />\r\n      <label>Institution</label>\r\n      <input type='text' />\r\n      <label>Number</label>\r\n      <input type='text' />\r\n      <label>Interest Rate</label>\r\n      <input type='number' />%\r\n      <label>Limit</label>\r\n      $<input type='number' />\r\n      <input type='submit' value=\"Update\" />\r\n  </form>-->\r\n</div>\r\n"
+module.exports = "<div class=\"accountEdit\">\r\n  <h4>Edit</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{editAccount.id}}</td>\r\n        <td>{{editAccount.debit ? 'Asset' : 'Liability'}}</td>\r\n        <td>{{editAccount.name}}</td>\r\n        <td>{{editAccount.institution}}</td>\r\n        <td>{{editAccount.number}}</td>\r\n        <td class='right'>{{displayAsPercent(editAccount.interest)}}</td>\r\n        <td class='right'>{{account.limit ? displayAsDollar(editAccount.limit) : '--'}}</td>\r\n        <td class='right'>{{displayAsDollar(editAccount.balance)}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Update</button>\r\n\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <input type='radio' value='true' checked={{debit}} (Change)=\"handleDebitButton()\" /> Asset\r\n      <input type='radio' value='false' checked={{!debit}} (Change)=\"handleDebitButton()\" /> Liability\r\n      <label>Name</label>\r\n      <input type='text' />\r\n      <label>Institution</label>\r\n      <input type='text' />\r\n      <label>Number</label>\r\n      <input type='text' />\r\n      <label>Interest Rate</label>\r\n      <input type='number' />%\r\n      <label>Limit</label>\r\n      $<input type='number' />\r\n      <input type='submit' value=\"Update\" />\r\n  </form>-->\r\n</div>\r\n"
 
 /***/ }),
 
@@ -278,12 +277,11 @@ var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var AccountEditComponent = /** @class */ (function () {
     function AccountEditComponent() {
         this.update = new core_1.EventEmitter();
-        this.debit = true;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
     AccountEditComponent.prototype.handleDebitButton = function () {
-        this.debit = !this.debit;
+        this.editAccount.debit = !this.editAccount.debit;
     };
     AccountEditComponent.prototype.onSubmit = function () {
         this.update.emit(this.editAccount);
@@ -533,7 +531,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/categories/categories.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"categories\">\r\n  <p *ngIf=\"!categories\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Categories</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Name</th>\r\n        <th>Tax?</th>\r\n        <th>Type</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let category of categories\">\r\n        <td>{{category.id}}</td>\r\n        <td>{{category.name}}</td>\r\n        <td>&nbsp;{{category.tax && <span class='glyphicon glyphicon-copy' style='color:green;'></span>}}</td>\r\n        <td>{{category.type}}</td>\r\n        <td><a [routerLink]=\"['/categorytEdit']\">Edit</a></td>\r\n        <td><a (click)=\"confirm('are you sure you want to delete this category?'); deleteCategory();\">Delete</a></td>\r\n        <!--<category-item *ngFor=\"let category of categories\" [category]=\"category\"></category-item>-->\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"addCategory()\">Add Category</button>\r\n  <category-add (add)=\"onAdd($event)\"></category-add>\r\n  <category-edit *ngIf=\"categories\" [editCategory]=\"categories[0]\" (update)=\"onUpdate($event)\"></category-edit>\r\n</div>\r\n"
+module.exports = "<div class=\"categories\">\r\n  <p *ngIf=\"!categories\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Categories</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Name</th>\r\n        <th>Tax?</th>\r\n        <th>Type</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let category of categories\">\r\n        <td>{{category.id}}</td>\r\n        <td>{{category.name}}</td>\r\n        <td>&nbsp;<span *ngIf=\"category.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n        <td>{{category.type}}</td>\r\n        <td><a [routerLink]=\"['/categorytEdit']\">Edit</a></td>\r\n        <td><a (click)=\"confirm('are you sure you want to delete this category?'); deleteCategory();\">Delete</a></td>\r\n        <!--<category-item *ngFor=\"let category of categories\" [category]=\"category\"></category-item>-->\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"addCategory()\">Add Category</button>\r\n  <category-add (add)=\"onAdd($event)\"></category-add>\r\n  <category-edit *ngIf=\"categories\" [editCategory]=\"categories[0]\" (update)=\"onUpdate($event)\"></category-edit>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -614,7 +612,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/categoryAdd/categoryAdd.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"categoryAdd\">\r\n  <h4>Add</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{newAccount.id}}</td>\r\n        <td>{{newAccount.debit ? 'Asset' : 'Liability'}}</td>\r\n        <td>{{newAccount.name}}</td>\r\n        <td>{{newAccount.institution}}</td>\r\n        <td>{{newAccount.number}}</td>\r\n        <td className='right'>{{displayAsPercent(newAccount.interest)}}</td>\r\n        <td className='right'>{{account.limit ? displayAsDollar(newAccount.limit) : '--'}}</td>\r\n        <td className='right'>{{displayAsDollar(newAccount.balance)}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Add</button>\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <label>Name</label>\r\n      <label>Institution</label>\r\n      <label>Number</label>\r\n      <label>Interest Rate</label>\r\n      <label>Limit</label>\r\n      <input type='submit' value='Add' />\r\n  </form>-->\r\n</div>\r\n"
+module.exports = "<div class=\"categoryAdd\">\r\n  <h4>Add</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Name</th>\r\n        <th>Tax?</th>\r\n        <th>Type</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{newCategory.id}}</td>\r\n        <td>{{newCategory.name}}</td>\r\n        <td>&nbsp;<span *ngIf=\"newCategory.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n        <td>{{newCategory.type}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Add</button>\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <label>Name</label>\r\n      <label>Institution</label>\r\n      <label>Number</label>\r\n      <label>Interest Rate</label>\r\n      <label>Limit</label>\r\n      <input type='submit' value='Add' />\r\n  </form>-->\r\n</div>\r\n"
 
 /***/ }),
 
@@ -637,15 +635,12 @@ var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var CategoryAddComponent = /** @class */ (function () {
     function CategoryAddComponent() {
         this.add = new core_1.EventEmitter();
-        this.tax = false;
-        this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
-        this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
     CategoryAddComponent.prototype.ngOnInit = function () {
         this.newCategory = { id: null, name: 'New Category', tax: false, type: '' };
     };
     CategoryAddComponent.prototype.handleTaxButton = function () {
-        this.tax = !this.tax;
+        this.newCategory.tax = !this.newCategory.tax;
     };
     CategoryAddComponent.prototype.onSubmit = function () {
         this.add.emit(this.newCategory);
@@ -689,7 +684,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/categoryEdit/categoryEdit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"categoryEdit\">\r\n    <form>\r\n        <label>Type</label>\r\n        <label>Name</label>\r\n        <label>Institution</label>\r\n        <label>Number</label>\r\n        <label>Interest Rate</label>\r\n        <label>Limit</label>\r\n        <input type='submit' value=\"Update\" />\r\n    </form>\r\n</div>"
+module.exports = "<div class=\"categoryEdit\">\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Name</th>\r\n        <th>Tax?</th>\r\n        <th>Type</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{editCategory.id}}</td>\r\n        <td>{{editCategory.name}}</td>\r\n        <td>&nbsp;<span *ngIf=\"editCategory.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n        <td>{{editCategory.type}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Update</button>\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <label>Name</label>\r\n      <label>Institution</label>\r\n      <label>Number</label>\r\n      <label>Interest Rate</label>\r\n      <label>Limit</label>\r\n      <input type='submit' value=\"Update\" />\r\n  </form>-->\r\n</div>\r\n"
 
 /***/ }),
 
@@ -704,11 +699,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var CategoryEditComponent = /** @class */ (function () {
     function CategoryEditComponent() {
+        this.update = new core_1.EventEmitter();
     }
+    CategoryEditComponent.prototype.handleTaxButton = function () {
+        this.editCategory.tax = !this.editCategory.tax;
+    };
+    CategoryEditComponent.prototype.onSubmit = function () {
+        this.update.emit(this.editCategory);
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], CategoryEditComponent.prototype, "editCategory", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], CategoryEditComponent.prototype, "update", void 0);
     CategoryEditComponent = __decorate([
         core_1.Component({
             selector: 'category-edit',
@@ -842,7 +855,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/navmenu/navmenu.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse'>\r\n            <ul class='nav navbar-nav'>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/home']\">\r\n                        <span class='glyphicon glyphicon-home'></span> Home\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/counter']\">\r\n                        <span class='glyphicon glyphicon-education'></span> Counter\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/fetch-data']\">\r\n                        <span class='glyphicon glyphicon-th-list'></span> Fetch data\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/accounts']\">\r\n                        <span class='glyphicon glyphicon-credit-card'></span> Accounts\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/categories']\">\r\n                        <span class='glyphicon glyphicon-folder-open'></span> Categories\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/transactions']\">\r\n                        <span class='glyphicon glyphicon-list-alt'></span> Transactions\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/users']\">\r\n                        <span class='glyphicon glyphicon-user'></span> Users\r\n                    </a>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse'>\r\n            <ul class='nav navbar-nav'>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/home']\">\r\n                        <span class='glyphicon glyphicon-home'></span> Home\r\n                    </a>\r\n                </li>\r\n                 <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/accounts']\">\r\n                        <span class='glyphicon glyphicon-credit-card'></span> Accounts\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/categories']\">\r\n                        <span class='glyphicon glyphicon-folder-open'></span> Categories\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/transactions']\">\r\n                        <span class='glyphicon glyphicon-list-alt'></span> Transactions\r\n                    </a>\r\n                </li>\r\n                <li [routerLinkActive]=\"['link-active']\">\r\n                    <a [routerLink]=\"['/users']\">\r\n                        <span class='glyphicon glyphicon-user'></span> Users\r\n                    </a>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -897,7 +910,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/transactionAdd/transactionAdd.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionAdd\">\r\n  <h4>Add</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{newAccount.id}}</td>\r\n        <td>{{newAccount.debit ? 'Asset' : 'Liability'}}</td>\r\n        <td>{{newAccount.name}}</td>\r\n        <td>{{newAccount.institution}}</td>\r\n        <td>{{newAccount.number}}</td>\r\n        <td className='right'>{{displayAsPercent(newAccount.interest)}}</td>\r\n        <td className='right'>{{account.limit ? displayAsDollar(newAccount.limit) : '--'}}</td>\r\n        <td className='right'>{{displayAsDollar(newAccount.balance)}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Add</button>\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <label>Name</label>\r\n      <label>Institution</label>\r\n      <label>Number</label>\r\n      <label>Interest Rate</label>\r\n      <label>Limit</label>\r\n      <input type='submit' value='Add' />\r\n  </form>-->\r\n</div>\r\n"
+module.exports = "<div class=\"transactionAdd\">\r\n  <h4>Add</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Data</th>\r\n        <th>Amount</th>\r\n        <th>Category</th>\r\n        <th>Debit Account</th>\r\n        <th>Credit Account</th>\r\n        <th>Tax</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{newTransaction.id}}</td>\r\n        <td>{{newTransaction.date}}</td>\r\n        <td class='right'>{{displayAsDollar(newTransaction.amount)}}</td>\r\n        <td>{{newTransaction.category}}</td>\r\n        <td>{{newTransaction.drAcct}}</td>\r\n        <td>{{newTransaction.crAcct}}</td>\r\n        <td>&nbsp;<span *ngIf=\"newTransaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Add</button>\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <label>Name</label>\r\n      <label>Institution</label>\r\n      <label>Number</label>\r\n      <label>Interest Rate</label>\r\n      <label>Limit</label>\r\n      <input type='submit' value='Add' />\r\n  </form>-->\r\n</div>\r\n"
 
 /***/ }),
 
@@ -921,10 +934,12 @@ var TransactionAddComponent = /** @class */ (function () {
     function TransactionAddComponent() {
         this.add = new core_1.EventEmitter();
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
-        this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
     TransactionAddComponent.prototype.ngOnInit = function () {
         this.newTransaction = { id: null, amount: 0, category: 0, crAcct: 0, date: '', drAcct: 0, tax: false, };
+    };
+    TransactionAddComponent.prototype.handleTaxButton = function () {
+        this.newTransaction.tax = !this.newTransaction.tax;
     };
     TransactionAddComponent.prototype.onSubmit = function () {
         this.add.emit(this.newTransaction);
@@ -968,7 +983,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/transactionEdit/transactionEdit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionEdit\">\r\n    <form>\r\n        <label>Type</label>\r\n        <label>Name</label>\r\n        <label>Institution</label>\r\n        <label>Number</label>\r\n        <label>Interest Rate</label>\r\n        <label>Limit</label>\r\n        <input type='submit' value=\"Update\" />\r\n    </form>\r\n</div>"
+module.exports = "<div class=\"transactionEdit\">\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Data</th>\r\n        <th>Amount</th>\r\n        <th>Category</th>\r\n        <th>Debit Account</th>\r\n        <th>Credit Account</th>\r\n        <th>Tax</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{editTransaction.id}}</td>\r\n        <td>{{editTransaction.date}}</td>\r\n        <td class='right'>{{displayAsDollar(editTransaction.amount)}}</td>\r\n        <td>{{editTransaction.category}}</td>\r\n        <td>{{editTransaction.drAcct}}</td>\r\n        <td>{{editTransaction.crAcct}}</td>\r\n        <td>&nbsp;<span *ngIf=\"editTransaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Update</button>\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <label>Name</label>\r\n      <label>Institution</label>\r\n      <label>Number</label>\r\n      <label>Interest Rate</label>\r\n      <label>Limit</label>\r\n      <input type='submit' value=\"Update\" />\r\n  </form>-->\r\n</div>\r\n"
 
 /***/ }),
 
@@ -983,11 +998,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var TransactionEditComponent = /** @class */ (function () {
     function TransactionEditComponent() {
+        this.update = new core_1.EventEmitter();
+        this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
     }
+    TransactionEditComponent.prototype.handleTaxButton = function () {
+        this.editTransaction.tax = !this.editTransaction.tax;
+    };
+    TransactionEditComponent.prototype.onSubmit = function () {
+        this.update.emit(this.editTransaction);
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], TransactionEditComponent.prototype, "editTransaction", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], TransactionEditComponent.prototype, "update", void 0);
     TransactionEditComponent = __decorate([
         core_1.Component({
             selector: 'transaction-edit',
@@ -1085,7 +1119,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/transactions/transactions.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactions\">\r\n    <p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n    \r\n    <table>\r\n        <caption>Transactions</caption>\r\n        <thead>\r\n            <tr>\r\n                <th>ID</th>\r\n                <th>Date</th>\r\n                <th>Amount</th>\r\n                <th>Category</th>\r\n                <th>Debit Account</th>\r\n                <th>Credit Account</th>\r\n                <th>Tax?</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <transaction-item *ngFor=\"let transaction of transactions\" [transaction]=\"transaction\"></transaction-item>\r\n        </tbody>\r\n    </table>\r\n    <button (click)=\"addTransaction()\">Add Transaction</button>\r\n</div>\r\n"
+module.exports = "<div class=\"transactions\">\r\n  <p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Transactions</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Date</th>\r\n        <th>Amount</th>\r\n        <th>Category</th>\r\n        <th>Debit Account</th>\r\n        <th>Credit Account</th>\r\n        <th>Tax?</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let transaction of transactions\">\r\n        <td>{{transaction.id}}</td>\r\n        <td>{{transaction.date}}</td>\r\n        <td className='right'>{{displayAsDollar(transaction.amount)}}</td>\r\n        <td>{{transaction.category}}</td>\r\n        <td>{{transaction.drAcct}}</td>\r\n        <td>{{transaction.crAcct}}</td>\r\n        <td>&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n        <td><a [routerLink]=\"['/transactionEdit']\">Edit</a></td>\r\n        <td><a (click)=\"onDelete(transaction.id);\">Delete</a></td>\r\n      </tr>\r\n      <!--<transaction-item *ngFor=\"let transaction of transactions\" [transaction]=\"transaction\"></transaction-item>-->\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"addTransaction()\">Add Transaction</button>\r\n  <transaction-add (add)=\"onAdd($event)\"></transaction-add>\r\n  <transaction-edit *ngIf=\"transactions\" [editTransaction]=\"transactions[0]\" (update)=\"onUpdate($event)\"></transaction-edit>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1109,6 +1143,7 @@ var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data
 var TransactionsComponent = /** @class */ (function () {
     function TransactionsComponent(dataService) {
         this.dataService = dataService;
+        this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
     }
     TransactionsComponent.prototype.ngOnInit = function () {
         this.getTransactions();
@@ -1116,6 +1151,19 @@ var TransactionsComponent = /** @class */ (function () {
     TransactionsComponent.prototype.getTransactions = function () {
         var _this = this;
         this.dataService.getTransactions().subscribe(function (transactions) { return _this.transactions = transactions; });
+    };
+    TransactionsComponent.prototype.onDelete = function (id) {
+        var confirmation = confirm('are you sure you want to delete transaction on date' + this.transactions.find(function (element) { return element.id == id; }).date + '?');
+        if (confirmation) {
+            alert("Ha! Account " + id + " is GONE!");
+        }
+        ;
+    };
+    TransactionsComponent.prototype.onAdd = function (newTransaction) {
+        alert("You just added transaction for date " + newTransaction.date + " and amount " + newTransaction.amount + ".");
+    };
+    TransactionsComponent.prototype.onUpdate = function (transaction) {
+        alert("You just updated transaction for date " + transaction.date + ".");
     };
     TransactionsComponent = __decorate([
         core_1.Component({
@@ -1215,7 +1263,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/users/users.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"users\">\r\n    <p *ngIf=\"!users\"><em>Loading...</em></p>\r\n\r\n    <table>\r\n        <caption>Users</caption>\r\n        <thead>\r\n            <tr>\r\n                <th>ID</th>\r\n                <th>Username</th>\r\n                <th>Admin</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <user-item *ngFor=\"let user of users\" [user]=\"user\"></user-item>\r\n        </tbody>\r\n    </table>\r\n    <button (click)=\"addUser()\">Add User</button>\r\n</div>\r\n"
+module.exports = "<div class=\"users\">\r\n  <p *ngIf=\"!users\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Users</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Username</th>\r\n        <th>Admin</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let user of users\">\r\n        <td>{{user.id}}</td>\r\n        <td>{{user.userName}}</td>\r\n        <td><input type='checkbox' checked={{user.admin}} (Change)=\"toggleAdmin()\" /></td>\r\n        <td><a [routerLink]=\"['/accountEdit']\">Edit</a></td>\r\n        <td><a (click)=\"onDelete(account.id);\">Delete</a></td>\r\n      </tr>\r\n      <!--<user-item *ngFor=\"let user of users\" [user]=\"user\"></user-item>-->\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"addUser()\">Add User</button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1246,6 +1294,19 @@ var UsersComponent = /** @class */ (function () {
     UsersComponent.prototype.getUsers = function () {
         var _this = this;
         this.dataService.getUsers().subscribe(function (users) { return _this.users = users; });
+    };
+    UsersComponent.prototype.onDelete = function (id) {
+        var confirmation = confirm('are you sure you want to delete ' + this.users.find(function (element) { return element.id == id; }).userName + '?');
+        if (confirmation) {
+            alert("Ha! User " + id + " is GONE!");
+        }
+        ;
+    };
+    UsersComponent.prototype.onAdminChange = function (user) {
+        alert("You just updated " + user.userName + "'s admin stsus.");
+    };
+    UsersComponent.prototype.onPasswordReset = function (user) {
+        alert("You just reset " + user.userName + "'s password.");
     };
     UsersComponent = __decorate([
         core_1.Component({

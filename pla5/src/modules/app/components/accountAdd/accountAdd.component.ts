@@ -14,11 +14,11 @@ export class AccountAddComponent {
     this.newAccount = { id: null, balance: 0, debit: true, institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true };
   }
 
-    public debit = true;
     public displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);
     public displayAsPercent = (value: number) => value.toFixed(2) + "%";
+
     public handleDebitButton() {
-        this.debit = !this.debit;
+      this.newAccount.debit = !this.newAccount.debit;
     }
 
     onSubmit() {

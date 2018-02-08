@@ -19,4 +19,20 @@ export class UsersComponent {
     getUsers(): void {
         this.dataService.getUsers().subscribe(users => this.users = users);
     }
+
+    onDelete(id: string): void {
+      var confirmation = confirm('are you sure you want to delete ' + this.users.find((element) => element.id == id).userName + '?');
+      if (confirmation) {
+        alert("Ha! User " + id + " is GONE!")
+      };
+    }
+
+    onAdminChange(user: User) {
+      alert("You just updated " + user.userName + "'s admin stsus.");
+    }
+
+    onPasswordReset(user: User) {
+      alert("You just reset " + user.userName + "'s password.");
+    }
+
 }

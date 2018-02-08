@@ -1,22 +1,35 @@
 <div class="transactions">
-    <p *ngIf="!transactions"><em>Loading...</em></p>
-    
-    <table>
-        <caption>Transactions</caption>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Category</th>
-                <th>Debit Account</th>
-                <th>Credit Account</th>
-                <th>Tax?</th>
-            </tr>
-        </thead>
-        <tbody>
-            <transaction-item *ngFor="let transaction of transactions" [transaction]="transaction"></transaction-item>
-        </tbody>
-    </table>
-    <button (click)="addTransaction()">Add Transaction</button>
+  <p *ngIf="!transactions"><em>Loading...</em></p>
+
+  <table>
+    <caption>Transactions</caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Category</th>
+        <th>Debit Account</th>
+        <th>Credit Account</th>
+        <th>Tax?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transaction of transactions">
+        <td>{{transaction.id}}</td>
+        <td>{{transaction.date}}</td>
+        <td className='right'>{{displayAsDollar(transaction.amount)}}</td>
+        <td>{{transaction.category}}</td>
+        <td>{{transaction.drAcct}}</td>
+        <td>{{transaction.crAcct}}</td>
+        <td>&nbsp;<span *ngIf="transaction.tax" class='glyphicon glyphicon-copy' style='color:green;'></span></td>
+        <td><a [routerLink]="['/transactionEdit']">Edit</a></td>
+        <td><a (click)="onDelete(transaction.id);">Delete</a></td>
+      </tr>
+      <!--<transaction-item *ngFor="let transaction of transactions" [transaction]="transaction"></transaction-item>-->
+    </tbody>
+  </table>
+  <button (click)="addTransaction()">Add Transaction</button>
+  <transaction-add (add)="onAdd($event)"></transaction-add>
+  <transaction-edit *ngIf="transactions" [editTransaction]="transactions[0]" (update)="onUpdate($event)"></transaction-edit>
 </div>

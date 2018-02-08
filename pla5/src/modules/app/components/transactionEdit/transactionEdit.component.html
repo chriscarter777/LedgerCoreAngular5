@@ -1,11 +1,38 @@
-﻿<div class="transactionEdit">
-    <form>
-        <label>Type</label>
-        <label>Name</label>
-        <label>Institution</label>
-        <label>Number</label>
-        <label>Interest Rate</label>
-        <label>Limit</label>
-        <input type='submit' value="Update" />
-    </form>
+<div class="transactionEdit">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Data</th>
+        <th>Amount</th>
+        <th>Category</th>
+        <th>Debit Account</th>
+        <th>Credit Account</th>
+        <th>Tax</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{editTransaction.id}}</td>
+        <td>{{editTransaction.date}}</td>
+        <td class='right'>{{displayAsDollar(editTransaction.amount)}}</td>
+        <td>{{editTransaction.category}}</td>
+        <td>{{editTransaction.drAcct}}</td>
+        <td>{{editTransaction.crAcct}}</td>
+        <td>&nbsp;<span *ngIf="editTransaction.tax" class='glyphicon glyphicon-copy' style='color:green;'></span></td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="onSubmit()">Update</button>
+
+
+  <!--<form>
+      <label>Type</label>
+      <label>Name</label>
+      <label>Institution</label>
+      <label>Number</label>
+      <label>Interest Rate</label>
+      <label>Limit</label>
+      <input type='submit' value="Update" />
+  </form>-->
 </div>

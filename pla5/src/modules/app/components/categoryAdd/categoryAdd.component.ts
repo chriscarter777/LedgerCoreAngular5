@@ -14,11 +14,8 @@ export class CategoryAddComponent {
     this.newCategory = { id: null, name: 'New Category', tax: false, type: '' };
   }
 
-  public tax = false;
-  public displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);
-  public displayAsPercent = (value: number) => value.toFixed(2) + "%";
   public handleTaxButton() {
-    this.tax = !this.tax;
+    this.newCategory.tax = !this.newCategory.tax;
   }
 
   onSubmit() {

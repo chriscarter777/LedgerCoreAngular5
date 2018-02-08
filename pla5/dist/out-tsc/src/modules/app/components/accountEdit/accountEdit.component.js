@@ -13,12 +13,11 @@ var core_1 = require("@angular/core");
 var AccountEditComponent = /** @class */ (function () {
     function AccountEditComponent() {
         this.update = new core_1.EventEmitter();
-        this.debit = true;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
     AccountEditComponent.prototype.handleDebitButton = function () {
-        this.debit = !this.debit;
+        this.editAccount.debit = !this.editAccount.debit;
     };
     AccountEditComponent.prototype.onSubmit = function () {
         this.update.emit(this.editAccount);

@@ -10,11 +10,10 @@ export class AccountEditComponent {
   @Input() editAccount: Account;
   @Output() update = new EventEmitter();
 
-    public debit = true;
     public displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);
     public displayAsPercent = (value: number) => value.toFixed(2) + "%";
     public handleDebitButton() {
-        this.debit = !this.debit;
+      this.editAccount.debit = !this.editAccount.debit;
     }
 
     onSubmit() {

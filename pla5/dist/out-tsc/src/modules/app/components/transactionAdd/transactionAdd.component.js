@@ -14,10 +14,12 @@ var TransactionAddComponent = /** @class */ (function () {
     function TransactionAddComponent() {
         this.add = new core_1.EventEmitter();
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
-        this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
     TransactionAddComponent.prototype.ngOnInit = function () {
         this.newTransaction = { id: null, amount: 0, category: 0, crAcct: 0, date: '', drAcct: 0, tax: false, };
+    };
+    TransactionAddComponent.prototype.handleTaxButton = function () {
+        this.newTransaction.tax = !this.newTransaction.tax;
     };
     TransactionAddComponent.prototype.onSubmit = function () {
         this.add.emit(this.newTransaction);

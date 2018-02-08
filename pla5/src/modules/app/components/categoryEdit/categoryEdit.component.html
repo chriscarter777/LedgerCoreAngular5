@@ -1,11 +1,32 @@
-﻿<div class="categoryEdit">
-    <form>
-        <label>Type</label>
-        <label>Name</label>
-        <label>Institution</label>
-        <label>Number</label>
-        <label>Interest Rate</label>
-        <label>Limit</label>
-        <input type='submit' value="Update" />
-    </form>
+<div class="categoryEdit">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Tax?</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{editCategory.id}}</td>
+        <td>{{editCategory.name}}</td>
+        <td>&nbsp;<span *ngIf="editCategory.tax" class='glyphicon glyphicon-copy' style='color:green;'></span></td>
+        <td>{{editCategory.type}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="onSubmit()">Update</button>
+
+
+  <!--<form>
+      <label>Type</label>
+      <label>Name</label>
+      <label>Institution</label>
+      <label>Number</label>
+      <label>Interest Rate</label>
+      <label>Limit</label>
+      <input type='submit' value="Update" />
+  </form>-->
 </div>

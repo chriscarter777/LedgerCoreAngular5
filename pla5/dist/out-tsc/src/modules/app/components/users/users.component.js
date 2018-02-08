@@ -22,6 +22,19 @@ var UsersComponent = /** @class */ (function () {
         var _this = this;
         this.dataService.getUsers().subscribe(function (users) { return _this.users = users; });
     };
+    UsersComponent.prototype.onDelete = function (id) {
+        var confirmation = confirm('are you sure you want to delete ' + this.users.find(function (element) { return element.id == id; }).userName + '?');
+        if (confirmation) {
+            alert("Ha! User " + id + " is GONE!");
+        }
+        ;
+    };
+    UsersComponent.prototype.onAdminChange = function (user) {
+        alert("You just updated " + user.userName + "'s admin stsus.");
+    };
+    UsersComponent.prototype.onPasswordReset = function (user) {
+        alert("You just reset " + user.userName + "'s password.");
+    };
     UsersComponent = __decorate([
         core_1.Component({
             selector: 'pl-users',

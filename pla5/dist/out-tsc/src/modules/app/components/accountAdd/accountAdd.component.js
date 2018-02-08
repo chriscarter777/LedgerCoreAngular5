@@ -13,7 +13,6 @@ var core_1 = require("@angular/core");
 var AccountAddComponent = /** @class */ (function () {
     function AccountAddComponent() {
         this.add = new core_1.EventEmitter();
-        this.debit = true;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
@@ -21,7 +20,7 @@ var AccountAddComponent = /** @class */ (function () {
         this.newAccount = { id: null, balance: 0, debit: true, institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true };
     };
     AccountAddComponent.prototype.handleDebitButton = function () {
-        this.debit = !this.debit;
+        this.newAccount.debit = !this.newAccount.debit;
     };
     AccountAddComponent.prototype.onSubmit = function () {
         this.add.emit(this.newAccount);
