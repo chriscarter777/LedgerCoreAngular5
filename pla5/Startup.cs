@@ -28,7 +28,7 @@ namespace pla5
       //Data Access
       services.AddDbContext<LedgerDbContext>(
           options => options.UseSqlServer(Configuration.GetConnectionString("LedgerDatabase"),
-          optionsBuilders => optionsBuilders.MigrationsAssembly("PersonalLedger")));
+          optionsBuilders => optionsBuilders.MigrationsAssembly("pla5")));
 
       //Identity
       services.AddIdentity<IdentityUser, IdentityRole>()

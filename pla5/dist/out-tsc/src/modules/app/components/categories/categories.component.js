@@ -22,6 +22,19 @@ var CategoriesComponent = /** @class */ (function () {
         var _this = this;
         this.dataService.getCategories().subscribe(function (categories) { return _this.categories = categories; });
     };
+    CategoriesComponent.prototype.onDelete = function (id) {
+        var confirmation = confirm('are you sure you want to delete ' + this.categories.find(function (element) { return element.id == id; }).name + '?');
+        if (confirmation) {
+            alert("Ha! Category " + id + " is GONE!");
+        }
+        ;
+    };
+    CategoriesComponent.prototype.onAdd = function (newCategory) {
+        alert("You just added " + newCategory.name + ".");
+    };
+    CategoriesComponent.prototype.onUpdate = function (category) {
+        alert("You just updated " + category.name + ".");
+    };
     CategoriesComponent = __decorate([
         core_1.Component({
             selector: 'pl-categories',
