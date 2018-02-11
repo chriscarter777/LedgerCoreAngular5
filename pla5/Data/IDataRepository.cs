@@ -9,21 +9,22 @@ namespace pla5.Data
 {
     public interface IDataRepository
     {
-        Task<Account[]> GetAccountsAsync();
-        Task<int> AddAccountAsync(Account a);
-        Task<int> DeleteAccountAsync(int id);
-        Task<int> UpdateAccountAsync(Account a);
+      Task<Account[]> GetAccountsAsync();
+      Task<Account> GetAccountAsync(int id);
+      Task<Account> AddAccountAsync(Account a);
+      Task<Account> DeleteAccountAsync(int id);
+      Task<Account> UpdateAccountAsync(Account a);
 
-        Task<Category[]> GetCategoriesAsync();
-        Task<int> AddCategoryAsync(Category c);
-        Task<int> DeleteCategoryAsync(int id);
-        Task<int> UpdateCategoryAsync(Category c);
+      Task<Category[]> GetCategoriesAsync();
+      Task<Category> GetCategoryAsync(int id);
+      Task<Category> AddCategoryAsync(Category c);
+      Task<Category> DeleteCategoryAsync(int id);
+      Task<Category> UpdateCategoryAsync(Category c);
 
-        Task<Transaction[]> GetTransactionsAsync();
-        Task<int> AddTransactionAsync(Transaction t);
-        Task<int> DeleteTransactionAsync(int id);
-        Task<int> UpdateTransactionAsync(Transaction t);
-
-        Task<AppUser[]> GetUsersAsync();
+      Task<Transaction[]> GetTransactionsAsync();
+      Task<Transaction> GetTransactionAsync(int id);
+      Task<Transaction> AddTransactionAsync(Transaction t);
+      Task<Transaction> DeleteTransactionAsync(int id);
+      Task<Transaction> UpdateTransactionAsync(Transaction t);
   }  //interface
 }  //namespace

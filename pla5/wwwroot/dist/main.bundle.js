@@ -66,29 +66,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var platform_browser_1 = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
-var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var common_1 = __webpack_require__("../../../common/esm5/common.js");
-var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
-var app_component_1 = __webpack_require__("../../../../../src/modules/app/components/app/app.component.ts");
-var navmenu_component_1 = __webpack_require__("../../../../../src/modules/app/components/navmenu/navmenu.component.ts");
-var home_component_1 = __webpack_require__("../../../../../src/modules/app/components/home/home.component.ts");
 var accountAdd_component_1 = __webpack_require__("../../../../../src/modules/app/components/accountAdd/accountAdd.component.ts");
 var accountEdit_component_1 = __webpack_require__("../../../../../src/modules/app/components/accountEdit/accountEdit.component.ts");
-var accountItem_component_1 = __webpack_require__("../../../../../src/modules/app/components/accountItem/accountItem.component.ts");
-var accounts_component_1 = __webpack_require__("../../../../../src/modules/app/components/accounts/accounts.component.ts");
-var categories_component_1 = __webpack_require__("../../../../../src/modules/app/components/categories/categories.component.ts");
+var accountList_component_1 = __webpack_require__("../../../../../src/modules/app/components/accountList/accountList.component.ts");
+var app_component_1 = __webpack_require__("../../../../../src/modules/app/components/app/app.component.ts");
+var categoryList_component_1 = __webpack_require__("../../../../../src/modules/app/components/categoryList/categoryList.component.ts");
 var categoryAdd_component_1 = __webpack_require__("../../../../../src/modules/app/components/categoryAdd/categoryAdd.component.ts");
 var categoryEdit_component_1 = __webpack_require__("../../../../../src/modules/app/components/categoryEdit/categoryEdit.component.ts");
-var categoryItem_component_1 = __webpack_require__("../../../../../src/modules/app/components/categoryItem/categoryItem.component.ts");
+var home_component_1 = __webpack_require__("../../../../../src/modules/app/components/home/home.component.ts");
+var navmenu_component_1 = __webpack_require__("../../../../../src/modules/app/components/navmenu/navmenu.component.ts");
 var transactionAdd_component_1 = __webpack_require__("../../../../../src/modules/app/components/transactionAdd/transactionAdd.component.ts");
 var transactionEdit_component_1 = __webpack_require__("../../../../../src/modules/app/components/transactionEdit/transactionEdit.component.ts");
-var transactionItem_component_1 = __webpack_require__("../../../../../src/modules/app/components/transactionItem/transactionItem.component.ts");
-var transactions_component_1 = __webpack_require__("../../../../../src/modules/app/components/transactions/transactions.component.ts");
-var userItem_component_1 = __webpack_require__("../../../../../src/modules/app/components/userItem/userItem.component.ts");
-var users_component_1 = __webpack_require__("../../../../../src/modules/app/components/users/users.component.ts");
+var transactionlist_component_1 = __webpack_require__("../../../../../src/modules/app/components/transactionList/transactionlist.component.ts");
+var userList_component_1 = __webpack_require__("../../../../../src/modules/app/components/userList/userList.component.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -97,46 +93,43 @@ var AppModule = /** @class */ (function () {
             //make non-module items available
             declarations: [
                 app_component_1.AppComponent,
-                navmenu_component_1.NavMenuComponent,
                 home_component_1.HomeComponent,
+                navmenu_component_1.NavMenuComponent,
                 accountAdd_component_1.AccountAddComponent,
                 accountEdit_component_1.AccountEditComponent,
-                accountItem_component_1.AccountItemComponent,
-                accounts_component_1.AccountsComponent,
-                categories_component_1.CategoriesComponent,
+                accountList_component_1.AccountListComponent,
+                categoryList_component_1.CategoryListComponent,
                 categoryAdd_component_1.CategoryAddComponent,
                 categoryEdit_component_1.CategoryEditComponent,
-                categoryItem_component_1.CategoryItemComponent,
                 transactionAdd_component_1.TransactionAddComponent,
                 transactionEdit_component_1.TransactionEditComponent,
-                transactionItem_component_1.TransactionItemComponent,
-                transactions_component_1.TransactionsComponent,
-                userItem_component_1.UserItemComponent,
-                users_component_1.UsersComponent
+                transactionlist_component_1.TransactionListComponent,
+                userList_component_1.UserListComponent
             ],
             //import other modules
             imports: [
                 platform_browser_1.BrowserModule,
                 common_1.CommonModule,
                 http_1.HttpClientModule,
-                forms_1.FormsModule,
+                forms_1.ReactiveFormsModule,
                 router_1.RouterModule.forRoot([
                     { path: '', redirectTo: 'home', pathMatch: 'full' },
                     { path: 'home', component: home_component_1.HomeComponent },
-                    { path: 'account-add', component: accountAdd_component_1.AccountAddComponent },
-                    { path: 'account-edit', component: accountEdit_component_1.AccountEditComponent },
-                    { path: 'account-item', component: accountItem_component_1.AccountItemComponent },
-                    { path: 'accounts', component: accounts_component_1.AccountsComponent },
+                    {
+                        path: 'accounts',
+                        component: accountList_component_1.AccountListComponent,
+                        children: [
+                            { path: 'account-add', component: accountAdd_component_1.AccountAddComponent },
+                            { path: 'account-edit', component: accountEdit_component_1.AccountEditComponent },
+                        ]
+                    },
                     { path: 'category-add', component: categoryAdd_component_1.CategoryAddComponent },
                     { path: 'category-edit', component: categoryEdit_component_1.CategoryEditComponent },
-                    { path: 'category-item', component: categoryEdit_component_1.CategoryEditComponent },
-                    { path: 'categories', component: categories_component_1.CategoriesComponent },
+                    { path: 'categories', component: categoryList_component_1.CategoryListComponent },
                     { path: 'transaction-add', component: transactionAdd_component_1.TransactionAddComponent },
                     { path: 'transaction-edit', component: transactionEdit_component_1.TransactionEditComponent },
-                    { path: 'transaction-item', component: transactionItem_component_1.TransactionItemComponent },
-                    { path: 'transactions', component: transactions_component_1.TransactionsComponent },
-                    { path: 'user-item', component: userItem_component_1.UserItemComponent },
-                    { path: 'users', component: users_component_1.UsersComponent },
+                    { path: 'transactions', component: transactionlist_component_1.TransactionListComponent },
+                    { path: 'users', component: userList_component_1.UserListComponent },
                     { path: '**', redirectTo: 'home' }
                 ])
             ],
@@ -167,7 +160,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body {\r\n}\r\n", ""]);
+exports.push([module.i, "body {\r\n}\r\n\r\nlabel{\r\n  width:100px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -180,7 +173,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/accountAdd/accountAdd.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"accountAdd\">\r\n  <h4>Add</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{newAccount.id}}</td>\r\n        <td>{{newAccount.debit ? 'Asset' : 'Liability'}}</td>\r\n        <td>{{newAccount.name}}</td>\r\n        <td>{{newAccount.institution}}</td>\r\n        <td>{{newAccount.number}}</td>\r\n        <td class='right'>{{displayAsPercent(newAccount.interest)}}</td>\r\n        <td class='right'>{{newAccount.limit ? displayAsDollar(newAccount.limit) : '--'}}</td>\r\n        <td class='right'>{{displayAsDollar(newAccount.balance)}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n<button (click)=\"onSubmit()\">Add</button>\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <input type='radio' value='true' checked={{debit}} onChange=\"handleDebitButton()\" /> Asset\r\n      <input type='radio' value='false' checked={{!debit}} onChange=\"handleDebitButton()\" /> Liability\r\n      <label>Name</label>\r\n      <input type='text' />\r\n      <label>Institution</label>\r\n      <input type='text' />\r\n      <label>Number</label>\r\n      <input type='text' />\r\n      <label>Interest Rate</label>\r\n      <input type='number' />%\r\n      <label>Limit</label>\r\n      $<input type='number' />\r\n      <input type='submit' value=\"Add\" />\r\n  </form>-->\r\n</div>\r\n"
+module.exports = "<div class=\"accountAdd\">\r\n  <h4>Add</h4>\r\n  <!--<table>\r\n      <thead>\r\n        <tr>\r\n          <th>ID</th>\r\n          <th>Type</th>\r\n          <th>Name</th>\r\n          <th>Institution</th>\r\n          <th>Number</th>\r\n          <th>Interest</th>\r\n          <th>Limit</th>\r\n          <th>Balance</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr>\r\n          <td>{{newAccount.id}}</td>\r\n          <td>{{newAccount.acctType ? 'Asset' : 'Liability'}}</td>\r\n          <td>{{newAccount.name}}</td>\r\n          <td>{{newAccount.institution}}</td>\r\n          <td>{{newAccount.number}}</td>\r\n          <td class='right'>{{displayAsPercent(newAccount.interest)}}</td>\r\n          <td class='right'>{{newAccount.limit ? displayAsDollar(newAccount.limit) : '--'}}</td>\r\n          <td class='right'>{{displayAsDollar(newAccount.balance)}}</td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  <button (click)=\"onSubmit()\">Add</button>-->\r\n\r\n  <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Type</label>\r\n    <input type='radio' name=\"acctType\" formControlName=\"acctType\" value=\"Asset\" /> Asset\r\n    <input type='radio' name=\"acctType\" formControlName=\"acctType\" value=\"Liability\" /> Liability <br />\r\n    <label>Name</label>\r\n    <input type='text' name=\"name\" formControlName=\"name\" /> <br />\r\n    <label>Institution</label>\r\n    <input type='text' name=\"institution\" formControlName=\"institution\" /> <br />\r\n    <label>Number</label>\r\n    <input type='text' name=\"number\" formControlName=\"number\" /> <br />\r\n    <label>Interest Rate</label>\r\n    <input type='number' name=\"interest\" formControlName=\"interest\" />% <br />\r\n    <label>Limit<span class=\"pull-right\">$</span></label>\r\n    <input type='number' name=\"limit\" formControlName=\"limit\" /> <br />\r\n    <input type='submit' value=\"Add\" />\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -200,6 +193,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var AccountAddComponent = /** @class */ (function () {
     function AccountAddComponent() {
         this.add = new core_1.EventEmitter();
@@ -207,13 +201,28 @@ var AccountAddComponent = /** @class */ (function () {
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
     AccountAddComponent.prototype.ngOnInit = function () {
-        this.newAccount = { id: null, balance: 0, debit: true, institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true };
-    };
-    AccountAddComponent.prototype.handleDebitButton = function () {
-        this.newAccount.debit = !this.newAccount.debit;
+        this.newAccount = this.freshNewAccount();
+        this.form = new forms_1.FormGroup({
+            acctType: new forms_1.FormControl(this.newAccount.acctType),
+            institution: new forms_1.FormControl(this.newAccount.institution),
+            interest: new forms_1.FormControl(this.newAccount.interest),
+            limit: new forms_1.FormControl(this.newAccount.limit),
+            name: new forms_1.FormControl(this.newAccount.name),
+            number: new forms_1.FormControl(this.newAccount.number),
+        });
     };
     AccountAddComponent.prototype.onSubmit = function () {
+        this.newAccount.acctType = this.form.get('acctType').value;
+        this.newAccount.institution = this.form.get('institution').value;
+        this.newAccount.interest = this.form.get('interest').value;
+        this.newAccount.limit = this.form.get('limit').value;
+        this.newAccount.name = this.form.get('name').value;
+        this.newAccount.number = this.form.get('number').value;
         this.add.emit(this.newAccount);
+        this.ngOnInit();
+    };
+    AccountAddComponent.prototype.freshNewAccount = function () {
+        return { id: null, balance: 0, acctType: "Asset", institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true };
     };
     __decorate([
         core_1.Output(),
@@ -241,7 +250,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body {\r\n}\r\n", ""]);
+exports.push([module.i, "body {\r\n}\r\n\r\nlabel {\r\n  width: 100px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -254,7 +263,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/accountEdit/accountEdit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"accountEdit\">\r\n  <h4>Edit</h4>\r\n  <table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{editAccount.id}}</td>\r\n        <td>{{editAccount.debit ? 'Asset' : 'Liability'}}</td>\r\n        <td>{{editAccount.name}}</td>\r\n        <td>{{editAccount.institution}}</td>\r\n        <td>{{editAccount.number}}</td>\r\n        <td class='right'>{{displayAsPercent(editAccount.interest)}}</td>\r\n        <td class='right'>{{editAccount.limit ? displayAsDollar(editAccount.limit) : '--'}}</td>\r\n        <td class='right'>{{displayAsDollar(editAccount.balance)}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Update</button>\r\n\r\n\r\n\r\n  <!--<form>\r\n      <label>Type</label>\r\n      <input type='radio' value='true' checked={{debit}} (Change)=\"handleDebitButton()\" /> Asset\r\n      <input type='radio' value='false' checked={{!debit}} (Change)=\"handleDebitButton()\" /> Liability\r\n      <label>Name</label>\r\n      <input type='text' />\r\n      <label>Institution</label>\r\n      <input type='text' />\r\n      <label>Number</label>\r\n      <input type='text' />\r\n      <label>Interest Rate</label>\r\n      <input type='number' />%\r\n      <label>Limit</label>\r\n      $<input type='number' />\r\n      <input type='submit' value=\"Update\" />\r\n  </form>-->\r\n</div>\r\n"
+module.exports = "<div class=\"accountEdit\">\r\n  <h4>Edit</h4>\r\n  <!--<table>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr>\r\n        <td>{{editAccount.id}}</td>\r\n        <td>{{editAccount.acctType}}</td>\r\n        <td>{{editAccount.name}}</td>\r\n        <td>{{editAccount.institution}}</td>\r\n        <td>{{editAccount.number}}</td>\r\n        <td class='right'>{{displayAsPercent(editAccount.interest)}}</td>\r\n        <td class='right'>{{editAccount.limit ? displayAsDollar(editAccount.limit) : '--'}}</td>\r\n        <td class='right'>{{displayAsDollar(editAccount.balance)}}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"onSubmit()\">Update</button>-->\r\n\r\n  <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Type</label>\r\n    <input type='radio' name=\"acctType\" value=\"Asset\" formControlName=\"acctType\" /> Asset\r\n    <input type='radio' name=\"acctType\" value=\"Liability\" formControlName=\"acctType\" /> Liability <br />\r\n    <label>Name</label>\r\n    <input type='text' name=\"name\" formControlName=\"name\" /> <br />\r\n    <label>Institution</label>\r\n    <input type='text' name=\"institution\" formControlName=\"institution\" /> <br />\r\n    <label>Number</label>\r\n    <input type='text' name=\"number\" formControlName=\"number\" /> <br />\r\n    <label>Interest Rate</label>\r\n    <input type='number' name=\"interest\" formControlName=\"interest\" />% <br />\r\n    <label>Limit<span class=\"pull-right\">$</span></label>\r\n    <input type='number' name=\"limit\" formControlName=\"limit\" /> <br />\r\n    <input type='submit' value=\"Update\" />\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -274,16 +283,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var AccountEditComponent = /** @class */ (function () {
     function AccountEditComponent() {
         this.update = new core_1.EventEmitter();
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
-    AccountEditComponent.prototype.handleDebitButton = function () {
-        this.editAccount.debit = !this.editAccount.debit;
+    AccountEditComponent.prototype.ngOnInit = function () {
+        this.form = new forms_1.FormGroup({
+            acctType: new forms_1.FormControl(this.editAccount.acctType),
+            institution: new forms_1.FormControl(this.editAccount.institution),
+            interest: new forms_1.FormControl(this.editAccount.interest),
+            limit: new forms_1.FormControl(this.editAccount.limit),
+            name: new forms_1.FormControl(this.editAccount.name),
+            number: new forms_1.FormControl(this.editAccount.number),
+        });
     };
     AccountEditComponent.prototype.onSubmit = function () {
+        this.editAccount.acctType = this.form.get('acctType').value;
+        this.editAccount.institution = this.form.get('institution').value;
+        this.editAccount.interest = this.form.get('interest').value;
+        this.editAccount.limit = this.form.get('limit').value;
+        this.editAccount.name = this.form.get('name').value;
+        this.editAccount.number = this.form.get('number').value;
         this.update.emit(this.editAccount);
     };
     __decorate([
@@ -308,7 +331,7 @@ exports.AccountEditComponent = AccountEditComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/modules/app/components/accountItem/accountItem.component.css":
+/***/ "../../../../../src/modules/app/components/accountList/accountList.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -326,78 +349,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/modules/app/components/accountItem/accountItem.component.html":
+/***/ "../../../../../src/modules/app/components/accountList/accountList.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<tr class=\"accountItem\">\r\n    <td>{{account.id}}</td>\r\n    <td>{{account.debit ? 'Asset' : 'Liability'}}</td>\r\n    <td>{{account.name}}</td>\r\n    <td>{{account.institution}}</td>\r\n    <td>{{account.number}}</td>\r\n    <td className='right'>{{displayAsPercent(account.interest)}}</td>\r\n    <td className='right'>{{limit ? displayAsDollar(account.limit) : '--'}}</td>\r\n    <td className='right'>{{displayAsDollar(account.balance)}}</td>\r\n    <td><a [routerLink]=\"['/accountEdit']\">Edit</a></td>\r\n    <td><a (click)=\"confirm('are you sure you want to delete this account?'); deleteAccount();\">Delete</a></td>\r\n</tr>\r\n"
+module.exports = "<div class=\"accounts\">\r\n  <p *ngIf=\"!accounts\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Accounts</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let account of accounts\">\r\n        <td>{{account.id}}</td>\r\n        <td>{{account.acctType}}</td>\r\n        <td>{{account.name}}</td>\r\n        <td>{{account.institution}}</td>\r\n        <td>{{account.number}}</td>\r\n        <td class='right'>{{displayAsPercent(account.interest)}}</td>\r\n        <td class='right'>{{account.limit ? displayAsDollar(account.limit) : '--'}}</td>\r\n        <td class='right'>{{displayAsDollar(account.balance)}}</td>\r\n        <td><a [routerLink]=\"['./account-edit']\">Edit</a></td>\r\n        <td><a (click)=\"onDelete(account.id);\">Delete</a></td>\r\n      </tr>\r\n      <!--<account-item *ngFor=\"let account of accounts\" [account]=\"account\"></account-item>-->\r\n    </tbody>\r\n  </table>\r\n  <a [routerLink]=\"['./account-add']\">Add New Account</a>\r\n  <br />\r\n  <router-outlet>These are your accounts.</router-outlet>\r\n  <account-add (add)=\"onAdd($event)\"></account-add>\r\n  <account-edit *ngIf=\"accounts\" [editAccount] =\"accounts[0]\" (update)=\"onUpdate($event)\"></account-edit>\r\n</div>\r\n"
 
 /***/ }),
 
-/***/ "../../../../../src/modules/app/components/accountItem/accountItem.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var AccountItemComponent = /** @class */ (function () {
-    function AccountItemComponent() {
-        this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
-        this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
-    }
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object)
-    ], AccountItemComponent.prototype, "account", void 0);
-    AccountItemComponent = __decorate([
-        core_1.Component({
-            selector: 'account-item',
-            template: __webpack_require__("../../../../../src/modules/app/components/accountItem/accountItem.component.html"),
-            styles: [__webpack_require__("../../../../../src/modules/app/components/accountItem/accountItem.component.css")]
-        })
-    ], AccountItemComponent);
-    return AccountItemComponent;
-}());
-exports.AccountItemComponent = AccountItemComponent;
-
-
-/***/ }),
-
-/***/ "../../../../../src/modules/app/components/accounts/accounts.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "body {\r\n}\r\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/modules/app/components/accounts/accounts.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"accounts\">\r\n  <p *ngIf=\"!accounts\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Accounts</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let account of accounts\">\r\n        <td>{{account.id}}</td>\r\n        <td>{{account.debit ? 'Asset' : 'Liability'}}</td>\r\n        <td>{{account.name}}</td>\r\n        <td>{{account.institution}}</td>\r\n        <td>{{account.number}}</td>\r\n        <td className='right'>{{displayAsPercent(account.interest)}}</td>\r\n        <td className='right'>{{account.limit ? displayAsDollar(account.limit) : '--'}}</td>\r\n        <td className='right'>{{displayAsDollar(account.balance)}}</td>\r\n        <td><a [routerLink]=\"['/accountEdit']\">Edit</a></td>\r\n        <td><a (click)=\"onDelete(account.id);\">Delete</a></td>\r\n      </tr>\r\n      <!--<account-item *ngFor=\"let account of accounts\" [account]=\"account\"></account-item>-->\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"addAccount()\">Add Account</button>\r\n  <account-add (add)=\"onAdd($event)\"></account-add>\r\n  <account-edit *ngIf=\"accounts\" [editAccount] =\"accounts[0]\" (update)=\"onUpdate($event)\"></account-edit>\r\n</div>\r\n"
-
-/***/ }),
-
-/***/ "../../../../../src/modules/app/components/accounts/accounts.component.ts":
+/***/ "../../../../../src/modules/app/components/accountList/accountList.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -414,43 +373,74 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
-var AccountsComponent = /** @class */ (function () {
-    function AccountsComponent(dataService) {
+var AccountListComponent = /** @class */ (function () {
+    function AccountListComponent(dataService) {
         this.dataService = dataService;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
-    AccountsComponent.prototype.ngOnInit = function () {
+    AccountListComponent.prototype.ngOnInit = function () {
         this.getAccounts();
     };
-    AccountsComponent.prototype.getAccounts = function () {
+    AccountListComponent.prototype.getAccounts = function () {
         var _this = this;
-        this.dataService.getAccounts().subscribe(function (accounts) { return _this.accounts = accounts; });
+        this.dataService.getAccounts().subscribe(function (accounts) { return _this.accounts = accounts; }, function (error) { return alert("there was an error getting accounts."); });
     };
-    AccountsComponent.prototype.onDelete = function (id) {
-        var confirmation = confirm('are you sure you want to delete ' + this.accounts.find(function (element) { return element.id == id; }).name + '?');
+    AccountListComponent.prototype.onDelete = function (id) {
+        var _this = this;
+        var result;
+        var indextToDelete = this.accounts.findIndex(function (element) { return element.id === id; });
+        var nameToDelete = this.accounts[indextToDelete].name;
+        var confirmation = confirm('are you sure you want to delete ' + this.accounts[indextToDelete].name + '?');
         if (confirmation) {
-            alert("Ha! Account " + id + " is GONE!");
+            this.dataService.deleteAccount(id).subscribe(function (result) {
+                if (result === null) {
+                    alert("There was a problem deleting.");
+                }
+                else {
+                    _this.accounts.splice(indextToDelete, 1);
+                }
+            }, function (error) { return alert("There was a problem deleting."); });
         }
         ;
     };
-    AccountsComponent.prototype.onAdd = function (newAccount) {
-        alert("You just added " + newAccount.name + ".");
+    AccountListComponent.prototype.onAdd = function (newAccount) {
+        var _this = this;
+        var result;
+        console.log("onAdd received from accountAdd: " + JSON.stringify(newAccount));
+        this.dataService.addAccount(newAccount).subscribe(function (result) {
+            console.log("onAdd received from data.service: " + result);
+            if (result === null) {
+                alert("There was a problem adding.");
+            }
+            else {
+                _this.accounts.push(result);
+            }
+        }, function (error) { return alert("There was a problem adding."); });
     };
-    AccountsComponent.prototype.onUpdate = function (account) {
-        alert("You just updated " + account.name + ".");
+    AccountListComponent.prototype.onUpdate = function (editAccount) {
+        var _this = this;
+        var result;
+        this.dataService.updateAccount(editAccount).subscribe(function (result) {
+            if (result === null) {
+                alert("There was a problem updating.");
+            }
+            else {
+                _this.accounts[0] = result;
+            }
+        }, function (error) { return alert("There was a problem updating."); });
     };
-    AccountsComponent = __decorate([
+    AccountListComponent = __decorate([
         core_1.Component({
-            selector: 'pl-accounts',
-            template: __webpack_require__("../../../../../src/modules/app/components/accounts/accounts.component.html"),
-            styles: [__webpack_require__("../../../../../src/modules/app/components/accounts/accounts.component.css")]
+            selector: 'account-list',
+            template: __webpack_require__("../../../../../src/modules/app/components/accountList/accountList.component.html"),
+            styles: [__webpack_require__("../../../../../src/modules/app/components/accountList/accountList.component.css")]
         }),
         __metadata("design:paramtypes", [data_service_1.DataService])
-    ], AccountsComponent);
-    return AccountsComponent;
+    ], AccountListComponent);
+    return AccountListComponent;
 }());
-exports.AccountsComponent = AccountsComponent;
+exports.AccountListComponent = AccountListComponent;
 
 
 /***/ }),
@@ -506,87 +496,6 @@ var AppComponent = /** @class */ (function () {
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
-
-
-/***/ }),
-
-/***/ "../../../../../src/modules/app/components/categories/categories.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "body {\r\n}\r\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/modules/app/components/categories/categories.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"categories\">\r\n  <p *ngIf=\"!categories\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Categories</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Name</th>\r\n        <th>Tax?</th>\r\n        <th>Type</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let category of categories\">\r\n        <td>{{category.id}}</td>\r\n        <td>{{category.name}}</td>\r\n        <td>&nbsp;<span *ngIf=\"category.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n        <td>{{category.type}}</td>\r\n        <td><a [routerLink]=\"['/categorytEdit']\">Edit</a></td>\r\n        <td><a (click)=\"confirm('are you sure you want to delete this category?'); deleteCategory();\">Delete</a></td>\r\n        <!--<category-item *ngFor=\"let category of categories\" [category]=\"category\"></category-item>-->\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"addCategory()\">Add Category</button>\r\n  <category-add (add)=\"onAdd($event)\"></category-add>\r\n  <category-edit *ngIf=\"categories\" [editCategory]=\"categories[0]\" (update)=\"onUpdate($event)\"></category-edit>\r\n</div>\r\n"
-
-/***/ }),
-
-/***/ "../../../../../src/modules/app/components/categories/categories.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
-var CategoriesComponent = /** @class */ (function () {
-    function CategoriesComponent(dataService) {
-        this.dataService = dataService;
-    }
-    CategoriesComponent.prototype.ngOnInit = function () {
-        this.getCategories();
-    };
-    CategoriesComponent.prototype.getCategories = function () {
-        var _this = this;
-        this.dataService.getCategories().subscribe(function (categories) { return _this.categories = categories; });
-    };
-    CategoriesComponent.prototype.onDelete = function (id) {
-        var confirmation = confirm('are you sure you want to delete ' + this.categories.find(function (element) { return element.id == id; }).name + '?');
-        if (confirmation) {
-            alert("Ha! Category " + id + " is GONE!");
-        }
-        ;
-    };
-    CategoriesComponent.prototype.onAdd = function (newCategory) {
-        alert("You just added " + newCategory.name + ".");
-    };
-    CategoriesComponent.prototype.onUpdate = function (category) {
-        alert("You just updated " + category.name + ".");
-    };
-    CategoriesComponent = __decorate([
-        core_1.Component({
-            selector: 'pl-categories',
-            template: __webpack_require__("../../../../../src/modules/app/components/categories/categories.component.html"),
-            styles: [__webpack_require__("../../../../../src/modules/app/components/categories/categories.component.css")]
-        }),
-        __metadata("design:paramtypes", [data_service_1.DataService])
-    ], CategoriesComponent);
-    return CategoriesComponent;
-}());
-exports.CategoriesComponent = CategoriesComponent;
 
 
 /***/ }),
@@ -736,7 +645,7 @@ exports.CategoryEditComponent = CategoryEditComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/modules/app/components/categoryItem/categoryItem.component.css":
+/***/ "../../../../../src/modules/app/components/categoryList/categoryList.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -754,14 +663,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/modules/app/components/categoryItem/categoryItem.component.html":
+/***/ "../../../../../src/modules/app/components/categoryList/categoryList.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<tr class=\"categoryItem\">\r\n    <td>{{category.id}}</td>\r\n    <td>{{category.name}}</td>\r\n    <td>&nbsp;{{category.tax}} && <span class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n    <td>{{category.type}}</td>\r\n    <td><a [routerLink]=\"['/categorytEdit']\">Edit</a></td>\r\n    <td><a (click)=\"confirm('are you sure you want to delete this category?'); deleteCategory();\">Delete</a></td>\r\n</tr>"
+module.exports = "<div class=\"categories\">\r\n  <p *ngIf=\"!categories\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Categories</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Name</th>\r\n        <th>Tax?</th>\r\n        <th>Type</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let category of categories\">\r\n        <td>{{category.id}}</td>\r\n        <td>{{category.name}}</td>\r\n        <td>&nbsp;<span *ngIf=\"category.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n        <td>{{category.type}}</td>\r\n        <td><a [routerLink]=\"['/categorytEdit']\">Edit</a></td>\r\n        <td><a (click)=\"confirm('are you sure you want to delete this category?'); deleteCategory();\">Delete</a></td>\r\n        <!--<category-item *ngFor=\"let category of categories\" [category]=\"category\"></category-item>-->\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"addCategory()\">Add Category</button>\r\n  <category-add (add)=\"onAdd($event)\"></category-add>\r\n  <category-edit *ngIf=\"categories\" [editCategory]=\"categories[0]\" (update)=\"onUpdate($event)\"></category-edit>\r\n</div>\r\n"
 
 /***/ }),
 
-/***/ "../../../../../src/modules/app/components/categoryItem/categoryItem.component.ts":
+/***/ "../../../../../src/modules/app/components/categoryList/categoryList.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -777,23 +686,70 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var CategoryItemComponent = /** @class */ (function () {
-    function CategoryItemComponent() {
+var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+var CategoryListComponent = /** @class */ (function () {
+    function CategoryListComponent(dataService) {
+        this.dataService = dataService;
     }
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object)
-    ], CategoryItemComponent.prototype, "category", void 0);
-    CategoryItemComponent = __decorate([
+    CategoryListComponent.prototype.ngOnInit = function () {
+        this.getCategories();
+    };
+    CategoryListComponent.prototype.getCategories = function () {
+        var _this = this;
+        this.dataService.getCategories().subscribe(function (categories) { return _this.categories = categories; }, function (error) { return alert("there was an error getting categories."); });
+    };
+    CategoryListComponent.prototype.onDelete = function (id) {
+        var _this = this;
+        var result;
+        var indextToDelete = this.categories.findIndex(function (element) { return element.id === id; });
+        var confirmation = confirm('are you sure you want to delete ' + this.categories[indextToDelete].name + '?');
+        if (confirmation) {
+            this.dataService.deleteCategory(id).subscribe(function (result) {
+                if (result === null) {
+                    alert("There was a problem deleting.");
+                }
+                else {
+                    _this.categories.splice(indextToDelete, 1);
+                }
+            }, function (error) { return alert("There was a problem deleting."); });
+        }
+        ;
+    };
+    CategoryListComponent.prototype.onAdd = function (newCategory) {
+        var _this = this;
+        var result;
+        this.dataService.addCategory(newCategory).subscribe(function (result) {
+            if (result === null) {
+                alert("There was a problem adding.");
+            }
+            else {
+                _this.categories.push(result);
+            }
+        }, function (error) { return alert("There was a problem adding."); });
+    };
+    CategoryListComponent.prototype.onUpdate = function (category) {
+        var _this = this;
+        var result;
+        this.dataService.updateCategory(category).subscribe(function (result) {
+            if (result === null) {
+                alert("There was a problem updating.");
+            }
+            else {
+                _this.categories[0] = result;
+            }
+        }, function (error) { return alert("There was a problem updating."); });
+    };
+    CategoryListComponent = __decorate([
         core_1.Component({
-            selector: 'category-item',
-            template: __webpack_require__("../../../../../src/modules/app/components/categoryItem/categoryItem.component.html"),
-            styles: [__webpack_require__("../../../../../src/modules/app/components/categoryItem/categoryItem.component.css")]
-        })
-    ], CategoryItemComponent);
-    return CategoryItemComponent;
+            selector: 'category-list',
+            template: __webpack_require__("../../../../../src/modules/app/components/categoryList/categoryList.component.html"),
+            styles: [__webpack_require__("../../../../../src/modules/app/components/categoryList/categoryList.component.css")]
+        }),
+        __metadata("design:paramtypes", [data_service_1.DataService])
+    ], CategoryListComponent);
+    return CategoryListComponent;
 }());
-exports.CategoryItemComponent = CategoryItemComponent;
+exports.CategoryListComponent = CategoryListComponent;
 
 
 /***/ }),
@@ -1036,7 +992,7 @@ exports.TransactionEditComponent = TransactionEditComponent;
 
 /***/ }),
 
-/***/ "../../../../../src/modules/app/components/transactionItem/transactionItem.component.css":
+/***/ "../../../../../src/modules/app/components/transactionList/transactionList.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -1054,76 +1010,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/modules/app/components/transactionItem/transactionItem.component.html":
+/***/ "../../../../../src/modules/app/components/transactionList/transactionList.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<tr class=\"transactionItem\">\r\n    <td>{{transaction.id}}</td>\r\n    <td>{{transaction.date}}</td>\r\n    <td className='right'>displayAsDollar({{transaction.amount}})</td>\r\n    <td>{{transaction.category}}</td>\r\n    <td>{{transaction.drAcct}}</td>\r\n    <td>{{transaction.crAcct}}</td>\r\n    <td>&nbsp;{{transaction.tax}} && <span className='glyphicon glyphicon-copy' style='color: green;'></span></td>\r\n    <td><a [routerLink]=\"['/transactionEdit']\">Edit</a></td>\r\n    <td><a (click)=\"confirm('are you sure you want to delete this transaction?'); deleteTransaction();\">Delete</a></td>\r\n</tr>"
+module.exports = "<div class=\"transactions\">\r\n  <p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Transactions</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Date</th>\r\n        <th>Amount</th>\r\n        <th>Category</th>\r\n        <th>Debit Account</th>\r\n        <th>Credit Account</th>\r\n        <th>Tax?</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let transaction of transactions\">\r\n        <td>{{transaction.id}}</td>\r\n        <td>{{transaction.date | date}}</td>\r\n        <td className='right'>{{displayAsDollar(transaction.amount)}}</td>\r\n        <td>{{transaction.category}}</td>\r\n        <td>{{transaction.drAcct}}</td>\r\n        <td>{{transaction.crAcct}}</td>\r\n        <td>&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n        <td><a [routerLink]=\"['/transactionEdit']\">Edit</a></td>\r\n        <td><a (click)=\"onDelete(transaction.id);\">Delete</a></td>\r\n      </tr>\r\n      <!--<transaction-item *ngFor=\"let transaction of transactions\" [transaction]=\"transaction\"></transaction-item>-->\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"addTransaction()\">Add Transaction</button>\r\n  <transaction-add (add)=\"onAdd($event)\"></transaction-add>\r\n  <transaction-edit *ngIf=\"transactions\" [editTransaction]=\"transactions[0]\" (update)=\"onUpdate($event)\"></transaction-edit>\r\n</div>\r\n"
 
 /***/ }),
 
-/***/ "../../../../../src/modules/app/components/transactionItem/transactionItem.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var TransactionItemComponent = /** @class */ (function () {
-    function TransactionItemComponent() {
-    }
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object)
-    ], TransactionItemComponent.prototype, "transaction", void 0);
-    TransactionItemComponent = __decorate([
-        core_1.Component({
-            selector: 'transaction-item',
-            template: __webpack_require__("../../../../../src/modules/app/components/transactionItem/transactionItem.component.html"),
-            styles: [__webpack_require__("../../../../../src/modules/app/components/transactionItem/transactionItem.component.css")]
-        })
-    ], TransactionItemComponent);
-    return TransactionItemComponent;
-}());
-exports.TransactionItemComponent = TransactionItemComponent;
-
-
-/***/ }),
-
-/***/ "../../../../../src/modules/app/components/transactions/transactions.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "body {\r\n}\r\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/modules/app/components/transactions/transactions.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"transactions\">\r\n  <p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Transactions</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Date</th>\r\n        <th>Amount</th>\r\n        <th>Category</th>\r\n        <th>Debit Account</th>\r\n        <th>Credit Account</th>\r\n        <th>Tax?</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let transaction of transactions\">\r\n        <td>{{transaction.id}}</td>\r\n        <td>{{transaction.date}}</td>\r\n        <td className='right'>{{displayAsDollar(transaction.amount)}}</td>\r\n        <td>{{transaction.category}}</td>\r\n        <td>{{transaction.drAcct}}</td>\r\n        <td>{{transaction.crAcct}}</td>\r\n        <td>&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n        <td><a [routerLink]=\"['/transactionEdit']\">Edit</a></td>\r\n        <td><a (click)=\"onDelete(transaction.id);\">Delete</a></td>\r\n      </tr>\r\n      <!--<transaction-item *ngFor=\"let transaction of transactions\" [transaction]=\"transaction\"></transaction-item>-->\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"addTransaction()\">Add Transaction</button>\r\n  <transaction-add (add)=\"onAdd($event)\"></transaction-add>\r\n  <transaction-edit *ngIf=\"transactions\" [editTransaction]=\"transactions[0]\" (update)=\"onUpdate($event)\"></transaction-edit>\r\n</div>\r\n"
-
-/***/ }),
-
-/***/ "../../../../../src/modules/app/components/transactions/transactions.component.ts":
+/***/ "../../../../../src/modules/app/components/transactionList/transactionlist.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1140,47 +1034,75 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
-var TransactionsComponent = /** @class */ (function () {
-    function TransactionsComponent(dataService) {
+var TransactionListComponent = /** @class */ (function () {
+    function TransactionListComponent(dataService) {
         this.dataService = dataService;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
     }
-    TransactionsComponent.prototype.ngOnInit = function () {
+    TransactionListComponent.prototype.ngOnInit = function () {
         this.getTransactions();
     };
-    TransactionsComponent.prototype.getTransactions = function () {
+    TransactionListComponent.prototype.getTransactions = function () {
         var _this = this;
-        this.dataService.getTransactions().subscribe(function (transactions) { return _this.transactions = transactions; });
+        this.dataService.getTransactions().subscribe(function (transactions) { return _this.transactions = transactions; }, function (error) { return alert("there was an error getting transactions."); });
     };
-    TransactionsComponent.prototype.onDelete = function (id) {
-        var confirmation = confirm('are you sure you want to delete transaction on date' + this.transactions.find(function (element) { return element.id == id; }).date + '?');
+    TransactionListComponent.prototype.onDelete = function (id) {
+        var _this = this;
+        var result;
+        var indextToDelete = this.transactions.findIndex(function (element) { return element.id === id; });
+        var confirmation = confirm('are you sure you want to delete transaction on date' + this.transactions[indextToDelete].date + '?');
         if (confirmation) {
-            alert("Ha! Account " + id + " is GONE!");
+            this.dataService.deleteTransaction(id).subscribe(function (result) {
+                if (result === null) {
+                    alert("There was a problem deleting.");
+                }
+                else {
+                    _this.transactions.splice(indextToDelete, 1);
+                }
+            }, function (error) { return alert("There was a problem deleting."); });
         }
         ;
     };
-    TransactionsComponent.prototype.onAdd = function (newTransaction) {
-        alert("You just added transaction for date " + newTransaction.date + " and amount " + newTransaction.amount + ".");
+    TransactionListComponent.prototype.onAdd = function (newTransaction) {
+        var _this = this;
+        var result;
+        this.dataService.addTransaction(newTransaction).subscribe(function (result) {
+            if (result === null) {
+                alert("There was a problem adding.");
+            }
+            else {
+                _this.transactions.push(result);
+            }
+        }, function (error) { return alert("There was a problem adding."); });
     };
-    TransactionsComponent.prototype.onUpdate = function (transaction) {
-        alert("You just updated transaction for date " + transaction.date + ".");
+    TransactionListComponent.prototype.onUpdate = function (transaction) {
+        var _this = this;
+        var result;
+        this.dataService.updateTransaction(transaction).subscribe(function (result) {
+            if (result === null) {
+                alert("There was a problem updating.");
+            }
+            else {
+                _this.transactions[0] = result;
+            }
+        }, function (error) { return alert("There was a problem updating."); });
     };
-    TransactionsComponent = __decorate([
+    TransactionListComponent = __decorate([
         core_1.Component({
-            selector: 'pl-transactions',
-            template: __webpack_require__("../../../../../src/modules/app/components/transactions/transactions.component.html"),
-            styles: [__webpack_require__("../../../../../src/modules/app/components/transactions/transactions.component.css")]
+            selector: 'transaction-list',
+            template: __webpack_require__("../../../../../src/modules/app/components/transactionList/transactionList.component.html"),
+            styles: [__webpack_require__("../../../../../src/modules/app/components/transactionList/transactionList.component.css")]
         }),
         __metadata("design:paramtypes", [data_service_1.DataService])
-    ], TransactionsComponent);
-    return TransactionsComponent;
+    ], TransactionListComponent);
+    return TransactionListComponent;
 }());
-exports.TransactionsComponent = TransactionsComponent;
+exports.TransactionListComponent = TransactionListComponent;
 
 
 /***/ }),
 
-/***/ "../../../../../src/modules/app/components/userItem/userItem.component.css":
+/***/ "../../../../../src/modules/app/components/userList/userList.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -1198,76 +1120,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/modules/app/components/userItem/userItem.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<tr class=\"userItem\">\r\n    <td>{{user.id}}</td>\r\n    <td>{{user.userName}}</td>\r\n    <td><input type='checkbox' checked={{user.admin}} (Change)=\"toggleAdmin()\" /></td>\r\n    <td class='deleteLink'><a (click)=\"confirm('Are you sure you want to delete this user?'); deleteUser();\">Delete</a></td>\r\n</tr>"
-
-/***/ }),
-
-/***/ "../../../../../src/modules/app/components/userItem/userItem.component.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var UserItemComponent = /** @class */ (function () {
-    function UserItemComponent() {
-    }
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object)
-    ], UserItemComponent.prototype, "user", void 0);
-    UserItemComponent = __decorate([
-        core_1.Component({
-            selector: 'user-item',
-            template: __webpack_require__("../../../../../src/modules/app/components/userItem/userItem.component.html"),
-            styles: [__webpack_require__("../../../../../src/modules/app/components/userItem/userItem.component.css")]
-        })
-    ], UserItemComponent);
-    return UserItemComponent;
-}());
-exports.UserItemComponent = UserItemComponent;
-
-
-/***/ }),
-
-/***/ "../../../../../src/modules/app/components/users/users.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "body {\r\n}\r\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/modules/app/components/users/users.component.html":
+/***/ "../../../../../src/modules/app/components/userList/userList.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"users\">\r\n  <p *ngIf=\"!users\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Users</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Username</th>\r\n        <th>Admin</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let user of users\">\r\n        <td>{{user.id}}</td>\r\n        <td>{{user.userName}}</td>\r\n        <td><input type='checkbox' checked={{user.admin}} (Change)=\"toggleAdmin()\" /></td>\r\n        <td><a [routerLink]=\"['/accountEdit']\">Edit</a></td>\r\n        <td><a (click)=\"onDelete(account.id);\">Delete</a></td>\r\n      </tr>\r\n      <!--<user-item *ngFor=\"let user of users\" [user]=\"user\"></user-item>-->\r\n    </tbody>\r\n  </table>\r\n  <button (click)=\"addUser()\">Add User</button>\r\n</div>\r\n"
 
 /***/ }),
 
-/***/ "../../../../../src/modules/app/components/users/users.component.ts":
+/***/ "../../../../../src/modules/app/components/userList/userList.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1284,41 +1144,46 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
-var UsersComponent = /** @class */ (function () {
-    function UsersComponent(dataService) {
+var UserListComponent = /** @class */ (function () {
+    function UserListComponent(dataService) {
         this.dataService = dataService;
     }
-    UsersComponent.prototype.ngOnInit = function () {
+    UserListComponent.prototype.ngOnInit = function () {
         this.getUsers();
     };
-    UsersComponent.prototype.getUsers = function () {
+    UserListComponent.prototype.getUsers = function () {
         var _this = this;
         this.dataService.getUsers().subscribe(function (users) { return _this.users = users; });
     };
-    UsersComponent.prototype.onDelete = function (id) {
+    UserListComponent.prototype.onDelete = function (id) {
         var confirmation = confirm('are you sure you want to delete ' + this.users.find(function (element) { return element.id == id; }).userName + '?');
         if (confirmation) {
             alert("Ha! User " + id + " is GONE!");
         }
         ;
     };
-    UsersComponent.prototype.onAdminChange = function (user) {
-        alert("You just updated " + user.userName + "'s admin stsus.");
+    UserListComponent.prototype.onMakeAdmin = function (id) {
+        var _this = this;
+        this.dataService.makeAdmin(id).subscribe(function (result) { _this.users[0].admin = true; }, function (error) { return alert("There was a problem updating."); });
     };
-    UsersComponent.prototype.onPasswordReset = function (user) {
-        alert("You just reset " + user.userName + "'s password.");
+    UserListComponent.prototype.onUnmakeAdmin = function (id) {
+        var _this = this;
+        this.dataService.makeAdmin(id).subscribe(function (result) { _this.users[0].admin = false; }, function (error) { return alert("There was a problem updating."); });
     };
-    UsersComponent = __decorate([
+    UserListComponent.prototype.onPasswordReset = function (id) {
+        this.dataService.makeAdmin(id).subscribe(function (result) { }, function (error) { return alert("There was a problem updating."); });
+    };
+    UserListComponent = __decorate([
         core_1.Component({
-            selector: 'pl-users',
-            template: __webpack_require__("../../../../../src/modules/app/components/users/users.component.html"),
-            styles: [__webpack_require__("../../../../../src/modules/app/components/users/users.component.css")]
+            selector: 'user-list',
+            template: __webpack_require__("../../../../../src/modules/app/components/userList/userList.component.html"),
+            styles: [__webpack_require__("../../../../../src/modules/app/components/userList/userList.component.css")]
         }),
         __metadata("design:paramtypes", [data_service_1.DataService])
-    ], UsersComponent);
-    return UsersComponent;
+    ], UserListComponent);
+    return UserListComponent;
 }());
-exports.UsersComponent = UsersComponent;
+exports.UserListComponent = UserListComponent;
 
 
 /***/ }),
@@ -1344,23 +1209,65 @@ var DataService = /** @class */ (function () {
     function DataService(http) {
         this.http = http;
     }
+    // --Accounts--
     DataService.prototype.getAccounts = function () {
-        return this.http.get('/Accounts/AccountsAsync');
-        //return this.http.get<Account[]>(this.baseUrl + 'Accounts//AccountsAsync');
+        console.log("data.service.getAccounts...");
+        return this.http.get('/api/Accounts');
     };
+    DataService.prototype.addAccount = function (accountToAdd) {
+        console.log("data.service.addAccount received: " + JSON.stringify(accountToAdd));
+        return this.http.post('/api/Accounts', accountToAdd);
+    };
+    DataService.prototype.deleteAccount = function (id) {
+        console.log("data.service.deleteAccount received: " + id);
+        return this.http.delete('/api/Accounts/' + id);
+    };
+    DataService.prototype.updateAccount = function (accountToUpdate) {
+        console.log("data.service.updateAccount received: " + JSON.stringify(accountToUpdate));
+        return this.http.put('/api/Accounts', accountToUpdate);
+    };
+    // --Categories--
     DataService.prototype.getCategories = function () {
-        return this.http.get('/Categories/CategoriesAsync');
+        return this.http.get('/api/Categories');
     };
+    DataService.prototype.addCategory = function (categoryToAdd) {
+        return this.http.post('/api/Categories', categoryToAdd);
+    };
+    DataService.prototype.deleteCategory = function (id) {
+        return this.http.delete('/api/Categories/' + id);
+    };
+    DataService.prototype.updateCategory = function (categoryToUpdate) {
+        return this.http.put('/api/Categories', categoryToUpdate);
+    };
+    // --Transactions--
     DataService.prototype.getTransactions = function () {
-        return this.http.get('/Transactions/TransactionsAsync');
+        return this.http.get('/api/Transactions');
     };
+    DataService.prototype.addTransaction = function (transactionToAdd) {
+        return this.http.post('/api/Transactions', transactionToAdd);
+    };
+    DataService.prototype.deleteTransaction = function (id) {
+        return this.http.delete('/api/Transactions/' + id);
+    };
+    DataService.prototype.updateTransaction = function (transactionToUpdate) {
+        return this.http.put('/api/Transactions', transactionToUpdate);
+    };
+    // --Users--
     DataService.prototype.getUsers = function () {
-        return this.http.get('/Users/GetUsersAsync');
+        return this.http.get('/api/Users');
     };
-    __decorate([
-        core_1.Inject('BASE_URL'),
-        __metadata("design:type", String)
-    ], DataService.prototype, "baseUrl", void 0);
+    DataService.prototype.makeAdmin = function (id) {
+        return this.http.put('/api/Users/Admin/' + id, id);
+    };
+    DataService.prototype.unmakeAdmin = function (id) {
+        return this.http.put('/api/Users/NoAdmin/' + id, id);
+    };
+    DataService.prototype.resetPassword = function (id, newPassword) {
+        return this.http.put('/api/Users/Reset' + id, newPassword);
+    };
+    DataService.prototype.deleteUser = function (id) {
+        return this.http.delete('/api/Users' + id);
+    };
     DataService = __decorate([
         core_1.Injectable(),
         __metadata("design:paramtypes", [http_1.HttpClient])

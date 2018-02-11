@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,5 +39,7 @@ namespace pla5.Data
             modelBuilder.Entity<Transaction>().Property(x => x.Amount).HasColumnType("money");
             modelBuilder.Entity<Transaction>().Property(x => x.User).HasColumnType("nvarchar(128)");
         }
+
+        public DbSet<pla5.Models.AppUser> AppUser { get; set; }
     }  //context
 }  //namespace

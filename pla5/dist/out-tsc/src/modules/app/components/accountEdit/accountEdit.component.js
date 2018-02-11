@@ -10,16 +10,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
 var AccountEditComponent = /** @class */ (function () {
     function AccountEditComponent() {
         this.update = new core_1.EventEmitter();
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
-    AccountEditComponent.prototype.handleDebitButton = function () {
-        this.editAccount.debit = !this.editAccount.debit;
+    AccountEditComponent.prototype.ngOnInit = function () {
+        this.form = new forms_1.FormGroup({
+            acctType: new forms_1.FormControl(this.editAccount.acctType),
+            institution: new forms_1.FormControl(this.editAccount.institution),
+            interest: new forms_1.FormControl(this.editAccount.interest),
+            limit: new forms_1.FormControl(this.editAccount.limit),
+            name: new forms_1.FormControl(this.editAccount.name),
+            number: new forms_1.FormControl(this.editAccount.number),
+        });
     };
     AccountEditComponent.prototype.onSubmit = function () {
+        this.editAccount.acctType = this.form.get('acctType').value;
+        this.editAccount.institution = this.form.get('institution').value;
+        this.editAccount.interest = this.form.get('interest').value;
+        this.editAccount.limit = this.form.get('limit').value;
+        this.editAccount.name = this.form.get('name').value;
+        this.editAccount.number = this.form.get('number').value;
         this.update.emit(this.editAccount);
     };
     __decorate([

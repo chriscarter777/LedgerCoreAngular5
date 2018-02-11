@@ -1,6 +1,6 @@
 <div class="accountEdit">
   <h4>Edit</h4>
-  <table>
+  <!--<table>
     <thead>
       <tr>
         <th>ID</th>
@@ -16,7 +16,7 @@
     <tbody>
       <tr>
         <td>{{editAccount.id}}</td>
-        <td>{{editAccount.debit ? 'Asset' : 'Liability'}}</td>
+        <td>{{editAccount.acctType}}</td>
         <td>{{editAccount.name}}</td>
         <td>{{editAccount.institution}}</td>
         <td>{{editAccount.number}}</td>
@@ -26,24 +26,22 @@
       </tr>
     </tbody>
   </table>
-  <button (click)="onSubmit()">Update</button>
+  <button (click)="onSubmit()">Update</button>-->
 
-
-
-  <!--<form>
-      <label>Type</label>
-      <input type='radio' value='true' checked={{debit}} (Change)="handleDebitButton()" /> Asset
-      <input type='radio' value='false' checked={{!debit}} (Change)="handleDebitButton()" /> Liability
-      <label>Name</label>
-      <input type='text' />
-      <label>Institution</label>
-      <input type='text' />
-      <label>Number</label>
-      <input type='text' />
-      <label>Interest Rate</label>
-      <input type='number' />%
-      <label>Limit</label>
-      $<input type='number' />
-      <input type='submit' value="Update" />
-  </form>-->
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <label>Type</label>
+    <input type='radio' name="acctType" value="Asset" formControlName="acctType" /> Asset
+    <input type='radio' name="acctType" value="Liability" formControlName="acctType" /> Liability <br />
+    <label>Name</label>
+    <input type='text' name="name" formControlName="name" /> <br />
+    <label>Institution</label>
+    <input type='text' name="institution" formControlName="institution" /> <br />
+    <label>Number</label>
+    <input type='text' name="number" formControlName="number" /> <br />
+    <label>Interest Rate</label>
+    <input type='number' name="interest" formControlName="interest" />% <br />
+    <label>Limit<span class="pull-right">$</span></label>
+    <input type='number' name="limit" formControlName="limit" /> <br />
+    <input type='submit' value="Update" />
+  </form>
 </div>

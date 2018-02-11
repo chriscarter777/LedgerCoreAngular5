@@ -184,7 +184,7 @@ namespace pla5.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Debit");
+                    b.Property<string>("AcctType");
 
                     b.Property<int?>("DefaultAcct");
 

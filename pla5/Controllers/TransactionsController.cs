@@ -10,95 +10,174 @@ using pla5.Data;
 using pla5.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 
 namespace pla5.Controllers
 {
-    [Authorize]
-    public class TransactionsController : Controller
+  [Produces("application/json")]
+  [Route("api/Transactions")]
+  public class TransactionsController : Controller
+  {
+    private readonly ILogger _logger;
+    private readonly IDataRepository _repo;
+    private readonly string _userName;
+
+    public TransactionsController(ILogger<TransactionsController> logger, IDataRepository repo, SignInManager<IdentityUser> signInManager)
     {
-        private HtmlEncoder _htmlEncoder;
-        private readonly ILogger _logger;
-        private readonly IDataRepository _repo;
-        private readonly string _userName;
+      _logger = logger;
+      _repo = repo;
+      _userName = signInManager.Context.User.Identity.Name;
+    }
 
-        public TransactionsController(HtmlEncoder htmlEncoder, ILogger<TransactionsController> logger, IDataRepository repo, SignInManager<IdentityUser> signInManager)
+    // GET: api/Transactions
+    [HttpGet]
+    public async Task<IActionResult> GetTransactions()
+    {
+      try
+      {
+        if (!ModelState.IsValid)
         {
-            _htmlEncoder = htmlEncoder;
-            _logger = logger;
-            _repo = repo;
-            _userName = signInManager.Context.User.Identity.Name;
-        }  //ctor
-
-        public async Task<IActionResult> TransactionsAsync()
-        {
-            try
-            {
-                return Ok(await _repo.GetTransactionsAsync());
-            }
-            catch (Exception e)
-            {
-                HandleException(e, ControllerContext.RouteData.Values["action"].ToString(), "", false);
-                return NotFound();
-            }
+          return BadRequest(ModelState);
         }
 
-        public async Task<IActionResult> AddTransactionAsync(Transaction t)
+        IEnumerable<Transaction> transactions = await _repo.GetTransactionsAsync();
+
+        if (transactions == null)
         {
-            //API returns the database ID of the added item
-            try
-            {
-                return Ok(await _repo.AddTransactionAsync(t));
-            }
-            catch (Exception e)
-            {
-                HandleException(e, ControllerContext.RouteData.Values["action"].ToString(), "", false);
-                return NotFound();
-            }
+          return NotFound();
+        }
+        else
+        {
+          return Ok(transactions);
+        }
+      }
+      catch (Exception e)
+      {
+        HandleException(e, ControllerContext.RouteData.Values["action"].ToString(), "", false);
+        return NotFound();
+      }
+    }  //GetTransactions
+
+    // GET: api/Transactions/5
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetTransaction([FromRoute] int id)
+    {
+      try
+      {
+        if (!ModelState.IsValid)
+        {
+          return BadRequest(ModelState);
         }
 
-        public async Task<IActionResult> DeleteTransactionAsync(int id)
+        Transaction transaction = await _repo.GetTransactionAsync(id);
+
+        if (transaction == null)
         {
-            try
-            {
-                await _repo.DeleteTransactionAsync(id);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                HandleException(e, ControllerContext.RouteData.Values["action"].ToString(), "", false);
-                return NotFound();
-            }
+          return NotFound();
+        }
+        else
+        {
+          return Ok(transaction);
+        }
+      }
+      catch (Exception e)
+      {
+        HandleException(e, ControllerContext.RouteData.Values["action"].ToString(), "", false);
+        return NotFound();
+      }
+    }  //GetTransaction
+
+    // PUT: api/Transactions/5
+    [HttpPut]
+    public async Task<IActionResult> PutTransaction([FromBody] Transaction transaction)
+    {
+      try
+      {
+        if (!ModelState.IsValid)
+        {
+          return BadRequest(ModelState);
         }
 
-        public async Task<IActionResult> UpdateTransactionAsync(Transaction t)
+        Transaction response = await _repo.UpdateTransactionAsync(transaction);
+
+        if (response == null)
         {
-            try
-            {
-                await _repo.UpdateTransactionAsync(t);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                HandleException(e, ControllerContext.RouteData.Values["action"].ToString(), "", false);
-                return NotFound();
-            }
+          return NotFound();
+        }
+        else
+        {
+          return Ok(response);
+        }
+      }
+      catch (Exception e)
+      {
+        HandleException(e, ControllerContext.RouteData.Values["action"].ToString(), "", false);
+        return NotFound();
+      }
+    }  //PutTransaction
+
+    // POST: api/Transactions
+    [HttpPost]
+    public async Task<IActionResult> PostTransaction([FromBody] Transaction transaction)
+    {
+      try
+      {
+        transaction.User = _userName;
+        if (!ModelState.IsValid)
+        {
+          return BadRequest(ModelState);
         }
 
-        public IActionResult Error()
-        {
-            ViewData["RequestId"] = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
-            return View();
-        }
+        Transaction response = await _repo.AddTransactionAsync(transaction);
 
-        #region Infrastructure
-        private void HandleException(Exception e, string method, string userMessage, bool redirect)
+        if (response == null)
         {
-            _logger.LogError("{0}: An error occurred in TransactionsController/{1} for user: {2}.\n{3}\n{4}", DateTime.Now, method, _userName, e.Message, userMessage);
-            if (redirect)
-            {
-                RedirectToAction("Error");
-            }
-        }  //HandleException
-        #endregion
-    }  //controller
+          return NotFound();
+        }
+        else
+        {
+          return Ok(response);
+        }
+      }
+      catch (Exception e)
+      {
+        HandleException(e, ControllerContext.RouteData.Values["action"].ToString(), "", false);
+        return NotFound();
+      }
+    }  //PostTransaction
+
+    // DELETE: api/Transactions/5
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteTransaction([FromRoute] int id)
+    {
+      try
+      {
+        Transaction response = await _repo.DeleteTransactionAsync(id);
+
+        if (response == null)
+        {
+          return NotFound();
+        }
+        else
+        {
+          return Ok(response);
+        }
+      }
+      catch (Exception e)
+      {
+        HandleException(e, ControllerContext.RouteData.Values["action"].ToString(), "", false);
+        return NotFound();
+      }
+    }  //DeleteTransaction
+    #region Infrastructure
+    private void HandleException(Exception e, string method, string userMessage, bool redirect)
+    {
+      _logger.LogError("{0}: An error occurred in TransactionsController/{1} for user: {2}.\n{3}\n{4}", DateTime.Now, method, _userName, e.Message, userMessage);
+      if (redirect)
+      {
+        RedirectToAction("Error");
+      }
+    }  //HandleException
+    #endregion
+  }  //controller
 }  //namespace

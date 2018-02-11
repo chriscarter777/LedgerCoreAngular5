@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
 var AccountAddComponent = /** @class */ (function () {
     function AccountAddComponent() {
         this.add = new core_1.EventEmitter();
@@ -17,13 +18,28 @@ var AccountAddComponent = /** @class */ (function () {
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
     AccountAddComponent.prototype.ngOnInit = function () {
-        this.newAccount = { id: null, balance: 0, debit: true, institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true };
-    };
-    AccountAddComponent.prototype.handleDebitButton = function () {
-        this.newAccount.debit = !this.newAccount.debit;
+        this.newAccount = this.freshNewAccount();
+        this.form = new forms_1.FormGroup({
+            acctType: new forms_1.FormControl(this.newAccount.acctType),
+            institution: new forms_1.FormControl(this.newAccount.institution),
+            interest: new forms_1.FormControl(this.newAccount.interest),
+            limit: new forms_1.FormControl(this.newAccount.limit),
+            name: new forms_1.FormControl(this.newAccount.name),
+            number: new forms_1.FormControl(this.newAccount.number),
+        });
     };
     AccountAddComponent.prototype.onSubmit = function () {
+        this.newAccount.acctType = this.form.get('acctType').value;
+        this.newAccount.institution = this.form.get('institution').value;
+        this.newAccount.interest = this.form.get('interest').value;
+        this.newAccount.limit = this.form.get('limit').value;
+        this.newAccount.name = this.form.get('name').value;
+        this.newAccount.number = this.form.get('number').value;
         this.add.emit(this.newAccount);
+        this.ngOnInit();
+    };
+    AccountAddComponent.prototype.freshNewAccount = function () {
+        return { id: null, balance: 0, acctType: "Asset", institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true };
     };
     __decorate([
         core_1.Output(),

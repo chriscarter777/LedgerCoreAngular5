@@ -7,9 +7,9 @@ namespace pla5.Models
 {
     public class Account
     {
-        public int ID { get; set; }
+        public int? ID { get; set; }
         public decimal Balance { get; set; }
-        public bool Debit { get; set; }
+        public string AcctType { get; set; }
         public int? DefaultAcct { get; set; }
         public decimal? DefaultAmt { get; set; }
         public int? DefaultCat { get; set; }

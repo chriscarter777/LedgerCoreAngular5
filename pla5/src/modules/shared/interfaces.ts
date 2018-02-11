@@ -1,7 +1,7 @@
-﻿export interface Account {
+export interface Account {
     id: number;
     balance: number;
-    debit: boolean;
+    acctType: string;
     defaultAcct?: number;
     defaultAmt?: number;
     defaultCat?: number;

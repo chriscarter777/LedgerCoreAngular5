@@ -10,85 +10,172 @@ using pla5.Data;
 using pla5.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace pla5.Controllers
 {
-  [Authorize]
+  [Produces("application/json")]
+  [Route("api/Accounts")]
   public class AccountsController : Controller
   {
-    private HtmlEncoder _htmlEncoder;
     private readonly ILogger _logger;
     private readonly IDataRepository _repo;
     private readonly string _userName;
 
-    public AccountsController(HtmlEncoder htmlEncoder, ILogger<AccountsController> logger, IDataRepository repo, SignInManager<IdentityUser> signInManager)
+    public AccountsController(ILogger<AccountsController> logger, IDataRepository repo, SignInManager<IdentityUser> signInManager)
     {
-      _htmlEncoder = htmlEncoder;
       _logger = logger;
       _repo = repo;
       _userName = signInManager.Context.User.Identity.Name;
-    }  //ctor
+    }
 
-    public async Task<IActionResult> AccountsAsync()
+    // GET: api/Accounts
+    [HttpGet]
+    public async Task<IActionResult> GetAccounts()
     {
       try
       {
-        return Ok(await _repo.GetAccountsAsync());
+        if (!ModelState.IsValid)
+        {
+          return BadRequest(ModelState);
+        }
+
+        IEnumerable<Account> account = await _repo.GetAccountsAsync();
+
+        if (account == null)
+        {
+          return NotFound();
+        }
+        else
+        {
+          return Ok(account);
+        }
       }
       catch (Exception e)
       {
         HandleException(e, ControllerContext.RouteData.Values["action"].ToString(), "", false);
         return NotFound();
       }
-    }
+    } //GetAccounts
 
-    public async Task<IActionResult> AddAccountAsync(Account a)
+    // GET: api/Accounts/5
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetAccount([FromRoute] int id)
     {
-      //API returns the database ID of the added item
       try
       {
-        return Ok(await _repo.AddAccountAsync(a));
+        if (!ModelState.IsValid)
+        {
+          return BadRequest(ModelState);
+        }
+
+        Account account = await _repo.GetAccountAsync(id);
+
+        if (account == null)
+        {
+          return NotFound();
+        }
+        else
+        {
+          return Ok(account);
+        }
       }
       catch (Exception e)
       {
         HandleException(e, ControllerContext.RouteData.Values["action"].ToString(), "", false);
         return NotFound();
       }
-    }
+    } //GetAccount
 
-    public async Task<IActionResult> DeleteAccountAsync(int id)
+    // PUT: api/Accounts/5
+    [HttpPut]
+    public async Task<IActionResult> PutAccount([FromBody] Account account)
     {
       try
       {
-        await _repo.DeleteAccountAsync(id);
-        return Ok();
+        if (!ModelState.IsValid)
+        {
+          return BadRequest(ModelState);
+        }
+
+        Account response = await _repo.UpdateAccountAsync(account);
+
+        if (response == null)
+        {
+          return NotFound();
+        }
+        else
+        {
+          return Ok(response);
+        }
       }
       catch (Exception e)
       {
         HandleException(e, ControllerContext.RouteData.Values["action"].ToString(), "", false);
         return NotFound();
       }
-    }
+    } //PutAccount
 
-    public async Task<IActionResult> UpdateAccountAsync(Account a)
+    // POST: api/Accounts
+    [HttpPost]
+    public async Task<IActionResult> PostAccount([FromBody] Account account)
     {
       try
       {
-        await _repo.UpdateAccountAsync(a);
-        return Ok();
+        account.User = _userName;
+        if (!ModelState.IsValid)
+        {
+          return BadRequest(ModelState);
+        }
+
+        Account response = await _repo.AddAccountAsync(account);
+
+        if (response == null)
+        {
+          return NotFound();
+        }
+        else
+        {
+          return Ok(response);
+
+        }
       }
       catch (Exception e)
       {
         HandleException(e, ControllerContext.RouteData.Values["action"].ToString(), "", false);
         return NotFound();
       }
-    }
+    } //PostAccount
 
-    public IActionResult Error()
+    // DELETE: api/Accounts/5
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAccount([FromRoute] int id)
     {
-      ViewData["RequestId"] = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
-      return View();
-    }
+      try
+      {
+        if (!ModelState.IsValid)
+        {
+          return BadRequest(ModelState);
+        }
+
+        Account response = await _repo.DeleteAccountAsync(id);
+
+        if (response == null)
+        {
+          return NotFound();
+        }
+        else
+        {
+          return Ok(response);
+        }
+      }
+      catch (Exception e)
+      {
+        HandleException(e, ControllerContext.RouteData.Values["action"].ToString(), "", false);
+        return NotFound();
+      }
+    } //DeleteAccount
 
     #region Infrastructure
     private void HandleException(Exception e, string method, string userMessage, bool redirect)

@@ -7,7 +7,7 @@ namespace pla5.Models
 {
     public class Transaction
     {
-        public int ID { get; set; }
+        public int? ID { get; set; }
         public decimal Amount { get; set; }
         public int Category { get; set; }
         public int CrAcct { get; set; }

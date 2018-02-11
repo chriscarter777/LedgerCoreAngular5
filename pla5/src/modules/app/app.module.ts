@@ -1,82 +1,75 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { DataService } from '../shared/data.service'
 
-import { AppComponent } from './components/app/app.component';
-import { NavMenuComponent } from './components/navmenu/navmenu.component';
-import { HomeComponent } from './components/home/home.component';
 import { AccountAddComponent } from './components/accountAdd/accountAdd.component';
 import { AccountEditComponent } from './components/accountEdit/accountEdit.component';
-import { AccountItemComponent } from './components/accountItem/accountItem.component';
-import { AccountsComponent } from './components/accounts/accounts.component';
-import { CategoriesComponent } from './components/categories/categories.component';
+import { AccountListComponent } from './components/accountList/accountList.component';
+import { AppComponent } from './components/app/app.component';
+import { CategoryListComponent } from './components/categoryList/categoryList.component';
 import { CategoryAddComponent } from './components/categoryAdd/categoryAdd.component';
 import { CategoryEditComponent } from './components/categoryEdit/categoryEdit.component';
-import { CategoryItemComponent } from './components/categoryItem/categoryItem.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { TransactionAddComponent } from './components/transactionAdd/transactionAdd.component';
 import { TransactionEditComponent } from './components/transactionEdit/transactionEdit.component';
-import { TransactionItemComponent } from './components/transactionItem/transactionItem.component';
-import { TransactionsComponent } from './components/transactions/transactions.component';
-import { UserItemComponent } from './components/userItem/userItem.component';
-import { UsersComponent } from './components/users/users.component';
+import { TransactionListComponent } from './components/transactionList/transactionlist.component';
+import { UserListComponent } from './components/userList/userList.component';
 
 @NgModule({
 //make non-module items available
   declarations: [
     AppComponent,
-    NavMenuComponent,
     HomeComponent,
+    NavMenuComponent,
 
     AccountAddComponent,
     AccountEditComponent,
-    AccountItemComponent,
-    AccountsComponent,
+    AccountListComponent,
 
-    CategoriesComponent,
+    CategoryListComponent,
     CategoryAddComponent,
     CategoryEditComponent,
-    CategoryItemComponent,
 
     TransactionAddComponent,
     TransactionEditComponent,
-    TransactionItemComponent,
-    TransactionsComponent,
+    TransactionListComponent,
 
-    UserItemComponent,
-    UsersComponent
+    UserListComponent
   ],
     //import other modules
   imports: [
     BrowserModule,
     CommonModule,
     HttpClientModule,
-    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
 
-      { path: 'account-add', component: AccountAddComponent },
-      { path: 'account-edit', component: AccountEditComponent },
-      { path: 'account-item', component: AccountItemComponent },
-      { path: 'accounts', component: AccountsComponent },
+      {
+        path: 'accounts',
+        component: AccountListComponent,
+        children: [
+          { path: 'account-add', component: AccountAddComponent },
+          { path: 'account-edit', component: AccountEditComponent },
+        ]
+      },
 
       { path: 'category-add', component: CategoryAddComponent },
       { path: 'category-edit', component: CategoryEditComponent },
-      { path: 'category-item', component: CategoryEditComponent },
-      { path: 'categories', component: CategoriesComponent },
+      { path: 'categories', component: CategoryListComponent },
 
       { path: 'transaction-add', component: TransactionAddComponent },
       { path: 'transaction-edit', component: TransactionEditComponent },
-      { path: 'transaction-item', component: TransactionItemComponent },
-      { path: 'transactions', component: TransactionsComponent },
+      { path: 'transactions', component: TransactionListComponent },
 
-      { path: 'user-item', component: UserItemComponent },
-      { path: 'users', component: UsersComponent },
+      { path: 'users', component: UserListComponent },
       { path: '**', redirectTo: 'home' }
     ])
   ],
