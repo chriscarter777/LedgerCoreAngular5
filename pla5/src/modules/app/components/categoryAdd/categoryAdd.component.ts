@@ -30,7 +30,7 @@ export class CategoryAddComponent {
   }
 
   freshNewCategory() {
-    return { id: null, name: 'New Category', tax: false, type: '' }
+    return { id: null, name: 'New Category', tax: false, type: 'Expense' }
   }
 
   goBack(): void {

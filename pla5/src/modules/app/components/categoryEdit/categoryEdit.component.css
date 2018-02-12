@@ -1,2 +1,10 @@
-﻿body {
+body {
+}
+
+label {
+  width: 100px;
+}
+
+select {
+  width: 160px;
 }
