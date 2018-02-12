@@ -13,6 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="src\modules\app\app-routing.module.ts" />
+    <None Remove="src\modules\app\components\notFound\not-found.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.1" />
@@ -28,6 +33,11 @@
 
   <ItemGroup>
     <Folder Include="src\modules\shared\components\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="src\modules\app\app-routing.module.ts" />
+    <TypeScriptCompile Include="src\modules\app\components\notFound\not-found.component.ts" />
   </ItemGroup>
 
 </Project>

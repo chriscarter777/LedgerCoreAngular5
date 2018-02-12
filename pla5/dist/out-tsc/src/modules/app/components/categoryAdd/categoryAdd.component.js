@@ -29,7 +29,7 @@ var CategoryAddComponent = /** @class */ (function () {
         });
     };
     CategoryAddComponent.prototype.freshNewCategory = function () {
-        return { id: null, name: 'New Category', tax: false, type: '' };
+        return { id: null, name: 'New Category', tax: false, type: 'Expense' };
     };
     CategoryAddComponent.prototype.goBack = function () {
         this.location.back();

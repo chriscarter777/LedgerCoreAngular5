@@ -6,12 +6,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var app_routing_module_1 = require("./app-routing.module");
 var platform_browser_1 = require("@angular/platform-browser");
 var common_1 = require("@angular/common");
 var http_1 = require("@angular/common/http");
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
-var router_1 = require("@angular/router");
 var data_service_1 = require("../shared/data.service");
 var accountAdd_component_1 = require("./components/accountAdd/accountAdd.component");
 var accountEdit_component_1 = require("./components/accountEdit/accountEdit.component");
@@ -22,6 +22,7 @@ var categoryAdd_component_1 = require("./components/categoryAdd/categoryAdd.comp
 var categoryEdit_component_1 = require("./components/categoryEdit/categoryEdit.component");
 var home_component_1 = require("./components/home/home.component");
 var navmenu_component_1 = require("./components/navmenu/navmenu.component");
+var not_found_component_1 = require("./components/notFound/not-found.component");
 var transactionAdd_component_1 = require("./components/transactionAdd/transactionAdd.component");
 var transactionEdit_component_1 = require("./components/transactionEdit/transactionEdit.component");
 var transactionlist_component_1 = require("./components/transactionList/transactionlist.component");
@@ -31,11 +32,18 @@ var AppModule = /** @class */ (function () {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            //make non-module items available
+            imports: [
+                app_routing_module_1.AppRoutingModule,
+                platform_browser_1.BrowserModule,
+                common_1.CommonModule,
+                http_1.HttpClientModule,
+                forms_1.ReactiveFormsModule,
+            ],
             declarations: [
                 app_component_1.AppComponent,
                 home_component_1.HomeComponent,
                 navmenu_component_1.NavMenuComponent,
+                not_found_component_1.PageNotFoundComponent,
                 accountAdd_component_1.AccountAddComponent,
                 accountEdit_component_1.AccountEditComponent,
                 accountList_component_1.AccountListComponent,
@@ -46,45 +54,6 @@ var AppModule = /** @class */ (function () {
                 transactionEdit_component_1.TransactionEditComponent,
                 transactionlist_component_1.TransactionListComponent,
                 userList_component_1.UserListComponent
-            ],
-            //import other modules
-            imports: [
-                platform_browser_1.BrowserModule,
-                common_1.CommonModule,
-                http_1.HttpClientModule,
-                forms_1.ReactiveFormsModule,
-                router_1.RouterModule.forRoot([
-                    { path: '', redirectTo: 'home', pathMatch: 'full' },
-                    { path: 'home', component: home_component_1.HomeComponent },
-                    {
-                        path: 'accounts',
-                        component: accountList_component_1.AccountListComponent,
-                        children: [
-                            {
-                                path: 'account-add', component: accountAdd_component_1.AccountAddComponent
-                            },
-                            { path: 'account-edit/:id', component: accountEdit_component_1.AccountEditComponent }
-                        ]
-                    },
-                    {
-                        path: 'categories',
-                        component: categoryList_component_1.CategoryListComponent,
-                        children: [
-                            { path: 'category-add', component: categoryAdd_component_1.CategoryAddComponent },
-                            { path: 'category-edit/:id', component: categoryEdit_component_1.CategoryEditComponent }
-                        ]
-                    },
-                    {
-                        path: 'transactions',
-                        component: transactionlist_component_1.TransactionListComponent,
-                        children: [
-                            { path: 'transaction-add', component: transactionAdd_component_1.TransactionAddComponent },
-                            { path: 'transaction-edit/:id', component: transactionEdit_component_1.TransactionEditComponent }
-                        ]
-                    },
-                    { path: 'users', component: userList_component_1.UserListComponent },
-                    { path: '**', redirectTo: 'home' }
-                ])
             ],
             providers: [
                 { provide: 'BASE_URL', useFactory: getBaseUrl },

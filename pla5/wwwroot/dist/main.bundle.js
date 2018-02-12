@@ -53,6 +53,87 @@ platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(app_module_1
 
 /***/ }),
 
+/***/ "../../../../../src/modules/app/app-routing.module.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var router_1 = __webpack_require__("../../../router/esm5/router.js");
+var accountAdd_component_1 = __webpack_require__("../../../../../src/modules/app/components/accountAdd/accountAdd.component.ts");
+var accountEdit_component_1 = __webpack_require__("../../../../../src/modules/app/components/accountEdit/accountEdit.component.ts");
+var accountList_component_1 = __webpack_require__("../../../../../src/modules/app/components/accountList/accountList.component.ts");
+var categoryList_component_1 = __webpack_require__("../../../../../src/modules/app/components/categoryList/categoryList.component.ts");
+var categoryAdd_component_1 = __webpack_require__("../../../../../src/modules/app/components/categoryAdd/categoryAdd.component.ts");
+var categoryEdit_component_1 = __webpack_require__("../../../../../src/modules/app/components/categoryEdit/categoryEdit.component.ts");
+var home_component_1 = __webpack_require__("../../../../../src/modules/app/components/home/home.component.ts");
+var transactionAdd_component_1 = __webpack_require__("../../../../../src/modules/app/components/transactionAdd/transactionAdd.component.ts");
+var transactionEdit_component_1 = __webpack_require__("../../../../../src/modules/app/components/transactionEdit/transactionEdit.component.ts");
+var transactionlist_component_1 = __webpack_require__("../../../../../src/modules/app/components/transactionList/transactionlist.component.ts");
+var userList_component_1 = __webpack_require__("../../../../../src/modules/app/components/userList/userList.component.ts");
+var not_found_component_1 = __webpack_require__("../../../../../src/modules/app/components/notFound/not-found.component.ts");
+var appRoutes = [
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'home', component: home_component_1.HomeComponent },
+    {
+        path: 'accounts',
+        component: accountList_component_1.AccountListComponent,
+        children: [
+            {
+                path: 'account-add', component: accountAdd_component_1.AccountAddComponent
+            },
+            { path: 'account-edit/:id', component: accountEdit_component_1.AccountEditComponent }
+        ]
+    },
+    {
+        path: 'categories',
+        component: categoryList_component_1.CategoryListComponent,
+        children: [
+            { path: 'category-add', component: categoryAdd_component_1.CategoryAddComponent },
+            { path: 'category-edit/:id', component: categoryEdit_component_1.CategoryEditComponent }
+        ]
+    },
+    {
+        path: 'transactions',
+        component: transactionlist_component_1.TransactionListComponent,
+        children: [
+            { path: 'transaction-add', component: transactionAdd_component_1.TransactionAddComponent },
+            { path: 'transaction-edit/:id', component: transactionEdit_component_1.TransactionEditComponent }
+        ]
+    },
+    { path: 'users', component: userList_component_1.UserListComponent },
+    { path: 'Home/Main', redirectTo: 'home', pathMatch: 'full' },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: '**', component: not_found_component_1.PageNotFoundComponent }
+];
+var AppRoutingModule = /** @class */ (function () {
+    function AppRoutingModule() {
+    }
+    AppRoutingModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                router_1.RouterModule.forRoot(appRoutes, { enableTracing: true } // for debugging
+                )
+            ],
+            exports: [
+                router_1.RouterModule
+            ]
+        })
+    ], AppRoutingModule);
+    return AppRoutingModule;
+}());
+exports.AppRoutingModule = AppRoutingModule;
+
+
+/***/ }),
+
 /***/ "../../../../../src/modules/app/app.module.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -65,12 +146,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var app_routing_module_1 = __webpack_require__("../../../../../src/modules/app/app-routing.module.ts");
 var platform_browser_1 = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
 var common_1 = __webpack_require__("../../../common/esm5/common.js");
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
-var router_1 = __webpack_require__("../../../router/esm5/router.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
 var accountAdd_component_1 = __webpack_require__("../../../../../src/modules/app/components/accountAdd/accountAdd.component.ts");
 var accountEdit_component_1 = __webpack_require__("../../../../../src/modules/app/components/accountEdit/accountEdit.component.ts");
@@ -81,6 +162,7 @@ var categoryAdd_component_1 = __webpack_require__("../../../../../src/modules/ap
 var categoryEdit_component_1 = __webpack_require__("../../../../../src/modules/app/components/categoryEdit/categoryEdit.component.ts");
 var home_component_1 = __webpack_require__("../../../../../src/modules/app/components/home/home.component.ts");
 var navmenu_component_1 = __webpack_require__("../../../../../src/modules/app/components/navmenu/navmenu.component.ts");
+var not_found_component_1 = __webpack_require__("../../../../../src/modules/app/components/notFound/not-found.component.ts");
 var transactionAdd_component_1 = __webpack_require__("../../../../../src/modules/app/components/transactionAdd/transactionAdd.component.ts");
 var transactionEdit_component_1 = __webpack_require__("../../../../../src/modules/app/components/transactionEdit/transactionEdit.component.ts");
 var transactionlist_component_1 = __webpack_require__("../../../../../src/modules/app/components/transactionList/transactionlist.component.ts");
@@ -90,11 +172,18 @@ var AppModule = /** @class */ (function () {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            //make non-module items available
+            imports: [
+                app_routing_module_1.AppRoutingModule,
+                platform_browser_1.BrowserModule,
+                common_1.CommonModule,
+                http_1.HttpClientModule,
+                forms_1.ReactiveFormsModule,
+            ],
             declarations: [
                 app_component_1.AppComponent,
                 home_component_1.HomeComponent,
                 navmenu_component_1.NavMenuComponent,
+                not_found_component_1.PageNotFoundComponent,
                 accountAdd_component_1.AccountAddComponent,
                 accountEdit_component_1.AccountEditComponent,
                 accountList_component_1.AccountListComponent,
@@ -105,45 +194,6 @@ var AppModule = /** @class */ (function () {
                 transactionEdit_component_1.TransactionEditComponent,
                 transactionlist_component_1.TransactionListComponent,
                 userList_component_1.UserListComponent
-            ],
-            //import other modules
-            imports: [
-                platform_browser_1.BrowserModule,
-                common_1.CommonModule,
-                http_1.HttpClientModule,
-                forms_1.ReactiveFormsModule,
-                router_1.RouterModule.forRoot([
-                    { path: '', redirectTo: 'home', pathMatch: 'full' },
-                    { path: 'home', component: home_component_1.HomeComponent },
-                    {
-                        path: 'accounts',
-                        component: accountList_component_1.AccountListComponent,
-                        children: [
-                            {
-                                path: 'account-add', component: accountAdd_component_1.AccountAddComponent
-                            },
-                            { path: 'account-edit/:id', component: accountEdit_component_1.AccountEditComponent }
-                        ]
-                    },
-                    {
-                        path: 'categories',
-                        component: categoryList_component_1.CategoryListComponent,
-                        children: [
-                            { path: 'category-add', component: categoryAdd_component_1.CategoryAddComponent },
-                            { path: 'category-edit/:id', component: categoryEdit_component_1.CategoryEditComponent }
-                        ]
-                    },
-                    {
-                        path: 'transactions',
-                        component: transactionlist_component_1.TransactionListComponent,
-                        children: [
-                            { path: 'transaction-add', component: transactionAdd_component_1.TransactionAddComponent },
-                            { path: 'transaction-edit/:id', component: transactionEdit_component_1.TransactionEditComponent }
-                        ]
-                    },
-                    { path: 'users', component: userList_component_1.UserListComponent },
-                    { path: '**', redirectTo: 'home' }
-                ])
             ],
             providers: [
                 { provide: 'BASE_URL', useFactory: getBaseUrl },
@@ -185,7 +235,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/accountAdd/accountAdd.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"accountAdd\">\r\n  <h4>Add</h4>\r\n\r\n  <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Type</label>\r\n    <input type='radio' name=\"acctType\" formControlName=\"acctType\" value=\"Asset\" /> Asset\r\n    <input type='radio' name=\"acctType\" formControlName=\"acctType\" value=\"Liability\" /> Liability <br />\r\n    <label>Name</label>\r\n    <input type='text' name=\"name\" formControlName=\"name\" /> <br />\r\n    <label>Institution</label>\r\n    <input type='text' name=\"institution\" formControlName=\"institution\" /> <br />\r\n    <label>Number</label>\r\n    <input type='text' name=\"number\" formControlName=\"number\" /> <br />\r\n    <label>Interest Rate</label>\r\n    <input type='number' name=\"interest\" formControlName=\"interest\" />% <br />\r\n    <label>Limit<span class=\"pull-right\">$</span></label>\r\n    <input type='number' name=\"limit\" formControlName=\"limit\" /> <br />\r\n    <input type='submit' value=\"Add\" />\r\n    <button (click)=\"goBack()\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div class=\"accountAdd\">\r\n  <h4>Add</h4>\r\n\r\n  <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Type</label>\r\n    <input type='radio' name=\"acctType\" formControlName=\"acctType\" value=\"Asset\" /> Asset\r\n    <input type='radio' name=\"acctType\" formControlName=\"acctType\" value=\"Liability\" /> Liability <br />\r\n    <label>Name</label>\r\n    <input type='text' name=\"name\" formControlName=\"name\" /> <br />\r\n    <label>Institution</label>\r\n    <input type='text' name=\"institution\" formControlName=\"institution\" /> <br />\r\n    <label>Number</label>\r\n    <input type='text' name=\"number\" formControlName=\"number\" /> <br />\r\n    <label>Interest Rate</label>\r\n    <input type='number' name=\"interest\" formControlName=\"interest\" />% <br />\r\n    <label>Limit<span class=\"pull-right\">$</span></label>\r\n    <input type='number' name=\"limit\" formControlName=\"limit\" /> <br />\r\n    <input type='submit' value=\"Add\" />\r\n    <button routerLink=\"/accounts\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -284,7 +334,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/accountEdit/accountEdit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"accountEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Type</label>\r\n    <input type='radio' name=\"acctType\" value=\"Asset\" formControlName=\"acctType\" /> Asset\r\n    <input type='radio' name=\"acctType\" value=\"Liability\" formControlName=\"acctType\" /> Liability <br />\r\n    <label>Name</label>\r\n    <input type='text' name=\"name\" formControlName=\"name\" /> <br />\r\n    <label>Institution</label>\r\n    <input type='text' name=\"institution\" formControlName=\"institution\" /> <br />\r\n    <label>Number</label>\r\n    <input type='text' name=\"number\" formControlName=\"number\" /> <br />\r\n    <label>Interest Rate</label>\r\n    <input type='number' name=\"interest\" formControlName=\"interest\" />% <br />\r\n    <label>Limit<span class=\"pull-right\">$</span></label>\r\n    <input type='number' name=\"limit\" formControlName=\"limit\" /> <br />\r\n    <input type='submit' value=\"Update\" />\r\n    <button (click)=\"goBack()\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div class=\"accountEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Type</label>\r\n    <input type='radio' name=\"acctType\" value=\"Asset\" formControlName=\"acctType\" /> Asset\r\n    <input type='radio' name=\"acctType\" value=\"Liability\" formControlName=\"acctType\" /> Liability <br />\r\n    <label>Name</label>\r\n    <input type='text' name=\"name\" formControlName=\"name\" /> <br />\r\n    <label>Institution</label>\r\n    <input type='text' name=\"institution\" formControlName=\"institution\" /> <br />\r\n    <label>Number</label>\r\n    <input type='text' name=\"number\" formControlName=\"number\" /> <br />\r\n    <label>Interest Rate</label>\r\n    <input type='number' name=\"interest\" formControlName=\"interest\" />% <br />\r\n    <label>Limit<span class=\"pull-right\">$</span></label>\r\n    <input type='number' name=\"limit\" formControlName=\"limit\" /> <br />\r\n    <input type='submit' value=\"Update\" />\r\n    <button routerLink=\"/accounts\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -555,7 +605,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/categoryAdd/categoryAdd.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"categoryAdd\">\r\n  <h4>Add</h4>\r\n\r\n  <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Name</label>\r\n    <input type='text' name=\"name\" formControlName=\"name\" /> <br />\r\n    <label>Type</label>\r\n    <select name=\"type\" formControlName=\"type\">\r\n      <option value=\"Expense\">Expense</option>\r\n      <option value=\"Income\">Income</option>\r\n      <option value=\"Other\">Other</option>\r\n    </select> <br />\r\n    <!--<input type='text' name=\"type\" formControlName=\"type\" /> <br />-->\r\n    <label>Tax</label>\r\n    <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" /> <br />\r\n    <input type='submit' value=\"Add\" />\r\n    <button (click)=\"goBack()\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div class=\"categoryAdd\">\r\n  <h4>Add</h4>\r\n\r\n  <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Name</label>\r\n    <input type='text' name=\"name\" formControlName=\"name\" /> <br />\r\n    <label>Type</label>\r\n    <select name=\"type\" formControlName=\"type\">\r\n      <option value=\"Expense\">Expense</option>\r\n      <option value=\"Income\">Income</option>\r\n      <option value=\"Other\">Other</option>\r\n    </select> <br />\r\n    <!--<input type='text' name=\"type\" formControlName=\"type\" /> <br />-->\r\n    <label>Tax</label>\r\n    <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" /> <br />\r\n    <input type='submit' value=\"Add\" />\r\n    <button routerLink=\"/categories\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -646,7 +696,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/categoryEdit/categoryEdit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"categoryEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Name</label>\r\n    <input type='text' name=\"name\" formControlName=\"name\" /> <br />\r\n    <label>Type</label>\r\n    <select name=\"type\" formControlName=\"type\">\r\n      <option value=\"Expense\">Expense</option>\r\n      <option value=\"Income\">Income</option>\r\n      <option value=\"Other\">Other</option>\r\n    </select> <br />\r\n    <!--<input type='text' name=\"type\" formControlName=\"type\" /> <br />-->\r\n    <label>Tax</label>\r\n    <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" /> <br />\r\n    <input type='submit' value=\"Update\" />\r\n    <button (click)=\"goBack()\">Cancel</button>\r\n    <button (click)=\"goBack()\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div class=\"categoryEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Name</label>\r\n    <input type='text' name=\"name\" formControlName=\"name\" /> <br />\r\n    <label>Type</label>\r\n    <select name=\"type\" formControlName=\"type\">\r\n      <option value=\"Expense\">Expense</option>\r\n      <option value=\"Income\">Income</option>\r\n      <option value=\"Other\">Other</option>\r\n    </select> <br />\r\n    <!--<input type='text' name=\"type\" formControlName=\"type\" /> <br />-->\r\n    <label>Tax</label>\r\n    <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" /> <br />\r\n    <input type='submit' value=\"Update\" />\r\n    <button routerLink=\"/categories\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -888,7 +938,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/navmenu/navmenu.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse'>\r\n            <ul class='nav navbar-nav'>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/home\">\r\n                        <span class='glyphicon glyphicon-home'></span> Home\r\n                    </a>\r\n                </li>\r\n                 <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/accounts\">\r\n                        <span class='glyphicon glyphicon-credit-card'></span> Accounts\r\n                    </a>\r\n                </li>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/categories\">\r\n                        <span class='glyphicon glyphicon-folder-open'></span> Categories\r\n                    </a>\r\n                </li>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/transactions\">\r\n                        <span class='glyphicon glyphicon-list-alt'></span> Transactions\r\n                    </a>\r\n                </li>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/users\">\r\n                        <span class='glyphicon glyphicon-user'></span> Users\r\n                    </a>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<nav class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse'>\r\n            <ul class='nav navbar-nav'>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/home\">\r\n                        <span class='glyphicon glyphicon-home'></span> Home\r\n                    </a>\r\n                </li>\r\n                 <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/accounts\">\r\n                        <span class='glyphicon glyphicon-credit-card'></span> Accounts\r\n                    </a>\r\n                </li>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/categories\">\r\n                        <span class='glyphicon glyphicon-folder-open'></span> Categories\r\n                    </a>\r\n                </li>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/transactions\">\r\n                        <span class='glyphicon glyphicon-list-alt'></span> Transactions\r\n                    </a>\r\n                </li>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/users\">\r\n                        <span class='glyphicon glyphicon-user'></span> Users\r\n                    </a>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -922,6 +972,61 @@ exports.NavMenuComponent = NavMenuComponent;
 
 /***/ }),
 
+/***/ "../../../../../src/modules/app/components/notFound/not-found.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "body {\r\n}\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/modules/app/components/notFound/not-found.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n    <meta charset=\"utf-8\" />\r\n    <title></title>\r\n</head>\r\n<body>\r\n  <h1>Error 404 - Page Not Found</h1>\r\n  <h3>Sorry, the page you requested was not found.</h3>\r\n</body>\r\n</html>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/modules/app/components/notFound/not-found.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var PageNotFoundComponent = /** @class */ (function () {
+    function PageNotFoundComponent() {
+    }
+    PageNotFoundComponent = __decorate([
+        core_1.Component({
+            selector: 'not-found',
+            template: __webpack_require__("../../../../../src/modules/app/components/notFound/not-found.component.html"),
+            styles: [__webpack_require__("../../../../../src/modules/app/components/notFound/not-found.component.css")]
+        })
+    ], PageNotFoundComponent);
+    return PageNotFoundComponent;
+}());
+exports.PageNotFoundComponent = PageNotFoundComponent;
+
+
+/***/ }),
+
 /***/ "../../../../../src/modules/app/components/transactionAdd/transactionAdd.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -943,7 +1048,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/transactionAdd/transactionAdd.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionAdd\">\r\n  <h4>Add</h4>\r\n\r\n  <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Date</label>\r\n    <input type='date' name=\"date\" formControlName=\"date\" /> <br />\r\n    <label>Category</label>\r\n    <input type='text' name=\"category\" formControlName=\"category\" /> <br />\r\n    <label>Amount<span class=\"pull-right\">$</span></label>\r\n    <input type='number' name=\"amount\" formControlName=\"amount\" /> <br />\r\n    <label>Debit Account</label>\r\n    <input type='text' name=\"drAccount\" formControlName=\"drAccount\" /> <br />\r\n    <label>Credit Account</label>\r\n    <input type='text' name=\"crAccount\" formControlName=\"crAccount\" /> <br />\r\n    <label>Tax</label>\r\n    <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n    <input type='submit' value=\"Add\" />\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div class=\"transactionAdd\">\r\n  <h4>Add</h4>\r\n\r\n  <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Date</label>\r\n    <input type='date' name=\"date\" formControlName=\"date\" /> <br />\r\n    <label>Category</label>\r\n    <input type='text' name=\"category\" formControlName=\"category\" /> <br />\r\n    <label>Amount<span class=\"pull-right\">$</span></label>\r\n    <input type='number' name=\"amount\" formControlName=\"amount\" /> <br />\r\n    <label>Debit Account</label>\r\n    <input type='text' name=\"drAccount\" formControlName=\"drAccount\" /> <br />\r\n    <label>Credit Account</label>\r\n    <input type='text' name=\"crAccount\" formControlName=\"crAccount\" /> <br />\r\n    <label>Tax</label>\r\n    <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n    <input type='submit' value=\"Add\" />\r\n    <button routerLink=\"/transactions\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1041,7 +1146,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/transactionEdit/transactionEdit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Date</label>\r\n    <input type='date' name=\"date\" formControlName=\"date\" /> <br />\r\n    <label>Category</label>\r\n    <input type='text' name=\"category\" formControlName=\"category\" /> <br />\r\n    <label>Amount<span class=\"pull-right\">$</span></label>\r\n    <input type='number' name=\"amount\" formControlName=\"amount\" /> <br />\r\n    <label>Debit Account</label>\r\n    <input type='text' name=\"drAcct\" formControlName=\"drAcct\" /> <br />\r\n    <label>Credit Account</label>\r\n    <input type='text' name=\"crAcct\" formControlName=\"crAcct\" /> <br />\r\n    <label>Tax</label>\r\n    <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n    <input type='submit' value=\"Update\" />\r\n    <button (click)=\"goBack()\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div class=\"transactionEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Date</label>\r\n    <input type='date' name=\"date\" formControlName=\"date\" /> <br />\r\n    <label>Category</label>\r\n    <input type='text' name=\"category\" formControlName=\"category\" /> <br />\r\n    <label>Amount<span class=\"pull-right\">$</span></label>\r\n    <input type='number' name=\"amount\" formControlName=\"amount\" /> <br />\r\n    <label>Debit Account</label>\r\n    <input type='text' name=\"drAcct\" formControlName=\"drAcct\" /> <br />\r\n    <label>Credit Account</label>\r\n    <input type='text' name=\"crAcct\" formControlName=\"crAcct\" /> <br />\r\n    <label>Tax</label>\r\n    <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n    <input type='submit' value=\"Update\" />\r\n    <button routerLink=\"/transactions\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 

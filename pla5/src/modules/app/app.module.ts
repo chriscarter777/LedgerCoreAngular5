@@ -1,3 +1,4 @@
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,17 +17,26 @@ import { CategoryAddComponent } from './components/categoryAdd/categoryAdd.compo
 import { CategoryEditComponent } from './components/categoryEdit/categoryEdit.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
+import { PageNotFoundComponent } from './components/notFound/not-found.component';
 import { TransactionAddComponent } from './components/transactionAdd/transactionAdd.component';
 import { TransactionEditComponent } from './components/transactionEdit/transactionEdit.component';
 import { TransactionListComponent } from './components/transactionList/transactionlist.component';
 import { UserListComponent } from './components/userList/userList.component';
 
 @NgModule({
-//make non-module items available
+  imports: [
+    AppRoutingModule,
+    BrowserModule,
+    CommonModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+  ],
+
   declarations: [
     AppComponent,
     HomeComponent,
     NavMenuComponent,
+    PageNotFoundComponent,
 
     AccountAddComponent,
     AccountEditComponent,
@@ -42,48 +52,7 @@ import { UserListComponent } from './components/userList/userList.component';
 
     UserListComponent
   ],
-    //import other modules
-  imports: [
-    BrowserModule,
-    CommonModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot([
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
 
-      {
-        path: 'accounts',
-        component: AccountListComponent,
-        children: [
-          {
-            path: 'account-add', component: AccountAddComponent },
-          { path: 'account-edit/:id', component: AccountEditComponent }
-        ]
-      },
-
-      {
-        path: 'categories',
-        component: CategoryListComponent,
-        children: [
-          { path: 'category-add', component: CategoryAddComponent },
-          { path: 'category-edit/:id', component: CategoryEditComponent }
-        ]
-     },
-
-      {
-        path: 'transactions',
-        component: TransactionListComponent,
-        children: [
-          { path: 'transaction-add', component: TransactionAddComponent },
-          { path: 'transaction-edit/:id', component: TransactionEditComponent }
-        ]
-     },
-
-      { path: 'users', component: UserListComponent },
-      { path: '**', redirectTo: 'home' }
-    ])
-  ],
   providers: [
     { provide: 'BASE_URL', useFactory: getBaseUrl },
     DataService
