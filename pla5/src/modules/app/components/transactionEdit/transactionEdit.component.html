@@ -1,39 +1,19 @@
 <div class="transactionEdit">
   <h4>Edit</h4>
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Data</th>
-        <th>Amount</th>
-        <th>Category</th>
-        <th>Debit Account</th>
-        <th>Credit Account</th>
-        <th>Tax</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{editTransaction.id}}</td>
-        <td>{{editTransaction.date}}</td>
-        <td class='right'>{{displayAsDollar(editTransaction.amount)}}</td>
-        <td>{{editTransaction.category}}</td>
-        <td>{{editTransaction.drAcct}}</td>
-        <td>{{editTransaction.crAcct}}</td>
-        <td>&nbsp;<span *ngIf="editTransaction.tax" class='glyphicon glyphicon-copy' style='color:green;'></span></td>
-      </tr>
-    </tbody>
-  </table>
-  <button (click)="onSubmit()">Update</button>
 
-
-  <!--<form>
-      <label>Type</label>
-      <label>Name</label>
-      <label>Institution</label>
-      <label>Number</label>
-      <label>Interest Rate</label>
-      <label>Limit</label>
-      <input type='submit' value="Update" />
-  </form>-->
+  <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <label>Date</label>
+    <input type='date' name="date" formControlName="date" /> <br />
+    <label>Category</label>
+    <input type='text' name="category" formControlName="category" /> <br />
+    <label>Amount<span class="pull-right">$</span></label>
+    <input type='number' name="amount" formControlName="amount" /> <br />
+    <label>Debit Account</label>
+    <input type='text' name="drAcct" formControlName="drAcct" /> <br />
+    <label>Credit Account</label>
+    <input type='text' name="crAcct" formControlName="crAcct" /> <br />
+    <label>Tax</label>
+    <input type='checkbox' name="tax" value="true" formControlName="tax" />
+    <input type='submit' value="Update" />
+  </form>
 </div>

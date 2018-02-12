@@ -25,15 +25,12 @@
         <td class='right'>{{displayAsPercent(account.interest)}}</td>
         <td class='right'>{{account.limit ? displayAsDollar(account.limit) : '--'}}</td>
         <td class='right'>{{displayAsDollar(account.balance)}}</td>
-        <td><a [routerLink]="['./account-edit']">Edit</a></td>
+        <td><a routerLink="./account-edit/{{account.id}}">Edit</a></td>
         <td><a (click)="onDelete(account.id);">Delete</a></td>
       </tr>
-      <!--<account-item *ngFor="let account of accounts" [account]="account"></account-item>-->
     </tbody>
   </table>
-  <a [routerLink]="['./account-add']">Add New Account</a>
+  <a routerLink="./account-add">Add New Account</a>
   <br />
-  <router-outlet>These are your accounts.</router-outlet>
-  <account-add (add)="onAdd($event)"></account-add>
-  <account-edit *ngIf="accounts" [editAccount] ="accounts[0]" (update)="onUpdate($event)"></account-edit>
+  <router-outlet></router-outlet>
 </div>

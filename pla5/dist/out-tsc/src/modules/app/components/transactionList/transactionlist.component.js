@@ -13,9 +13,39 @@ var core_1 = require("@angular/core");
 var data_service_1 = require("../../../shared/data.service");
 var TransactionListComponent = /** @class */ (function () {
     function TransactionListComponent(dataService) {
+        var _this = this;
         this.dataService = dataService;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
-    }
+        this.dataService.transactionAdded.subscribe(function (data) {
+            console.log("transactionAdded received from data.service: " + JSON.stringify(data));
+            if (data === null) {
+                alert("There was a problem adding.");
+            }
+            else {
+                _this.transactions.push(data);
+            }
+        }, function (error) { return alert("There was a problem adding."); });
+        this.dataService.transactionDeleted.subscribe(function (data) {
+            console.log("transactionDeleted received from data.service: " + JSON.stringify(data));
+            if (data === null) {
+                alert("There was a problem deleting.");
+            }
+            else {
+                var indextToDelete = _this.transactions.findIndex(function (element) { return element.id === data.id; });
+                _this.transactions.splice(indextToDelete, 1);
+            }
+        }, function (error) { return alert("There was a problem deleting."); });
+        this.dataService.transactionUpdated.subscribe(function (data) {
+            console.log("transactionUpdated received from data.service: " + JSON.stringify(data));
+            if (data === null) {
+                alert("There was a problem updating.");
+            }
+            else {
+                var indexToUpdate = _this.transactions.findIndex(function (element) { return element.id == data.id; });
+                _this.transactions[indexToUpdate] = data;
+            }
+        }, function (error) { return alert("There was a problem updating."); });
+    } //ctor
     TransactionListComponent.prototype.ngOnInit = function () {
         this.getTransactions();
     };
@@ -24,45 +54,14 @@ var TransactionListComponent = /** @class */ (function () {
         this.dataService.getTransactions().subscribe(function (transactions) { return _this.transactions = transactions; }, function (error) { return alert("there was an error getting transactions."); });
     };
     TransactionListComponent.prototype.onDelete = function (id) {
-        var _this = this;
         var result;
         var indextToDelete = this.transactions.findIndex(function (element) { return element.id === id; });
-        var confirmation = confirm('are you sure you want to delete transaction on date' + this.transactions[indextToDelete].date + '?');
+        var dateToDelete = this.transactions[indextToDelete].date;
+        var confirmation = confirm('Are you sure you want to delete transaction on ' + dateToDelete + '?');
         if (confirmation) {
-            this.dataService.deleteTransaction(id).subscribe(function (result) {
-                if (result === null) {
-                    alert("There was a problem deleting.");
-                }
-                else {
-                    _this.transactions.splice(indextToDelete, 1);
-                }
-            }, function (error) { return alert("There was a problem deleting."); });
+            this.dataService.deleteAccount(id);
         }
         ;
-    };
-    TransactionListComponent.prototype.onAdd = function (newTransaction) {
-        var _this = this;
-        var result;
-        this.dataService.addTransaction(newTransaction).subscribe(function (result) {
-            if (result === null) {
-                alert("There was a problem adding.");
-            }
-            else {
-                _this.transactions.push(result);
-            }
-        }, function (error) { return alert("There was a problem adding."); });
-    };
-    TransactionListComponent.prototype.onUpdate = function (transaction) {
-        var _this = this;
-        var result;
-        this.dataService.updateTransaction(transaction).subscribe(function (result) {
-            if (result === null) {
-                alert("There was a problem updating.");
-            }
-            else {
-                _this.transactions[0] = result;
-            }
-        }, function (error) { return alert("There was a problem updating."); });
     };
     TransactionListComponent = __decorate([
         core_1.Component({

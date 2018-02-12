@@ -13,7 +13,18 @@ var core_1 = require("@angular/core");
 var data_service_1 = require("../../../shared/data.service");
 var UserListComponent = /** @class */ (function () {
     function UserListComponent(dataService) {
+        var _this = this;
         this.dataService = dataService;
+        this.dataService.userDeleted.subscribe(function (data) {
+            console.log("accountDeleted received from data.service: " + JSON.stringify(data));
+            if (data === null) {
+                alert("There was a problem deleting.");
+            }
+            else {
+                var indextToDelete = _this.users.findIndex(function (element) { return element.id === data.id; });
+                _this.users.splice(indextToDelete, 1);
+            }
+        }, function (error) { return alert("There was a problem deleting."); });
     }
     UserListComponent.prototype.ngOnInit = function () {
         this.getUsers();
@@ -25,20 +36,23 @@ var UserListComponent = /** @class */ (function () {
     UserListComponent.prototype.onDelete = function (id) {
         var confirmation = confirm('are you sure you want to delete ' + this.users.find(function (element) { return element.id == id; }).userName + '?');
         if (confirmation) {
-            alert("Ha! User " + id + " is GONE!");
+            this.dataService.deleteUser(id);
         }
         ;
     };
-    UserListComponent.prototype.onMakeAdmin = function (id) {
-        var _this = this;
-        this.dataService.makeAdmin(id).subscribe(function (result) { _this.users[0].admin = true; }, function (error) { return alert("There was a problem updating."); });
+    UserListComponent.prototype.onToggleAdmin = function (id) {
+        var indexToToggle = this.users.findIndex(function (element) { return element.id === id; });
+        if (this.users[indexToToggle].admin === true) {
+            this.users[indexToToggle].admin = false;
+            this.dataService.unmakeAdmin(id);
+        }
+        else {
+            this.users[indexToToggle].admin = true;
+            this.dataService.makeAdmin(id);
+        }
     };
-    UserListComponent.prototype.onUnmakeAdmin = function (id) {
-        var _this = this;
-        this.dataService.makeAdmin(id).subscribe(function (result) { _this.users[0].admin = false; }, function (error) { return alert("There was a problem updating."); });
-    };
-    UserListComponent.prototype.onPasswordReset = function (id) {
-        this.dataService.makeAdmin(id).subscribe(function (result) { }, function (error) { return alert("There was a problem updating."); });
+    UserListComponent.prototype.onReset = function (id) {
+        this.dataService.resetPassword(id, "Password?123");
     };
     UserListComponent = __decorate([
         core_1.Component({

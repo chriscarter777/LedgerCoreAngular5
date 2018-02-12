@@ -14,12 +14,10 @@
       <tr *ngFor="let user of users">
         <td>{{user.id}}</td>
         <td>{{user.userName}}</td>
-        <td><input type='checkbox' checked={{user.admin}} (Change)="toggleAdmin()" /></td>
-        <td><a [routerLink]="['/accountEdit']">Edit</a></td>
-        <td><a (click)="onDelete(account.id);">Delete</a></td>
+        <td><input type='checkbox' checked={{user.admin}} (Change)="onToggleAdmin(user.id)" /></td>
+        <td><a (click)="onReset(user.id);">Reset Password</a></td>
+        <td><a (click)="onDelete(user.id);">Delete</a></td>
       </tr>
-      <!--<user-item *ngFor="let user of users" [user]="user"></user-item>-->
     </tbody>
   </table>
-  <button (click)="addUser()">Add User</button>
 </div>

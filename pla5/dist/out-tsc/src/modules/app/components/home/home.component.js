@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var HomeComponent = /** @class */ (function () {
     function HomeComponent() {
+        this.title = 'PLA5 Home';
     }
     HomeComponent = __decorate([
         core_1.Component({

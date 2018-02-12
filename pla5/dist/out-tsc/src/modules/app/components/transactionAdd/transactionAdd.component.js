@@ -10,30 +10,55 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
+var router_1 = require("@angular/router");
+var common_1 = require("@angular/common");
+var data_service_1 = require("../../../shared/data.service");
 var TransactionAddComponent = /** @class */ (function () {
-    function TransactionAddComponent() {
-        this.add = new core_1.EventEmitter();
+    function TransactionAddComponent(route, dataService, location) {
+        this.route = route;
+        this.dataService = dataService;
+        this.location = location;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
     }
     TransactionAddComponent.prototype.ngOnInit = function () {
-        this.newTransaction = { id: null, amount: 0, category: 0, crAcct: 0, date: '', drAcct: 0, tax: false, };
+        this.newTransaction = this.freshNewTransaction();
+        this.form = new forms_1.FormGroup({
+            amount: new forms_1.FormControl(this.newTransaction.amount),
+            category: new forms_1.FormControl(this.newTransaction.category),
+            crAcct: new forms_1.FormControl(this.newTransaction.crAcct),
+            date: new forms_1.FormControl(this.newTransaction.date),
+            drAcct: new forms_1.FormControl(this.newTransaction.drAcct),
+            tax: new forms_1.FormControl(this.newTransaction.tax),
+        });
     };
-    TransactionAddComponent.prototype.handleTaxButton = function () {
-        this.newTransaction.tax = !this.newTransaction.tax;
+    TransactionAddComponent.prototype.freshNewTransaction = function () {
+        return { id: null, amount: 0, category: 0, crAcct: 0, date: '', drAcct: 0, tax: false };
+    };
+    TransactionAddComponent.prototype.goBack = function () {
+        this.location.back();
     };
     TransactionAddComponent.prototype.onSubmit = function () {
-        this.add.emit(this.newTransaction);
+        this.newTransaction.amount = this.form.get('amount').value;
+        this.newTransaction.category = this.form.get('category').value;
+        this.newTransaction.crAcct = this.form.get('crAcct').value;
+        this.newTransaction.date = this.form.get('date').value;
+        this.newTransaction.drAcct = this.form.get('drAcct').value;
+        this.newTransaction.tax = this.form.get('tax').value;
+        this.dataService.addTransaction(this.newTransaction);
+        //reset
+        this.ngOnInit();
+        this.goBack();
     };
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], TransactionAddComponent.prototype, "add", void 0);
     TransactionAddComponent = __decorate([
         core_1.Component({
             selector: 'transaction-add',
             templateUrl: './transactionAdd.component.html',
             styleUrls: ['./transactionAdd.component.css']
-        })
+        }),
+        __metadata("design:paramtypes", [router_1.ActivatedRoute,
+            data_service_1.DataService,
+            common_1.Location])
     ], TransactionAddComponent);
     return TransactionAddComponent;
 }());

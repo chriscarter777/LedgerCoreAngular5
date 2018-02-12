@@ -56,18 +56,29 @@ import { UserListComponent } from './components/userList/userList.component';
         path: 'accounts',
         component: AccountListComponent,
         children: [
-          { path: 'account-add', component: AccountAddComponent },
-          { path: 'account-edit', component: AccountEditComponent },
+          {
+            path: 'account-add', component: AccountAddComponent },
+          { path: 'account-edit/:id', component: AccountEditComponent }
         ]
       },
 
-      { path: 'category-add', component: CategoryAddComponent },
-      { path: 'category-edit', component: CategoryEditComponent },
-      { path: 'categories', component: CategoryListComponent },
+      {
+        path: 'categories',
+        component: CategoryListComponent,
+        children: [
+          { path: 'category-add', component: CategoryAddComponent },
+          { path: 'category-edit/:id', component: CategoryEditComponent }
+        ]
+     },
 
-      { path: 'transaction-add', component: TransactionAddComponent },
-      { path: 'transaction-edit', component: TransactionEditComponent },
-      { path: 'transactions', component: TransactionListComponent },
+      {
+        path: 'transactions',
+        component: TransactionListComponent,
+        children: [
+          { path: 'transaction-add', component: TransactionAddComponent },
+          { path: 'transaction-edit/:id', component: TransactionEditComponent }
+        ]
+     },
 
       { path: 'users', component: UserListComponent },
       { path: '**', redirectTo: 'home' }

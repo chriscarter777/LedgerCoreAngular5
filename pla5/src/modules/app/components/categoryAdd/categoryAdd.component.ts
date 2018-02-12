@@ -1,4 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { DataService } from '../../../shared/data.service';
 import { Category } from '../../../shared/interfaces'; 
 
 @Component({
@@ -7,18 +11,39 @@ import { Category } from '../../../shared/interfaces';
     styleUrls: ['./categoryAdd.component.css']
 })
 export class CategoryAddComponent {
-  @Output() add = new EventEmitter();
-  public newCategory: Category;
+  form: FormGroup;
+  newCategory: Category;
+
+  constructor(
+    private route: ActivatedRoute,
+    private dataService: DataService,
+    private location: Location
+  ) { }
 
   ngOnInit() {
-    this.newCategory = { id: null, name: 'New Category', tax: false, type: '' };
+    this.newCategory = this.freshNewCategory();
+    this.form = new FormGroup({
+      name: new FormControl(this.newCategory.name),
+      tax: new FormControl(this.newCategory.tax),
+      type: new FormControl(this.newCategory.type),
+    });
   }
 
-  public handleTaxButton() {
-    this.newCategory.tax = !this.newCategory.tax;
+  freshNewCategory() {
+    return { id: null, name: 'New Category', tax: false, type: '' }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
   onSubmit() {
-    this.add.emit(this.newCategory);
+    this.newCategory.name = this.form.get('name').value;
+    this.newCategory.tax = this.form.get('tax').value;
+    this.newCategory.type = this.form.get('type').value;
+    this.dataService.addCategory(this.newCategory);
+    //reset
+    this.ngOnInit();
+    this.goBack();
   }
 }

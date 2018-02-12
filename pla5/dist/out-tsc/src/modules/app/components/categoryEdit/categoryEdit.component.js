@@ -10,30 +10,54 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
+var router_1 = require("@angular/router");
+var common_1 = require("@angular/common");
+var data_service_1 = require("../../../shared/data.service");
 var CategoryEditComponent = /** @class */ (function () {
-    function CategoryEditComponent() {
-        this.update = new core_1.EventEmitter();
+    function CategoryEditComponent(dataService, route, location) {
+        this.dataService = dataService;
+        this.route = route;
+        this.location = location;
     }
-    CategoryEditComponent.prototype.handleTaxButton = function () {
-        this.editCategory.tax = !this.editCategory.tax;
+    CategoryEditComponent.prototype.ngOnInit = function () {
+        this.createForm();
+    };
+    CategoryEditComponent.prototype.createForm = function () {
+        var _this = this;
+        var id = +this.route.snapshot.paramMap.get('id');
+        this.dataService.getCategory(id).subscribe(function (category) {
+            _this.editCategory = category;
+            _this.instantiateForm();
+        }, function (error) { return alert("there was an error getting category."); });
+    };
+    CategoryEditComponent.prototype.instantiateForm = function () {
+        this.form = new forms_1.FormGroup({
+            name: new forms_1.FormControl(this.editCategory.name),
+            tax: new forms_1.FormControl(this.editCategory.tax),
+            type: new forms_1.FormControl(this.editCategory.type),
+        });
+    };
+    CategoryEditComponent.prototype.goBack = function () {
+        this.location.back();
     };
     CategoryEditComponent.prototype.onSubmit = function () {
-        this.update.emit(this.editCategory);
+        this.editCategory.name = this.form.get('name').value;
+        this.editCategory.tax = this.form.get('tax').value;
+        this.editCategory.type = this.form.get('type').value;
+        this.dataService.updateCategory(this.editCategory);
+        //reset
+        this.goBack();
     };
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object)
-    ], CategoryEditComponent.prototype, "editCategory", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], CategoryEditComponent.prototype, "update", void 0);
     CategoryEditComponent = __decorate([
         core_1.Component({
             selector: 'category-edit',
             templateUrl: './categoryEdit.component.html',
             styleUrls: ['./categoryEdit.component.css']
-        })
+        }),
+        __metadata("design:paramtypes", [data_service_1.DataService,
+            router_1.ActivatedRoute,
+            common_1.Location])
     ], CategoryEditComponent);
     return CategoryEditComponent;
 }());

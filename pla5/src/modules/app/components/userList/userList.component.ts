@@ -10,7 +10,21 @@ import { DataService } from '../../../shared/data.service';
 export class UserListComponent {
     public users: User[];
 
-    constructor(private dataService: DataService) { }
+    constructor(private dataService: DataService) {
+      this.dataService.userDeleted.subscribe(
+        (data: User) => {
+          console.log("accountDeleted received from data.service: " + JSON.stringify(data));
+          if (data === null) {
+            alert("There was a problem deleting.");
+          }
+          else {
+            var indextToDelete = this.users.findIndex((element) => element.id === data.id);
+            this.users.splice(indextToDelete, 1);
+          }
+        },
+        error => alert("There was a problem deleting.")
+      );
+    }
 
     ngOnInit() {
         this.getUsers();
@@ -22,29 +36,21 @@ export class UserListComponent {
 
     onDelete(id: string): void {
       var confirmation = confirm('are you sure you want to delete ' + this.users.find((element) => element.id == id).userName + '?');
-      if (confirmation) {
-        alert("Ha! User " + id + " is GONE!")
-      };
+      if (confirmation) { this.dataService.deleteUser(id); };
     }
 
-    onMakeAdmin(id: string) {
-      this.dataService.makeAdmin(id).subscribe(
-        result => {this.users[0].admin = true;},
-        error => alert("There was a problem updating.")
-      );
+    onToggleAdmin(id: string) {
+      var indexToToggle = this.users.findIndex((element) => element.id === id);
+      if (this.users[indexToToggle].admin === true) {
+        this.users[indexToToggle].admin = false;
+        this.dataService.unmakeAdmin(id)
+      }
+      else {
+        this.users[indexToToggle].admin = true;
+        this.dataService.makeAdmin(id)
+      }
     }
-
-    onUnmakeAdmin(id: string) {
-      this.dataService.makeAdmin(id).subscribe(
-        result => { this.users[0].admin = false; },
-        error => alert("There was a problem updating.")
-      );
-    }
-
-    onPasswordReset(id: string) {
-      this.dataService.makeAdmin(id).subscribe(
-        result => { },
-        error => alert("There was a problem updating.")
-      );
+    onReset(id: string) {
+      this.dataService.resetPassword(id, "Password?123");
     }
 }

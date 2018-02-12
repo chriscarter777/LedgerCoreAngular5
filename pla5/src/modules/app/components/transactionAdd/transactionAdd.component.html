@@ -1,39 +1,19 @@
 <div class="transactionAdd">
   <h4>Add</h4>
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Data</th>
-        <th>Amount</th>
-        <th>Category</th>
-        <th>Debit Account</th>
-        <th>Credit Account</th>
-        <th>Tax</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{newTransaction.id}}</td>
-        <td>{{newTransaction.date}}</td>
-        <td class='right'>{{displayAsDollar(newTransaction.amount)}}</td>
-        <td>{{newTransaction.category}}</td>
-        <td>{{newTransaction.drAcct}}</td>
-        <td>{{newTransaction.crAcct}}</td>
-        <td>&nbsp;<span *ngIf="newTransaction.tax" class='glyphicon glyphicon-copy' style='color:green;'></span></td>
-      </tr>
-    </tbody>
-  </table>
-  <button (click)="onSubmit()">Add</button>
 
-
-  <!--<form>
-      <label>Type</label>
-      <label>Name</label>
-      <label>Institution</label>
-      <label>Number</label>
-      <label>Interest Rate</label>
-      <label>Limit</label>
-      <input type='submit' value='Add' />
-  </form>-->
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <label>Date</label>
+    <input type='date' name="date" formControlName="date" /> <br />
+    <label>Category</label>
+    <input type='text' name="category" formControlName="category" /> <br />
+    <label>Amount<span class="pull-right">$</span></label>
+    <input type='number' name="amount" formControlName="amount" /> <br />
+    <label>Debit Account</label>
+    <input type='text' name="drAccount" formControlName="drAccount" /> <br />
+    <label>Credit Account</label>
+    <input type='text' name="crAccount" formControlName="crAccount" /> <br />
+    <label>Tax</label>
+    <input type='checkbox' name="tax" value="true" formControlName="tax" />
+    <input type='submit' value="Add" />
+  </form>
 </div>

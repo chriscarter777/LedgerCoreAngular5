@@ -17,13 +17,12 @@
         <td>{{category.name}}</td>
         <td>&nbsp;<span *ngIf="category.tax" class='glyphicon glyphicon-copy' style='color:green;'></span></td>
         <td>{{category.type}}</td>
-        <td><a [routerLink]="['/categorytEdit']">Edit</a></td>
-        <td><a (click)="confirm('are you sure you want to delete this category?'); deleteCategory();">Delete</a></td>
-        <!--<category-item *ngFor="let category of categories" [category]="category"></category-item>-->
+        <td><a routerLink="./category-edit/{{category.id}}">Edit</a></td>
+        <td><a (click)="onDelete(category.id);">Delete</a></td>
       </tr>
     </tbody>
   </table>
-  <button (click)="addCategory()">Add Category</button>
-  <category-add (add)="onAdd($event)"></category-add>
-  <category-edit *ngIf="categories" [editCategory]="categories[0]" (update)="onUpdate($event)"></category-edit>
+  <a routerLink="./category-add">Add New Category</a>
+  <br />
+  <router-outlet></router-outlet>
 </div>

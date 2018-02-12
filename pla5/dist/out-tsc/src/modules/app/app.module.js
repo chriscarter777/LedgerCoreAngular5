@@ -60,16 +60,28 @@ var AppModule = /** @class */ (function () {
                         path: 'accounts',
                         component: accountList_component_1.AccountListComponent,
                         children: [
-                            { path: 'account-add', component: accountAdd_component_1.AccountAddComponent },
-                            { path: 'account-edit', component: accountEdit_component_1.AccountEditComponent },
+                            {
+                                path: 'account-add', component: accountAdd_component_1.AccountAddComponent
+                            },
+                            { path: 'account-edit/:id', component: accountEdit_component_1.AccountEditComponent }
                         ]
                     },
-                    { path: 'category-add', component: categoryAdd_component_1.CategoryAddComponent },
-                    { path: 'category-edit', component: categoryEdit_component_1.CategoryEditComponent },
-                    { path: 'categories', component: categoryList_component_1.CategoryListComponent },
-                    { path: 'transaction-add', component: transactionAdd_component_1.TransactionAddComponent },
-                    { path: 'transaction-edit', component: transactionEdit_component_1.TransactionEditComponent },
-                    { path: 'transactions', component: transactionlist_component_1.TransactionListComponent },
+                    {
+                        path: 'categories',
+                        component: categoryList_component_1.CategoryListComponent,
+                        children: [
+                            { path: 'category-add', component: categoryAdd_component_1.CategoryAddComponent },
+                            { path: 'category-edit/:id', component: categoryEdit_component_1.CategoryEditComponent }
+                        ]
+                    },
+                    {
+                        path: 'transactions',
+                        component: transactionlist_component_1.TransactionListComponent,
+                        children: [
+                            { path: 'transaction-add', component: transactionAdd_component_1.TransactionAddComponent },
+                            { path: 'transaction-edit/:id', component: transactionEdit_component_1.TransactionEditComponent }
+                        ]
+                    },
                     { path: 'users', component: userList_component_1.UserListComponent },
                     { path: '**', redirectTo: 'home' }
                 ])

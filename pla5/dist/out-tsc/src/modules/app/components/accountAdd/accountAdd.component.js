@@ -11,9 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
+var router_1 = require("@angular/router");
+var common_1 = require("@angular/common");
+var data_service_1 = require("../../../shared/data.service");
 var AccountAddComponent = /** @class */ (function () {
-    function AccountAddComponent() {
-        this.add = new core_1.EventEmitter();
+    function AccountAddComponent(route, dataService, location) {
+        this.route = route;
+        this.dataService = dataService;
+        this.location = location;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
@@ -28,6 +33,12 @@ var AccountAddComponent = /** @class */ (function () {
             number: new forms_1.FormControl(this.newAccount.number),
         });
     };
+    AccountAddComponent.prototype.freshNewAccount = function () {
+        return { id: null, balance: 0, acctType: "Asset", institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true };
+    };
+    AccountAddComponent.prototype.goBack = function () {
+        this.location.back();
+    };
     AccountAddComponent.prototype.onSubmit = function () {
         this.newAccount.acctType = this.form.get('acctType').value;
         this.newAccount.institution = this.form.get('institution').value;
@@ -35,24 +46,22 @@ var AccountAddComponent = /** @class */ (function () {
         this.newAccount.limit = this.form.get('limit').value;
         this.newAccount.name = this.form.get('name').value;
         this.newAccount.number = this.form.get('number').value;
-        this.add.emit(this.newAccount);
+        this.dataService.addAccount(this.newAccount);
+        //reset
         this.ngOnInit();
+        this.goBack();
     };
-    AccountAddComponent.prototype.freshNewAccount = function () {
-        return { id: null, balance: 0, acctType: "Asset", institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true };
-    };
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], AccountAddComponent.prototype, "add", void 0);
     AccountAddComponent = __decorate([
         core_1.Component({
             selector: 'account-add',
             templateUrl: './accountAdd.component.html',
             styleUrls: ['./accountAdd.component.css']
-        })
+        }),
+        __metadata("design:paramtypes", [router_1.ActivatedRoute,
+            data_service_1.DataService,
+            common_1.Location])
     ], AccountAddComponent);
     return AccountAddComponent;
-}());
+}()); //class
 exports.AccountAddComponent = AccountAddComponent;
 //# sourceMappingURL=accountAdd.component.js.map

@@ -10,29 +10,48 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
+var router_1 = require("@angular/router");
+var common_1 = require("@angular/common");
+var data_service_1 = require("../../../shared/data.service");
 var CategoryAddComponent = /** @class */ (function () {
-    function CategoryAddComponent() {
-        this.add = new core_1.EventEmitter();
+    function CategoryAddComponent(route, dataService, location) {
+        this.route = route;
+        this.dataService = dataService;
+        this.location = location;
     }
     CategoryAddComponent.prototype.ngOnInit = function () {
-        this.newCategory = { id: null, name: 'New Category', tax: false, type: '' };
+        this.newCategory = this.freshNewCategory();
+        this.form = new forms_1.FormGroup({
+            name: new forms_1.FormControl(this.newCategory.name),
+            tax: new forms_1.FormControl(this.newCategory.tax),
+            type: new forms_1.FormControl(this.newCategory.type),
+        });
     };
-    CategoryAddComponent.prototype.handleTaxButton = function () {
-        this.newCategory.tax = !this.newCategory.tax;
+    CategoryAddComponent.prototype.freshNewCategory = function () {
+        return { id: null, name: 'New Category', tax: false, type: '' };
+    };
+    CategoryAddComponent.prototype.goBack = function () {
+        this.location.back();
     };
     CategoryAddComponent.prototype.onSubmit = function () {
-        this.add.emit(this.newCategory);
+        this.newCategory.name = this.form.get('name').value;
+        this.newCategory.tax = this.form.get('tax').value;
+        this.newCategory.type = this.form.get('type').value;
+        this.dataService.addCategory(this.newCategory);
+        //reset
+        this.ngOnInit();
+        this.goBack();
     };
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], CategoryAddComponent.prototype, "add", void 0);
     CategoryAddComponent = __decorate([
         core_1.Component({
             selector: 'category-add',
             templateUrl: './categoryAdd.component.html',
             styleUrls: ['./categoryAdd.component.css']
-        })
+        }),
+        __metadata("design:paramtypes", [router_1.ActivatedRoute,
+            data_service_1.DataService,
+            common_1.Location])
     ], CategoryAddComponent);
     return CategoryAddComponent;
 }());
