@@ -89,7 +89,7 @@ namespace pla5
 
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
+                    defaults: new { controller = "Home", action = "Main" });
             });
         }
     }

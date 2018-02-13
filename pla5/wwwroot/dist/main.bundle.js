@@ -906,7 +906,7 @@ var HomeComponent = /** @class */ (function () {
     }
     HomeComponent = __decorate([
         core_1.Component({
-            selector: 'home',
+            selector: 'app-home',
             template: __webpack_require__("../../../../../src/modules/app/components/home/home.component.html")
         })
     ], HomeComponent);
@@ -1250,7 +1250,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/transactionList/transactionList.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactions\">\r\n  <p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Transactions</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Date</th>\r\n        <th>Amount</th>\r\n        <th>Category</th>\r\n        <th>Debit Account</th>\r\n        <th>Credit Account</th>\r\n        <th>Tax?</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let transaction of transactions\">\r\n        <td>{{transaction.id}}</td>\r\n        <td>{{transaction.date | date}}</td>\r\n        <td className='right'>{{displayAsDollar(transaction.amount)}}</td>\r\n        <td>{{transaction.category}}</td>\r\n        <td>{{transaction.drAcct}}</td>\r\n        <td>{{transaction.crAcct}}</td>\r\n        <td>&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n        <td><a routerLink=\"./transaction-edit/{{transaction.id}}\">Edit</a></td>\r\n        <td><a (click)=\"onDelete(transaction.id);\">Delete</a></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <a routerLink=\"./transaction-add\">Add New Transaction</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
+module.exports = "<div class=\"transactions\">\r\n  <p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Transactions</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Date</th>\r\n        <th>Amount</th>\r\n        <th>Category</th>\r\n        <th>Debit Account</th>\r\n        <th>Credit Account</th>\r\n        <th>Tax?</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let transaction of transactions\">\r\n        <td>{{transaction.id}}</td>\r\n        <td>{{transaction.date | date}}</td>\r\n        <td className='right'>{{displayAsDollar(transaction.amount)}}</td>\r\n        <td>{{categoryName(transaction.category)}}</td>\r\n        <td>{{accountName(transaction.drAcct)}}</td>\r\n        <td>{{accountName(transaction.crAcct)}}</td>\r\n        <td>&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n        <td><a routerLink=\"./transaction-edit/{{transaction.id}}\">Edit</a></td>\r\n        <td><a (click)=\"onDelete(transaction.id);\">Delete</a></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <a routerLink=\"./transaction-add\">Add New Transaction</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1307,7 +1307,23 @@ var TransactionListComponent = /** @class */ (function () {
         }, function (error) { return alert("There was a problem updating."); });
     } //ctor
     TransactionListComponent.prototype.ngOnInit = function () {
+        this.getAccounts();
+        this.getCategories();
         this.getTransactions();
+    };
+    TransactionListComponent.prototype.accountName = function (accountId) {
+        return this.accounts.find(function (element) { return element.id === accountId; }).name;
+    };
+    TransactionListComponent.prototype.categoryName = function (categoryId) {
+        return this.categories.find(function (element) { return element.id === categoryId; }).name;
+    };
+    TransactionListComponent.prototype.getAccounts = function () {
+        var _this = this;
+        this.dataService.getAccounts().subscribe(function (accounts) { return _this.accounts = accounts; }, function (error) { return alert("there was an error getting accounts."); });
+    };
+    TransactionListComponent.prototype.getCategories = function () {
+        var _this = this;
+        this.dataService.getCategories().subscribe(function (categories) { return _this.categories = categories; }, function (error) { return alert("there was an error getting categories."); });
     };
     TransactionListComponent.prototype.getTransactions = function () {
         var _this = this;

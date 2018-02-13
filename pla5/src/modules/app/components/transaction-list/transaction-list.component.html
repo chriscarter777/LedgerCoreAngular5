@@ -19,9 +19,9 @@
         <td>{{transaction.id}}</td>
         <td>{{transaction.date | date}}</td>
         <td className='right'>{{displayAsDollar(transaction.amount)}}</td>
-        <td>{{transaction.category}}</td>
-        <td>{{transaction.drAcct}}</td>
-        <td>{{transaction.crAcct}}</td>
+        <td>{{categoryName(transaction.category)}}</td>
+        <td>{{accountName(transaction.drAcct)}}</td>
+        <td>{{accountName(transaction.crAcct)}}</td>
         <td>&nbsp;<span *ngIf="transaction.tax" class='glyphicon glyphicon-copy' style='color:green;'></span></td>
         <td><a routerLink="./transaction-edit/{{transaction.id}}">Edit</a></td>
         <td><a (click)="onDelete(transaction.id);">Delete</a></td>

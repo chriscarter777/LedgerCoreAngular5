@@ -49,7 +49,7 @@
             if (User.IsInRole("Administrator"))
             {
               <li>@Html.ActionLink("Administration", "Index", "Admin")</li>
-              <li>@Html.ActionLink("Register", "Register", "Access")</li>
+              <li>@Html.ActionLink("Add User", "Register", "Access")</li>
             }
             <li>@Html.ActionLink("Log Out", "Logout", "Access")</li>
           }

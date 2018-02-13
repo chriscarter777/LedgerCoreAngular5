@@ -30,11 +30,11 @@ namespace pla5.Controllers
             _userName = signInManager.Context.User.Identity.Name;
         }  //ctor
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             if (_signInManager.IsSignedIn(User))
             {
-                _signInManager.SignOutAsync();
+                //await _signInManager.SignOutAsync();
             }
             return View();
         }

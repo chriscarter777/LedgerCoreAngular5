@@ -4,24 +4,23 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 
 import { DataService } from '../shared/data.service'
 
-import { AccountAddComponent } from './components/accountAdd/accountAdd.component';
-import { AccountEditComponent } from './components/accountEdit/accountEdit.component';
-import { AccountListComponent } from './components/accountList/accountList.component';
-import { AppComponent } from './components/app/app.component';
-import { CategoryListComponent } from './components/categoryList/categoryList.component';
-import { CategoryAddComponent } from './components/categoryAdd/categoryAdd.component';
-import { CategoryEditComponent } from './components/categoryEdit/categoryEdit.component';
-import { HomeComponent } from './components/home/home.component';
-import { NavMenuComponent } from './components/navmenu/navmenu.component';
-import { PageNotFoundComponent } from './components/notFound/not-found.component';
-import { TransactionAddComponent } from './components/transactionAdd/transactionAdd.component';
-import { TransactionEditComponent } from './components/transactionEdit/transactionEdit.component';
-import { TransactionListComponent } from './components/transactionList/transactionlist.component';
-import { UserListComponent } from './components/userList/userList.component';
+import { AccountAddComponent } from './components/account-add/account-add.component';
+import { AccountEditComponent } from './components/account-edit/account-edit.component';
+import { AccountListComponent } from './components/account-list/account-list.component';
+import { AppComponent } from './components/app-root/app-root.component';
+import { CategoryListComponent } from './components/category-list/category-list.component';
+import { CategoryAddComponent } from './components/category-add/category-add.component';
+import { CategoryEditComponent } from './components/category-edit/category-edit.component';
+import { HomeComponent } from './components/app-home/app-home.component';
+import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
+import { TransactionAddComponent } from './components/transaction-add/transaction-add.component';
+import { TransactionEditComponent } from './components/transaction-edit/transaction-edit.component';
+import { TransactionListComponent } from './components/transaction-list/transaction-list.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { PageNotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   imports: [

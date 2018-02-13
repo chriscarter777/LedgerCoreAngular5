@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from '../../../shared/data.service';
-import { Transaction } from '../../../shared/interfaces'; 
+import { Account, Category, Transaction } from '../../../shared/interfaces'; 
 
 @Component({
     selector: 'transaction-list',
@@ -9,6 +9,8 @@ import { Transaction } from '../../../shared/interfaces';
 })
 
 export class TransactionListComponent {
+    accounts: Account[];
+    categories: Category[];
     transactions: Transaction[];
 
     constructor(private dataService: DataService) {
@@ -56,15 +58,39 @@ export class TransactionListComponent {
     }  //ctor
 
     ngOnInit() {
+        this.getAccounts();
+        this.getCategories();
         this.getTransactions();
+    }
+
+    accountName(accountId: number) {
+        return this.accounts.find((element) => element.id === accountId).name;
+    }
+
+    categoryName(categoryId: number) {
+        return this.categories.find((element) => element.id === categoryId).name;
     }
 
     displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);
 
+    getAccounts(): void {
+        this.dataService.getAccounts().subscribe(
+            accounts => this.accounts = accounts,
+            error => alert("there was an error getting accounts.")
+        );
+    }
+
+    getCategories(): void {
+        this.dataService.getCategories().subscribe(
+            categories => this.categories = categories,
+            error => alert("there was an error getting categories.")
+        );
+    }
+
     getTransactions(): void {
         this.dataService.getTransactions().subscribe(
-          transactions => this.transactions = transactions,
-          error => alert("there was an error getting transactions.")
+            transactions => this.transactions = transactions,
+            error => alert("there was an error getting transactions.")
         );
     }
 
