@@ -30,6 +30,8 @@ var TransactionEditComponent = /** @class */ (function () {
         }
         ;
         document.getElementById("addlink").setAttribute("disabled", "true");
+        this.getAccounts();
+        this.getCategories();
         var id = +this.route.snapshot.paramMap.get('id');
         this.createForm(id);
     };
@@ -40,6 +42,12 @@ var TransactionEditComponent = /** @class */ (function () {
         }
         ;
         document.getElementById("addlink").removeAttribute("disabled");
+    };
+    TransactionEditComponent.prototype.accountName = function (accountId) {
+        return this.accounts.find(function (element) { return element.id === accountId; }).name;
+    };
+    TransactionEditComponent.prototype.categoryName = function (categoryId) {
+        return this.categories.find(function (element) { return element.id === categoryId; }).name;
     };
     TransactionEditComponent.prototype.createForm = function (id) {
         var _this = this;
@@ -57,6 +65,14 @@ var TransactionEditComponent = /** @class */ (function () {
             drAcct: new forms_1.FormControl(this.editTransaction.drAcct),
             tax: new forms_1.FormControl(this.editTransaction.tax),
         });
+    };
+    TransactionEditComponent.prototype.getAccounts = function () {
+        var _this = this;
+        this.dataService.getAccounts().subscribe(function (accounts) { return _this.accounts = accounts; }, function (error) { return alert("there was an error getting accounts."); });
+    };
+    TransactionEditComponent.prototype.getCategories = function () {
+        var _this = this;
+        this.dataService.getCategories().subscribe(function (categories) { return _this.categories = categories; }, function (error) { return alert("there was an error getting categories."); });
     };
     TransactionEditComponent.prototype.goBack = function () {
         this.location.back();

@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Location } from '@angular/common';
 import { DataService } from '../../../shared/data.service';
-import { Transaction } from '../../../shared/interfaces';
+import { Account, Category, Transaction } from '../../../shared/interfaces';
 
 @Component({
     selector: 'transaction-edit',
@@ -12,6 +12,8 @@ import { Transaction } from '../../../shared/interfaces';
     styleUrls: ['./transaction-edit.component.css']
 })
 export class TransactionEditComponent {
+    accounts: Account[];
+    categories: Category[];
     editTransaction: Transaction;
     form: FormGroup;
 
@@ -19,7 +21,6 @@ export class TransactionEditComponent {
     constructor(
         private dataService: DataService,
         private route: ActivatedRoute,
-        private router: Router,
         private location: Location
     ) { }
 
@@ -30,8 +31,13 @@ export class TransactionEditComponent {
         };
         document.getElementById("addlink").setAttribute("disabled", "true");
 
+        this.getAccounts();
+        this.getCategories();
+
         const id = +this.route.snapshot.paramMap.get('id');
-        this.createForm(id);
+
+        Promise.all([this.getAccounts(), this.getCategories(), this.getTransaction(id)])
+            .then(() => this.defineForm());
     }
 
     ngOnDestroy() {
@@ -42,14 +48,12 @@ export class TransactionEditComponent {
         document.getElementById("addlink").removeAttribute("disabled");
     }
 
-    createForm(id): void {
-        this.dataService.getTransaction(id).subscribe(
-            transaction => {
-                this.editTransaction = transaction;
-                this.defineForm();
-            },
-            error => alert("there was an error getting transaction.")
-        );
+    accountName(accountId: number) {
+        return this.accounts.find((element) => element.id === accountId).name;
+    }
+
+    categoryName(categoryId: number) {
+        return this.categories.find((element) => element.id === categoryId).name;
     }
 
     public displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);
@@ -63,6 +67,48 @@ export class TransactionEditComponent {
             drAcct: new FormControl(this.editTransaction.drAcct),
             tax: new FormControl(this.editTransaction.tax),
         });
+    }
+
+    getAccounts() {
+        return new Promise(resolve => {
+            this.dataService.getAccounts().subscribe(
+                accounts => {
+                    this.accounts = accounts;
+                    resolve(accounts);
+                },
+                error => {
+                    alert("there was an error getting accounts.");
+                }
+            )
+        })
+    }
+
+    getCategories() {
+        return new Promise(resolve => {
+            this.dataService.getCategories().subscribe(
+                categories => {
+                    this.categories = categories;
+                    resolve(categories);
+                },
+                error => {
+                    alert("there was an error getting categories.");
+                }
+            )
+        })
+    }
+
+    getTransaction(id) {
+        return new Promise(resolve => {
+            this.dataService.getTransaction(id).subscribe(
+                transaction => {
+                    this.editTransaction = transaction;
+                    resolve(transaction);
+                },
+                error => {
+                    alert("there was an error getting transaction.");
+                }
+            )
+        })
     }
 
     goBack(): void {

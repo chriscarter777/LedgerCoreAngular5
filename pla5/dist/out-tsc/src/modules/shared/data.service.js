@@ -68,6 +68,7 @@ var DataService = /** @class */ (function () {
     };
     // --Categories--
     DataService.prototype.getCategories = function () {
+        console.log("data.service.getCategories...");
         return this.http.get('/api/Categories');
     };
     DataService.prototype.getCategory = function (id) {
@@ -100,6 +101,7 @@ var DataService = /** @class */ (function () {
     };
     // --Transactions--
     DataService.prototype.getTransactions = function () {
+        console.log("data.service.getTransactions...");
         return this.http.get('/api/Transactions');
     };
     DataService.prototype.getTransaction = function (id) {

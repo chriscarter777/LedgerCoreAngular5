@@ -14,6 +14,7 @@ var common_1 = require("@angular/common");
 var http_1 = require("@angular/common/http");
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
+var reports_module_1 = require("../reports/reports.module");
 var transactions_module_1 = require("../transactions/transactions.module");
 var users_module_1 = require("../users/users.module");
 var data_service_1 = require("../shared/data.service");
@@ -33,6 +34,7 @@ var AppModule = /** @class */ (function () {
                 forms_1.ReactiveFormsModule,
                 accounts_module_1.AccountsModule,
                 categories_module_1.CategoriesModule,
+                reports_module_1.ReportsModule,
                 transactions_module_1.TransactionsModule,
                 users_module_1.UsersModule,
                 app_routing_module_1.AppRoutingModule,
