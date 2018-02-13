@@ -6,61 +6,48 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var accounts_module_1 = require("../accounts/accounts.module");
 var app_routing_module_1 = require("./app-routing.module");
+var categories_module_1 = require("../categories/categories.module");
 var platform_browser_1 = require("@angular/platform-browser");
 var common_1 = require("@angular/common");
 var http_1 = require("@angular/common/http");
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
+var transactions_module_1 = require("../transactions/transactions.module");
+var users_module_1 = require("../users/users.module");
 var data_service_1 = require("../shared/data.service");
-var accountAdd_component_1 = require("./components/accountAdd/accountAdd.component");
-var accountEdit_component_1 = require("./components/accountEdit/accountEdit.component");
-var accountList_component_1 = require("./components/accountList/accountList.component");
-var app_component_1 = require("./components/app/app.component");
-var categoryList_component_1 = require("./components/categoryList/categoryList.component");
-var categoryAdd_component_1 = require("./components/categoryAdd/categoryAdd.component");
-var categoryEdit_component_1 = require("./components/categoryEdit/categoryEdit.component");
-var home_component_1 = require("./components/home/home.component");
-var navmenu_component_1 = require("./components/navmenu/navmenu.component");
-var not_found_component_1 = require("./components/notFound/not-found.component");
-var transactionAdd_component_1 = require("./components/transactionAdd/transactionAdd.component");
-var transactionEdit_component_1 = require("./components/transactionEdit/transactionEdit.component");
-var transactionlist_component_1 = require("./components/transactionList/transactionlist.component");
-var userList_component_1 = require("./components/userList/userList.component");
+var app_root_component_1 = require("./components/app-root/app-root.component");
+var app_home_component_1 = require("./components/app-home/app-home.component");
+var nav_menu_component_1 = require("./components/nav-menu/nav-menu.component");
+var not_found_component_1 = require("./components/not-found/not-found.component");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             imports: [
-                app_routing_module_1.AppRoutingModule,
                 platform_browser_1.BrowserModule,
                 common_1.CommonModule,
                 http_1.HttpClientModule,
                 forms_1.ReactiveFormsModule,
+                accounts_module_1.AccountsModule,
+                categories_module_1.CategoriesModule,
+                transactions_module_1.TransactionsModule,
+                users_module_1.UsersModule,
+                app_routing_module_1.AppRoutingModule,
             ],
             declarations: [
-                app_component_1.AppComponent,
-                home_component_1.HomeComponent,
-                navmenu_component_1.NavMenuComponent,
-                not_found_component_1.PageNotFoundComponent,
-                accountAdd_component_1.AccountAddComponent,
-                accountEdit_component_1.AccountEditComponent,
-                accountList_component_1.AccountListComponent,
-                categoryList_component_1.CategoryListComponent,
-                categoryAdd_component_1.CategoryAddComponent,
-                categoryEdit_component_1.CategoryEditComponent,
-                transactionAdd_component_1.TransactionAddComponent,
-                transactionEdit_component_1.TransactionEditComponent,
-                transactionlist_component_1.TransactionListComponent,
-                userList_component_1.UserListComponent
+                app_root_component_1.AppComponent,
+                app_home_component_1.HomeComponent,
+                nav_menu_component_1.NavMenuComponent,
+                not_found_component_1.PageNotFoundComponent
             ],
             providers: [
                 { provide: 'BASE_URL', useFactory: getBaseUrl },
                 data_service_1.DataService
             ],
-            //set entry point
-            bootstrap: [app_component_1.AppComponent]
+            bootstrap: [app_root_component_1.AppComponent]
         })
     ], AppModule);
     return AppModule;
