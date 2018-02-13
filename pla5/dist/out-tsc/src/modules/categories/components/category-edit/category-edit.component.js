@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
+require("rxjs/add/operator/switchMap");
 var common_1 = require("@angular/common");
 var data_service_1 = require("../../../shared/data.service");
 var CategoryEditComponent = /** @class */ (function () {
@@ -21,17 +22,31 @@ var CategoryEditComponent = /** @class */ (function () {
         this.location = location;
     }
     CategoryEditComponent.prototype.ngOnInit = function () {
-        this.createForm();
-    };
-    CategoryEditComponent.prototype.createForm = function () {
-        var _this = this;
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].setAttribute("disabled", "true");
+        }
+        ;
+        document.getElementById("addlink").setAttribute("disabled", "true");
         var id = +this.route.snapshot.paramMap.get('id');
+        this.createForm(id);
+    };
+    CategoryEditComponent.prototype.ngOnDestroy = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].removeAttribute("disabled");
+        }
+        ;
+        document.getElementById("addlink").removeAttribute("disabled");
+    };
+    CategoryEditComponent.prototype.createForm = function (id) {
+        var _this = this;
         this.dataService.getCategory(id).subscribe(function (category) {
             _this.editCategory = category;
-            _this.instantiateForm();
+            _this.defineForm();
         }, function (error) { return alert("there was an error getting category."); });
     };
-    CategoryEditComponent.prototype.instantiateForm = function () {
+    CategoryEditComponent.prototype.defineForm = function () {
         this.form = new forms_1.FormGroup({
             name: new forms_1.FormControl(this.editCategory.name),
             tax: new forms_1.FormControl(this.editCategory.tax),

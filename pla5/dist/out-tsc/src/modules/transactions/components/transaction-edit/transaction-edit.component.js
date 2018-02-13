@@ -12,27 +12,43 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
+require("rxjs/add/operator/switchMap");
 var common_1 = require("@angular/common");
 var data_service_1 = require("../../../shared/data.service");
 var TransactionEditComponent = /** @class */ (function () {
-    function TransactionEditComponent(dataService, route, location) {
+    function TransactionEditComponent(dataService, route, router, location) {
         this.dataService = dataService;
         this.route = route;
+        this.router = router;
         this.location = location;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
     }
     TransactionEditComponent.prototype.ngOnInit = function () {
-        this.createForm();
-    };
-    TransactionEditComponent.prototype.createForm = function () {
-        var _this = this;
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].setAttribute("disabled", "true");
+        }
+        ;
+        document.getElementById("addlink").setAttribute("disabled", "true");
         var id = +this.route.snapshot.paramMap.get('id');
+        this.createForm(id);
+    };
+    TransactionEditComponent.prototype.ngOnDestroy = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].removeAttribute("disabled");
+        }
+        ;
+        document.getElementById("addlink").removeAttribute("disabled");
+    };
+    TransactionEditComponent.prototype.createForm = function (id) {
+        var _this = this;
         this.dataService.getTransaction(id).subscribe(function (transaction) {
             _this.editTransaction = transaction;
-            _this.instantiateForm();
+            _this.defineForm();
         }, function (error) { return alert("there was an error getting transaction."); });
     };
-    TransactionEditComponent.prototype.instantiateForm = function () {
+    TransactionEditComponent.prototype.defineForm = function () {
         this.form = new forms_1.FormGroup({
             amount: new forms_1.FormControl(this.editTransaction.amount),
             category: new forms_1.FormControl(this.editTransaction.category),
@@ -64,6 +80,7 @@ var TransactionEditComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [data_service_1.DataService,
             router_1.ActivatedRoute,
+            router_1.Router,
             common_1.Location])
     ], TransactionEditComponent);
     return TransactionEditComponent;

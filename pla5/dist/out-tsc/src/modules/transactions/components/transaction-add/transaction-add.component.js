@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
+require("rxjs/add/operator/switchMap");
 var common_1 = require("@angular/common");
 var data_service_1 = require("../../../shared/data.service");
 var TransactionAddComponent = /** @class */ (function () {
@@ -22,6 +23,12 @@ var TransactionAddComponent = /** @class */ (function () {
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
     }
     TransactionAddComponent.prototype.ngOnInit = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].setAttribute("disabled", "true");
+        }
+        ;
+        document.getElementById("addlink").setAttribute("disabled", "true");
         this.newTransaction = this.freshNewTransaction();
         this.form = new forms_1.FormGroup({
             amount: new forms_1.FormControl(this.newTransaction.amount),
@@ -31,6 +38,14 @@ var TransactionAddComponent = /** @class */ (function () {
             drAcct: new forms_1.FormControl(this.newTransaction.drAcct),
             tax: new forms_1.FormControl(this.newTransaction.tax),
         });
+    };
+    TransactionAddComponent.prototype.ngOnDestroy = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].removeAttribute("disabled");
+        }
+        ;
+        document.getElementById("addlink").removeAttribute("disabled");
     };
     TransactionAddComponent.prototype.freshNewTransaction = function () {
         return { id: null, amount: 0, category: 0, crAcct: 0, date: '', drAcct: 0, tax: false };

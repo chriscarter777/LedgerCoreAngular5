@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
 import { Location } from '@angular/common';
 import { DataService } from '../../../shared/data.service';
 import { Account } from '../../../shared/interfaces';
@@ -22,7 +23,13 @@ export class AccountAddComponent {
   ) { }
 
   ngOnInit() {
-    this.newAccount = this.freshNewAccount();
+      var editlinks = document.getElementsByClassName("editlink");
+      for (var i = 0; i < editlinks.length; i++) {
+          editlinks[i].setAttribute("disabled", "true");
+      };
+      document.getElementById("addlink").setAttribute("disabled", "true");
+
+      this.newAccount = this.freshNewAccount();
     this.form = new FormGroup({
       acctType: new FormControl(this.newAccount.acctType),
       institution: new FormControl(this.newAccount.institution),
@@ -33,6 +40,13 @@ export class AccountAddComponent {
    });
   }
 
+  ngOnDestroy() {
+      var editlinks = document.getElementsByClassName("editlink");
+      for (var i = 0; i < editlinks.length; i++) {
+          editlinks[i].removeAttribute("disabled");
+      };
+      document.getElementById("addlink").removeAttribute("disabled");
+  }
 
   displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);
 

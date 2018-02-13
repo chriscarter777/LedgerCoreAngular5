@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
+require("rxjs/add/operator/switchMap");
 var common_1 = require("@angular/common");
 var data_service_1 = require("../../../shared/data.service");
 var AccountAddComponent = /** @class */ (function () {
@@ -23,6 +24,12 @@ var AccountAddComponent = /** @class */ (function () {
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
     AccountAddComponent.prototype.ngOnInit = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].setAttribute("disabled", "true");
+        }
+        ;
+        document.getElementById("addlink").setAttribute("disabled", "true");
         this.newAccount = this.freshNewAccount();
         this.form = new forms_1.FormGroup({
             acctType: new forms_1.FormControl(this.newAccount.acctType),
@@ -32,6 +39,14 @@ var AccountAddComponent = /** @class */ (function () {
             name: new forms_1.FormControl(this.newAccount.name),
             number: new forms_1.FormControl(this.newAccount.number),
         });
+    };
+    AccountAddComponent.prototype.ngOnDestroy = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].removeAttribute("disabled");
+        }
+        ;
+        document.getElementById("addlink").removeAttribute("disabled");
     };
     AccountAddComponent.prototype.freshNewAccount = function () {
         return { id: null, balance: 0, acctType: "Asset", institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true };

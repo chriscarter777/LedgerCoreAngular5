@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
 import { Location } from '@angular/common';
 import { DataService } from '../../../shared/data.service';
 import { Transaction } from '../../../shared/interfaces'; 
@@ -21,7 +22,13 @@ export class TransactionAddComponent {
   ) { }
 
   ngOnInit() {
-    this.newTransaction = this.freshNewTransaction();
+      var editlinks = document.getElementsByClassName("editlink");
+      for (var i = 0; i < editlinks.length; i++) {
+          editlinks[i].setAttribute("disabled", "true");
+      };
+      document.getElementById("addlink").setAttribute("disabled", "true");
+
+      this.newTransaction = this.freshNewTransaction();
     this.form = new FormGroup({
       amount: new FormControl(this.newTransaction.amount),
       category: new FormControl(this.newTransaction.category),
@@ -30,6 +37,14 @@ export class TransactionAddComponent {
       drAcct: new FormControl(this.newTransaction.drAcct),
       tax: new FormControl(this.newTransaction.tax),
     });
+  }
+
+  ngOnDestroy() {
+      var editlinks = document.getElementsByClassName("editlink");
+      for (var i = 0; i < editlinks.length; i++) {
+          editlinks[i].removeAttribute("disabled");
+      };
+      document.getElementById("addlink").removeAttribute("disabled");
   }
 
   public displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);

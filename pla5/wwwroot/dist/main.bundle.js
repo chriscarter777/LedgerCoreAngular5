@@ -190,6 +190,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
+__webpack_require__("../../../../rxjs/_esm5/add/operator/switchMap.js");
 var common_1 = __webpack_require__("../../../common/esm5/common.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
 var AccountAddComponent = /** @class */ (function () {
@@ -201,6 +202,12 @@ var AccountAddComponent = /** @class */ (function () {
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
     AccountAddComponent.prototype.ngOnInit = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].setAttribute("disabled", "true");
+        }
+        ;
+        document.getElementById("addlink").setAttribute("disabled", "true");
         this.newAccount = this.freshNewAccount();
         this.form = new forms_1.FormGroup({
             acctType: new forms_1.FormControl(this.newAccount.acctType),
@@ -210,6 +217,14 @@ var AccountAddComponent = /** @class */ (function () {
             name: new forms_1.FormControl(this.newAccount.name),
             number: new forms_1.FormControl(this.newAccount.number),
         });
+    };
+    AccountAddComponent.prototype.ngOnDestroy = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].removeAttribute("disabled");
+        }
+        ;
+        document.getElementById("addlink").removeAttribute("disabled");
     };
     AccountAddComponent.prototype.freshNewAccount = function () {
         return { id: null, balance: 0, acctType: "Asset", institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true };
@@ -254,7 +269,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body {\r\n}\r\n\r\nlabel {\r\n  width: 100px;\r\n}\r\n", ""]);
+exports.push([module.i, "body {\r\n}\r\n\r\nlabel {\r\n  width: 100px;\r\n}\r\n\r\n.red {\r\n    color: blue;\r\n}\r\n", ""]);
 
 // exports
 
@@ -289,6 +304,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
+__webpack_require__("../../../../rxjs/_esm5/add/operator/switchMap.js");
 var common_1 = __webpack_require__("../../../common/esm5/common.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
 var AccountEditComponent = /** @class */ (function () {
@@ -300,17 +316,31 @@ var AccountEditComponent = /** @class */ (function () {
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
     AccountEditComponent.prototype.ngOnInit = function () {
-        this.createForm();
-    };
-    AccountEditComponent.prototype.createForm = function () {
-        var _this = this;
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].setAttribute("disabled", "true");
+        }
+        ;
+        document.getElementById("addlink").setAttribute("disabled", "true");
         var id = +this.route.snapshot.paramMap.get('id');
+        this.createForm(id);
+    };
+    AccountEditComponent.prototype.ngOnDestroy = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].removeAttribute("disabled");
+        }
+        ;
+        document.getElementById("addlink").removeAttribute("disabled");
+    };
+    AccountEditComponent.prototype.createForm = function (id) {
+        var _this = this;
         this.dataService.getAccount(id).subscribe(function (account) {
             _this.editAccount = account;
-            _this.instantiateForm();
+            _this.defineForm();
         }, function (error) { return alert("there was an error getting account."); });
     };
-    AccountEditComponent.prototype.instantiateForm = function () {
+    AccountEditComponent.prototype.defineForm = function () {
         this.form = new forms_1.FormGroup({
             acctType: new forms_1.FormControl(this.editAccount.acctType),
             institution: new forms_1.FormControl(this.editAccount.institution),
@@ -359,7 +389,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body {\r\n}\r\n", ""]);
+exports.push([module.i, "body {\r\n}\r\n\r\n.red {\r\n    color: red;\r\n}\r\n\r\n.greyed{\r\n    color:lightgray;\r\n}\r\n", ""]);
 
 // exports
 
@@ -372,7 +402,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/accounts/components/account-list/account-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"accounts\">\r\n  <p *ngIf=\"!accounts\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Accounts</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let account of accounts\">\r\n        <td>{{account.id}}</td>\r\n        <td>{{account.acctType}}</td>\r\n        <td>{{account.name}}</td>\r\n        <td>{{account.institution}}</td>\r\n        <td>{{account.number}}</td>\r\n        <td class='right'>{{displayAsPercent(account.interest)}}</td>\r\n        <td class='right'>{{account.limit ? displayAsDollar(account.limit) : '--'}}</td>\r\n        <td class='right'>{{displayAsDollar(account.balance)}}</td>\r\n        <td><a routerLink=\"./account-edit/{{account.id}}\">Edit</a></td>\r\n        <td><a (click)=\"onDelete(account.id);\">Delete</a></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <a routerLink=\"./account-add\">Add New Account</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
+module.exports = "<div class=\"accounts\">\r\n  <p *ngIf=\"!accounts\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Accounts</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let account of accounts\">\r\n        <td>{{account.id}}</td>\r\n        <td>{{account.acctType}}</td>\r\n        <td>{{account.name}}</td>\r\n        <td>{{account.institution}}</td>\r\n        <td>{{account.number}}</td>\r\n        <td class='right'>{{displayAsPercent(account.interest)}}</td>\r\n        <td class='right'>{{account.limit ? displayAsDollar(account.limit) : '--'}}</td>\r\n        <td class='right'>{{displayAsDollar(account.balance)}}</td>\r\n        <td><a class=\"btn btn-xs editlink\" routerLink=\"./account-edit/{{account.id}}\">Edit</a></td>\r\n        <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(account.id);\">Delete</a></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./account-add\">Add New Account</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -929,6 +959,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
+__webpack_require__("../../../../rxjs/_esm5/add/operator/switchMap.js");
 var common_1 = __webpack_require__("../../../common/esm5/common.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
 var CategoryAddComponent = /** @class */ (function () {
@@ -938,12 +969,26 @@ var CategoryAddComponent = /** @class */ (function () {
         this.location = location;
     }
     CategoryAddComponent.prototype.ngOnInit = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].setAttribute("disabled", "true");
+        }
+        ;
+        document.getElementById("addlink").setAttribute("disabled", "true");
         this.newCategory = this.freshNewCategory();
         this.form = new forms_1.FormGroup({
             name: new forms_1.FormControl(this.newCategory.name),
             tax: new forms_1.FormControl(this.newCategory.tax),
             type: new forms_1.FormControl(this.newCategory.type),
         });
+    };
+    CategoryAddComponent.prototype.ngOnDestroy = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].removeAttribute("disabled");
+        }
+        ;
+        document.getElementById("addlink").removeAttribute("disabled");
     };
     CategoryAddComponent.prototype.freshNewCategory = function () {
         return { id: null, name: 'New Category', tax: false, type: 'Expense' };
@@ -1020,6 +1065,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
+__webpack_require__("../../../../rxjs/_esm5/add/operator/switchMap.js");
 var common_1 = __webpack_require__("../../../common/esm5/common.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
 var CategoryEditComponent = /** @class */ (function () {
@@ -1029,17 +1075,31 @@ var CategoryEditComponent = /** @class */ (function () {
         this.location = location;
     }
     CategoryEditComponent.prototype.ngOnInit = function () {
-        this.createForm();
-    };
-    CategoryEditComponent.prototype.createForm = function () {
-        var _this = this;
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].setAttribute("disabled", "true");
+        }
+        ;
+        document.getElementById("addlink").setAttribute("disabled", "true");
         var id = +this.route.snapshot.paramMap.get('id');
+        this.createForm(id);
+    };
+    CategoryEditComponent.prototype.ngOnDestroy = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].removeAttribute("disabled");
+        }
+        ;
+        document.getElementById("addlink").removeAttribute("disabled");
+    };
+    CategoryEditComponent.prototype.createForm = function (id) {
+        var _this = this;
         this.dataService.getCategory(id).subscribe(function (category) {
             _this.editCategory = category;
-            _this.instantiateForm();
+            _this.defineForm();
         }, function (error) { return alert("there was an error getting category."); });
     };
-    CategoryEditComponent.prototype.instantiateForm = function () {
+    CategoryEditComponent.prototype.defineForm = function () {
         this.form = new forms_1.FormGroup({
             name: new forms_1.FormControl(this.editCategory.name),
             tax: new forms_1.FormControl(this.editCategory.tax),
@@ -1095,7 +1155,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/categories/components/category-list/category-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"categories\">\r\n  <p *ngIf=\"!categories\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Categories</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Name</th>\r\n        <th>Tax?</th>\r\n        <th>Type</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let category of categories\">\r\n        <td>{{category.id}}</td>\r\n        <td>{{category.name}}</td>\r\n        <td>&nbsp;<span *ngIf=\"category.tax\" class='glyphicon glyphicon-record' style='color:green;'></span></td>\r\n        <td>{{category.type}}</td>\r\n        <td><a routerLink=\"./category-edit/{{category.id}}\">Edit</a></td>\r\n        <td><a (click)=\"onDelete(category.id);\">Delete</a></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <a routerLink=\"./category-add\">Add New Category</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
+module.exports = "<div class=\"categories\">\r\n  <p *ngIf=\"!categories\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Categories</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Name</th>\r\n        <th>Tax?</th>\r\n        <th>Type</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let category of categories\">\r\n        <td>{{category.id}}</td>\r\n        <td>{{category.name}}</td>\r\n        <td>&nbsp;<span *ngIf=\"category.tax\" class='glyphicon glyphicon-record' style='color:green;'></span></td>\r\n        <td>{{category.type}}</td>\r\n        <td><a class=\"btn btn-xs editlink\" routerLink=\"./category-edit/{{category.id}}\">Edit</a></td>\r\n        <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(category.id);\">Delete</a></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./category-add\">Add New Category</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1464,6 +1524,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
+__webpack_require__("../../../../rxjs/_esm5/add/operator/switchMap.js");
 var common_1 = __webpack_require__("../../../common/esm5/common.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
 var TransactionAddComponent = /** @class */ (function () {
@@ -1474,6 +1535,12 @@ var TransactionAddComponent = /** @class */ (function () {
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
     }
     TransactionAddComponent.prototype.ngOnInit = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].setAttribute("disabled", "true");
+        }
+        ;
+        document.getElementById("addlink").setAttribute("disabled", "true");
         this.newTransaction = this.freshNewTransaction();
         this.form = new forms_1.FormGroup({
             amount: new forms_1.FormControl(this.newTransaction.amount),
@@ -1483,6 +1550,14 @@ var TransactionAddComponent = /** @class */ (function () {
             drAcct: new forms_1.FormControl(this.newTransaction.drAcct),
             tax: new forms_1.FormControl(this.newTransaction.tax),
         });
+    };
+    TransactionAddComponent.prototype.ngOnDestroy = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].removeAttribute("disabled");
+        }
+        ;
+        document.getElementById("addlink").removeAttribute("disabled");
     };
     TransactionAddComponent.prototype.freshNewTransaction = function () {
         return { id: null, amount: 0, category: 0, crAcct: 0, date: '', drAcct: 0, tax: false };
@@ -1562,27 +1637,43 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
+__webpack_require__("../../../../rxjs/_esm5/add/operator/switchMap.js");
 var common_1 = __webpack_require__("../../../common/esm5/common.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
 var TransactionEditComponent = /** @class */ (function () {
-    function TransactionEditComponent(dataService, route, location) {
+    function TransactionEditComponent(dataService, route, router, location) {
         this.dataService = dataService;
         this.route = route;
+        this.router = router;
         this.location = location;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
     }
     TransactionEditComponent.prototype.ngOnInit = function () {
-        this.createForm();
-    };
-    TransactionEditComponent.prototype.createForm = function () {
-        var _this = this;
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].setAttribute("disabled", "true");
+        }
+        ;
+        document.getElementById("addlink").setAttribute("disabled", "true");
         var id = +this.route.snapshot.paramMap.get('id');
+        this.createForm(id);
+    };
+    TransactionEditComponent.prototype.ngOnDestroy = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].removeAttribute("disabled");
+        }
+        ;
+        document.getElementById("addlink").removeAttribute("disabled");
+    };
+    TransactionEditComponent.prototype.createForm = function (id) {
+        var _this = this;
         this.dataService.getTransaction(id).subscribe(function (transaction) {
             _this.editTransaction = transaction;
-            _this.instantiateForm();
+            _this.defineForm();
         }, function (error) { return alert("there was an error getting transaction."); });
     };
-    TransactionEditComponent.prototype.instantiateForm = function () {
+    TransactionEditComponent.prototype.defineForm = function () {
         this.form = new forms_1.FormGroup({
             amount: new forms_1.FormControl(this.editTransaction.amount),
             category: new forms_1.FormControl(this.editTransaction.category),
@@ -1614,6 +1705,7 @@ var TransactionEditComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [data_service_1.DataService,
             router_1.ActivatedRoute,
+            router_1.Router,
             common_1.Location])
     ], TransactionEditComponent);
     return TransactionEditComponent;
@@ -1644,7 +1736,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-list/transaction-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactions\">\r\n  <p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Transactions</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Date</th>\r\n        <th>Amount</th>\r\n        <th>Category</th>\r\n        <th>Debit Account</th>\r\n        <th>Credit Account</th>\r\n        <th>Tax?</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let transaction of transactions\">\r\n        <td>{{transaction.id}}</td>\r\n        <td>{{transaction.date | date}}</td>\r\n        <td className='right'>{{displayAsDollar(transaction.amount)}}</td>\r\n        <td>{{categoryName(transaction.category)}}</td>\r\n        <td>{{accountName(transaction.drAcct)}}</td>\r\n        <td>{{accountName(transaction.crAcct)}}</td>\r\n        <td>&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n        <td><a routerLink=\"./transaction-edit/{{transaction.id}}\">Edit</a></td>\r\n        <td><a (click)=\"onDelete(transaction.id);\">Delete</a></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <a routerLink=\"./transaction-add\">Add New Transaction</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
+module.exports = "<div class=\"transactions\">\r\n  <p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Transactions</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Date</th>\r\n        <th>Amount</th>\r\n        <th>Category</th>\r\n        <th>Debit Account</th>\r\n        <th>Credit Account</th>\r\n        <th>Tax?</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let transaction of transactions\">\r\n        <td>{{transaction.id}}</td>\r\n        <td>{{transaction.date | date}}</td>\r\n        <td className='right'>{{displayAsDollar(transaction.amount)}}</td>\r\n        <td>{{categoryName(transaction.category)}}</td>\r\n        <td>{{accountName(transaction.drAcct)}}</td>\r\n        <td>{{accountName(transaction.crAcct)}}</td>\r\n        <td>&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n        <td><a class=\"btn btn-xs editlink\" routerLink=\"./transaction-edit/{{transaction.id}}\">Edit</a></td>\r\n        <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(transaction.id);\">Delete</a></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./transaction-add\">Add New Transaction</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 

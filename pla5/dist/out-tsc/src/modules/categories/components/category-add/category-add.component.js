@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
+require("rxjs/add/operator/switchMap");
 var common_1 = require("@angular/common");
 var data_service_1 = require("../../../shared/data.service");
 var CategoryAddComponent = /** @class */ (function () {
@@ -21,12 +22,26 @@ var CategoryAddComponent = /** @class */ (function () {
         this.location = location;
     }
     CategoryAddComponent.prototype.ngOnInit = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].setAttribute("disabled", "true");
+        }
+        ;
+        document.getElementById("addlink").setAttribute("disabled", "true");
         this.newCategory = this.freshNewCategory();
         this.form = new forms_1.FormGroup({
             name: new forms_1.FormControl(this.newCategory.name),
             tax: new forms_1.FormControl(this.newCategory.tax),
             type: new forms_1.FormControl(this.newCategory.type),
         });
+    };
+    CategoryAddComponent.prototype.ngOnDestroy = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].removeAttribute("disabled");
+        }
+        ;
+        document.getElementById("addlink").removeAttribute("disabled");
     };
     CategoryAddComponent.prototype.freshNewCategory = function () {
         return { id: null, name: 'New Category', tax: false, type: 'Expense' };

@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
+require("rxjs/add/operator/switchMap");
 var common_1 = require("@angular/common");
 var data_service_1 = require("../../../shared/data.service");
 var AccountEditComponent = /** @class */ (function () {
@@ -23,17 +24,31 @@ var AccountEditComponent = /** @class */ (function () {
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
     }
     AccountEditComponent.prototype.ngOnInit = function () {
-        this.createForm();
-    };
-    AccountEditComponent.prototype.createForm = function () {
-        var _this = this;
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].setAttribute("disabled", "true");
+        }
+        ;
+        document.getElementById("addlink").setAttribute("disabled", "true");
         var id = +this.route.snapshot.paramMap.get('id');
+        this.createForm(id);
+    };
+    AccountEditComponent.prototype.ngOnDestroy = function () {
+        var editlinks = document.getElementsByClassName("editlink");
+        for (var i = 0; i < editlinks.length; i++) {
+            editlinks[i].removeAttribute("disabled");
+        }
+        ;
+        document.getElementById("addlink").removeAttribute("disabled");
+    };
+    AccountEditComponent.prototype.createForm = function (id) {
+        var _this = this;
         this.dataService.getAccount(id).subscribe(function (account) {
             _this.editAccount = account;
-            _this.instantiateForm();
+            _this.defineForm();
         }, function (error) { return alert("there was an error getting account."); });
     };
-    AccountEditComponent.prototype.instantiateForm = function () {
+    AccountEditComponent.prototype.defineForm = function () {
         this.form = new forms_1.FormGroup({
             acctType: new forms_1.FormControl(this.editAccount.acctType),
             institution: new forms_1.FormControl(this.editAccount.institution),
