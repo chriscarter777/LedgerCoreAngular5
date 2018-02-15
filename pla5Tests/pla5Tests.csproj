@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="HomeTests\" />
+    <ProjectReference Include="..\pla5\pla5.csproj" />
   </ItemGroup>
 
 </Project>

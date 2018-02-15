@@ -24,7 +24,6 @@ namespace pla5.Data
     private readonly string _userName;
     private readonly bool _userSI;
     private readonly bool _userAdmin;
-    private readonly UserManager<IdentityUser> _userManager;
     private readonly List<Category> _defaultCategories = new List<Category>{
             //OTHER
             new Category
@@ -284,7 +283,7 @@ namespace pla5.Data
         };
     #endregion
 
-    public LedgerDbRepository(LedgerDbContext context, HtmlEncoder htmlEncoder, ILogger<LedgerDbRepository> logger, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+    public LedgerDbRepository(LedgerDbContext context, HtmlEncoder htmlEncoder, ILogger<LedgerDbRepository> logger, SignInManager<IdentityUser> signInManager)
     {
       _context = context;
       _htmlEncoder = htmlEncoder;
@@ -292,7 +291,6 @@ namespace pla5.Data
       _userName = signInManager.Context.User.Identity.Name;
       _userSI = signInManager.Context.User.Identity.IsAuthenticated;
       _userAdmin = signInManager.Context.User.IsInRole("Administrator");
-      _userManager = userManager;
     }  //ctor
 
     #region Accounts

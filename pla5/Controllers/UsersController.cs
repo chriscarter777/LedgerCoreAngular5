@@ -22,14 +22,12 @@ namespace pla5.Controllers
   {
     private readonly ILogger _logger;
     private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
     private readonly string _userName;
 
 
-    public UsersController(UserManager<IdentityUser> userManager, ILogger<AccessController> logger, SignInManager<IdentityUser> signInManager)
+    public UsersController(ILogger<UsersController> logger, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
     {
       _logger = logger;
-      _signInManager = signInManager;
       _userManager = userManager;
       _userName = signInManager.Context.User.Identity.Name;
     }

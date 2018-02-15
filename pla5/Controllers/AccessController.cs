@@ -33,18 +33,18 @@ namespace pla5.Controllers
         [HttpGet]
         public IActionResult AccessDenied()  //Identity middleware automatically redirects to this view
         {
-            return View();
+            return View("AccessDenied");
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
-            SeedDatabaseAsync();
+            await SeedDatabaseAsync();
             if (_signInManager.IsSignedIn(User))
             {
-                _signInManager.SignOutAsync();
+                await _signInManager.SignOutAsync();
             }
-            return View();
+            return View("Login");
         }  //Login[Get]
 
         [HttpPost]
@@ -72,7 +72,7 @@ namespace pla5.Controllers
                 }
             }
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View("Login", model);
         }  //Login[Post]
 
         public async Task<IActionResult> Logout()
@@ -82,10 +82,10 @@ namespace pla5.Controllers
         }  //Logout
 
         [HttpGet]
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
-            SeedDatabaseAsync();
-            return View();
+            await SeedDatabaseAsync();
+            return View("Register");
         }  //Register[Get]
 
         [HttpPost]

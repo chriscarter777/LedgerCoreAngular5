@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,15 +14,13 @@ namespace pla5.Controllers
 {
     public class HomeController : Controller
     {
-        private HtmlEncoder _htmlEncoder;
         private readonly ILogger _logger;
         private readonly IDataRepository _repo;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly string _userName;
 
-        public HomeController(HtmlEncoder htmlEncoder, ILogger<HomeController> logger, IDataRepository repo, SignInManager<IdentityUser> signInManager)
+        public HomeController(ILogger<HomeController> logger, IDataRepository repo, SignInManager<IdentityUser> signInManager)
         {
-            _htmlEncoder = htmlEncoder;
             _logger = logger;
             _repo = repo;
             _signInManager = signInManager;
@@ -34,15 +31,15 @@ namespace pla5.Controllers
         {
             if (_signInManager.IsSignedIn(User))
             {
-                //await _signInManager.SignOutAsync();
+                await _signInManager.SignOutAsync();
             }
-            return View();
+            return View("Index");
         }
 
         [Authorize]
         public IActionResult Main()
         {
-            return View();
+            return View("Main");
         }
 
         #region Infrastructure
