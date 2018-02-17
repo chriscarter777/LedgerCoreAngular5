@@ -16,14 +16,14 @@ require("rxjs/add/operator/switchMap");
 var common_1 = require("@angular/common");
 var data_service_1 = require("../../../shared/data.service");
 var TransactionEditComponent = /** @class */ (function () {
-    function TransactionEditComponent(dataService, route, router, location) {
+    function TransactionEditComponent(dataService, route, location) {
         this.dataService = dataService;
         this.route = route;
-        this.router = router;
         this.location = location;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
     }
     TransactionEditComponent.prototype.ngOnInit = function () {
+        var _this = this;
         var editlinks = document.getElementsByClassName("editlink");
         for (var i = 0; i < editlinks.length; i++) {
             editlinks[i].setAttribute("disabled", "true");
@@ -33,7 +33,8 @@ var TransactionEditComponent = /** @class */ (function () {
         this.getAccounts();
         this.getCategories();
         var id = +this.route.snapshot.paramMap.get('id');
-        this.createForm(id);
+        Promise.all([this.getAccounts(), this.getCategories(), this.getTransaction(id)])
+            .then(function () { return _this.defineForm(); });
     };
     TransactionEditComponent.prototype.ngOnDestroy = function () {
         var editlinks = document.getElementsByClassName("editlink");
@@ -49,13 +50,6 @@ var TransactionEditComponent = /** @class */ (function () {
     TransactionEditComponent.prototype.categoryName = function (categoryId) {
         return this.categories.find(function (element) { return element.id === categoryId; }).name;
     };
-    TransactionEditComponent.prototype.createForm = function (id) {
-        var _this = this;
-        this.dataService.getTransaction(id).subscribe(function (transaction) {
-            _this.editTransaction = transaction;
-            _this.defineForm();
-        }, function (error) { return alert("there was an error getting transaction."); });
-    };
     TransactionEditComponent.prototype.defineForm = function () {
         this.form = new forms_1.FormGroup({
             amount: new forms_1.FormControl(this.editTransaction.amount),
@@ -68,11 +62,36 @@ var TransactionEditComponent = /** @class */ (function () {
     };
     TransactionEditComponent.prototype.getAccounts = function () {
         var _this = this;
-        this.dataService.getAccounts().subscribe(function (accounts) { return _this.accounts = accounts; }, function (error) { return alert("there was an error getting accounts."); });
+        return new Promise(function (resolve) {
+            _this.dataService.getAccounts().subscribe(function (accounts) {
+                _this.accounts = accounts;
+                resolve(accounts);
+            }, function (error) {
+                alert("there was an error getting accounts.");
+            });
+        });
     };
     TransactionEditComponent.prototype.getCategories = function () {
         var _this = this;
-        this.dataService.getCategories().subscribe(function (categories) { return _this.categories = categories; }, function (error) { return alert("there was an error getting categories."); });
+        return new Promise(function (resolve) {
+            _this.dataService.getCategories().subscribe(function (categories) {
+                _this.categories = categories;
+                resolve(categories);
+            }, function (error) {
+                alert("there was an error getting categories.");
+            });
+        });
+    };
+    TransactionEditComponent.prototype.getTransaction = function (id) {
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.dataService.getTransaction(id).subscribe(function (transaction) {
+                _this.editTransaction = transaction;
+                resolve(transaction);
+            }, function (error) {
+                alert("there was an error getting transaction.");
+            });
+        });
     };
     TransactionEditComponent.prototype.goBack = function () {
         this.location.back();
@@ -96,7 +115,6 @@ var TransactionEditComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [data_service_1.DataService,
             router_1.ActivatedRoute,
-            router_1.Router,
             common_1.Location])
     ], TransactionEditComponent);
     return TransactionEditComponent;

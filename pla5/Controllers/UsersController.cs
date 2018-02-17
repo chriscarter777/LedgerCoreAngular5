@@ -22,14 +22,12 @@ namespace pla5.Controllers
   {
     private readonly ILogger _logger;
     private readonly UserManager<IdentityUser> _userManager;
-    private readonly string _userName;
 
 
-    public UsersController(ILogger<UsersController> logger, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+    public UsersController(ILogger<UsersController> logger, UserManager<IdentityUser> userManager)
     {
       _logger = logger;
       _userManager = userManager;
-      _userName = signInManager.Context.User.Identity.Name;
     }
 
     // GET: api/Users
@@ -219,7 +217,7 @@ namespace pla5.Controllers
     #region Infrastructure
     private void HandleException(Exception e, string method, string userMessage, bool redirect)
     {
-      _logger.LogError("{0}: An error occurred in UsersController/{1} for user: {2}.\n{3}\n{4}", DateTime.Now, method, _userName, e.Message, userMessage);
+      _logger.LogError("{0}: An error occurred in UsersController/{1.\n{2}\n{3}", DateTime.Now, method, e.Message, userMessage);
       if (redirect)
       {
         RedirectToAction("Error");

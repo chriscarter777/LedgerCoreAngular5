@@ -56,9 +56,12 @@ namespace pla5.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    if (Url.IsLocalUrl(returnUrl))
+                    if (!String.IsNullOrEmpty(returnUrl))
                     {
-                        return Redirect(returnUrl);
+                        if (Url.IsLocalUrl(returnUrl))
+                        {
+                            return Redirect(returnUrl);
+                        }
                     }
                     else
                     {

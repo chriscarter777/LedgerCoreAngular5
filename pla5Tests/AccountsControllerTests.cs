@@ -7,76 +7,81 @@ using pla5.Controllers;
 using pla5.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Principal;
+using System.Web;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace pla5Tests
 {
      public class AccountsControllerTests
-    {
+     {
           [Fact]
-          public void GetAccountsIsOk()
+          public async Task GetAccountsIsOk()
           {
                var mockLogger = Mocks.ILogger<AccountsController>();
                var mockRepo = Mocks.IDataRepository();
-               var mockSIManager = Mocks.ISignInManager();
-               var controller = new AccountsController(mockLogger.Object, mockRepo.Object, mockSIManager.Object);
 
-               var result = controller.GetAccounts();
+               var controller = new AccountsController(mockLogger.Object, mockRepo.Object);
+
+               var result = await controller.GetAccounts();
 
                var res = Assert.IsType<OkObjectResult>(result);
                Assert.IsType<Account[]>(res.Value);
           }
 
           [Fact]
-          public void GetAccountIsOk()
+          public async Task GetAccountIsOk()
           {
                var mockLogger = Mocks.ILogger<AccountsController>();
                var mockRepo = Mocks.IDataRepository();
-               var mockSIManager = Mocks.ISignInManager();
-               var controller = new AccountsController(mockLogger.Object, mockRepo.Object, mockSIManager.Object);
 
-               var result = controller.GetAccount(0);
+               var controller = new AccountsController(mockLogger.Object, mockRepo.Object);
+
+               var result = await controller.GetAccount(0);
 
                var res = Assert.IsType<OkObjectResult>(result);
                Assert.IsType<Account>(res.Value);
           }
 
           [Fact]
-          public void PutAccountIsOk()
+          public async Task PutAccountIsOk()
           {
                var mockLogger = Mocks.ILogger<AccountsController>();
                var mockRepo = Mocks.IDataRepository();
-               var mockSIManager = Mocks.ISignInManager();
-               var controller = new AccountsController(mockLogger.Object, mockRepo.Object, mockSIManager.Object);
 
-               var result = controller.PutAccount(new Account());
+               var controller = new AccountsController(mockLogger.Object, mockRepo.Object);
+
+               var result = await controller.PutAccount(new Account());
 
                var res = Assert.IsType<OkObjectResult>(result);
                Assert.IsType<Account>(res.Value);
           }
 
           [Fact]
-          public void PostAccountIsOk()
+          public async Task PostAccountIsOk()
           {
                var mockLogger = Mocks.ILogger<AccountsController>();
                var mockRepo = Mocks.IDataRepository();
-               var mockSIManager = Mocks.ISignInManager();
-               var controller = new AccountsController(mockLogger.Object, mockRepo.Object, mockSIManager.Object);
 
-               var result = controller.PostAccount(new Account());
+               var controller = new AccountsController(mockLogger.Object, mockRepo.Object);
+
+               var result = await controller.PostAccount(new Account());
 
                var res = Assert.IsType<OkObjectResult>(result);
                Assert.IsType<Account>(res.Value);
           }
 
           [Fact]
-          public void DeleteAccountIsOk()
+          public async Task DeleteAccountIsOk()
           {
                var mockLogger = Mocks.ILogger<AccountsController>();
                var mockRepo = Mocks.IDataRepository();
-               var mockSIManager = Mocks.ISignInManager();
-               var controller = new AccountsController(mockLogger.Object, mockRepo.Object, mockSIManager.Object);
 
-               var result = controller.DeleteAccount(0);
+               var controller = new AccountsController(mockLogger.Object, mockRepo.Object);
+
+               var result = await controller.DeleteAccount(0);
 
                var res = Assert.IsType<OkObjectResult>(result);
                Assert.IsType<Account>(res.Value);

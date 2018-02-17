@@ -17,14 +17,12 @@ namespace pla5.Controllers
         private readonly ILogger _logger;
         private readonly IDataRepository _repo;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly string _userName;
 
         public HomeController(ILogger<HomeController> logger, IDataRepository repo, SignInManager<IdentityUser> signInManager)
         {
             _logger = logger;
             _repo = repo;
             _signInManager = signInManager;
-            _userName = signInManager.Context.User.Identity.Name;
         }  //ctor
 
         public async Task<IActionResult> Index()
@@ -45,7 +43,7 @@ namespace pla5.Controllers
         #region Infrastructure
         private void HandleException(Exception e, string method, string userMessage, bool redirect)
         {
-            _logger.LogError("{0}: An error occurred in HomeController/{1} for user: {2}.\n{3}\n{4}", DateTime.Now, method, _userName, e.Message, userMessage);
+            _logger.LogError("{0}: An error occurred in HomeController/{1.\n{2}\n{3}", DateTime.Now, method, e.Message, userMessage);
             if (redirect)
             {
                 RedirectToAction("Error");

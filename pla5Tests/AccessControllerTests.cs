@@ -30,7 +30,7 @@ namespace pla5Tests
           }
 
           [Fact]
-          public void LoginGetSignsOutAndReturnsViewForUser()
+          public async Task LoginGetSignsOutAndReturnsViewForUser()
           {
                var mockLogger = Mocks.ILogger<AccessController>();
                var mockSIManager = Mocks.ISignInManager();
@@ -38,7 +38,7 @@ namespace pla5Tests
                var mockUserManager = Mocks.IUserManager();
                var controller = new AccessController(mockLogger.Object, mockRoleManager.Object, mockSIManager.Object, mockUserManager.Object);
 
-               var result = controller.Login();
+               var result = await controller.Login();
 
                mockSIManager.Verify(mock => mock.SignOutAsync(), Times.Once());
                var res = Assert.IsType<ViewResult>(result);
@@ -46,7 +46,7 @@ namespace pla5Tests
           }
 
           [Fact]
-          public void LoginGetReturnsViewForAnon()
+          public async Task LoginGetReturnsViewForAnon()
           {
                var mockLogger = Mocks.ILogger<AccessController>();
                var mockSIManager = Mocks.ISignInManagerAnon();
@@ -54,32 +54,33 @@ namespace pla5Tests
                var mockUserManager = Mocks.IUserManager();
                var controller = new AccessController(mockLogger.Object, mockRoleManager.Object, mockSIManager.Object, mockUserManager.Object);
 
-               var result = controller.Login();
+               var result = await controller.Login();
 
                var res = Assert.IsType<ViewResult>(result);
                Assert.Equal("Login", res.ViewName);
           }
 
           [Fact]
-          public void LoginPostSignsInAndReturnsView()
+          public async Task LoginPostSignsInAndReturnsView()
           {
                var mockLogger = Mocks.ILogger<AccessController>();
                var mockSIManager = Mocks.ISignInManagerAnon();
                var mockRoleManager = Mocks.IRoleManager();
                var mockUserManager = Mocks.IUserManager();
-               LoginViewModel model = new LoginViewModel();
-               string returnUrl = "Main";
+               LoginViewModel model = new LoginViewModel{
+                    UserName = "Tester", Password = "Password_123", RememberMe = false
+               };
                var controller = new AccessController(mockLogger.Object, mockRoleManager.Object, mockSIManager.Object, mockUserManager.Object);
 
-               var result = controller.Login(model, returnUrl);
+               var result = await controller.Login(model);
 
-               mockSIManager.Verify(mock => mock.PasswordSignInAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>()), Times.Once());
-               var res = Assert.IsType<ViewResult>(result);
+               mockSIManager.Verify(mock => mock.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false), Times.Once());
+               var res = Assert.IsType<RedirectToActionResult>(result);
           }
 
 
           [Fact]
-          public void LogoutSignsOutAndReturnsView()
+          public async Task LogoutSignsOutAndReturnsView()
           {
                var mockLogger = Mocks.ILogger<AccessController>();
                var mockSIManager = Mocks.ISignInManager();
@@ -87,15 +88,15 @@ namespace pla5Tests
                var mockUserManager = Mocks.IUserManager();
                var controller = new AccessController(mockLogger.Object, mockRoleManager.Object, mockSIManager.Object, mockUserManager.Object);
 
-               var result = controller.Logout();
+               var result = await controller.Logout();
 
                mockSIManager.Verify(mock => mock.SignOutAsync(), Times.Once());
-               var res = Assert.IsType<ViewResult>(result);
-               Assert.Equal(nameof(HomeController.Index), res.ViewName);
+               var res = Assert.IsType<RedirectToActionResult>(result);
+               Assert.Equal("Index", res.ActionName);
           }
 
           [Fact]
-          public void RegisterGetReturnsView()
+          public async Task RegisterGetReturnsView()
           {
                var mockLogger = Mocks.ILogger<AccessController>();
                var mockSIManager = Mocks.ISignInManager();
@@ -103,32 +104,32 @@ namespace pla5Tests
                var mockUserManager = Mocks.IUserManager();
                var controller = new AccessController(mockLogger.Object, mockRoleManager.Object, mockSIManager.Object, mockUserManager.Object);
 
-               var result = controller.Register();
+               var result = await controller.Register();
 
                var res = Assert.IsType<ViewResult>(result);
                Assert.Equal("Register", res.ViewName);
           }
 
           [Fact]
-          public void RegisterPostCreatesUserAndReturnsView()
+          public async Task RegisterPostCreatesUserAndReturnsView()
           {
                var mockLogger = Mocks.ILogger<AccessController>();
                var mockSIManager = Mocks.ISignInManager();
                var mockRoleManager = Mocks.IRoleManager();
                var mockUserManager = Mocks.IUserManager();
-               RegisterViewModel model = new RegisterViewModel {UserName = "tester", Password = "Password_123" };
+               RegisterViewModel model = new RegisterViewModel {UserName = "tester", Password = "Password_123", Administrator = false };
                var controller = new AccessController(mockLogger.Object, mockRoleManager.Object, mockSIManager.Object, mockUserManager.Object);
 
-               var result = controller.Register(model);
+               var result = await controller.Register(model);
 
-               mockUserManager.Verify(mock => mock.CreateAsync(It.IsAny<IdentityUser>(), It.IsAny<string>()), Times.Once());
+               mockUserManager.Verify(mock => mock.CreateAsync(It.IsAny<IdentityUser>(), model.Password), Times.Once());
                mockUserManager.Verify(mock => mock.AddToRoleAsync(It.IsAny<IdentityUser>(), "Administrator"), Times.Never());
-               var res = Assert.IsType<ViewResult>(result);
-               Assert.Equal("Login", res.ViewName);
+               var res = Assert.IsType<RedirectToActionResult>(result);
+               Assert.Equal("Login", res.ActionName);
           }
 
           [Fact]
-          public void RegisterPostCreatesAdminAndReturnsView()
+          public async Task RegisterPostCreatesAdminAndReturnsView()
           {
                var mockLogger = Mocks.ILogger<AccessController>();
                var mockSIManager = Mocks.ISignInManager();
@@ -137,12 +138,12 @@ namespace pla5Tests
                RegisterViewModel model = new RegisterViewModel { UserName = "tester", Password = "Password_123", Administrator = true };
                var controller = new AccessController(mockLogger.Object, mockRoleManager.Object, mockSIManager.Object, mockUserManager.Object);
 
-               var result = controller.Register(model);
+               var result = await controller.Register(model);
 
                mockUserManager.Verify(mock => mock.CreateAsync(It.IsAny<IdentityUser>(), It.IsAny<string>()), Times.Once());
                mockUserManager.Verify(mock => mock.AddToRoleAsync(It.IsAny<IdentityUser>(), "Administrator"), Times.Once());
-               var res = Assert.IsType<ViewResult>(result);
-               Assert.Equal("Login", res.ViewName);
+               var res = Assert.IsType<RedirectToActionResult>(result);
+               Assert.Equal("Login", res.ActionName);
           }
 
      }  //test class

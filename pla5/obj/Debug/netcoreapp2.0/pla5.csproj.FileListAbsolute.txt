@@ -3,9 +3,9 @@ C:\Users\Chris\Documents\Source\PLA5\pla5\bin\Debug\netcoreapp2.0\pla5.runtimeco
 C:\Users\Chris\Documents\Source\PLA5\pla5\bin\Debug\netcoreapp2.0\pla5.runtimeconfig.dev.json
 C:\Users\Chris\Documents\Source\PLA5\pla5\bin\Debug\netcoreapp2.0\pla5.dll
 C:\Users\Chris\Documents\Source\PLA5\pla5\bin\Debug\netcoreapp2.0\pla5.pdb
+C:\Users\Chris\Documents\Source\PLA5\pla5\obj\Debug\netcoreapp2.0\pla5.csprojResolveAssemblyReference.cache
 C:\Users\Chris\Documents\Source\PLA5\pla5\obj\Debug\netcoreapp2.0\pla5.csproj.CoreCompileInputs.cache
 C:\Users\Chris\Documents\Source\PLA5\pla5\obj\Debug\netcoreapp2.0\pla5.AssemblyInfoInputs.cache
 C:\Users\Chris\Documents\Source\PLA5\pla5\obj\Debug\netcoreapp2.0\pla5.AssemblyInfo.cs
 C:\Users\Chris\Documents\Source\PLA5\pla5\obj\Debug\netcoreapp2.0\pla5.dll
 C:\Users\Chris\Documents\Source\PLA5\pla5\obj\Debug\netcoreapp2.0\pla5.pdb
-C:\Users\Chris\Documents\Source\PLA5\pla5\obj\Debug\netcoreapp2.0\pla5.csprojResolveAssemblyReference.cache

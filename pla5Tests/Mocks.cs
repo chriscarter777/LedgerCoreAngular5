@@ -11,7 +11,11 @@ using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.Options;
 
 namespace pla5Tests
 {
@@ -24,58 +28,104 @@ namespace pla5Tests
 
           internal static Mock<SignInManager<IdentityUser>> ISignInManager()
           {
-               var mockSIM = new Mock<SignInManager<IdentityUser>>(MockBehavior.Strict);
-               mockSIM.Setup(mock => mock.Context.User.Identity.Name).Returns("tester");
-               mockSIM.Setup(mock => mock.PasswordSignInAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(new SignInResult()));
-               mockSIM.Setup(mock => mock.IsSignedIn(It.IsAny<ClaimsPrincipal>())).Returns(true);
-               mockSIM.Setup(mock => mock.Context.User.Identity.IsAuthenticated).Returns(true);
-               mockSIM.Setup(mock => mock.Context.User.IsInRole("Administrator")).Returns(false);
-               return mockSIM;
+               var mockUM = IUserManager();
+               var mockHCA = new Mock<IHttpContextAccessor>();
+               var mockCPF = new Mock<IUserClaimsPrincipalFactory<IdentityUser>>();
+               var mockIO = new Mock<IOptions<IdentityOptions>>();
+               var mockL = new Mock<ILogger<SignInManager<IdentityUser>>>();
+               var mockASP = new Mock<IAuthenticationSchemeProvider> ();
+
+               var mockSignInManager = new Mock<SignInManager<IdentityUser>>(mockUM.Object, mockHCA.Object, mockCPF.Object, mockIO.Object, mockL.Object, mockASP.Object);
+
+               //mockSignInManager.SetupProperty(mock => mock.Context.User.Identity.Name).Returns("tester");
+               //mockSignInManager.SetupGet(mock => mock.Context.User.Identity.IsAuthenticated).Returns(true);
+               //mockSignInManager.SetupGet(mock => mock.Context.User.IsInRole("Administrator")).Returns(false);
+               mockSignInManager.Setup(mock => mock.PasswordSignInAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(SignInResult.Success));
+               mockSignInManager.Setup(mock => mock.IsSignedIn(It.IsAny<ClaimsPrincipal>())).Returns(true);
+
+               return mockSignInManager;
           }
 
           internal static Mock<SignInManager<IdentityUser>> ISignInManagerAdmin()
           {
-               var mockSIM = new Mock<SignInManager<IdentityUser>>(MockBehavior.Strict);
-               mockSIM.Setup(mock => mock.Context.User.Identity.Name).Returns("tester");
-               mockSIM.Setup(mock => mock.PasswordSignInAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(new SignInResult()));
-               mockSIM.Setup(mock => mock.IsSignedIn(It.IsAny<ClaimsPrincipal>())).Returns(true);
-               mockSIM.Setup(mock => mock.Context.User.Identity.IsAuthenticated).Returns(true);
-               mockSIM.Setup(mock => mock.Context.User.IsInRole("Administrator")).Returns(true);
-               return mockSIM;
+               var mockUM = IUserManager();
+               var mockHCA = new Mock<IHttpContextAccessor>();
+               var mockCPF = new Mock<IUserClaimsPrincipalFactory<IdentityUser>>();
+               var mockIO = new Mock<IOptions<IdentityOptions>>();
+               var mockL = new Mock<ILogger<SignInManager<IdentityUser>>>();
+               var mockASP = new Mock<IAuthenticationSchemeProvider>();
+
+               var mockSignInManager = new Mock<SignInManager<IdentityUser>>(mockUM.Object, mockHCA.Object, mockCPF.Object, mockIO.Object, mockL.Object, mockASP.Object);
+
+               //mockSignInManager.Setup(mock => mock.Context.User.Identity.Name).Returns("tester");
+               //mockSignInManager.Setup(mock => mock.Context.User.Identity.IsAuthenticated).Returns(true);
+               //mockSignInManager.Setup(mock => mock.Context.User.IsInRole("Administrator")).Returns(true);
+               mockSignInManager.Setup(mock => mock.PasswordSignInAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(SignInResult.Success));
+               mockSignInManager.Setup(mock => mock.IsSignedIn(It.IsAny<ClaimsPrincipal>())).Returns(true);
+
+               return mockSignInManager;
           }
 
           internal static Mock<SignInManager<IdentityUser>> ISignInManagerAnon()
           {
-               var mockSIM = new Mock<SignInManager<IdentityUser>>(MockBehavior.Strict);
-               mockSIM.Setup(mock => mock.Context.User.Identity.Name).Returns("tester");
-               mockSIM.Setup(mock => mock.PasswordSignInAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(new SignInResult()));
-               mockSIM.Setup(mock => mock.IsSignedIn(It.IsAny<ClaimsPrincipal>())).Returns(false);
-               mockSIM.Setup(mock => mock.Context.User.Identity.IsAuthenticated).Returns(false);
-               mockSIM.Setup(mock => mock.Context.User.IsInRole("Administrator")).Returns(false);
-               return mockSIM;
-          }
+               var mockUM = IUserManager();
+               var mockHCA = new Mock<IHttpContextAccessor>();
+               var mockCPF = new Mock<IUserClaimsPrincipalFactory<IdentityUser>>();
+               var mockIO = new Mock<IOptions<IdentityOptions>>();
+               var mockL = new Mock<ILogger<SignInManager<IdentityUser>>>();
+               var mockASP = new Mock<IAuthenticationSchemeProvider>();
 
+               var mockSignInManager = new Mock<SignInManager<IdentityUser>>(mockUM.Object, mockHCA.Object, mockCPF.Object, mockIO.Object, mockL.Object, mockASP.Object);
+
+               //mockSignInManager.Setup(mock => mock.Context.User.Identity.Name).Returns("tester");
+               //mockSignInManager.Setup(mock => mock.Context.User.Identity.IsAuthenticated).Returns(false);
+               //mockSignInManager.Setup(mock => mock.Context.User.IsInRole("Administrator")).Returns(false);
+               mockSignInManager.Setup(mock => mock.PasswordSignInAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>())).Returns(Task.FromResult(SignInResult.Success));
+               mockSignInManager.Setup(mock => mock.IsSignedIn(It.IsAny<ClaimsPrincipal>())).Returns(false);
+
+               return mockSignInManager;
+          }
 
           internal static Mock<UserManager<IdentityUser>> IUserManager()
           {
-               var mockUM = new Mock<UserManager<IdentityUser>>(MockBehavior.Strict);
+               var mockUS = new Mock<IUserStore<IdentityUser>>();
+               var mockO = new Mock<IOptions<IdentityOptions>>();
+               var mockPH = new Mock<IPasswordHasher<IdentityUser>>();
+               var mockUV = new IUserValidator<IdentityUser>[0];
+               var mockPV = new IPasswordValidator<IdentityUser>[0];
+               var mockLN = new Mock<ILookupNormalizer>();
+               var mockIED = new Mock<IdentityErrorDescriber>();
+               var mockSP = new Mock<IServiceProvider>();
+               var mockL = new Mock<ILogger<UserManager<IdentityUser>>>();
+
+               var mockUM = new Mock<UserManager<IdentityUser>>(mockUS.Object, mockO.Object, mockPH.Object, mockUV, mockPV, mockLN.Object, mockIED.Object, mockSP.Object, mockL.Object);
+
                mockUM.Setup(mock => mock.Users).Returns(new IdentityUser[0].AsQueryable());
-               mockUM.Setup(mock => mock.CreateAsync(It.IsAny<IdentityUser>(), It.IsAny<string>())).Returns(Task.FromResult(new IdentityResult()));
-               mockUM.Setup(mock => mock.AddToRoleAsync(It.IsAny<IdentityUser>(), "Administrator")).Returns(Task.FromResult(new IdentityResult()));
-               mockUM.Setup(mock => mock.IsInRoleAsync(It.IsAny<IdentityUser>(), "Adminstrator")).Returns(Task.FromResult(true));
+               mockUM.Setup(mock => mock.CreateAsync(It.IsAny<IdentityUser>(), It.IsAny<string>())).Returns(Task.FromResult(IdentityResult.Success));
+               mockUM.Setup(mock => mock.AddToRoleAsync(It.IsAny<IdentityUser>(), It.IsAny<string>())).Returns(Task.FromResult(IdentityResult.Success));
+               mockUM.Setup(mock => mock.IsInRoleAsync(It.IsAny<IdentityUser>(), It.IsAny<string>())).Returns(Task.FromResult(true));
                mockUM.Setup(mock => mock.FindByNameAsync(It.IsAny<string>())).Returns(Task.FromResult(new IdentityUser()));
                mockUM.Setup(mock => mock.FindByIdAsync(It.IsAny<string>())).Returns(Task.FromResult(new IdentityUser()));
-               mockUM.Setup(mock => mock.AddClaimAsync(It.IsAny<IdentityUser>(), new Claim(ClaimTypes.Role, "Administrator"))).Returns(Task.FromResult(new IdentityResult()));
-               mockUM.Setup(mock => mock.RemoveClaimAsync(It.IsAny<IdentityUser>(), new Claim(ClaimTypes.Role, "Administrator"))).Returns(Task.FromResult(new IdentityResult()));
-               mockUM.Setup(mock => mock.ResetPasswordAsync(It.IsAny<IdentityUser>(), It.IsAny<string>(), It.IsAny<string>())).Returns(Task.FromResult(new IdentityResult()));
-               mockUM.Setup(mock => mock.DeleteAsync(It.IsAny<IdentityUser>())).Returns(Task.FromResult(new IdentityResult()));
+               mockUM.Setup(mock => mock.AddClaimAsync(It.IsAny<IdentityUser>(), It.IsAny<Claim>())).Returns(Task.FromResult(IdentityResult.Success));
+               mockUM.Setup(mock => mock.RemoveClaimAsync(It.IsAny<IdentityUser>(), It.IsAny<Claim>())).Returns(Task.FromResult(IdentityResult.Success));
+               mockUM.Setup(mock => mock.ResetPasswordAsync(It.IsAny<IdentityUser>(), It.IsAny<string>(), It.IsAny<string>())).Returns(Task.FromResult(IdentityResult.Success));
+               mockUM.Setup(mock => mock.DeleteAsync(It.IsAny<IdentityUser>())).Returns(Task.FromResult(IdentityResult.Success));
+
                return mockUM;
           }
 
           internal static Mock<RoleManager<IdentityRole>> IRoleManager()
           {
-               var mockRM = new Mock<RoleManager<IdentityRole>>(MockBehavior.Strict);
+               var mockRS = new Mock<IRoleStore<IdentityRole>>();
+               var mockRV = new IRoleValidator<IdentityRole>[0];
+               var mockLN = new Mock<ILookupNormalizer>();
+               var mockIED = new Mock<IdentityErrorDescriber>();
+               var mockL = new Mock<ILogger<RoleManager<IdentityRole>>>();
+
+               var mockRM = new Mock<RoleManager<IdentityRole>>(mockRS.Object, mockRV, mockLN.Object, mockIED.Object, mockL.Object);
+
                mockRM.Setup(mock => mock.Roles).Returns(new IdentityRole[0].AsQueryable());
+
                return mockRM;
           }
 
@@ -101,4 +151,32 @@ namespace pla5Tests
           }
 
      }  //class
+
+     public class FakeUserManager : UserManager<IdentityUser>
+     {
+          public FakeUserManager()
+              : base(new Mock<IUserStore<IdentityUser>>().Object,
+                    new Mock<IOptions<IdentityOptions>>().Object,
+                    new Mock<IPasswordHasher<IdentityUser>>().Object,
+                    new IUserValidator<IdentityUser>[0],
+                    new IPasswordValidator<IdentityUser>[0],
+                    new Mock<ILookupNormalizer>().Object,
+                    new Mock<IdentityErrorDescriber>().Object,
+                    new Mock<IServiceProvider>().Object,
+                    new Mock<ILogger<UserManager<IdentityUser>>>().Object)
+          { }
+
+     }
+
+     public class FakeSignInManager : SignInManager<IdentityUser>
+     {
+          public FakeSignInManager()
+              : base(new Mock<FakeUserManager>().Object,
+                    new HttpContextAccessor(),
+                    new Mock<IUserClaimsPrincipalFactory<IdentityUser>>().Object,
+                    new Mock<IOptions<IdentityOptions>>().Object,
+                    new Mock<ILogger<SignInManager<IdentityUser>>>().Object,
+                    new Mock<IAuthenticationSchemeProvider>().Object)
+          { }
+     }
 }  //namespace

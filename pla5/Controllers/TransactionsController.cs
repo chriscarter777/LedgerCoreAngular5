@@ -20,13 +20,11 @@ namespace pla5.Controllers
   {
     private readonly ILogger _logger;
     private readonly IDataRepository _repo;
-    private readonly string _userName;
 
-    public TransactionsController(ILogger<TransactionsController> logger, IDataRepository repo, SignInManager<IdentityUser> signInManager)
+    public TransactionsController(ILogger<TransactionsController> logger, IDataRepository repo)
     {
       _logger = logger;
       _repo = repo;
-      _userName = signInManager.Context.User.Identity.Name;
     }
 
     // GET: api/Transactions
@@ -122,7 +120,6 @@ namespace pla5.Controllers
     {
       try
       {
-        transaction.User = _userName;
         if (!ModelState.IsValid)
         {
           return BadRequest(ModelState);
@@ -172,7 +169,7 @@ namespace pla5.Controllers
     #region Infrastructure
     private void HandleException(Exception e, string method, string userMessage, bool redirect)
     {
-      _logger.LogError("{0}: An error occurred in TransactionsController/{1} for user: {2}.\n{3}\n{4}", DateTime.Now, method, _userName, e.Message, userMessage);
+      _logger.LogError("{0}: An error occurred in TransactionsController/{1}.\n{2}\n{3}", DateTime.Now, method, e.Message, userMessage);
       if (redirect)
       {
         RedirectToAction("Error");

@@ -45,21 +45,7 @@ namespace pla5Tests
           }
 
           [Fact]
-          public void MainRedirectsToIndexForAnon()
-          {
-               var mockLogger = Mocks.ILogger<HomeController>();
-               var mockSIManager = Mocks.ISignInManagerAnon();
-               var mockRepo = Mocks.IDataRepository();
-               var controller = new HomeController(mockLogger.Object, mockRepo.Object, mockSIManager.Object);
-
-               var result = controller.Main();
-
-               var res = Assert.IsType<ViewResult>(result);
-               Assert.Equal("Index", res.ViewName);
-          }
-
-          [Fact]
-          public void MainReturnsViewForUser()
+          public void MainReturnsView()
           {
                var mockLogger = Mocks.ILogger<HomeController>();
                var mockSIManager = Mocks.ISignInManager();

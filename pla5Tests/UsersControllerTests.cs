@@ -13,54 +13,53 @@ namespace pla5Tests
      public class UsersControllerTests
     {
           [Fact]
-          public void GetAppUsersIsOk()
+          public async Task GetAppUsersIsOk()
           {
                var mockLogger = Mocks.ILogger<UsersController>();
-               var mockSIManager = Mocks.ISignInManager();
                var mockUserManager = Mocks.IUserManager();
-               var controller = new UsersController(mockLogger.Object, mockSIManager.Object, mockUserManager.Object);
+               var controller = new UsersController(mockLogger.Object, mockUserManager.Object);
 
-               var result = controller.GetAppUsers();
+               var result = await controller.GetAppUsers();
 
                var res = Assert.IsType<OkObjectResult>(result);
                Assert.IsType<AppUser[]>(res.Value);
           }
 
           [Fact]
-          public void GetAppUserIsOk()
+          public async Task GetAppUserIsOk()
           {
                var mockLogger = Mocks.ILogger<UsersController>();
-               var mockSIManager = Mocks.ISignInManager();
                var mockUserManager = Mocks.IUserManager();
-               var controller = new UsersController(mockLogger.Object, mockSIManager.Object, mockUserManager.Object);
-               var result = controller.GetAppUser("tester");
+               var controller = new UsersController(mockLogger.Object, mockUserManager.Object);
+
+               var result = await controller.GetAppUser("tester");
 
                var res = Assert.IsType<OkObjectResult>(result);
                Assert.IsType<AppUser>(res.Value);
           }
 
           [Fact]
-          public void MakeAdminIsOk()
+          public async Task MakeAdminIsOk()
           {
                var mockLogger = Mocks.ILogger<UsersController>();
-               var mockSIManager = Mocks.ISignInManager();
                var mockUserManager = Mocks.IUserManager();
-               var controller = new UsersController(mockLogger.Object, mockSIManager.Object, mockUserManager.Object);
-               var result = controller.MakeAdminAsync("tester");
+               var controller = new UsersController(mockLogger.Object, mockUserManager.Object);
 
-               var res = Assert.IsType<OkObjectResult>(result);
+               var result = await controller.MakeAdminAsync("tester");
+
+               var res = Assert.IsType<OkResult>(result);
           }
 
           [Fact]
-          public void UnmakeAdminIsOk()
+          public async Task UnmakeAdminIsOk()
           {
                var mockLogger = Mocks.ILogger<UsersController>();
-               var mockSIManager = Mocks.ISignInManager();
                var mockUserManager = Mocks.IUserManager();
-               var controller = new UsersController(mockLogger.Object, mockSIManager.Object, mockUserManager.Object);
-               var result = controller.UnmakeAdminAsync("tester");
+               var controller = new UsersController(mockLogger.Object, mockUserManager.Object);
 
-               var res = Assert.IsType<OkObjectResult>(result);
+               var result = await controller.UnmakeAdminAsync("tester");
+
+               var res = Assert.IsType<OkResult>(result);
           }
 
           [Theory]
@@ -68,26 +67,24 @@ namespace pla5Tests
           [InlineData("password_123")]
           [InlineData("Password123")]
           [InlineData("Password_")]
-          public void ResetPasswordIsOk(string value)
+          public async Task ResetPasswordIsOk(string value)
           {
                var mockLogger = Mocks.ILogger<UsersController>();
-               var mockSIManager = Mocks.ISignInManager();
                var mockUserManager = Mocks.IUserManager();
-               var controller = new UsersController(mockLogger.Object, mockSIManager.Object, mockUserManager.Object);
-               Assert.IsType<OkObjectResult>(controller.ResetPasswordAsync("tester", "token", value));
+               var controller = new UsersController(mockLogger.Object, mockUserManager.Object);
+               Assert.IsType<OkResult>(await controller.ResetPasswordAsync("tester", "token", value));
           }
 
           [Fact]
-          public void DeleteAccountIsOk()
+          public async Task DeleteUserIsOk()
           {
                var mockLogger = Mocks.ILogger<UsersController>();
-               var mockSIManager = Mocks.ISignInManager();
                var mockUserManager = Mocks.IUserManager();
-               var controller = new UsersController(mockLogger.Object, mockSIManager.Object, mockUserManager.Object);
+               var controller = new UsersController(mockLogger.Object, mockUserManager.Object);
 
-               var result = controller.DeleteUser("tester");
+               var result = await controller.DeleteUser("tester");
 
-               var res = Assert.IsType<OkObjectResult>(result);
+               var res = Assert.IsType<OkResult>(result);
           }
      }  //test class
 }  //namespace

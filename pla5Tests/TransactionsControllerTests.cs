@@ -13,70 +13,65 @@ namespace pla5Tests
      public class TransactionsControllerTests
     {
           [Fact]
-          public void GetTransactionsIsOk()
+          public async Task GetTransactionsIsOk()
           {
                var mockLogger = Mocks.ILogger<TransactionsController>();
                var mockRepo = Mocks.IDataRepository();
-               var mockSIManager = Mocks.ISignInManager();
-               var controller = new TransactionsController(mockLogger.Object, mockRepo.Object, mockSIManager.Object);
+               var controller = new TransactionsController(mockLogger.Object, mockRepo.Object);
 
-               var result = controller.GetTransactions();
+               var result = await controller.GetTransactions();
 
                var res = Assert.IsType<OkObjectResult>(result);
                Assert.IsType<Transaction[]>(res.Value);
           }
 
           [Fact]
-          public void GetTransactionIsOk()
+          public async Task GetTransactionIsOk()
           {
                var mockLogger = Mocks.ILogger<TransactionsController>();
                var mockRepo = Mocks.IDataRepository();
-               var mockSIManager = Mocks.ISignInManager();
-               var controller = new TransactionsController(mockLogger.Object, mockRepo.Object, mockSIManager.Object);
+               var controller = new TransactionsController(mockLogger.Object, mockRepo.Object);
 
-               var result = controller.GetTransaction(0);
+               var result = await controller.GetTransaction(0);
 
                var res = Assert.IsType<OkObjectResult>(result);
                Assert.IsType<Transaction>(res.Value);
           }
 
           [Fact]
-          public void PutTransactionIsOk()
+          public async Task PutTransactionIsOk()
           {
                var mockLogger = Mocks.ILogger<TransactionsController>();
                var mockRepo = Mocks.IDataRepository();
-               var mockSIManager = Mocks.ISignInManager();
-               var controller = new TransactionsController(mockLogger.Object, mockRepo.Object, mockSIManager.Object);
+               var controller = new TransactionsController(mockLogger.Object, mockRepo.Object);
 
-               var result = controller.PutTransaction(new Transaction());
+               var result = await controller.PutTransaction(new Transaction());
 
                var res = Assert.IsType<OkObjectResult>(result);
                Assert.IsType<Transaction>(res.Value);
           }
 
           [Fact]
-          public void PostTransactionIsOk()
+          public async Task PostTransactionIsOk()
           {
                var mockLogger = Mocks.ILogger<TransactionsController>();
                var mockRepo = Mocks.IDataRepository();
-               var mockSIManager = Mocks.ISignInManager();
-               var controller = new TransactionsController(mockLogger.Object, mockRepo.Object, mockSIManager.Object);
+               var controller = new TransactionsController(mockLogger.Object, mockRepo.Object);
 
-               var result = controller.PostTransaction(new Transaction());
+               var result = await controller.PostTransaction(new Transaction());
 
                var res = Assert.IsType<OkObjectResult>(result);
                Assert.IsType<Transaction>(res.Value);
           }
 
           [Fact]
-          public void DeleteTransactionIsOk()
+          public async Task DeleteTransactionIsOk()
           {
                var mockLogger = Mocks.ILogger<TransactionsController>();
                var mockRepo = Mocks.IDataRepository();
-               var mockSIManager = Mocks.ISignInManager();
-               var controller = new TransactionsController(mockLogger.Object, mockRepo.Object, mockSIManager.Object);
+               var controller = new TransactionsController(mockLogger.Object, mockRepo.Object);
 
-               var result = controller.DeleteTransaction(0);
+               var result = await controller.DeleteTransaction(0);
 
                var res = Assert.IsType<OkObjectResult>(result);
                Assert.IsType<Transaction>(res.Value);

@@ -32,12 +32,7 @@ var TransactionAddComponent = /** @class */ (function () {
         document.getElementById("addlink").setAttribute("disabled", "true");
         this.newTransaction = this.freshNewTransaction();
         Promise.all([this.getAccounts(), this.getCategories()])
-            .then(function () {
-            console.log("---Account count is: " + _this.accounts.length);
-            console.log("---Category count is: " + _this.categories.length);
-        })
-            .then(function () { return _this.defineForm(); })
-            .then(function () { return console.log("---form defined with default date: " + _this.form.get('date').value); });
+            .then(function () { return _this.defineForm(); });
     };
     ;
     TransactionAddComponent.prototype.ngOnDestroy = function () {
@@ -49,11 +44,9 @@ var TransactionAddComponent = /** @class */ (function () {
         document.getElementById("addlink").removeAttribute("disabled");
     };
     TransactionAddComponent.prototype.accountName = function (accountId) {
-        console.log("accountName called with " + accountId);
         return this.accounts.find(function (element) { return element.id === accountId; }).name;
     };
     TransactionAddComponent.prototype.categoryName = function (categoryId) {
-        console.log("categoryName called with " + categoryId);
         return this.categories.find(function (element) { return element.id === categoryId; }).name;
     };
     TransactionAddComponent.prototype.defineForm = function () {

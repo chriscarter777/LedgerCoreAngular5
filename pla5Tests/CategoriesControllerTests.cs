@@ -15,70 +15,65 @@ namespace pla5Tests
      public class CategoriesControllerTests
     {
           [Fact]
-          public void GetCategoriesIsOk()
+          public async Task GetCategoriesIsOk()
           {
                var mockLogger = Mocks.ILogger<CategoriesController>();
                var mockRepo = Mocks.IDataRepository();
-               var mockSIManager = Mocks.ISignInManager();
-               var controller = new CategoriesController(mockLogger.Object, mockRepo.Object, mockSIManager.Object);
+               var controller = new CategoriesController(mockLogger.Object, mockRepo.Object);
 
-               var result = controller.GetCategories();
+               var result = await controller.GetCategories();
 
                var res = Assert.IsType<OkObjectResult>(result);
                Assert.IsType<Category[]>(res.Value);
           }
 
           [Fact]
-          public void GetCategoryIsOk()
+          public async Task GetCategoryIsOk()
           {
                var mockLogger = Mocks.ILogger<CategoriesController>();
                var mockRepo = Mocks.IDataRepository();
-               var mockSIManager = Mocks.ISignInManager();
-               var controller = new CategoriesController(mockLogger.Object, mockRepo.Object, mockSIManager.Object);
+               var controller = new CategoriesController(mockLogger.Object, mockRepo.Object);
 
-               var result = controller.GetCategory(0);
+               var result = await controller.GetCategory(0);
 
                var res = Assert.IsType<OkObjectResult>(result);
                Assert.IsType<Category>(res.Value);
           }
 
           [Fact]
-          public void PutCategoryIsOk()
+          public async Task PutCategoryIsOk()
           {
                var mockLogger = Mocks.ILogger<CategoriesController>();
                var mockRepo = Mocks.IDataRepository();
-               var mockSIManager = Mocks.ISignInManager();
-               var controller = new CategoriesController(mockLogger.Object, mockRepo.Object, mockSIManager.Object);
+               var controller = new CategoriesController(mockLogger.Object, mockRepo.Object);
 
-               var result = controller.PutCategory(new Category());
+               var result = await controller.PutCategory(new Category());
 
                var res = Assert.IsType<OkObjectResult>(result);
                Assert.IsType<Category>(res.Value);
           }
 
           [Fact]
-          public void PostCategoryIsOk()
+          public async Task PostCategoryIsOk()
           {
                var mockLogger = Mocks.ILogger<CategoriesController>();
                var mockRepo = Mocks.IDataRepository();
-               var mockSIManager = Mocks.ISignInManager();
-               var controller = new CategoriesController(mockLogger.Object, mockRepo.Object, mockSIManager.Object);
+               var controller = new CategoriesController(mockLogger.Object, mockRepo.Object);
 
-               var result = controller.PostCategory(new Category());
+               var result = await controller.PostCategory(new Category());
 
                var res = Assert.IsType<OkObjectResult>(result);
                Assert.IsType<Category>(res.Value);
           }
 
           [Fact]
-          public void DeleteCategoryIsOk()
+          public async Task DeleteCategoryIsOk()
           {
                var mockLogger = Mocks.ILogger<CategoriesController>();
                var mockRepo = Mocks.IDataRepository();
-               var mockSIManager = Mocks.ISignInManager();
-               var controller = new CategoriesController(mockLogger.Object, mockRepo.Object, mockSIManager.Object);
+               var controller = new CategoriesController(mockLogger.Object, mockRepo.Object);
 
-               var result = controller.DeleteCategory(0);
+               var result = await controller.DeleteCategory(0);
 
                var res = Assert.IsType<OkObjectResult>(result);
                Assert.IsType<Category>(res.Value);
