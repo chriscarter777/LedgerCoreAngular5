@@ -5,36 +5,33 @@
     <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
         <label>Date</label>
         <input type='date' name="date" formControlName="date" /> <br />
+        <label>To</label>
+        <select name="acctTo" formControlName="acctTo">
+            <option *ngFor="let account of acctPayee" value="{{account.id}}">{{account.name}}</option>
+            <option disabled>──────────</option>
+            <option *ngFor="let account of acctLiability" value="{{account.id}}">{{account.name}}</option>
+            <option disabled>──────────</option>
+            <option *ngFor="let account of acctAsset" value="{{account.id}}">{{account.name}}</option>
+        </select> <br />
+        <label>From</label>
+        <select name="acctFrom" formControlName="acctFrom">
+            <option *ngFor="let account of acctPayee" value="{{account.id}}">{{account.name}}</option>
+            <option disabled>──────────</option>
+            <option *ngFor="let account of acctLiability" value="{{account.id}}">{{account.name}}</option>
+            <option disabled>──────────</option>
+            <option *ngFor="let account of acctAsset" value="{{account.id}}">{{account.name}}</option>
+        </select> <br />
+        <label>Amount<span class="pull-right">$</span></label>
+        <input type='number' name="amount" formControlName="amount" /> <br />
         <label>Category</label>
-
         <mat-form-field>
             <input type="text" matInput formControlName="category" [matAutocomplete]="auto" />
             <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let category of filteredCategories | async" value="{{category.name}}">
-                    {{ category.name }}
+                <mat-option *ngFor="let categoryName of filteredCategoryNames | async" value="{{categoryName}}">
+                    {{ categoryName }}
                 </mat-option>
             </mat-autocomplete>
-        </mat-form-field>
-        <br />
-
-        <label>Amount<span class="pull-right">$</span></label>
-        <input type='number' name="amount" formControlName="amount" /> <br />
-        <label>Debit Account</label>
-        <select name="drAcct" formControlName="drAcct">
-            <option *ngFor="let account of acctPayee" value="{{account.id}}">{{account.name}}</option>
-            <option disabled>──────────</option>
-            <option *ngFor="let account of acctLiability" value="{{account.id}}">{{account.name}}</option>
-            <option disabled>──────────</option>
-            <option *ngFor="let account of acctAsset" value="{{account.id}}">{{account.name}}</option>
-        </select> <br />
-        <label>Credit Account</label>
-        <select name="crAcct" formControlName="crAcct">
-            <option *ngFor="let account of acctPayee" value="{{account.id}}">{{account.name}}</option>
-            <option disabled>──────────</option>
-            <option *ngFor="let account of acctLiability" value="{{account.id}}">{{account.name}}</option>
-            <option disabled>──────────</option>
-            <option *ngFor="let account of acctAsset" value="{{account.id}}">{{account.name}}</option>
-        </select> <br />
+        </mat-form-field><br />
         <label>Tax</label>
         <input type='checkbox' name="tax" value="true" formControlName="tax" /><br />
         <input type='submit' value="Add" />

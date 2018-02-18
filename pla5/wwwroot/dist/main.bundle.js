@@ -1269,7 +1269,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/reports/components/report-list/report-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"reports\">\r\n    <h1>This feature not yet supported.</h1>\r\n</div>\r\n"
+module.exports = "<div class=\"reports\">\r\n    <h2 style=\"margin-top:100px;\" class=\"lemonlime\">This feature not yet supported.</h2>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1642,7 +1642,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body {\r\n}\r\n\r\nlabel {\r\n  width: 120px;\r\n}\r\n\r\nselect {\r\n    width: 160px;\r\n}\r\n", ""]);
+exports.push([module.i, "body {\r\n}\r\n\r\nlabel {\r\n  width: 80px;\r\n}\r\n\r\nselect {\r\n    width: 160px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1655,7 +1655,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-add/transaction-add.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionAdd\">\r\n    <h4>Add</h4>\r\n    <p *ngIf=\"!form\">Loading...</p>\r\n\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n        <label>Date</label>\r\n        <input type='date' name=\"date\" formControlName=\"date\" /> <br />\r\n        <label>Category</label>\r\n\r\n        <mat-form-field>\r\n            <input type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"auto\" />\r\n            <mat-autocomplete #auto=\"matAutocomplete\">\r\n                <mat-option *ngFor=\"let category of filteredCategories | async\" value=\"{{category.name}}\">\r\n                    {{ category.name }}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n        </mat-form-field>\r\n        <br />\r\n\r\n        <!--<select name=\"category\" formControlName=\"category\">\r\n        <option *ngFor=\"let category of catExpense\" value=\"{{category.id}}\">{{category.name}}</option>\r\n        <option disabled>──────────</option>\r\n        <option *ngFor=\"let category of catIncome\" value=\"{{category.id}}\">{{category.name}}</option>\r\n        <option disabled>──────────</option>\r\n        <option *ngFor=\"let category of catOther\" value=\"{{category.id}}\">{{category.name}}</option>\r\n    </select> <br />-->\r\n\r\n        <label>Amount<span class=\"pull-right\">$</span></label>\r\n        <input type='number' name=\"amount\" formControlName=\"amount\" /> <br />\r\n        <label>Debit Account</label>\r\n        <select name=\"drAcct\" formControlName=\"drAcct\">\r\n            <option *ngFor=\"let account of acctPayee\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            <option disabled>──────────</option>\r\n            <option *ngFor=\"let account of acctLiability\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            <option disabled>──────────</option>\r\n            <option *ngFor=\"let account of acctAsset\" value=\"{{account.id}}\">{{account.name}}</option>\r\n        </select> <br />\r\n        <label>Credit Account</label>\r\n        <select name=\"crAcct\" formControlName=\"crAcct\">\r\n            <option *ngFor=\"let account of acctPayee\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            <option disabled>──────────</option>\r\n            <option *ngFor=\"let account of acctLiability\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            <option disabled>──────────</option>\r\n            <option *ngFor=\"let account of acctAsset\" value=\"{{account.id}}\">{{account.name}}</option>\r\n        </select> <br />\r\n        <label>Tax</label>\r\n        <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" /><br />\r\n        <input type='submit' value=\"Add\" />\r\n        <button routerLink=\"/transactions\">Cancel</button>\r\n    </form>\r\n</div>\r\n"
+module.exports = "<div class=\"transactionAdd\">\r\n    <h4>Add</h4>\r\n    <p *ngIf=\"!form\">Loading...</p>\r\n\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n        <label>Date</label>\r\n        <input type='date' name=\"date\" formControlName=\"date\" /> <br />\r\n        <label>To</label>\r\n        <select name=\"acctTo\" formControlName=\"acctTo\">\r\n            <option *ngFor=\"let account of acctPayee\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            <option disabled>──────────</option>\r\n            <option *ngFor=\"let account of acctLiability\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            <option disabled>──────────</option>\r\n            <option *ngFor=\"let account of acctAsset\" value=\"{{account.id}}\">{{account.name}}</option>\r\n        </select> <br />\r\n        <label>From</label>\r\n        <select name=\"acctFrom\" formControlName=\"acctFrom\">\r\n            <option *ngFor=\"let account of acctPayee\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            <option disabled>──────────</option>\r\n            <option *ngFor=\"let account of acctLiability\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            <option disabled>──────────</option>\r\n            <option *ngFor=\"let account of acctAsset\" value=\"{{account.id}}\">{{account.name}}</option>\r\n        </select> <br />\r\n        <label>Amount<span class=\"pull-right\">$</span></label>\r\n        <input type='number' name=\"amount\" formControlName=\"amount\" /> <br />\r\n        <label>Category</label>\r\n        <mat-form-field>\r\n            <input type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"auto\" />\r\n            <mat-autocomplete #auto=\"matAutocomplete\">\r\n                <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\">\r\n                    {{ categoryName }}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n        </mat-form-field><br />\r\n        <label>Tax</label>\r\n        <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" /><br />\r\n        <input type='submit' value=\"Add\" />\r\n        <button routerLink=\"/transactions\">Cancel</button>\r\n    </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1687,11 +1687,11 @@ var TransactionAddComponent = /** @class */ (function () {
         this.dataService = dataService;
         this.location = location;
         this.newTransaction = this.freshNewTransaction();
+        this.acctFrom = new forms_1.FormControl(this.newTransaction.acctFrom);
+        this.acctTo = new forms_1.FormControl(this.newTransaction.acctTo);
         this.amount = new forms_1.FormControl(this.newTransaction.amount);
-        this.category = new forms_1.FormControl(this.newTransaction.category);
-        this.crAcct = new forms_1.FormControl(this.newTransaction.crAcct);
+        this.category = new forms_1.FormControl(this.categoryName(this.newTransaction.category));
         this.date = new forms_1.FormControl(this.newTransaction.date);
-        this.drAcct = new forms_1.FormControl(this.newTransaction.drAcct);
         this.tax = new forms_1.FormControl(this.newTransaction.tax);
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
     }
@@ -1707,8 +1707,8 @@ var TransactionAddComponent = /** @class */ (function () {
             .then(function () { return _this.acctAsset = _this.accounts.filter(function (c) { return c.owned && c.acctType === "Asset"; }); })
             .then(function () { return _this.acctLiability = _this.accounts.filter(function (c) { return c.owned && c.acctType === "Liability"; }); })
             .then(function () { return _this.acctPayee = _this.accounts.filter(function (c) { return !c.owned; }); })
-            .then(function () { return _this.instantiateForm(_this.amount, _this.category, _this.crAcct, _this.date, _this.drAcct, _this.tax); })
-            .then(function () { return _this.filteredCategories = _this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); })); });
+            .then(function () { return _this.instantiateForm(_this.acctFrom, _this.acctTo, _this.amount, _this.category, _this.date, _this.tax); })
+            .then(function () { return _this.filteredCategoryNames = _this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); })); });
     };
     ;
     TransactionAddComponent.prototype.ngOnDestroy = function () {
@@ -1722,26 +1722,29 @@ var TransactionAddComponent = /** @class */ (function () {
     TransactionAddComponent.prototype.accountName = function (accountId) {
         return this.accounts.find(function (element) { return element.id === accountId; }).name;
     };
+    TransactionAddComponent.prototype.categoryId = function (categoryName) {
+        return this.categories.find(function (element) { return element.name === categoryName; }).id;
+    };
     TransactionAddComponent.prototype.categoryName = function (categoryId) {
         return this.categories.find(function (element) { return element.id === categoryId; }).name;
     };
-    TransactionAddComponent.prototype.instantiateForm = function (amount, category, crAcct, date, drAcct, tax) {
+    TransactionAddComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, date, tax) {
         this.form = new forms_1.FormGroup({
             amount: amount,
             category: category,
-            crAcct: crAcct,
+            acctTo: acctTo,
             date: date,
-            drAcct: drAcct,
+            acctFrom: acctFrom,
             tax: tax,
         });
     };
     TransactionAddComponent.prototype.categoryFilter = function (val) {
         return this.categories.filter(function (category) {
             return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
-        });
+        }).map(function (category) { return category.name; });
     };
     TransactionAddComponent.prototype.freshNewTransaction = function () {
-        return { id: null, amount: 0, category: 0, crAcct: 0, date: new Date().toLocaleDateString(), drAcct: 0, tax: false };
+        return { id: null, amount: 0, category: 0, acctTo: 0, date: new Date().toLocaleDateString(), acctFrom: 0, tax: false };
     };
     TransactionAddComponent.prototype.getAccounts = function () {
         var _this = this;
@@ -1769,14 +1772,16 @@ var TransactionAddComponent = /** @class */ (function () {
         this.location.back();
     };
     TransactionAddComponent.prototype.onSubmit = function () {
+        //set data from the form
+        this.newTransaction.acctFrom = this.form.get('acctFrom').value;
+        this.newTransaction.acctTo = this.form.get('acctTo').value;
         this.newTransaction.amount = this.form.get('amount').value;
-        this.newTransaction.category = this.form.get('category').value;
-        this.newTransaction.crAcct = this.form.get('crAcct').value;
+        this.newTransaction.category = this.categoryId(this.form.get('category').value);
         this.newTransaction.date = this.form.get('date').value;
-        this.newTransaction.drAcct = this.form.get('drAcct').value;
         this.newTransaction.tax = this.form.get('tax').value;
+        //add the transaction
         this.dataService.addTransaction(this.newTransaction);
-        //reset
+        //reset and close
         this.ngOnInit();
         this.goBack();
     };
@@ -1805,7 +1810,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body {\r\n}\r\n\r\nlabel {\r\n  width: 120px;\r\n}\r\n\r\nselect {\r\n    width: 160px;\r\n}\r\n", ""]);
+exports.push([module.i, "body {\r\n}\r\n\r\nlabel {\r\n  width: 80px;\r\n}\r\n\r\nselect {\r\n    width: 160px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1818,7 +1823,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-edit/transaction-edit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n      <label>Date</label>\r\n      <input type='date' name=\"date\" formControlName=\"date\" /> <br />\r\n      <label>Category</label>\r\n      <select name=\"category\" formControlName=\"category\">\r\n          <option *ngFor=\"let category of catExpense\" value=\"{{category.id}}\">{{category.name}}</option>\r\n          <option disabled>──────────</option>\r\n          <option *ngFor=\"let category of catIncome\" value=\"{{category.id}}\">{{category.name}}</option>\r\n          <option disabled>──────────</option>\r\n          <option *ngFor=\"let category of catOther\" value=\"{{category.id}}\">{{category.name}}</option>\r\n      </select> <br />\r\n      <label>Amount<span class=\"pull-right\">$</span></label>\r\n      <input type='number' name=\"amount\" formControlName=\"amount\" /> <br />\r\n      <label>Debit Account</label>\r\n      <select name=\"drAcct\" formControlName=\"drAcct\">\r\n          <option *ngFor=\"let account of acctPayee\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          <option disabled>──────────</option>\r\n          <option *ngFor=\"let account of acctLiability\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          <option disabled>──────────</option>\r\n          <option *ngFor=\"let account of acctAsset\" value=\"{{account.id}}\">{{account.name}}</option>\r\n      </select> <br />\r\n      <label>Credit Account</label>\r\n      <select name=\"crAcct\" formControlName=\"crAcct\">\r\n          <option *ngFor=\"let account of accounts\" value=\"{{account.id}}\">{{account.name}}</option>\r\n      </select> <br />\r\n      <label>Tax</label>\r\n      <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n      <input type='submit' value=\"Update\" />\r\n      <button routerLink=\"/transactions\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div class=\"transactionEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n      <label>Date</label>\r\n      <input type='date' name=\"date\" formControlName=\"date\" /> <br />\r\n      <label>To</label>\r\n      <select name=\"acctTo\" formControlName=\"acctTo\">\r\n          <option *ngFor=\"let account of acctPayee\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          <option disabled>──────────</option>\r\n          <option *ngFor=\"let account of acctLiability\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          <option disabled>──────────</option>\r\n          <option *ngFor=\"let account of acctAsset\" value=\"{{account.id}}\">{{account.name}}</option>\r\n      </select> <br />\r\n      <label>From</label>\r\n      <select name=\"acctFrom\" formControlName=\"acctFrom\">\r\n          <option *ngFor=\"let account of accounts\" value=\"{{account.id}}\">{{account.name}}</option>\r\n      </select> <br />\r\n      <label>Amount<span class=\"pull-right\">$</span></label>\r\n      <input type='number' name=\"amount\" formControlName=\"amount\" /> <br />\r\n      <label>Category</label>\r\n      <mat-form-field>\r\n          <input type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"auto\" />\r\n          <mat-autocomplete #auto=\"matAutocomplete\">\r\n              <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\">\r\n                  {{ categoryName }}\r\n              </mat-option>\r\n          </mat-autocomplete>\r\n      </mat-form-field><br />\r\n      <label>Tax</label>\r\n      <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n      <input type='submit' value=\"Update\" />\r\n      <button routerLink=\"/transactions\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1843,6 +1848,8 @@ var router_1 = __webpack_require__("../../../router/esm5/router.js");
 __webpack_require__("../../../../rxjs/_esm5/add/operator/switchMap.js");
 var common_1 = __webpack_require__("../../../common/esm5/common.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+var startWith_1 = __webpack_require__("../../../../rxjs/_esm5/operators/startWith.js");
+var map_1 = __webpack_require__("../../../../rxjs/_esm5/operators/map.js");
 var TransactionEditComponent = /** @class */ (function () {
     function TransactionEditComponent(dataService, route, location) {
         this.dataService = dataService;
@@ -1863,10 +1870,9 @@ var TransactionEditComponent = /** @class */ (function () {
             .then(function () { return _this.acctAsset = _this.accounts.filter(function (c) { return c.owned && c.acctType === "Asset"; }); })
             .then(function () { return _this.acctLiability = _this.accounts.filter(function (c) { return c.owned && c.acctType === "Liability"; }); })
             .then(function () { return _this.acctPayee = _this.accounts.filter(function (c) { return !c.owned; }); })
-            .then(function () { return _this.catExpense = _this.categories.filter(function (c) { return c.type === "Expense"; }); })
-            .then(function () { return _this.catIncome = _this.categories.filter(function (c) { return c.type === "Income"; }); })
-            .then(function () { return _this.catOther = _this.categories.filter(function (c) { return c.type === "Other"; }); })
-            .then(function () { return _this.defineForm(); });
+            .then(function () { return _this.instantiateControls(); })
+            .then(function () { return _this.instantiateForm(_this.acctFrom, _this.acctTo, _this.amount, _this.category, _this.date, _this.tax); })
+            .then(function () { return _this.filteredCategoryNames = _this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); })); });
     };
     TransactionEditComponent.prototype.ngOnDestroy = function () {
         var editlinks = document.getElementsByClassName("editlink");
@@ -1879,17 +1885,33 @@ var TransactionEditComponent = /** @class */ (function () {
     TransactionEditComponent.prototype.accountName = function (accountId) {
         return this.accounts.find(function (element) { return element.id === accountId; }).name;
     };
+    TransactionEditComponent.prototype.categoryId = function (categoryName) {
+        return this.categories.find(function (element) { return element.name === categoryName; }).id;
+    };
     TransactionEditComponent.prototype.categoryName = function (categoryId) {
         return this.categories.find(function (element) { return element.id === categoryId; }).name;
     };
-    TransactionEditComponent.prototype.defineForm = function () {
+    TransactionEditComponent.prototype.categoryFilter = function (val) {
+        return this.categories.filter(function (category) {
+            return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+        }).map(function (category) { return category.name; });
+    };
+    TransactionEditComponent.prototype.instantiateControls = function () {
+        this.acctFrom = new forms_1.FormControl(this.editTransaction.acctFrom);
+        this.acctTo = new forms_1.FormControl(this.editTransaction.acctTo);
+        this.amount = new forms_1.FormControl(this.editTransaction.amount);
+        this.category = new forms_1.FormControl(this.categoryName(this.editTransaction.category));
+        this.date = new forms_1.FormControl(this.editTransaction.date);
+        this.tax = new forms_1.FormControl(this.editTransaction.tax);
+    };
+    TransactionEditComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, date, tax) {
         this.form = new forms_1.FormGroup({
-            amount: new forms_1.FormControl(this.editTransaction.amount),
-            category: new forms_1.FormControl(this.editTransaction.category),
-            crAcct: new forms_1.FormControl(this.editTransaction.crAcct),
-            date: new forms_1.FormControl(this.editTransaction.date),
-            drAcct: new forms_1.FormControl(this.editTransaction.drAcct),
-            tax: new forms_1.FormControl(this.editTransaction.tax),
+            amount: amount,
+            category: category,
+            acctFrom: acctFrom,
+            date: date,
+            acctTo: acctTo,
+            tax: tax,
         });
     };
     TransactionEditComponent.prototype.getAccounts = function () {
@@ -1929,14 +1951,18 @@ var TransactionEditComponent = /** @class */ (function () {
         this.location.back();
     };
     TransactionEditComponent.prototype.onSubmit = function () {
+        //set data from the form
+        this.editTransaction.acctFrom = this.form.get('acctFrom').value;
+        this.editTransaction.acctTo = this.form.get('acctTo').value;
         this.editTransaction.amount = this.form.get('amount').value;
-        this.editTransaction.category = this.form.get('category').value;
-        this.editTransaction.crAcct = this.form.get('crAcct').value;
+        this.editTransaction.category = this.categoryId(this.form.get('category').value);
+        alert(this.form.get('category').value);
         this.editTransaction.date = this.form.get('date').value;
-        this.editTransaction.drAcct = this.form.get('drAcct').value;
         this.editTransaction.tax = this.form.get('tax').value;
+        //update the transaction
         this.dataService.updateTransaction(this.editTransaction);
-        //reset
+        //reset and close
+        this.ngOnInit();
         this.goBack();
     };
     TransactionEditComponent = __decorate([
@@ -1977,7 +2003,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-list/transaction-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactions\">\r\n  <p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n\r\n  <table *ngIf=\"transactions && categories && accounts\">\r\n    <caption>Transactions</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Date</th>\r\n        <th>Amount</th>\r\n        <th>Category</th>\r\n        <th>Debit Account</th>\r\n        <th>Credit Account</th>\r\n        <th>Tax?</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let transaction of transactions\">\r\n        <td>{{transaction.id}}</td>\r\n        <td>{{transaction.date | date}}</td>\r\n        <td className='right'>{{displayAsDollar(transaction.amount)}}</td>\r\n        <td>{{categoryName(transaction.category)}}</td>\r\n        <td>{{accountName(transaction.drAcct)}}</td>\r\n        <td>{{accountName(transaction.crAcct)}}</td>\r\n        <td>&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n        <td><a class=\"btn btn-xs editlink\" routerLink=\"./transaction-edit/{{transaction.id}}\">Edit</a></td>\r\n        <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(transaction.id);\">Delete</a></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./transaction-add\">Add New Transaction</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
+module.exports = "<div class=\"transactions\">\r\n  <p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n\r\n  <table *ngIf=\"transactions && categories && accounts\">\r\n    <caption>Transactions</caption>\r\n    <thead>\r\n        <tr>\r\n            <th>ID</th>\r\n            <th>Date</th>\r\n            <th>Amount</th>\r\n            <th>From</th>\r\n            <th>To</th>\r\n            <th>Category</th>\r\n            <th>Tax?</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let transaction of transactions\">\r\n            <td>{{transaction.id}}</td>\r\n            <td>{{transaction.date | date}}</td>\r\n            <td className='right'>{{displayAsDollar(transaction.amount)}}</td>\r\n            <td>{{accountName(transaction.acctFrom)}}</td>\r\n            <td>{{accountName(transaction.acctTo)}}</td>\r\n            <td>{{categoryName(transaction.category)}}</td>\r\n            <td>&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n            <td><a class=\"btn btn-xs editlink\" routerLink=\"./transaction-edit/{{transaction.id}}\">Edit</a></td>\r\n            <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(transaction.id);\">Delete</a></td>\r\n        </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./transaction-add\">Add New Transaction</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 

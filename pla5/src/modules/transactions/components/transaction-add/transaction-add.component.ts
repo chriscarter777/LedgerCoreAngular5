@@ -20,18 +20,16 @@ export class TransactionAddComponent {
     acctLiability: Account[];
     acctPayee: Account[];
     categories: Category[];
-
+    filteredCategoryNames: Observable<string[]>;
     newTransaction: Transaction = this.freshNewTransaction();
-
     form: FormGroup;
+    acctFrom: FormControl = new FormControl(this.newTransaction.acctFrom);
+    acctTo: FormControl = new FormControl(this.newTransaction.acctTo);
     amount: FormControl = new FormControl(this.newTransaction.amount);
-    category: FormControl = new FormControl(this.newTransaction.category);
-    crAcct: FormControl = new FormControl(this.newTransaction.crAcct);
+    category: FormControl = new FormControl(this.categoryName(this.newTransaction.category));
     date: FormControl = new FormControl(this.newTransaction.date);
-    drAcct: FormControl = new FormControl(this.newTransaction.drAcct);
     tax: FormControl = new FormControl(this.newTransaction.tax);
 
-    filteredCategories: Observable<Category[]>;
 
     constructor(
         private route: ActivatedRoute,
@@ -46,14 +44,12 @@ export class TransactionAddComponent {
         };
         document.getElementById("addlink").setAttribute("disabled", "true");
 
-
-
         Promise.all([this.getAccounts(), this.getCategories()])
             .then(() => this.acctAsset = this.accounts.filter(c => c.owned && c.acctType === "Asset"))
             .then(() => this.acctLiability = this.accounts.filter(c => c.owned && c.acctType === "Liability"))
             .then(() => this.acctPayee = this.accounts.filter(c => !c.owned))
-            .then(() => this.instantiateForm(this.amount, this.category, this.crAcct, this.date, this.drAcct, this.tax))
-            .then(() => this.filteredCategories = this.category.valueChanges.pipe(startWith(''), map(val => this.categoryFilter(val))))
+            .then(() => this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.tax))
+            .then(() => this.filteredCategoryNames = this.category.valueChanges.pipe(startWith(''), map(val => this.categoryFilter(val))))
     };
 
     ngOnDestroy() {
@@ -69,31 +65,35 @@ export class TransactionAddComponent {
         return this.accounts.find((element) => element.id === accountId).name;
     }
 
+    categoryId(categoryName: string) {
+        return this.categories.find((element) => element.name === categoryName).id;
+    }
+
     categoryName(categoryId: number) {
         return this.categories.find((element) => element.id === categoryId).name;
     }
 
 
-    instantiateForm(amount: FormControl, category: FormControl, crAcct: FormControl, date: FormControl, drAcct: FormControl, tax: FormControl) {
+    instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, date: FormControl, tax: FormControl) {
         this.form = new FormGroup({
             amount,
             category,
-            crAcct,
+            acctTo,
             date,
-            drAcct,
+            acctFrom,
             tax,
         });
     }
 
-    categoryFilter(val: string): Category[] {
+    categoryFilter(val: string): string[] {
         return this.categories.filter(category =>
-            category.name.toLowerCase().indexOf(val.toLowerCase()) === 0);
+            category.name.toLowerCase().indexOf(val.toLowerCase()) === 0).map(category => category.name);
     }
 
     displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);
 
     freshNewTransaction() {
-        return { id: null, amount: 0, category: 0, crAcct: 0, date: new Date().toLocaleDateString(), drAcct: 0, tax: false }
+        return { id: null, amount: 0, category: 0, acctTo: 0, date: new Date().toLocaleDateString(), acctFrom: 0, tax: false }
     }
 
     getAccounts() {
@@ -129,14 +129,16 @@ export class TransactionAddComponent {
     }
 
     onSubmit() {
+        //set data from the form
+        this.newTransaction.acctFrom = this.form.get('acctFrom').value;
+        this.newTransaction.acctTo = this.form.get('acctTo').value;
         this.newTransaction.amount = this.form.get('amount').value;
-        this.newTransaction.category = this.form.get('category').value;
-        this.newTransaction.crAcct = this.form.get('crAcct').value;
+        this.newTransaction.category = this.categoryId(this.form.get('category').value);
         this.newTransaction.date = this.form.get('date').value;
-        this.newTransaction.drAcct = this.form.get('drAcct').value;
         this.newTransaction.tax = this.form.get('tax').value;
+        //add the transaction
         this.dataService.addTransaction(this.newTransaction);
-        //reset
+        //reset and close
         this.ngOnInit();
         this.goBack();
     }

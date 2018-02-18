@@ -15,6 +15,8 @@ var router_1 = require("@angular/router");
 require("rxjs/add/operator/switchMap");
 var common_1 = require("@angular/common");
 var data_service_1 = require("../../../shared/data.service");
+var startWith_1 = require("rxjs/operators/startWith");
+var map_1 = require("rxjs/operators/map");
 var TransactionEditComponent = /** @class */ (function () {
     function TransactionEditComponent(dataService, route, location) {
         this.dataService = dataService;
@@ -35,10 +37,9 @@ var TransactionEditComponent = /** @class */ (function () {
             .then(function () { return _this.acctAsset = _this.accounts.filter(function (c) { return c.owned && c.acctType === "Asset"; }); })
             .then(function () { return _this.acctLiability = _this.accounts.filter(function (c) { return c.owned && c.acctType === "Liability"; }); })
             .then(function () { return _this.acctPayee = _this.accounts.filter(function (c) { return !c.owned; }); })
-            .then(function () { return _this.catExpense = _this.categories.filter(function (c) { return c.type === "Expense"; }); })
-            .then(function () { return _this.catIncome = _this.categories.filter(function (c) { return c.type === "Income"; }); })
-            .then(function () { return _this.catOther = _this.categories.filter(function (c) { return c.type === "Other"; }); })
-            .then(function () { return _this.defineForm(); });
+            .then(function () { return _this.instantiateControls(); })
+            .then(function () { return _this.instantiateForm(_this.acctFrom, _this.acctTo, _this.amount, _this.category, _this.date, _this.tax); })
+            .then(function () { return _this.filteredCategoryNames = _this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); })); });
     };
     TransactionEditComponent.prototype.ngOnDestroy = function () {
         var editlinks = document.getElementsByClassName("editlink");
@@ -51,17 +52,33 @@ var TransactionEditComponent = /** @class */ (function () {
     TransactionEditComponent.prototype.accountName = function (accountId) {
         return this.accounts.find(function (element) { return element.id === accountId; }).name;
     };
+    TransactionEditComponent.prototype.categoryId = function (categoryName) {
+        return this.categories.find(function (element) { return element.name === categoryName; }).id;
+    };
     TransactionEditComponent.prototype.categoryName = function (categoryId) {
         return this.categories.find(function (element) { return element.id === categoryId; }).name;
     };
-    TransactionEditComponent.prototype.defineForm = function () {
+    TransactionEditComponent.prototype.categoryFilter = function (val) {
+        return this.categories.filter(function (category) {
+            return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+        }).map(function (category) { return category.name; });
+    };
+    TransactionEditComponent.prototype.instantiateControls = function () {
+        this.acctFrom = new forms_1.FormControl(this.editTransaction.acctFrom);
+        this.acctTo = new forms_1.FormControl(this.editTransaction.acctTo);
+        this.amount = new forms_1.FormControl(this.editTransaction.amount);
+        this.category = new forms_1.FormControl(this.categoryName(this.editTransaction.category));
+        this.date = new forms_1.FormControl(this.editTransaction.date);
+        this.tax = new forms_1.FormControl(this.editTransaction.tax);
+    };
+    TransactionEditComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, date, tax) {
         this.form = new forms_1.FormGroup({
-            amount: new forms_1.FormControl(this.editTransaction.amount),
-            category: new forms_1.FormControl(this.editTransaction.category),
-            crAcct: new forms_1.FormControl(this.editTransaction.crAcct),
-            date: new forms_1.FormControl(this.editTransaction.date),
-            drAcct: new forms_1.FormControl(this.editTransaction.drAcct),
-            tax: new forms_1.FormControl(this.editTransaction.tax),
+            amount: amount,
+            category: category,
+            acctFrom: acctFrom,
+            date: date,
+            acctTo: acctTo,
+            tax: tax,
         });
     };
     TransactionEditComponent.prototype.getAccounts = function () {
@@ -101,14 +118,18 @@ var TransactionEditComponent = /** @class */ (function () {
         this.location.back();
     };
     TransactionEditComponent.prototype.onSubmit = function () {
+        //set data from the form
+        this.editTransaction.acctFrom = this.form.get('acctFrom').value;
+        this.editTransaction.acctTo = this.form.get('acctTo').value;
         this.editTransaction.amount = this.form.get('amount').value;
-        this.editTransaction.category = this.form.get('category').value;
-        this.editTransaction.crAcct = this.form.get('crAcct').value;
+        this.editTransaction.category = this.categoryId(this.form.get('category').value);
+        alert(this.form.get('category').value);
         this.editTransaction.date = this.form.get('date').value;
-        this.editTransaction.drAcct = this.form.get('drAcct').value;
         this.editTransaction.tax = this.form.get('tax').value;
+        //update the transaction
         this.dataService.updateTransaction(this.editTransaction);
-        //reset
+        //reset and close
+        this.ngOnInit();
         this.goBack();
     };
     TransactionEditComponent = __decorate([

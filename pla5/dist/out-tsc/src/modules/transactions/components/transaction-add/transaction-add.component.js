@@ -22,11 +22,11 @@ var TransactionAddComponent = /** @class */ (function () {
         this.dataService = dataService;
         this.location = location;
         this.newTransaction = this.freshNewTransaction();
+        this.acctFrom = new forms_1.FormControl(this.newTransaction.acctFrom);
+        this.acctTo = new forms_1.FormControl(this.newTransaction.acctTo);
         this.amount = new forms_1.FormControl(this.newTransaction.amount);
-        this.category = new forms_1.FormControl(this.newTransaction.category);
-        this.crAcct = new forms_1.FormControl(this.newTransaction.crAcct);
+        this.category = new forms_1.FormControl(this.categoryName(this.newTransaction.category));
         this.date = new forms_1.FormControl(this.newTransaction.date);
-        this.drAcct = new forms_1.FormControl(this.newTransaction.drAcct);
         this.tax = new forms_1.FormControl(this.newTransaction.tax);
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
     }
@@ -42,8 +42,8 @@ var TransactionAddComponent = /** @class */ (function () {
             .then(function () { return _this.acctAsset = _this.accounts.filter(function (c) { return c.owned && c.acctType === "Asset"; }); })
             .then(function () { return _this.acctLiability = _this.accounts.filter(function (c) { return c.owned && c.acctType === "Liability"; }); })
             .then(function () { return _this.acctPayee = _this.accounts.filter(function (c) { return !c.owned; }); })
-            .then(function () { return _this.instantiateForm(_this.amount, _this.category, _this.crAcct, _this.date, _this.drAcct, _this.tax); })
-            .then(function () { return _this.filteredCategories = _this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); })); });
+            .then(function () { return _this.instantiateForm(_this.acctFrom, _this.acctTo, _this.amount, _this.category, _this.date, _this.tax); })
+            .then(function () { return _this.filteredCategoryNames = _this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); })); });
     };
     ;
     TransactionAddComponent.prototype.ngOnDestroy = function () {
@@ -57,26 +57,29 @@ var TransactionAddComponent = /** @class */ (function () {
     TransactionAddComponent.prototype.accountName = function (accountId) {
         return this.accounts.find(function (element) { return element.id === accountId; }).name;
     };
+    TransactionAddComponent.prototype.categoryId = function (categoryName) {
+        return this.categories.find(function (element) { return element.name === categoryName; }).id;
+    };
     TransactionAddComponent.prototype.categoryName = function (categoryId) {
         return this.categories.find(function (element) { return element.id === categoryId; }).name;
     };
-    TransactionAddComponent.prototype.instantiateForm = function (amount, category, crAcct, date, drAcct, tax) {
+    TransactionAddComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, date, tax) {
         this.form = new forms_1.FormGroup({
             amount: amount,
             category: category,
-            crAcct: crAcct,
+            acctTo: acctTo,
             date: date,
-            drAcct: drAcct,
+            acctFrom: acctFrom,
             tax: tax,
         });
     };
     TransactionAddComponent.prototype.categoryFilter = function (val) {
         return this.categories.filter(function (category) {
             return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
-        });
+        }).map(function (category) { return category.name; });
     };
     TransactionAddComponent.prototype.freshNewTransaction = function () {
-        return { id: null, amount: 0, category: 0, crAcct: 0, date: new Date().toLocaleDateString(), drAcct: 0, tax: false };
+        return { id: null, amount: 0, category: 0, acctTo: 0, date: new Date().toLocaleDateString(), acctFrom: 0, tax: false };
     };
     TransactionAddComponent.prototype.getAccounts = function () {
         var _this = this;
@@ -104,14 +107,16 @@ var TransactionAddComponent = /** @class */ (function () {
         this.location.back();
     };
     TransactionAddComponent.prototype.onSubmit = function () {
+        //set data from the form
+        this.newTransaction.acctFrom = this.form.get('acctFrom').value;
+        this.newTransaction.acctTo = this.form.get('acctTo').value;
         this.newTransaction.amount = this.form.get('amount').value;
-        this.newTransaction.category = this.form.get('category').value;
-        this.newTransaction.crAcct = this.form.get('crAcct').value;
+        this.newTransaction.category = this.categoryId(this.form.get('category').value);
         this.newTransaction.date = this.form.get('date').value;
-        this.newTransaction.drAcct = this.form.get('drAcct').value;
         this.newTransaction.tax = this.form.get('tax').value;
+        //add the transaction
         this.dataService.addTransaction(this.newTransaction);
-        //reset
+        //reset and close
         this.ngOnInit();
         this.goBack();
     };

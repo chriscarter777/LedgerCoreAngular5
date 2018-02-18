@@ -4,7 +4,11 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Location } from '@angular/common';
 import { DataService } from '../../../shared/data.service';
+import { MatAutocomplete, MatInput, MatFormField, MatOption } from '@angular/material';
 import { Account, Category, Transaction } from '../../../shared/interfaces';
+import { Observable } from 'rxjs/Observable';
+import { startWith } from 'rxjs/operators/startWith';
+import { map } from 'rxjs/operators/map';
 
 @Component({
     selector: 'transaction-edit',
@@ -17,11 +21,15 @@ export class TransactionEditComponent {
     acctLiability: Account[];
     acctPayee: Account[];
     categories: Category[];
-    catExpense: Category[];
-    catIncome: Category[];
-    catOther: Category[];
+    filteredCategoryNames: Observable<string[]>;
     editTransaction: Transaction;
     form: FormGroup;
+    acctFrom: FormControl;
+    acctTo: FormControl;
+    amount: FormControl;
+    category: FormControl;
+    date: FormControl;
+    tax: FormControl;
 
 
     constructor(
@@ -43,10 +51,9 @@ export class TransactionEditComponent {
             .then(() => this.acctAsset = this.accounts.filter(c => c.owned && c.acctType === "Asset"))
             .then(() => this.acctLiability = this.accounts.filter(c => c.owned && c.acctType === "Liability"))
             .then(() => this.acctPayee = this.accounts.filter(c => !c.owned))
-            .then(() => this.catExpense = this.categories.filter(c => c.type === "Expense"))
-            .then(() => this.catIncome = this.categories.filter(c => c.type === "Income"))
-            .then(() => this.catOther = this.categories.filter(c => c.type === "Other"))
-            .then(() => this.defineForm());
+            .then(() => this.instantiateControls())
+            .then(() => this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.tax))
+            .then(() => this.filteredCategoryNames = this.category.valueChanges.pipe(startWith(''), map(val => this.categoryFilter(val))))
     }
 
     ngOnDestroy() {
@@ -61,20 +68,38 @@ export class TransactionEditComponent {
         return this.accounts.find((element) => element.id === accountId).name;
     }
 
+    categoryId(categoryName: string) {
+        return this.categories.find((element) => element.name === categoryName).id;
+    }
+
     categoryName(categoryId: number) {
         return this.categories.find((element) => element.id === categoryId).name;
     }
 
-    public displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);
+    categoryFilter(val: string): string[] {
+        return this.categories.filter(category =>
+            category.name.toLowerCase().indexOf(val.toLowerCase()) === 0).map(category => category.name);
+    }
 
-    defineForm() {
+    displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);
+
+    instantiateControls() {
+        this.acctFrom = new FormControl(this.editTransaction.acctFrom);
+        this.acctTo = new FormControl(this.editTransaction.acctTo);
+        this.amount = new FormControl(this.editTransaction.amount);
+        this.category = new FormControl(this.categoryName(this.editTransaction.category));
+        this.date = new FormControl(this.editTransaction.date);
+        this.tax = new FormControl(this.editTransaction.tax);
+    }
+
+    instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, date: FormControl, tax: FormControl) {
         this.form = new FormGroup({
-            amount: new FormControl(this.editTransaction.amount),
-            category: new FormControl(this.editTransaction.category),
-            crAcct: new FormControl(this.editTransaction.crAcct),
-            date: new FormControl(this.editTransaction.date),
-            drAcct: new FormControl(this.editTransaction.drAcct),
-            tax: new FormControl(this.editTransaction.tax),
+            amount,
+            category,
+            acctFrom,
+            date,
+            acctTo,
+            tax,
         });
     }
 
@@ -125,14 +150,18 @@ export class TransactionEditComponent {
     }
 
     onSubmit() {
+        //set data from the form
+        this.editTransaction.acctFrom = this.form.get('acctFrom').value;
+        this.editTransaction.acctTo = this.form.get('acctTo').value;
         this.editTransaction.amount = this.form.get('amount').value;
-        this.editTransaction.category = this.form.get('category').value;
-        this.editTransaction.crAcct = this.form.get('crAcct').value;
+        this.editTransaction.category = this.categoryId(this.form.get('category').value);
+        alert(this.form.get('category').value);
         this.editTransaction.date = this.form.get('date').value;
-        this.editTransaction.drAcct = this.form.get('drAcct').value;
         this.editTransaction.tax = this.form.get('tax').value;
+        //update the transaction
         this.dataService.updateTransaction(this.editTransaction);
-        //reset
+        //reset and close
+        this.ngOnInit();
         this.goBack();
     }
 }

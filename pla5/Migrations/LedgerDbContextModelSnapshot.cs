@@ -261,16 +261,16 @@ namespace pla5.Migrations
                     b.Property<int?>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("AcctFrom");
+
+                    b.Property<int>("AcctTo");
+
                     b.Property<decimal>("Amount")
                         .HasColumnType("money");
 
                     b.Property<int>("Category");
 
-                    b.Property<int>("CrAcct");
-
                     b.Property<DateTime>("Date");
-
-                    b.Property<int>("DrAcct");
 
                     b.Property<bool>("Tax");
 

@@ -23,11 +23,11 @@ export interface Category {
 
 export interface Transaction {
     id: number;
+    acctFrom: number;
+    acctTo: number;
     amount: number;
     category: number;
-    crAcct: number;
     date: string;
-    drAcct: number;
     tax: boolean;
 }
 

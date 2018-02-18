@@ -4,28 +4,28 @@
   <table *ngIf="transactions && categories && accounts">
     <caption>Transactions</caption>
     <thead>
-      <tr>
-        <th>ID</th>
-        <th>Date</th>
-        <th>Amount</th>
-        <th>Category</th>
-        <th>Debit Account</th>
-        <th>Credit Account</th>
-        <th>Tax?</th>
-      </tr>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Category</th>
+            <th>Tax?</th>
+        </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let transaction of transactions">
-        <td>{{transaction.id}}</td>
-        <td>{{transaction.date | date}}</td>
-        <td className='right'>{{displayAsDollar(transaction.amount)}}</td>
-        <td>{{categoryName(transaction.category)}}</td>
-        <td>{{accountName(transaction.drAcct)}}</td>
-        <td>{{accountName(transaction.crAcct)}}</td>
-        <td>&nbsp;<span *ngIf="transaction.tax" class='glyphicon glyphicon-copy' style='color:green;'></span></td>
-        <td><a class="btn btn-xs editlink" routerLink="./transaction-edit/{{transaction.id}}">Edit</a></td>
-        <td><a class="btn btn-xs deletelink" (click)="onDelete(transaction.id);">Delete</a></td>
-      </tr>
+        <tr *ngFor="let transaction of transactions">
+            <td>{{transaction.id}}</td>
+            <td>{{transaction.date | date}}</td>
+            <td className='right'>{{displayAsDollar(transaction.amount)}}</td>
+            <td>{{accountName(transaction.acctFrom)}}</td>
+            <td>{{accountName(transaction.acctTo)}}</td>
+            <td>{{categoryName(transaction.category)}}</td>
+            <td>&nbsp;<span *ngIf="transaction.tax" class='glyphicon glyphicon-copy' style='color:green;'></span></td>
+            <td><a class="btn btn-xs editlink" routerLink="./transaction-edit/{{transaction.id}}">Edit</a></td>
+            <td><a class="btn btn-xs deletelink" (click)="onDelete(transaction.id);">Delete</a></td>
+        </tr>
     </tbody>
   </table>
   <a class="btn" id="addlink" routerLink="./transaction-add">Add New Transaction</a>
