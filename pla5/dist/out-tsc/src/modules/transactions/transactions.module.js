@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var common_1 = require("@angular/common");
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
+var material_1 = require("@angular/material");
 var transaction_add_component_1 = require("./components/transaction-add/transaction-add.component");
 var transaction_edit_component_1 = require("./components/transaction-edit/transaction-edit.component");
 var transaction_list_component_1 = require("./components/transaction-list/transaction-list.component");
@@ -22,7 +23,11 @@ var TransactionsModule = /** @class */ (function () {
             imports: [
                 common_1.CommonModule,
                 forms_1.ReactiveFormsModule,
-                transactions_routing_module_1.TransactionRoutingModule
+                material_1.MatInputModule,
+                material_1.MatAutocompleteModule,
+                material_1.MatFormFieldModule,
+                material_1.MatOptionModule,
+                transactions_routing_module_1.TransactionRoutingModule,
             ],
             declarations: [
                 transaction_add_component_1.TransactionAddComponent,

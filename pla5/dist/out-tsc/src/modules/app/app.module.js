@@ -6,11 +6,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var platform_browser_1 = require("@angular/platform-browser");
+var animations_1 = require("@angular/platform-browser/animations");
+var common_1 = require("@angular/common");
 var accounts_module_1 = require("../accounts/accounts.module");
 var app_routing_module_1 = require("./app-routing.module");
 var categories_module_1 = require("../categories/categories.module");
-var platform_browser_1 = require("@angular/platform-browser");
-var common_1 = require("@angular/common");
 var http_1 = require("@angular/common/http");
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
@@ -29,6 +30,7 @@ var AppModule = /** @class */ (function () {
         core_1.NgModule({
             imports: [
                 platform_browser_1.BrowserModule,
+                animations_1.BrowserAnimationsModule,
                 common_1.CommonModule,
                 http_1.HttpClientModule,
                 forms_1.ReactiveFormsModule,

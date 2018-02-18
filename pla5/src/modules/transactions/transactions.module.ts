@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule, MatAutocompleteModule, MatFormFieldModule, MatOptionModule } from '@angular/material';
 
 import { TransactionAddComponent } from './components/transaction-add/transaction-add.component';
 import { TransactionEditComponent } from './components/transaction-edit/transaction-edit.component';
@@ -14,7 +15,11 @@ import { TransactionRoutingModule } from './transactions.routing.module'
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        TransactionRoutingModule
+        MatInputModule,
+        MatAutocompleteModule,
+        MatFormFieldModule,
+        MatOptionModule,
+        TransactionRoutingModule,
     ],
     declarations: [
         TransactionAddComponent,

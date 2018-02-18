@@ -13,7 +13,13 @@ import { Account, Category, Transaction } from '../../../shared/interfaces';
 })
 export class TransactionEditComponent {
     accounts: Account[];
+    acctAsset: Account[];
+    acctLiability: Account[];
+    acctPayee: Account[];
     categories: Category[];
+    catExpense: Category[];
+    catIncome: Category[];
+    catOther: Category[];
     editTransaction: Transaction;
     form: FormGroup;
 
@@ -31,12 +37,15 @@ export class TransactionEditComponent {
         };
         document.getElementById("addlink").setAttribute("disabled", "true");
 
-        this.getAccounts();
-        this.getCategories();
-
         const id = +this.route.snapshot.paramMap.get('id');
 
         Promise.all([this.getAccounts(), this.getCategories(), this.getTransaction(id)])
+            .then(() => this.acctAsset = this.accounts.filter(c => c.owned && c.acctType === "Asset"))
+            .then(() => this.acctLiability = this.accounts.filter(c => c.owned && c.acctType === "Liability"))
+            .then(() => this.acctPayee = this.accounts.filter(c => !c.owned))
+            .then(() => this.catExpense = this.categories.filter(c => c.type === "Expense"))
+            .then(() => this.catIncome = this.categories.filter(c => c.type === "Income"))
+            .then(() => this.catOther = this.categories.filter(c => c.type === "Other"))
             .then(() => this.defineForm());
     }
 

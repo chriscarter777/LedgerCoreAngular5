@@ -1,8 +1,10 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+
 import { AccountsModule } from '../accounts/accounts.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CategoriesModule } from '../categories/categories.module';
-import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +22,7 @@ import { PageNotFoundComponent } from './components/not-found/not-found.componen
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         CommonModule,
         HttpClientModule,
         ReactiveFormsModule,

@@ -59,6 +59,7 @@ export class AccountEditComponent {
     defineForm() {
         this.form = new FormGroup({
             acctType: new FormControl(this.editAccount.acctType),
+            active: new FormControl(this.editAccount.active),
             institution: new FormControl(this.editAccount.institution),
             interest: new FormControl(this.editAccount.interest),
             limit: new FormControl(this.editAccount.limit),
@@ -72,6 +73,7 @@ export class AccountEditComponent {
     }
 
     onSubmit() {
+        this.editAccount.active = this.form.get('active').value;
         this.editAccount.acctType = this.form.get('acctType').value;
         this.editAccount.institution = this.form.get('institution').value;
         this.editAccount.interest = this.form.get('interest').value;

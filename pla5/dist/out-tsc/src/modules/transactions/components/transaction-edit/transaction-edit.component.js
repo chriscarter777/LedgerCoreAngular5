@@ -30,10 +30,14 @@ var TransactionEditComponent = /** @class */ (function () {
         }
         ;
         document.getElementById("addlink").setAttribute("disabled", "true");
-        this.getAccounts();
-        this.getCategories();
         var id = +this.route.snapshot.paramMap.get('id');
         Promise.all([this.getAccounts(), this.getCategories(), this.getTransaction(id)])
+            .then(function () { return _this.acctAsset = _this.accounts.filter(function (c) { return c.owned && c.acctType === "Asset"; }); })
+            .then(function () { return _this.acctLiability = _this.accounts.filter(function (c) { return c.owned && c.acctType === "Liability"; }); })
+            .then(function () { return _this.acctPayee = _this.accounts.filter(function (c) { return !c.owned; }); })
+            .then(function () { return _this.catExpense = _this.categories.filter(function (c) { return c.type === "Expense"; }); })
+            .then(function () { return _this.catIncome = _this.categories.filter(function (c) { return c.type === "Income"; }); })
+            .then(function () { return _this.catOther = _this.categories.filter(function (c) { return c.type === "Other"; }); })
             .then(function () { return _this.defineForm(); });
     };
     TransactionEditComponent.prototype.ngOnDestroy = function () {

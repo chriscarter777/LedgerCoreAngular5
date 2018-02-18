@@ -6,13 +6,21 @@
       <input type='date' name="date" formControlName="date" /> <br />
       <label>Category</label>
       <select name="category" formControlName="category">
-          <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+          <option *ngFor="let category of catExpense" value="{{category.id}}">{{category.name}}</option>
+          <option disabled>──────────</option>
+          <option *ngFor="let category of catIncome" value="{{category.id}}">{{category.name}}</option>
+          <option disabled>──────────</option>
+          <option *ngFor="let category of catOther" value="{{category.id}}">{{category.name}}</option>
       </select> <br />
       <label>Amount<span class="pull-right">$</span></label>
       <input type='number' name="amount" formControlName="amount" /> <br />
       <label>Debit Account</label>
       <select name="drAcct" formControlName="drAcct">
-          <option *ngFor="let account of accounts" value="{{account.id}}">{{account.name}}</option>
+          <option *ngFor="let account of acctPayee" value="{{account.id}}">{{account.name}}</option>
+          <option disabled>──────────</option>
+          <option *ngFor="let account of acctLiability" value="{{account.id}}">{{account.name}}</option>
+          <option disabled>──────────</option>
+          <option *ngFor="let account of acctAsset" value="{{account.id}}">{{account.name}}</option>
       </select> <br />
       <label>Credit Account</label>
       <select name="crAcct" formControlName="crAcct">

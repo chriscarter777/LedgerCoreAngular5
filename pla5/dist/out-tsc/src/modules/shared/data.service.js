@@ -158,7 +158,7 @@ var DataService = /** @class */ (function () {
     };
     DataService.prototype.resetPassword = function (id, newPassword) {
         var _this = this;
-        var response = this.http.put('/api/Users/Reset' + id, newPassword)
+        var response = this.http.put('/api/Users/Reset/' + id, newPassword)
             .toPromise()
             .then(function (result) {
             _this.userReset.emit(result);
@@ -166,7 +166,7 @@ var DataService = /** @class */ (function () {
     };
     DataService.prototype.deleteUser = function (id) {
         var _this = this;
-        var response = this.http.delete('/api/Users' + id)
+        var response = this.http.delete('/api/Users/' + id)
             .toPromise()
             .then(function (result) {
             _this.userDeleted.emit(result);

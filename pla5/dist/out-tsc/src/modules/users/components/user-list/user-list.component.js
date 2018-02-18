@@ -16,14 +16,8 @@ var UserListComponent = /** @class */ (function () {
         var _this = this;
         this.dataService = dataService;
         this.dataService.userDeleted.subscribe(function (data) {
-            console.log("accountDeleted received from data.service: " + JSON.stringify(data));
-            if (data === null) {
-                alert("There was a problem deleting.");
-            }
-            else {
-                var indextToDelete = _this.users.findIndex(function (element) { return element.id === data.id; });
-                _this.users.splice(indextToDelete, 1);
-            }
+            var indexToDelete = _this.users.findIndex(function (element) { return element.id === data.id; });
+            var udeleted = _this.users.splice(indexToDelete, 1);
         }, function (error) { return alert("There was a problem deleting."); });
     }
     UserListComponent.prototype.ngOnInit = function () {
@@ -31,14 +25,25 @@ var UserListComponent = /** @class */ (function () {
     };
     UserListComponent.prototype.getUsers = function () {
         var _this = this;
-        this.dataService.getUsers().subscribe(function (users) { return _this.users = users; });
+        return new Promise(function (resolve) {
+            _this.dataService.getUsers().subscribe(function (users) {
+                _this.users = users;
+                resolve(users);
+            }, function (error) {
+                alert("there was an error getting users.");
+            });
+        });
     };
     UserListComponent.prototype.onDelete = function (id) {
-        var confirmation = confirm('are you sure you want to delete ' + this.users.find(function (element) { return element.id == id; }).userName + '?');
+        var userToDelete = this.users.find(function (element) { return element.id == id; }).userName;
+        var confirmation = confirm('are you sure you want to delete ' + userToDelete + '?');
         if (confirmation) {
-            this.dataService.deleteUser(id);
+            this.dataService.deleteUser(userToDelete);
         }
         ;
+    };
+    UserListComponent.prototype.logCheckbox = function (element) {
+        alert("Checkbox " + element.value + " was " + (element.checked ? '' : 'un') + "checked\n");
     };
     UserListComponent.prototype.onToggleAdmin = function (id) {
         var indexToToggle = this.users.findIndex(function (element) { return element.id === id; });

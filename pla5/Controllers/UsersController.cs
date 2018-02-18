@@ -42,7 +42,6 @@ namespace pla5.Controllers
         }
 
         IdentityUser[] ius = _userManager.Users.ToArray();
-
         if (ius == null)
         {
           return NotFound();
@@ -54,7 +53,7 @@ namespace pla5.Controllers
           appUsers[i] = new AppUser();
           appUsers[i].Id = ius[i].Id;
           appUsers[i].UserName = ius[i].UserName;
-          appUsers[i].Admin = await _userManager.IsInRoleAsync(ius[i], "Adminstrator");
+          appUsers[i].Admin = await _userManager.IsInRoleAsync(ius[i], "ADMINISTRATOR");
         }
         return Ok(appUsers);
       }
@@ -109,9 +108,8 @@ namespace pla5.Controllers
         }
 
         IdentityUser user = await _userManager.FindByIdAsync(id);
-        IdentityResult result = await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Administrator"));
-
-        if(result == IdentityResult.Success)
+                IdentityResult result = await _userManager.AddToRoleAsync(user, "ADMINISTRATOR");
+                if (result == IdentityResult.Success)
         {
           return Ok();
         }
@@ -139,9 +137,9 @@ namespace pla5.Controllers
         }
 
         IdentityUser user = await _userManager.FindByIdAsync(id);
-        IdentityResult result = await _userManager.RemoveClaimAsync(user, new Claim(ClaimTypes.Role, "Administrator"));
+                IdentityResult result = await _userManager.RemoveFromRoleAsync(user, "ADMINISTRATOR");
 
-        if (result == IdentityResult.Success)
+                if (result == IdentityResult.Success)
         {
           return Ok();
         }
@@ -204,9 +202,10 @@ namespace pla5.Controllers
           return NotFound();
         }
 
+        AppUser aUser = new AppUser(user);
         await _userManager.DeleteAsync(user);
 
-        return Ok();
+        return Ok(aUser);
       }
       catch (Exception e)
       {

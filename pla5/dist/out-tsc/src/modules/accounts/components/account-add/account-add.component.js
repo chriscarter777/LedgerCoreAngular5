@@ -49,7 +49,7 @@ var AccountAddComponent = /** @class */ (function () {
         document.getElementById("addlink").removeAttribute("disabled");
     };
     AccountAddComponent.prototype.freshNewAccount = function () {
-        return { id: null, balance: 0, acctType: "Asset", institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true };
+        return { id: null, active: true, balance: 0, acctType: "Asset", institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true };
     };
     AccountAddComponent.prototype.goBack = function () {
         this.location.back();

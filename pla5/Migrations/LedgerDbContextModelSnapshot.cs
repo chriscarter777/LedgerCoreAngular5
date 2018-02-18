@@ -181,10 +181,12 @@ namespace pla5.Migrations
 
             modelBuilder.Entity("pla5.Models.Account", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int?>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("AcctType");
+
+                    b.Property<bool>("Active");
 
                     b.Property<int?>("DefaultAcct");
 
@@ -219,9 +221,23 @@ namespace pla5.Migrations
                     b.ToTable("Accounts");
                 });
 
+            modelBuilder.Entity("pla5.Models.AppUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Admin");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppUser");
+                });
+
             modelBuilder.Entity("pla5.Models.Category", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int?>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name")
@@ -242,7 +258,7 @@ namespace pla5.Migrations
 
             modelBuilder.Entity("pla5.Models.Transaction", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int?>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<decimal>("Amount")

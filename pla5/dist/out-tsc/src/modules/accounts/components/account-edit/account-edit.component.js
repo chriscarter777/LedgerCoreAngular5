@@ -51,6 +51,7 @@ var AccountEditComponent = /** @class */ (function () {
     AccountEditComponent.prototype.defineForm = function () {
         this.form = new forms_1.FormGroup({
             acctType: new forms_1.FormControl(this.editAccount.acctType),
+            active: new forms_1.FormControl(this.editAccount.active),
             institution: new forms_1.FormControl(this.editAccount.institution),
             interest: new forms_1.FormControl(this.editAccount.interest),
             limit: new forms_1.FormControl(this.editAccount.limit),
@@ -62,6 +63,7 @@ var AccountEditComponent = /** @class */ (function () {
         this.location.back();
     };
     AccountEditComponent.prototype.onSubmit = function () {
+        this.editAccount.active = this.form.get('active').value;
         this.editAccount.acctType = this.form.get('acctType').value;
         this.editAccount.institution = this.form.get('institution').value;
         this.editAccount.interest = this.form.get('interest').value;

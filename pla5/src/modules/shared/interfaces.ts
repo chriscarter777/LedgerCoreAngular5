@@ -1,5 +1,6 @@
 export interface Account {
     id: number;
+    active: boolean;
     balance: number;
     acctType: string;
     defaultAcct?: number;

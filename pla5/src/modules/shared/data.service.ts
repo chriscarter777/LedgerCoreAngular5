@@ -164,7 +164,7 @@ export class DataService {
     }
 
     resetPassword(id: string, newPassword: string) {
-        const response = this.http.put<HttpResponse<any>>('/api/Users/Reset' + id, newPassword)
+        const response = this.http.put<HttpResponse<any>>('/api/Users/Reset/' + id, newPassword)
             .toPromise()
             .then(result => {
                 this.userReset.emit(result);
@@ -172,7 +172,7 @@ export class DataService {
     }
 
     deleteUser(id: string) {
-        const response = this.http.delete<User>('/api/Users' + id)
+        const response = this.http.delete<User>('/api/Users/' + id)
             .toPromise()
             .then(result => {
                 this.userDeleted.emit(result);

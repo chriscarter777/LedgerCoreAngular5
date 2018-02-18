@@ -53,7 +53,7 @@ export class AccountAddComponent {
     displayAsPercent = (value: number) => value.toFixed(2) + "%";
 
     freshNewAccount() {
-        return { id: null, balance: 0, acctType: "Asset", institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true }
+        return { id: null, active: true, balance: 0, acctType: "Asset", institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true }
     }
 
     goBack(): void {

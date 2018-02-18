@@ -227,7 +227,7 @@ var AccountAddComponent = /** @class */ (function () {
         document.getElementById("addlink").removeAttribute("disabled");
     };
     AccountAddComponent.prototype.freshNewAccount = function () {
-        return { id: null, balance: 0, acctType: "Asset", institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true };
+        return { id: null, active: true, balance: 0, acctType: "Asset", institution: '', interest: 0, limit: 0, name: 'New Account', number: '', owned: true };
     };
     AccountAddComponent.prototype.goBack = function () {
         this.location.back();
@@ -282,7 +282,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/accounts/components/account-edit/account-edit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"accountEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Type</label>\r\n    <input type='radio' name=\"acctType\" value=\"Asset\" formControlName=\"acctType\" /> Asset\r\n    <input type='radio' name=\"acctType\" value=\"Liability\" formControlName=\"acctType\" /> Liability <br />\r\n    <label>Name</label>\r\n    <input type='text' name=\"name\" formControlName=\"name\" /> <br />\r\n    <label>Institution</label>\r\n    <input type='text' name=\"institution\" formControlName=\"institution\" /> <br />\r\n    <label>Number</label>\r\n    <input type='text' name=\"number\" formControlName=\"number\" /> <br />\r\n    <label>Interest Rate</label>\r\n    <input type='number' name=\"interest\" formControlName=\"interest\" />% <br />\r\n    <label>Limit<span class=\"pull-right\">$</span></label>\r\n    <input type='number' name=\"limit\" formControlName=\"limit\" /> <br />\r\n    <input type='submit' value=\"Update\" />\r\n    <button routerLink=\"/accounts\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div class=\"accountEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n      <label>Active</label>\r\n      <input type=\"checkbox\" formControlName=\"active\"> <br />\r\n      <label>Type</label>\r\n      <input type='radio' name=\"acctType\" value=\"Asset\" formControlName=\"acctType\" /> Asset\r\n      <input type='radio' name=\"acctType\" value=\"Liability\" formControlName=\"acctType\" /> Liability <br />\r\n      <label>Name</label>\r\n      <input type='text' name=\"name\" formControlName=\"name\" /> <br />\r\n      <label>Institution</label>\r\n      <input type='text' name=\"institution\" formControlName=\"institution\" /> <br />\r\n      <label>Number</label>\r\n      <input type='text' name=\"number\" formControlName=\"number\" /> <br />\r\n      <label>Interest Rate</label>\r\n      <input type='number' name=\"interest\" formControlName=\"interest\" />% <br />\r\n      <label>Limit<span class=\"pull-right\">$</span></label>\r\n      <input type='number' name=\"limit\" formControlName=\"limit\" /> <br />\r\n      <input type='submit' value=\"Update\" />\r\n      <button routerLink=\"/accounts\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -343,6 +343,7 @@ var AccountEditComponent = /** @class */ (function () {
     AccountEditComponent.prototype.defineForm = function () {
         this.form = new forms_1.FormGroup({
             acctType: new forms_1.FormControl(this.editAccount.acctType),
+            active: new forms_1.FormControl(this.editAccount.active),
             institution: new forms_1.FormControl(this.editAccount.institution),
             interest: new forms_1.FormControl(this.editAccount.interest),
             limit: new forms_1.FormControl(this.editAccount.limit),
@@ -354,6 +355,7 @@ var AccountEditComponent = /** @class */ (function () {
         this.location.back();
     };
     AccountEditComponent.prototype.onSubmit = function () {
+        this.editAccount.active = this.form.get('active').value;
         this.editAccount.acctType = this.form.get('acctType').value;
         this.editAccount.institution = this.form.get('institution').value;
         this.editAccount.interest = this.form.get('interest').value;
@@ -389,7 +391,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body {\r\n}\r\n\r\n.red {\r\n    color: red;\r\n}\r\n\r\n.greyed{\r\n    color:lightgray;\r\n}\r\n", ""]);
+exports.push([module.i, "body {\r\n}\r\n\r\n.red {\r\n    color: red;\r\n}\r\n\r\n.green {\r\n    color: green;\r\n}\r\n\r\n.greyed{\r\n    color:lightgray;\r\n}\r\n", ""]);
 
 // exports
 
@@ -402,7 +404,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/accounts/components/account-list/account-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"accounts\">\r\n  <p *ngIf=\"!accounts\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Accounts</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Type</th>\r\n        <th>Name</th>\r\n        <th>Institution</th>\r\n        <th>Number</th>\r\n        <th>Interest</th>\r\n        <th>Limit</th>\r\n        <th>Balance</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let account of accounts\">\r\n        <td>{{account.id}}</td>\r\n        <td>{{account.acctType}}</td>\r\n        <td>{{account.name}}</td>\r\n        <td>{{account.institution}}</td>\r\n        <td>{{account.number}}</td>\r\n        <td class='right'>{{displayAsPercent(account.interest)}}</td>\r\n        <td class='right'>{{account.limit ? displayAsDollar(account.limit) : '--'}}</td>\r\n        <td class='right'>{{displayAsDollar(account.balance)}}</td>\r\n        <td><a class=\"btn btn-xs editlink\" routerLink=\"./account-edit/{{account.id}}\">Edit</a></td>\r\n        <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(account.id);\">Delete</a></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./account-add\">Add New Account</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
+module.exports = "<div class=\"accounts\">\r\n  <p *ngIf=\"!accounts\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Accounts</caption>\r\n    <thead>\r\n        <tr>\r\n            <th>Active</th>\r\n            <th>ID</th>\r\n            <th>Type</th>\r\n            <th>Name</th>\r\n            <th>Institution</th>\r\n            <th>Number</th>\r\n            <th>Interest</th>\r\n            <th>Limit</th>\r\n            <th>Balance</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let account of accounts\">\r\n            <td *ngIf=\"account.active\"><span class=\"green\">Active</span></td>\r\n            <td *ngIf=\"!account.active\"><span class=\"red\">Closed</span></td>\r\n            <td>{{account.id}}</td>\r\n            <td>{{account.acctType}}</td>\r\n            <td>{{account.name}}</td>\r\n            <td>{{account.institution}}</td>\r\n            <td>{{account.number}}</td>\r\n            <td class='right'>{{displayAsPercent(account.interest)}}</td>\r\n            <td class='right'>{{account.limit ? displayAsDollar(account.limit) : '--'}}</td>\r\n            <td class='right'>{{displayAsDollar(account.balance)}}</td>\r\n            <td><a class=\"btn btn-xs editlink\" routerLink=\"./account-edit/{{account.id}}\">Edit</a></td>\r\n            <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(account.id);\">Delete</a></td>\r\n        </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./account-add\">Add New Account</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -547,11 +549,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var platform_browser_1 = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
+var animations_1 = __webpack_require__("../../../platform-browser/esm5/animations.js");
+var common_1 = __webpack_require__("../../../common/esm5/common.js");
 var accounts_module_1 = __webpack_require__("../../../../../src/modules/accounts/accounts.module.ts");
 var app_routing_module_1 = __webpack_require__("../../../../../src/modules/app/app-routing.module.ts");
 var categories_module_1 = __webpack_require__("../../../../../src/modules/categories/categories.module.ts");
-var platform_browser_1 = __webpack_require__("../../../platform-browser/esm5/platform-browser.js");
-var common_1 = __webpack_require__("../../../common/esm5/common.js");
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
@@ -570,6 +573,7 @@ var AppModule = /** @class */ (function () {
         core_1.NgModule({
             imports: [
                 platform_browser_1.BrowserModule,
+                animations_1.BrowserAnimationsModule,
                 common_1.CommonModule,
                 http_1.HttpClientModule,
                 forms_1.ReactiveFormsModule,
@@ -1553,7 +1557,7 @@ var DataService = /** @class */ (function () {
     };
     DataService.prototype.resetPassword = function (id, newPassword) {
         var _this = this;
-        var response = this.http.put('/api/Users/Reset' + id, newPassword)
+        var response = this.http.put('/api/Users/Reset/' + id, newPassword)
             .toPromise()
             .then(function (result) {
             _this.userReset.emit(result);
@@ -1561,7 +1565,7 @@ var DataService = /** @class */ (function () {
     };
     DataService.prototype.deleteUser = function (id) {
         var _this = this;
-        var response = this.http.delete('/api/Users' + id)
+        var response = this.http.delete('/api/Users/' + id)
             .toPromise()
             .then(function (result) {
             _this.userDeleted.emit(result);
@@ -1651,7 +1655,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-add/transaction-add.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionAdd\">\r\n  <h4>Add</h4>\r\n    <p *ngIf=\"!form\">Loading...</p>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n      <label>Date</label>\r\n      <input type='date' name=\"date\" formControlName=\"date\" /> <br />\r\n      <label>Category</label>\r\n      <select name=\"category\" formControlName=\"category\">\r\n          <option *ngFor=\"let category of categories\" value=\"{{category.id}}\">{{category.name}}</option>\r\n      </select> <br />\r\n      <label>Amount<span class=\"pull-right\">$</span></label>\r\n      <input type='number' name=\"amount\" formControlName=\"amount\" /> <br />\r\n      <label>Debit Account</label>\r\n      <select name=\"drAcct\" formControlName=\"drAcct\">\r\n          <option *ngFor=\"let account of accounts\" value=\"{{account.id}}\">{{account.name}}</option>\r\n      </select> <br />\r\n      <label>Credit Account</label>\r\n      <select name=\"crAcct\" formControlName=\"crAcct\">\r\n          <option *ngFor=\"let account of accounts\" value=\"{{account.id}}\">{{account.name}}</option>\r\n      </select> <br />\r\n      <label>Tax</label>\r\n      <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n      <input type='submit' value=\"Add\" />\r\n      <button routerLink=\"/transactions\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div class=\"transactionAdd\">\r\n    <h4>Add</h4>\r\n    <p *ngIf=\"!form\">Loading...</p>\r\n\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n        <label>Date</label>\r\n        <input type='date' name=\"date\" formControlName=\"date\" /> <br />\r\n        <label>Category</label>\r\n\r\n        <mat-form-field>\r\n            <input type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"auto\" />\r\n            <mat-autocomplete #auto=\"matAutocomplete\">\r\n                <mat-option *ngFor=\"let category of filteredCategories | async\" value=\"{{category.name}}\">\r\n                    {{ category.name }}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n        </mat-form-field>\r\n        <br />\r\n\r\n        <!--<select name=\"category\" formControlName=\"category\">\r\n        <option *ngFor=\"let category of catExpense\" value=\"{{category.id}}\">{{category.name}}</option>\r\n        <option disabled>──────────</option>\r\n        <option *ngFor=\"let category of catIncome\" value=\"{{category.id}}\">{{category.name}}</option>\r\n        <option disabled>──────────</option>\r\n        <option *ngFor=\"let category of catOther\" value=\"{{category.id}}\">{{category.name}}</option>\r\n    </select> <br />-->\r\n\r\n        <label>Amount<span class=\"pull-right\">$</span></label>\r\n        <input type='number' name=\"amount\" formControlName=\"amount\" /> <br />\r\n        <label>Debit Account</label>\r\n        <select name=\"drAcct\" formControlName=\"drAcct\">\r\n            <option *ngFor=\"let account of acctPayee\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            <option disabled>──────────</option>\r\n            <option *ngFor=\"let account of acctLiability\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            <option disabled>──────────</option>\r\n            <option *ngFor=\"let account of acctAsset\" value=\"{{account.id}}\">{{account.name}}</option>\r\n        </select> <br />\r\n        <label>Credit Account</label>\r\n        <select name=\"crAcct\" formControlName=\"crAcct\">\r\n            <option *ngFor=\"let account of acctPayee\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            <option disabled>──────────</option>\r\n            <option *ngFor=\"let account of acctLiability\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            <option disabled>──────────</option>\r\n            <option *ngFor=\"let account of acctAsset\" value=\"{{account.id}}\">{{account.name}}</option>\r\n        </select> <br />\r\n        <label>Tax</label>\r\n        <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" /><br />\r\n        <input type='submit' value=\"Add\" />\r\n        <button routerLink=\"/transactions\">Cancel</button>\r\n    </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1673,14 +1677,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
-__webpack_require__("../../../../rxjs/_esm5/add/operator/switchMap.js");
 var common_1 = __webpack_require__("../../../common/esm5/common.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+var startWith_1 = __webpack_require__("../../../../rxjs/_esm5/operators/startWith.js");
+var map_1 = __webpack_require__("../../../../rxjs/_esm5/operators/map.js");
 var TransactionAddComponent = /** @class */ (function () {
     function TransactionAddComponent(route, dataService, location) {
         this.route = route;
         this.dataService = dataService;
         this.location = location;
+        this.newTransaction = this.freshNewTransaction();
+        this.amount = new forms_1.FormControl(this.newTransaction.amount);
+        this.category = new forms_1.FormControl(this.newTransaction.category);
+        this.crAcct = new forms_1.FormControl(this.newTransaction.crAcct);
+        this.date = new forms_1.FormControl(this.newTransaction.date);
+        this.drAcct = new forms_1.FormControl(this.newTransaction.drAcct);
+        this.tax = new forms_1.FormControl(this.newTransaction.tax);
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
     }
     TransactionAddComponent.prototype.ngOnInit = function () {
@@ -1691,9 +1703,12 @@ var TransactionAddComponent = /** @class */ (function () {
         }
         ;
         document.getElementById("addlink").setAttribute("disabled", "true");
-        this.newTransaction = this.freshNewTransaction();
         Promise.all([this.getAccounts(), this.getCategories()])
-            .then(function () { return _this.defineForm(); });
+            .then(function () { return _this.acctAsset = _this.accounts.filter(function (c) { return c.owned && c.acctType === "Asset"; }); })
+            .then(function () { return _this.acctLiability = _this.accounts.filter(function (c) { return c.owned && c.acctType === "Liability"; }); })
+            .then(function () { return _this.acctPayee = _this.accounts.filter(function (c) { return !c.owned; }); })
+            .then(function () { return _this.instantiateForm(_this.amount, _this.category, _this.crAcct, _this.date, _this.drAcct, _this.tax); })
+            .then(function () { return _this.filteredCategories = _this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); })); });
     };
     ;
     TransactionAddComponent.prototype.ngOnDestroy = function () {
@@ -1710,14 +1725,19 @@ var TransactionAddComponent = /** @class */ (function () {
     TransactionAddComponent.prototype.categoryName = function (categoryId) {
         return this.categories.find(function (element) { return element.id === categoryId; }).name;
     };
-    TransactionAddComponent.prototype.defineForm = function () {
+    TransactionAddComponent.prototype.instantiateForm = function (amount, category, crAcct, date, drAcct, tax) {
         this.form = new forms_1.FormGroup({
-            amount: new forms_1.FormControl(this.newTransaction.amount),
-            category: new forms_1.FormControl(this.newTransaction.category),
-            crAcct: new forms_1.FormControl(this.newTransaction.crAcct),
-            date: new forms_1.FormControl(this.newTransaction.date),
-            drAcct: new forms_1.FormControl(this.newTransaction.drAcct),
-            tax: new forms_1.FormControl(this.newTransaction.tax),
+            amount: amount,
+            category: category,
+            crAcct: crAcct,
+            date: date,
+            drAcct: drAcct,
+            tax: tax,
+        });
+    };
+    TransactionAddComponent.prototype.categoryFilter = function (val) {
+        return this.categories.filter(function (category) {
+            return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
         });
     };
     TransactionAddComponent.prototype.freshNewTransaction = function () {
@@ -1798,7 +1818,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-edit/transaction-edit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n      <label>Date</label>\r\n      <input type='date' name=\"date\" formControlName=\"date\" /> <br />\r\n      <label>Category</label>\r\n      <select name=\"category\" formControlName=\"category\">\r\n          <option *ngFor=\"let category of categories\" value=\"{{category.id}}\">{{category.name}}</option>\r\n      </select> <br />\r\n      <label>Amount<span class=\"pull-right\">$</span></label>\r\n      <input type='number' name=\"amount\" formControlName=\"amount\" /> <br />\r\n      <label>Debit Account</label>\r\n      <select name=\"drAcct\" formControlName=\"drAcct\">\r\n          <option *ngFor=\"let account of accounts\" value=\"{{account.id}}\">{{account.name}}</option>\r\n      </select> <br />\r\n      <label>Credit Account</label>\r\n      <select name=\"crAcct\" formControlName=\"crAcct\">\r\n          <option *ngFor=\"let account of accounts\" value=\"{{account.id}}\">{{account.name}}</option>\r\n      </select> <br />\r\n      <label>Tax</label>\r\n      <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n      <input type='submit' value=\"Update\" />\r\n      <button routerLink=\"/transactions\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div class=\"transactionEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n      <label>Date</label>\r\n      <input type='date' name=\"date\" formControlName=\"date\" /> <br />\r\n      <label>Category</label>\r\n      <select name=\"category\" formControlName=\"category\">\r\n          <option *ngFor=\"let category of catExpense\" value=\"{{category.id}}\">{{category.name}}</option>\r\n          <option disabled>──────────</option>\r\n          <option *ngFor=\"let category of catIncome\" value=\"{{category.id}}\">{{category.name}}</option>\r\n          <option disabled>──────────</option>\r\n          <option *ngFor=\"let category of catOther\" value=\"{{category.id}}\">{{category.name}}</option>\r\n      </select> <br />\r\n      <label>Amount<span class=\"pull-right\">$</span></label>\r\n      <input type='number' name=\"amount\" formControlName=\"amount\" /> <br />\r\n      <label>Debit Account</label>\r\n      <select name=\"drAcct\" formControlName=\"drAcct\">\r\n          <option *ngFor=\"let account of acctPayee\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          <option disabled>──────────</option>\r\n          <option *ngFor=\"let account of acctLiability\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          <option disabled>──────────</option>\r\n          <option *ngFor=\"let account of acctAsset\" value=\"{{account.id}}\">{{account.name}}</option>\r\n      </select> <br />\r\n      <label>Credit Account</label>\r\n      <select name=\"crAcct\" formControlName=\"crAcct\">\r\n          <option *ngFor=\"let account of accounts\" value=\"{{account.id}}\">{{account.name}}</option>\r\n      </select> <br />\r\n      <label>Tax</label>\r\n      <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n      <input type='submit' value=\"Update\" />\r\n      <button routerLink=\"/transactions\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1838,10 +1858,14 @@ var TransactionEditComponent = /** @class */ (function () {
         }
         ;
         document.getElementById("addlink").setAttribute("disabled", "true");
-        this.getAccounts();
-        this.getCategories();
         var id = +this.route.snapshot.paramMap.get('id');
         Promise.all([this.getAccounts(), this.getCategories(), this.getTransaction(id)])
+            .then(function () { return _this.acctAsset = _this.accounts.filter(function (c) { return c.owned && c.acctType === "Asset"; }); })
+            .then(function () { return _this.acctLiability = _this.accounts.filter(function (c) { return c.owned && c.acctType === "Liability"; }); })
+            .then(function () { return _this.acctPayee = _this.accounts.filter(function (c) { return !c.owned; }); })
+            .then(function () { return _this.catExpense = _this.categories.filter(function (c) { return c.type === "Expense"; }); })
+            .then(function () { return _this.catIncome = _this.categories.filter(function (c) { return c.type === "Income"; }); })
+            .then(function () { return _this.catOther = _this.categories.filter(function (c) { return c.type === "Other"; }); })
             .then(function () { return _this.defineForm(); });
     };
     TransactionEditComponent.prototype.ngOnDestroy = function () {
@@ -1953,7 +1977,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-list/transaction-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactions\">\r\n  <p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Transactions</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Date</th>\r\n        <th>Amount</th>\r\n        <th>Category</th>\r\n        <th>Debit Account</th>\r\n        <th>Credit Account</th>\r\n        <th>Tax?</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let transaction of transactions\">\r\n        <td>{{transaction.id}}</td>\r\n        <td>{{transaction.date | date}}</td>\r\n        <td className='right'>{{displayAsDollar(transaction.amount)}}</td>\r\n        <td>{{categoryName(transaction.category)}}</td>\r\n        <td>{{accountName(transaction.drAcct)}}</td>\r\n        <td>{{accountName(transaction.crAcct)}}</td>\r\n        <td>&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n        <td><a class=\"btn btn-xs editlink\" routerLink=\"./transaction-edit/{{transaction.id}}\">Edit</a></td>\r\n        <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(transaction.id);\">Delete</a></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./transaction-add\">Add New Transaction</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
+module.exports = "<div class=\"transactions\">\r\n  <p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n\r\n  <table *ngIf=\"transactions && categories && accounts\">\r\n    <caption>Transactions</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Date</th>\r\n        <th>Amount</th>\r\n        <th>Category</th>\r\n        <th>Debit Account</th>\r\n        <th>Credit Account</th>\r\n        <th>Tax?</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let transaction of transactions\">\r\n        <td>{{transaction.id}}</td>\r\n        <td>{{transaction.date | date}}</td>\r\n        <td className='right'>{{displayAsDollar(transaction.amount)}}</td>\r\n        <td>{{categoryName(transaction.category)}}</td>\r\n        <td>{{accountName(transaction.drAcct)}}</td>\r\n        <td>{{accountName(transaction.crAcct)}}</td>\r\n        <td>&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n        <td><a class=\"btn btn-xs editlink\" routerLink=\"./transaction-edit/{{transaction.id}}\">Edit</a></td>\r\n        <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(transaction.id);\">Delete</a></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./transaction-add\">Add New Transaction</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2072,6 +2096,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var common_1 = __webpack_require__("../../../common/esm5/common.js");
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
+var material_1 = __webpack_require__("../../../material/esm5/material.es5.js");
 var transaction_add_component_1 = __webpack_require__("../../../../../src/modules/transactions/components/transaction-add/transaction-add.component.ts");
 var transaction_edit_component_1 = __webpack_require__("../../../../../src/modules/transactions/components/transaction-edit/transaction-edit.component.ts");
 var transaction_list_component_1 = __webpack_require__("../../../../../src/modules/transactions/components/transaction-list/transaction-list.component.ts");
@@ -2085,7 +2110,11 @@ var TransactionsModule = /** @class */ (function () {
             imports: [
                 common_1.CommonModule,
                 forms_1.ReactiveFormsModule,
-                transactions_routing_module_1.TransactionRoutingModule
+                material_1.MatInputModule,
+                material_1.MatAutocompleteModule,
+                material_1.MatFormFieldModule,
+                material_1.MatOptionModule,
+                transactions_routing_module_1.TransactionRoutingModule,
             ],
             declarations: [
                 transaction_add_component_1.TransactionAddComponent,
@@ -2170,7 +2199,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/users/components/user-list/user-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"users\">\r\n  <p *ngIf=\"!users\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Users</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Username</th>\r\n        <th>Admin</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let user of users\">\r\n        <td>{{user.id}}</td>\r\n        <td>{{user.userName}}</td>\r\n        <td><input type='checkbox' checked={{user.admin}} (Change)=\"onToggleAdmin(user.id)\" /></td>\r\n        <td><a (click)=\"onReset(user.id);\">Reset Password</a></td>\r\n        <td><a (click)=\"onDelete(user.id);\">Delete</a></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n</div>\r\n"
+module.exports = "<div class=\"users\">\r\n    <p *ngIf=\"!users\"><em>Loading...</em></p>\r\n\r\n    <table>\r\n        <caption>Users</caption>\r\n        <thead>\r\n            <tr>\r\n                <th>ID</th>\r\n                <th>Username</th>\r\n                <th>Admin</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr *ngFor=\"let user of users\">\r\n                <td>{{user.id}}</td>\r\n                <td>{{user.userName}}</td>\r\n                <td><input #cb1 type=\"checkbox\" value=\"true\" [checked]=\"user.admin\" (change)=\"onToggleAdmin(user.id)\"></td>\r\n                <td><a (click)=\"onReset(user.id);\">Reset Password</a></td>\r\n                <td><a (click)=\"onDelete(user.id);\">Delete</a></td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2196,14 +2225,8 @@ var UserListComponent = /** @class */ (function () {
         var _this = this;
         this.dataService = dataService;
         this.dataService.userDeleted.subscribe(function (data) {
-            console.log("accountDeleted received from data.service: " + JSON.stringify(data));
-            if (data === null) {
-                alert("There was a problem deleting.");
-            }
-            else {
-                var indextToDelete = _this.users.findIndex(function (element) { return element.id === data.id; });
-                _this.users.splice(indextToDelete, 1);
-            }
+            var indexToDelete = _this.users.findIndex(function (element) { return element.id === data.id; });
+            var udeleted = _this.users.splice(indexToDelete, 1);
         }, function (error) { return alert("There was a problem deleting."); });
     }
     UserListComponent.prototype.ngOnInit = function () {
@@ -2211,14 +2234,25 @@ var UserListComponent = /** @class */ (function () {
     };
     UserListComponent.prototype.getUsers = function () {
         var _this = this;
-        this.dataService.getUsers().subscribe(function (users) { return _this.users = users; });
+        return new Promise(function (resolve) {
+            _this.dataService.getUsers().subscribe(function (users) {
+                _this.users = users;
+                resolve(users);
+            }, function (error) {
+                alert("there was an error getting users.");
+            });
+        });
     };
     UserListComponent.prototype.onDelete = function (id) {
-        var confirmation = confirm('are you sure you want to delete ' + this.users.find(function (element) { return element.id == id; }).userName + '?');
+        var userToDelete = this.users.find(function (element) { return element.id == id; }).userName;
+        var confirmation = confirm('are you sure you want to delete ' + userToDelete + '?');
         if (confirmation) {
-            this.dataService.deleteUser(id);
+            this.dataService.deleteUser(userToDelete);
         }
         ;
+    };
+    UserListComponent.prototype.logCheckbox = function (element) {
+        alert("Checkbox " + element.value + " was " + (element.checked ? '' : 'un') + "checked\n");
     };
     UserListComponent.prototype.onToggleAdmin = function (id) {
         var indexToToggle = this.users.findIndex(function (element) { return element.id === id; });
