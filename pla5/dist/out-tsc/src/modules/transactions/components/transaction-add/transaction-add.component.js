@@ -22,12 +22,14 @@ var TransactionAddComponent = /** @class */ (function () {
         this.dataService = dataService;
         this.location = location;
         this.newTransaction = this.freshNewTransaction();
-        this.acctFrom = new forms_1.FormControl(this.newTransaction.acctFrom);
-        this.acctTo = new forms_1.FormControl(this.newTransaction.acctTo);
-        this.amount = new forms_1.FormControl(this.newTransaction.amount);
-        this.category = new forms_1.FormControl(this.categoryName(this.newTransaction.category));
+        this.acctFrom = new forms_1.FormControl();
+        this.acctTo = new forms_1.FormControl();
+        this.amount = new forms_1.FormControl();
+        this.category = new forms_1.FormControl();
         this.date = new forms_1.FormControl(this.newTransaction.date);
-        this.tax = new forms_1.FormControl(this.newTransaction.tax);
+        this.payeeFrom = new forms_1.FormControl();
+        this.payeeTo = new forms_1.FormControl();
+        this.tax = new forms_1.FormControl();
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
     }
     TransactionAddComponent.prototype.ngOnInit = function () {
@@ -38,11 +40,10 @@ var TransactionAddComponent = /** @class */ (function () {
         }
         ;
         document.getElementById("addlink").setAttribute("disabled", "true");
-        Promise.all([this.getAccounts(), this.getCategories()])
-            .then(function () { return _this.acctAsset = _this.accounts.filter(function (c) { return c.owned && c.acctType === "Asset"; }); })
-            .then(function () { return _this.acctLiability = _this.accounts.filter(function (c) { return c.owned && c.acctType === "Liability"; }); })
-            .then(function () { return _this.acctPayee = _this.accounts.filter(function (c) { return !c.owned; }); })
-            .then(function () { return _this.instantiateForm(_this.acctFrom, _this.acctTo, _this.amount, _this.category, _this.date, _this.tax); })
+        Promise.all([this.getAccounts(), this.getCategories(), this.getPayees()])
+            .then(function () { return _this.acctAsset = _this.accounts.filter(function (c) { return c.acctType === "Asset"; }); })
+            .then(function () { return _this.acctLiability = _this.accounts.filter(function (c) { return c.acctType === "Liability"; }); })
+            .then(function () { return _this.instantiateForm(_this.acctFrom, _this.acctTo, _this.amount, _this.category, _this.date, _this.payeeFrom, _this.payeeTo, _this.tax); })
             .then(function () { return _this.filteredCategoryNames = _this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); })); });
     };
     ;
@@ -63,13 +64,15 @@ var TransactionAddComponent = /** @class */ (function () {
     TransactionAddComponent.prototype.categoryName = function (categoryId) {
         return this.categories.find(function (element) { return element.id === categoryId; }).name;
     };
-    TransactionAddComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, date, tax) {
+    TransactionAddComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, date, payeeFrom, payeeTo, tax) {
         this.form = new forms_1.FormGroup({
+            acctFrom: acctFrom,
+            acctTo: acctTo,
             amount: amount,
             category: category,
-            acctTo: acctTo,
             date: date,
-            acctFrom: acctFrom,
+            payeeFrom: payeeFrom,
+            payeeTo: payeeTo,
             tax: tax,
         });
     };
@@ -79,7 +82,7 @@ var TransactionAddComponent = /** @class */ (function () {
         }).map(function (category) { return category.name; });
     };
     TransactionAddComponent.prototype.freshNewTransaction = function () {
-        return { id: null, amount: 0, category: 0, acctTo: 0, date: new Date().toLocaleDateString(), acctFrom: 0, tax: false };
+        return { id: null, amount: 0, category: 0, acctFrom: 0, acctTo: 0, date: new Date().toLocaleDateString(), payeeFrom: 0, payeeTo: 0, tax: false };
     };
     TransactionAddComponent.prototype.getAccounts = function () {
         var _this = this;
@@ -103,6 +106,10 @@ var TransactionAddComponent = /** @class */ (function () {
             });
         });
     };
+    TransactionAddComponent.prototype.getPayees = function () {
+        var _this = this;
+        this.dataService.getPayees().subscribe(function (payees) { return _this.payees = payees; }, function (error) { return alert("there was an error getting payees."); });
+    };
     TransactionAddComponent.prototype.goBack = function () {
         this.location.back();
     };
@@ -113,12 +120,17 @@ var TransactionAddComponent = /** @class */ (function () {
         this.newTransaction.amount = this.form.get('amount').value;
         this.newTransaction.category = this.categoryId(this.form.get('category').value);
         this.newTransaction.date = this.form.get('date').value;
+        this.newTransaction.payeeFrom = this.form.get('payeeFrom').value;
+        this.newTransaction.payeeTo = this.form.get('payeeTo').value;
         this.newTransaction.tax = this.form.get('tax').value;
         //add the transaction
         this.dataService.addTransaction(this.newTransaction);
         //reset and close
         this.ngOnInit();
         this.goBack();
+    };
+    TransactionAddComponent.prototype.payeeName = function (payeeId) {
+        return this.payees.find(function (element) { return element.id === payeeId; }).name;
     };
     TransactionAddComponent = __decorate([
         core_1.Component({

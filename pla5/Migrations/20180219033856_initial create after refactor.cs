@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace pla5.Migrations
 {
-    public partial class initialcreate : Migration
+    public partial class initialcreateafterrefactor : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,21 +15,31 @@ namespace pla5.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AcctType = table.Column<string>(nullable: true),
-                    DefaultAcct = table.Column<int>(nullable: true),
-                    DefaultAmt = table.Column<decimal>(type: "money", nullable: true),
-                    DefaultCat = table.Column<int>(nullable: true),
+                    AcctType = table.Column<string>(type: "nvarchar(128)", nullable: true),
+                    Active = table.Column<bool>(nullable: false),
                     Institution = table.Column<string>(type: "nvarchar(128)", nullable: true),
                     Interest = table.Column<decimal>(nullable: false, defaultValue: 0m),
                     Limit = table.Column<decimal>(type: "money", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(128)", nullable: true),
                     Number = table.Column<string>(type: "nvarchar(128)", nullable: true),
-                    Owned = table.Column<bool>(nullable: false),
                     User = table.Column<string>(type: "nvarchar(128)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Accounts", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppUser",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Admin = table.Column<bool>(nullable: false),
+                    UserName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUser", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -88,16 +98,33 @@ namespace pla5.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Payees",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DefaultAcct = table.Column<int>(nullable: true),
+                    DefaultAmt = table.Column<decimal>(type: "money", nullable: true),
+                    DefaultCat = table.Column<int>(nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(128)", nullable: true),
+                    User = table.Column<string>(type: "nvarchar(128)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payees", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Transactions",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AcctFrom = table.Column<int>(nullable: false),
+                    AcctTo = table.Column<int>(nullable: false),
                     Amount = table.Column<decimal>(type: "money", nullable: false),
                     Category = table.Column<int>(nullable: false),
-                    CrAcct = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
-                    DrAcct = table.Column<int>(nullable: false),
                     Tax = table.Column<bool>(nullable: false),
                     User = table.Column<string>(type: "nvarchar(128)", nullable: true)
                 },
@@ -258,6 +285,9 @@ namespace pla5.Migrations
                 name: "Accounts");
 
             migrationBuilder.DropTable(
+                name: "AppUser");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -274,6 +304,9 @@ namespace pla5.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Payees");
 
             migrationBuilder.DropTable(
                 name: "Transactions");

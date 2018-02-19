@@ -49,6 +49,7 @@ var TransactionListComponent = /** @class */ (function () {
     TransactionListComponent.prototype.ngOnInit = function () {
         this.getAccounts();
         this.getCategories();
+        this.getPayees();
         this.getTransactions();
     };
     TransactionListComponent.prototype.accountName = function (accountId) {
@@ -65,6 +66,10 @@ var TransactionListComponent = /** @class */ (function () {
         var _this = this;
         this.dataService.getCategories().subscribe(function (categories) { return _this.categories = categories; }, function (error) { return alert("there was an error getting categories."); });
     };
+    TransactionListComponent.prototype.getPayees = function () {
+        var _this = this;
+        this.dataService.getPayees().subscribe(function (payees) { return _this.payees = payees; }, function (error) { return alert("there was an error getting payees."); });
+    };
     TransactionListComponent.prototype.getTransactions = function () {
         var _this = this;
         this.dataService.getTransactions().subscribe(function (transactions) { return _this.transactions = transactions; }, function (error) { return alert("there was an error getting transactions."); });
@@ -78,6 +83,9 @@ var TransactionListComponent = /** @class */ (function () {
             this.dataService.deleteAccount(id);
         }
         ;
+    };
+    TransactionListComponent.prototype.payeeName = function (payeeId) {
+        return this.payees.find(function (element) { return element.id === payeeId; }).name;
     };
     TransactionListComponent = __decorate([
         core_1.Component({

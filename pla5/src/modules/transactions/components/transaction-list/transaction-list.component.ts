@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from '../../../shared/data.service';
-import { Account, Category, Transaction } from '../../../shared/interfaces';
+import { Account, Category, Payee, Transaction } from '../../../shared/interfaces';
 
 @Component({
     selector: 'transaction-list',
@@ -11,6 +11,7 @@ import { Account, Category, Transaction } from '../../../shared/interfaces';
 export class TransactionListComponent {
     accounts: Account[];
     categories: Category[];
+    payees: Payee[];
     transactions: Transaction[];
 
     constructor(private dataService: DataService) {
@@ -60,6 +61,7 @@ export class TransactionListComponent {
     ngOnInit() {
         this.getAccounts();
         this.getCategories();
+        this.getPayees();
         this.getTransactions();
     }
 
@@ -87,6 +89,13 @@ export class TransactionListComponent {
         );
     }
 
+    getPayees(): void {
+        this.dataService.getPayees().subscribe(
+            payees => this.payees = payees,
+            error => alert("there was an error getting payees.")
+        );
+    }
+
     getTransactions(): void {
         this.dataService.getTransactions().subscribe(
             transactions => this.transactions = transactions,
@@ -101,4 +110,9 @@ export class TransactionListComponent {
         var confirmation = confirm('Are you sure you want to delete transaction on ' + dateToDelete + '?');
         if (confirmation) { this.dataService.deleteAccount(id); };
     }
+
+    payeeName(payeeId: number) {
+        return this.payees.find((element) => element.id === payeeId).name;
+    }
+
 }

@@ -2,7 +2,7 @@
 
 import { Inject, Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Account, Category, Transaction, User } from './interfaces';
+import { Account, Category, Payee, Transaction, User } from './interfaces';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -15,6 +15,9 @@ export class DataService {
     @Output() categoryAdded = new EventEmitter();
     @Output() categoryDeleted = new EventEmitter();
     @Output() categoryUpdated = new EventEmitter();
+    @Output() payeeAdded = new EventEmitter();
+    @Output() payeeDeleted = new EventEmitter();
+    @Output() payeeUpdated = new EventEmitter();
     @Output() transactionAdded = new EventEmitter();
     @Output() transactionDeleted = new EventEmitter();
     @Output() transactionUpdated = new EventEmitter();
@@ -38,7 +41,6 @@ export class DataService {
     }
 
     addAccount(accountToAdd: Account) {
-        console.log("data.service.addAccount received: " + JSON.stringify(accountToAdd));
         const response = this.http.post<Account>('/api/Accounts', accountToAdd)
             .toPromise()
             .then(result => {
@@ -47,7 +49,6 @@ export class DataService {
     }
 
     deleteAccount(id: number) {
-        console.log("data.service.deleteAccount received: " + id);
         const response = this.http.delete<Account>('/api/Accounts/' + id)
             .toPromise()
             .then(result => {
@@ -56,7 +57,6 @@ export class DataService {
     }
 
     updateAccount(accountToUpdate: Account) {
-        console.log("data.service.updateAccount received: " + JSON.stringify(accountToUpdate));
         const response = this.http.put<Account>('/api/Accounts', accountToUpdate)
             .toPromise()
             .then(result => {
@@ -101,6 +101,44 @@ export class DataService {
     }
 
 
+
+    // --Payees--
+    getPayees(): Observable<Payee[]> {
+        console.log("data.service.getPayees...");
+        return this.http.get<Payee[]>('/api/Payees');
+    }
+
+    getPayee(id): Observable<Payee> {
+        console.log("data.service.getPayee...");
+        return this.http.get<Payee>('/api/Payees/' + id);
+    }
+
+    addPayee(payeeToAdd: Payee) {
+        const response = this.http.post<Payee>('/api/Payees', payeeToAdd)
+            .toPromise()
+            .then(result => {
+                this.payeeAdded.emit(result);
+            });
+    }
+
+    deletePayee(id: number) {
+        const response = this.http.delete<Payee>('/api/Accounts/' + id)
+            .toPromise()
+            .then(result => {
+                this.payeeDeleted.emit(result);
+            });
+    }
+
+    updatePayee(payeeToUpdate: Payee) {
+        const response = this.http.put<Payee>('/apiPayees', payeeToUpdate)
+            .toPromise()
+            .then(result => {
+                this.payeeUpdated.emit(result);
+            });
+    }
+
+
+
     // --Transactions--
     getTransactions(): Observable<Transaction[]> {
         console.log("data.service.getTransactions...");
@@ -135,6 +173,7 @@ export class DataService {
                 this.transactionUpdated.emit(result);
             });
     }
+
 
 
     // --Users--

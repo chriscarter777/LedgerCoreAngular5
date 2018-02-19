@@ -41,7 +41,7 @@ namespace pla5.Controllers
           return BadRequest(ModelState);
         }
 
-        IdentityUser[] ius = _userManager.Users.ToArray();
+        IdentityUser[] ius = _userManager.Users.OrderBy(x => x.UserName).ToArray();
         if (ius == null)
         {
           return NotFound();

@@ -22,6 +22,9 @@ var DataService = /** @class */ (function () {
         this.categoryAdded = new core_1.EventEmitter();
         this.categoryDeleted = new core_1.EventEmitter();
         this.categoryUpdated = new core_1.EventEmitter();
+        this.payeeAdded = new core_1.EventEmitter();
+        this.payeeDeleted = new core_1.EventEmitter();
+        this.payeeUpdated = new core_1.EventEmitter();
         this.transactionAdded = new core_1.EventEmitter();
         this.transactionDeleted = new core_1.EventEmitter();
         this.transactionUpdated = new core_1.EventEmitter();
@@ -41,7 +44,6 @@ var DataService = /** @class */ (function () {
     };
     DataService.prototype.addAccount = function (accountToAdd) {
         var _this = this;
-        console.log("data.service.addAccount received: " + JSON.stringify(accountToAdd));
         var response = this.http.post('/api/Accounts', accountToAdd)
             .toPromise()
             .then(function (result) {
@@ -50,7 +52,6 @@ var DataService = /** @class */ (function () {
     };
     DataService.prototype.deleteAccount = function (id) {
         var _this = this;
-        console.log("data.service.deleteAccount received: " + id);
         var response = this.http.delete('/api/Accounts/' + id)
             .toPromise()
             .then(function (result) {
@@ -59,7 +60,6 @@ var DataService = /** @class */ (function () {
     };
     DataService.prototype.updateAccount = function (accountToUpdate) {
         var _this = this;
-        console.log("data.service.updateAccount received: " + JSON.stringify(accountToUpdate));
         var response = this.http.put('/api/Accounts', accountToUpdate)
             .toPromise()
             .then(function (result) {
@@ -97,6 +97,39 @@ var DataService = /** @class */ (function () {
             .toPromise()
             .then(function (result) {
             _this.categoryUpdated.emit(result);
+        });
+    };
+    // --Payees--
+    DataService.prototype.getPayees = function () {
+        console.log("data.service.getPayees...");
+        return this.http.get('/api/Payees');
+    };
+    DataService.prototype.getPayee = function (id) {
+        console.log("data.service.getPayee...");
+        return this.http.get('/api/Payees/' + id);
+    };
+    DataService.prototype.addPayee = function (payeeToAdd) {
+        var _this = this;
+        var response = this.http.post('/api/Payees', payeeToAdd)
+            .toPromise()
+            .then(function (result) {
+            _this.payeeAdded.emit(result);
+        });
+    };
+    DataService.prototype.deletePayee = function (id) {
+        var _this = this;
+        var response = this.http.delete('/api/Accounts/' + id)
+            .toPromise()
+            .then(function (result) {
+            _this.payeeDeleted.emit(result);
+        });
+    };
+    DataService.prototype.updatePayee = function (payeeToUpdate) {
+        var _this = this;
+        var response = this.http.put('/apiPayees', payeeToUpdate)
+            .toPromise()
+            .then(function (result) {
+            _this.payeeUpdated.emit(result);
         });
     };
     // --Transactions--
@@ -196,6 +229,18 @@ var DataService = /** @class */ (function () {
         core_1.Output(),
         __metadata("design:type", Object)
     ], DataService.prototype, "categoryUpdated", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], DataService.prototype, "payeeAdded", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], DataService.prototype, "payeeDeleted", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], DataService.prototype, "payeeUpdated", void 0);
     __decorate([
         core_1.Output(),
         __metadata("design:type", Object)

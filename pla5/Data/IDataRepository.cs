@@ -21,6 +21,12 @@ namespace pla5.Data
         Task<Category> GetCategoryAsync(int id);
         Task<Category> UpdateCategoryAsync(Category c);
 
+        Task<Payee> AddPayeeAsync(Payee p);
+        Task<Payee> DeletePayeeAsync(int id);
+        Task<Payee> GetPayeeAsync(int id);
+        Task<Payee[]> GetPayeesAsync();
+        Task<Payee> UpdatePayeeAsync(Payee p);
+
         Task<Transaction> AddTransactionAsync(Transaction t);
         Task<Transaction> DeleteTransactionAsync(int id);
         Task<Transaction> GetTransactionAsync(int id);

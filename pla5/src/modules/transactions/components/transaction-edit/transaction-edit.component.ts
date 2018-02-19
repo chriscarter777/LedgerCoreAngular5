@@ -5,7 +5,7 @@ import 'rxjs/add/operator/switchMap';
 import { Location } from '@angular/common';
 import { DataService } from '../../../shared/data.service';
 import { MatAutocomplete, MatInput, MatFormField, MatOption } from '@angular/material';
-import { Account, Category, Transaction } from '../../../shared/interfaces';
+import { Account, Category, Payee, Transaction } from '../../../shared/interfaces';
 import { Observable } from 'rxjs/Observable';
 import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
@@ -19,8 +19,8 @@ export class TransactionEditComponent {
     accounts: Account[];
     acctAsset: Account[];
     acctLiability: Account[];
-    acctPayee: Account[];
     categories: Category[];
+    payees: Payee[];
     filteredCategoryNames: Observable<string[]>;
     editTransaction: Transaction;
     form: FormGroup;
@@ -29,6 +29,8 @@ export class TransactionEditComponent {
     amount: FormControl;
     category: FormControl;
     date: FormControl;
+    payeeFrom: FormControl;
+    payeeTo: FormControl;
     tax: FormControl;
 
 
@@ -47,12 +49,11 @@ export class TransactionEditComponent {
 
         const id = +this.route.snapshot.paramMap.get('id');
 
-        Promise.all([this.getAccounts(), this.getCategories(), this.getTransaction(id)])
-            .then(() => this.acctAsset = this.accounts.filter(c => c.owned && c.acctType === "Asset"))
-            .then(() => this.acctLiability = this.accounts.filter(c => c.owned && c.acctType === "Liability"))
-            .then(() => this.acctPayee = this.accounts.filter(c => !c.owned))
+        Promise.all([this.getAccounts(), this.getCategories(), this.getPayees(), this.getTransaction(id)])
+            .then(() => this.acctAsset = this.accounts.filter(c => c.acctType === "Asset"))
+            .then(() => this.acctLiability = this.accounts.filter(c => c.acctType === "Liability"))
             .then(() => this.instantiateControls())
-            .then(() => this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.tax))
+            .then(() => this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.payeeFrom, this.payeeTo, this.tax))
             .then(() => this.filteredCategoryNames = this.category.valueChanges.pipe(startWith(''), map(val => this.categoryFilter(val))))
     }
 
@@ -89,16 +90,20 @@ export class TransactionEditComponent {
         this.amount = new FormControl(this.editTransaction.amount);
         this.category = new FormControl(this.categoryName(this.editTransaction.category));
         this.date = new FormControl(this.editTransaction.date);
+        this.payeeFrom = new FormControl(this.editTransaction.payeeFrom);
+        this.payeeTo = new FormControl(this.editTransaction.payeeTo);
         this.tax = new FormControl(this.editTransaction.tax);
     }
 
-    instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, date: FormControl, tax: FormControl) {
+    instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, date: FormControl, payeeFrom: FormControl, payeeTo: FormControl, tax: FormControl) {
         this.form = new FormGroup({
+            acctFrom,
+            acctTo,
             amount,
             category,
-            acctFrom,
             date,
-            acctTo,
+            payeeFrom,
+            payeeTo,
             tax,
         });
     }
@@ -131,6 +136,13 @@ export class TransactionEditComponent {
         })
     }
 
+    getPayees(): void {
+        this.dataService.getPayees().subscribe(
+            payees => this.payees = payees,
+            error => alert("there was an error getting payees.")
+        );
+    }
+
     getTransaction(id) {
         return new Promise(resolve => {
             this.dataService.getTransaction(id).subscribe(
@@ -155,8 +167,9 @@ export class TransactionEditComponent {
         this.editTransaction.acctTo = this.form.get('acctTo').value;
         this.editTransaction.amount = this.form.get('amount').value;
         this.editTransaction.category = this.categoryId(this.form.get('category').value);
-        alert(this.form.get('category').value);
         this.editTransaction.date = this.form.get('date').value;
+        this.editTransaction.payeeFrom = this.form.get('payeeFrom').value;
+        this.editTransaction.payeeTo = this.form.get('payeeTo').value;
         this.editTransaction.tax = this.form.get('tax').value;
         //update the transaction
         this.dataService.updateTransaction(this.editTransaction);
@@ -164,4 +177,9 @@ export class TransactionEditComponent {
         this.ngOnInit();
         this.goBack();
     }
+
+    payeeName(payeeId: number) {
+        return this.payees.find((element) => element.id === payeeId).name;
+    }
+
 }

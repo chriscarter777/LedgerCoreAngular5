@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +16,7 @@ namespace pla5.Data
 
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Payee> Payees { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,8 +24,8 @@ namespace pla5.Data
             //configure the Identity model
             base.OnModelCreating(modelBuilder);
             //configure the application model
+            modelBuilder.Entity<Account>().Property(x => x.AcctType).HasColumnType("nvarchar(128)");
             modelBuilder.Entity<Account>().Ignore(x => x.Balance);
-            modelBuilder.Entity<Account>().Property(x => x.DefaultAmt).HasColumnType("money");
             modelBuilder.Entity<Account>().Property(x => x.Institution).HasColumnType("nvarchar(128)");
             modelBuilder.Entity<Account>().Property(x => x.Interest).HasDefaultValue(0);
             modelBuilder.Entity<Account>().Property(x => x.Limit).HasColumnType("money");
@@ -35,6 +36,11 @@ namespace pla5.Data
             modelBuilder.Entity<Category>().Property(x => x.Name).HasColumnType("nvarchar(128)");
             modelBuilder.Entity<Category>().Property(x => x.Type).HasColumnType("nvarchar(32)");
             modelBuilder.Entity<Category>().Property(x => x.User).HasColumnType("nvarchar(128)");
+
+            modelBuilder.Entity<Payee>().Ignore(x => x.Balance);
+            modelBuilder.Entity<Payee>().Property(x => x.DefaultAmt).HasColumnType("money");
+            modelBuilder.Entity<Payee>().Property(x => x.Name).HasColumnType("nvarchar(128)");
+            modelBuilder.Entity<Payee>().Property(x => x.User).HasColumnType("nvarchar(128)");
 
             modelBuilder.Entity<Transaction>().Property(x => x.Amount).HasColumnType("money");
             modelBuilder.Entity<Transaction>().Property(x => x.User).HasColumnType("nvarchar(128)");

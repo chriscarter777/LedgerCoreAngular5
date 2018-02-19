@@ -1,15 +1,23 @@
 <div class="transactions">
   <p *ngIf="!transactions"><em>Loading...</em></p>
 
-  <table *ngIf="transactions && categories && accounts">
+  <table *ngIf="transactions && payees && categories && accounts">
     <caption>Transactions</caption>
     <thead>
         <tr>
+            <th colspan="2">&nbsp;</th>
+            <th colspan="2">To</th>
+            <th colspan="2">From</th>
+            <th colspan="3">&nbsp;</th>
+        </tr>
+        <tr>
             <th>ID</th>
             <th>Date</th>
+            <th>Payee</th>
+            <th>Account</th>
+            <th>Account</th>
+            <th>Payee</th>
             <th>Amount</th>
-            <th>From</th>
-            <th>To</th>
             <th>Category</th>
             <th>Tax?</th>
         </tr>
@@ -18,9 +26,11 @@
         <tr *ngFor="let transaction of transactions">
             <td>{{transaction.id}}</td>
             <td>{{transaction.date | date}}</td>
-            <td className='right'>{{displayAsDollar(transaction.amount)}}</td>
-            <td>{{accountName(transaction.acctFrom)}}</td>
+            <td>{{payeeName(transaction.payeeTo)}}</td>
             <td>{{accountName(transaction.acctTo)}}</td>
+            <td>{{accountName(transaction.acctFrom)}}</td>
+            <td>{{payeeName(transaction.payeeFrom)}}</td>
+            <td className='right'>{{displayAsDollar(transaction.amount)}}</td>
             <td>{{categoryName(transaction.category)}}</td>
             <td>&nbsp;<span *ngIf="transaction.tax" class='glyphicon glyphicon-copy' style='color:green;'></span></td>
             <td><a class="btn btn-xs editlink" routerLink="./transaction-edit/{{transaction.id}}">Edit</a></td>

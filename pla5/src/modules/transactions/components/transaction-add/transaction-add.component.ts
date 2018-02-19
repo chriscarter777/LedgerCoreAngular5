@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import { MatAutocomplete, MatInput, MatFormField, MatOption } from '@angular/material';
 import { DataService } from '../../../shared/data.service';
-import { Account, Category, Transaction } from '../../../shared/interfaces';
+import { Account, Category, Payee, Transaction } from '../../../shared/interfaces';
 import { Observable } from 'rxjs/Observable';
 import { startWith } from 'rxjs/operators/startWith';
 import { map } from 'rxjs/operators/map';
@@ -18,17 +18,19 @@ export class TransactionAddComponent {
     accounts: Account[];
     acctAsset: Account[];
     acctLiability: Account[];
-    acctPayee: Account[];
     categories: Category[];
+    payees: Payee[];
     filteredCategoryNames: Observable<string[]>;
     newTransaction: Transaction = this.freshNewTransaction();
     form: FormGroup;
-    acctFrom: FormControl = new FormControl(this.newTransaction.acctFrom);
-    acctTo: FormControl = new FormControl(this.newTransaction.acctTo);
-    amount: FormControl = new FormControl(this.newTransaction.amount);
-    category: FormControl = new FormControl(this.categoryName(this.newTransaction.category));
+    acctFrom: FormControl = new FormControl();
+    acctTo: FormControl = new FormControl();
+    amount: FormControl = new FormControl();
+    category: FormControl = new FormControl();
     date: FormControl = new FormControl(this.newTransaction.date);
-    tax: FormControl = new FormControl(this.newTransaction.tax);
+    payeeFrom: FormControl = new FormControl();
+    payeeTo: FormControl = new FormControl();
+    tax: FormControl = new FormControl();
 
 
     constructor(
@@ -44,11 +46,10 @@ export class TransactionAddComponent {
         };
         document.getElementById("addlink").setAttribute("disabled", "true");
 
-        Promise.all([this.getAccounts(), this.getCategories()])
-            .then(() => this.acctAsset = this.accounts.filter(c => c.owned && c.acctType === "Asset"))
-            .then(() => this.acctLiability = this.accounts.filter(c => c.owned && c.acctType === "Liability"))
-            .then(() => this.acctPayee = this.accounts.filter(c => !c.owned))
-            .then(() => this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.tax))
+        Promise.all([this.getAccounts(), this.getCategories(), this.getPayees()])
+            .then(() => this.acctAsset = this.accounts.filter(c => c.acctType === "Asset"))
+            .then(() => this.acctLiability = this.accounts.filter(c => c.acctType === "Liability"))
+            .then(() => this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.payeeFrom, this.payeeTo, this.tax))
             .then(() => this.filteredCategoryNames = this.category.valueChanges.pipe(startWith(''), map(val => this.categoryFilter(val))))
     };
 
@@ -74,13 +75,15 @@ export class TransactionAddComponent {
     }
 
 
-    instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, date: FormControl, tax: FormControl) {
+    instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, date: FormControl, payeeFrom: FormControl, payeeTo: FormControl, tax: FormControl) {
         this.form = new FormGroup({
+            acctFrom,
+            acctTo,
             amount,
             category,
-            acctTo,
             date,
-            acctFrom,
+            payeeFrom,
+            payeeTo,
             tax,
         });
     }
@@ -93,7 +96,7 @@ export class TransactionAddComponent {
     displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);
 
     freshNewTransaction() {
-        return { id: null, amount: 0, category: 0, acctTo: 0, date: new Date().toLocaleDateString(), acctFrom: 0, tax: false }
+        return { id: null, amount: 0, category: 0, acctFrom: 0, acctTo: 0, date: new Date().toLocaleDateString(), payeeFrom: 0, payeeTo: 0, tax: false }
     }
 
     getAccounts() {
@@ -124,7 +127,14 @@ export class TransactionAddComponent {
         })
     }
 
-    goBack(): void {
+    getPayees(): void {
+        this.dataService.getPayees().subscribe(
+            payees => this.payees = payees,
+            error => alert("there was an error getting payees.")
+        );
+    }
+
+   goBack(): void {
         this.location.back();
     }
 
@@ -135,11 +145,18 @@ export class TransactionAddComponent {
         this.newTransaction.amount = this.form.get('amount').value;
         this.newTransaction.category = this.categoryId(this.form.get('category').value);
         this.newTransaction.date = this.form.get('date').value;
+        this.newTransaction.payeeFrom = this.form.get('payeeFrom').value;
+        this.newTransaction.payeeTo = this.form.get('payeeTo').value;
         this.newTransaction.tax = this.form.get('tax').value;
         //add the transaction
         this.dataService.addTransaction(this.newTransaction);
         //reset and close
         this.ngOnInit();
         this.goBack();
+   }
+
+    payeeName(payeeId: number) {
+        return this.payees.find((element) => element.id === payeeId).name;
     }
+
 }

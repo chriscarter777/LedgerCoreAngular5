@@ -3,15 +3,11 @@ export interface Account {
     active: boolean;
     balance: number;
     acctType: string;
-    defaultAcct?: number;
-    defaultAmt?: number;
-    defaultCat?: number;
     institution: string;
     interest: number;
     limit?: number;
     name: string;
     number: string;
-    owned: boolean;
 }
 
 export interface Category {
@@ -21,6 +17,15 @@ export interface Category {
     type: string;
 }
 
+export interface Payee {
+    id: number;
+    balance: number;
+    defaultAcct?: number;
+    defaultAmt?: number;
+    defaultCat?: number;
+    name: string;
+}
+
 export interface Transaction {
     id: number;
     acctFrom: number;
@@ -28,6 +33,8 @@ export interface Transaction {
     amount: number;
     category: number;
     date: string;
+    payeeFrom: number;
+    payeeTo: number;
     tax: boolean;
 }
 

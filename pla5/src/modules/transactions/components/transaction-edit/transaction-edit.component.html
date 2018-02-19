@@ -3,21 +3,35 @@
 
   <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
       <label>Date</label>
-      <input type='date' name="date" formControlName="date" /> <br />
-      <label>To</label>
+      <input type='date' name="date" formControlName="date" />
+      <br />
+      <label>To Payee</label>
+      <select name="payeeTo" formControlName="payeeTo">
+          <option *ngFor="let payee of payees" value="{{payee.id}}">{{payee.name}}</option>
+      </select>
+      <br />
+      <label>To Acct</label>
       <select name="acctTo" formControlName="acctTo">
-          <option *ngFor="let account of acctPayee" value="{{account.id}}">{{account.name}}</option>
+          <option *ngFor="let account of acctAsset" [class]="account.active? '' : 'greyed'" value="{{account.id}}">{{account.name}}</option>
           <option disabled>──────────</option>
-          <option *ngFor="let account of acctLiability" value="{{account.id}}">{{account.name}}</option>
-          <option disabled>──────────</option>
-          <option *ngFor="let account of acctAsset" value="{{account.id}}">{{account.name}}</option>
-      </select> <br />
-      <label>From</label>
+          <option *ngFor="let account of acctLiability" [class]="account.active? '' : 'greyed'" value="{{account.id}}">{{account.name}}</option>
+      </select>
+      <br />
+      <label>From Acct</label>
       <select name="acctFrom" formControlName="acctFrom">
-          <option *ngFor="let account of accounts" value="{{account.id}}">{{account.name}}</option>
-      </select> <br />
+          <option *ngFor="let account of acctLiability" [class]="account.active? '' : 'greyed'" value="{{account.id}}">{{account.name}}</option>
+          <option disabled>──────────</option>
+          <option *ngFor="let account of acctAsset" [class]="account.active? '' : 'greyed'" value="{{account.id}}">{{account.name}}</option>
+      </select>
+      <br />
+      <label>From Payee</label>
+      <select name="payeeFrom" formControlName="payeeFrom">
+          <option *ngFor="let payee of payees" value="{{payee.id}}">{{payee.name}}</option>
+      </select>
+      <br />
       <label>Amount<span class="pull-right">$</span></label>
-      <input type='number' name="amount" formControlName="amount" /> <br />
+      <input type='number' name="amount" formControlName="amount" />
+      <br />
       <label>Category</label>
       <mat-form-field>
           <input type="text" matInput formControlName="category" [matAutocomplete]="auto" />
@@ -26,9 +40,11 @@
                   {{ categoryName }}
               </mat-option>
           </mat-autocomplete>
-      </mat-form-field><br />
+      </mat-form-field>
+      <br />
       <label>Tax</label>
       <input type='checkbox' name="tax" value="true" formControlName="tax" />
+      <br />
       <input type='submit' value="Update" />
       <button routerLink="/transactions">Cancel</button>
   </form>

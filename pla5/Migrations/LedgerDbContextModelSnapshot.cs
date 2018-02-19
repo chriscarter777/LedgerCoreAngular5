@@ -184,16 +184,10 @@ namespace pla5.Migrations
                     b.Property<int?>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AcctType");
+                    b.Property<string>("AcctType")
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<bool>("Active");
-
-                    b.Property<int?>("DefaultAcct");
-
-                    b.Property<decimal?>("DefaultAmt")
-                        .HasColumnType("money");
-
-                    b.Property<int?>("DefaultCat");
 
                     b.Property<string>("Institution")
                         .HasColumnType("nvarchar(128)");
@@ -210,8 +204,6 @@ namespace pla5.Migrations
 
                     b.Property<string>("Number")
                         .HasColumnType("nvarchar(128)");
-
-                    b.Property<bool>("Owned");
 
                     b.Property<string>("User")
                         .HasColumnType("nvarchar(128)");
@@ -256,14 +248,37 @@ namespace pla5.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("pla5.Models.Payee", b =>
+                {
+                    b.Property<int?>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("DefaultAcct");
+
+                    b.Property<decimal?>("DefaultAmt")
+                        .HasColumnType("money");
+
+                    b.Property<int?>("DefaultCat");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("User")
+                        .HasColumnType("nvarchar(128)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Payees");
+                });
+
             modelBuilder.Entity("pla5.Models.Transaction", b =>
                 {
                     b.Property<int?>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AcctFrom");
+                    b.Property<int?>("AcctFrom");
 
-                    b.Property<int>("AcctTo");
+                    b.Property<int?>("AcctTo");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("money");
@@ -271,6 +286,10 @@ namespace pla5.Migrations
                     b.Property<int>("Category");
 
                     b.Property<DateTime>("Date");
+
+                    b.Property<int?>("PayeeFrom");
+
+                    b.Property<int?>("PayeeTo");
 
                     b.Property<bool>("Tax");
 

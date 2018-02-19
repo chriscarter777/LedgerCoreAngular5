@@ -299,7 +299,7 @@ namespace pla5.Data
             _logger.LogTrace("DataRepository is getting Accounts for user: {0}.", _userName);
             try
             {
-                return await _context.Accounts.Where(x => x.User == _userName).OrderBy(x => x.AcctType).ThenBy(x => x.Name).ToArrayAsync() ?? new Account[0];
+                return await _context.Accounts.Where(x => x.User == _userName).OrderByDescending(x => x.Active) .ThenBy(x => x.AcctType).ThenBy(x => x.Name).ToArrayAsync() ?? new Account[0];
             }
             catch (Exception e)
             {
@@ -494,6 +494,92 @@ namespace pla5.Data
                 HandleException(e, nameof(SeedUserCategoriesAsync), "");
             }
         }  //SeedUserCategoriesAsync
+        #endregion
+        #region Payees
+        public async Task<Payee[]> GetPayeesAsync()
+        {
+            _logger.LogTrace("DataRepository is getting Payees for user: {0}.", _userName);
+            try
+            {
+                return await _context.Payees.Where(x => x.User == _userName).OrderBy(x => x.Name).ToArrayAsync() ?? new Payee[0];
+            }
+            catch (Exception e)
+            {
+                HandleException(e, nameof(GetPayeesAsync), "");
+                return null;
+            }
+        }  //GetPayeesAsync
+
+        public async Task<Payee> GetPayeeAsync(int id)
+        {
+            _logger.LogTrace("DataRepository is getting Payee {0} for user: {1}.", id, _userName);
+            try
+            {
+                return await _context.Payees.SingleOrDefaultAsync(x => x.User == _userName && x.ID == id);
+            }
+            catch (Exception e)
+            {
+                HandleException(e, nameof(GetPayeeAsync), "");
+                return null;
+            }
+        }  //GetPayeeAsync
+
+        public async Task<Payee> AddPayeeAsync(Payee p)
+        {
+            _logger.LogTrace("DataRepository is adding Payee {0} for user: {1}.", p.Name, _userName);
+            try
+            {
+                p.User = _userName;
+                _context.Payees.Add(p);
+                await _context.SaveChangesAsync();
+                return p;
+            }
+            catch (Exception e)
+            {
+                HandleException(e, nameof(AddPayeeAsync), "");
+                return null;
+            }
+        }  //AddPayeeAsync
+
+        public async Task<Payee> DeletePayeeAsync(int id)
+        {
+            _logger.LogTrace("DataRepository is deleting Payee {0} for user: {1}.", id, _userName);
+            try
+            {
+                Payee payee = await _context.Payees.SingleOrDefaultAsync(x => x.ID == id);
+                if (payee == null)
+                {
+                    return null;
+                }
+
+                _context.Payees.Remove(payee);
+                await _context.SaveChangesAsync();
+
+                return payee;
+
+            }
+            catch (Exception e)
+            {
+                HandleException(e, nameof(DeletePayeeAsync), "");
+                return null;
+            }
+        } //DeletePayeeAsync
+
+        public async Task<Payee> UpdatePayeeAsync(Payee p)
+        {
+            _logger.LogTrace("DataRepository is updating Payee {0} for user: {1}.", p.Name, _userName);
+            try
+            {
+                _context.Entry(p).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return p;
+            }
+            catch (Exception e)
+            {
+                HandleException(e, nameof(UpdatePayeeAsync), "");
+                return null;
+            }
+        }  //UpdatePayeeAsync
         #endregion
         #region Transactions
         public async Task<Transaction[]> GetTransactionsAsync()
