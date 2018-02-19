@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DataService } from '../../../shared/data.service';
 import { Account, Category, Payee, Transaction } from '../../../shared/interfaces';
 
@@ -14,11 +14,36 @@ export class TransactionListComponent {
     payees: Payee[];
     transactions: Transaction[];
 
+
     constructor(private dataService: DataService) {
+
+        this.dataService.payeeAdded.subscribe(
+            (data: Payee) => {
+                if (data === null) {
+                    alert("There was a problem adding payee.");
+                }
+                else {
+                    this.payees.push(data);
+                }
+            },
+            error => alert("There was a problem adding.")
+        );
+
+        this.dataService.payeeUpdated.subscribe(
+            (data: Payee) => {
+                if (data === null) {
+                    alert("There was a problem updating payee.");
+                }
+                else {
+                    var indexToUpdate = this.payees.findIndex((element) => element.id == data.id);
+                    this.payees[indexToUpdate] = data;
+                }
+            },
+            error => alert("There was a problem updating.")
+        );
 
         this.dataService.transactionAdded.subscribe(
             (data: Transaction) => {
-                console.log("transactionAdded received from data.service: " + JSON.stringify(data));
                 if (data === null) {
                     alert("There was a problem adding.");
                 }
@@ -31,7 +56,6 @@ export class TransactionListComponent {
 
         this.dataService.transactionDeleted.subscribe(
             (data: Transaction) => {
-                console.log("transactionDeleted received from data.service: " + JSON.stringify(data));
                 if (data === null) {
                     alert("There was a problem deleting.");
                 }
@@ -45,7 +69,6 @@ export class TransactionListComponent {
 
         this.dataService.transactionUpdated.subscribe(
             (data: Transaction) => {
-                console.log("transactionUpdated received from data.service: " + JSON.stringify(data));
                 if (data === null) {
                     alert("There was a problem updating.");
                 }

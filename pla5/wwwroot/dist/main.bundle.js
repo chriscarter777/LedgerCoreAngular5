@@ -714,7 +714,7 @@ var AppComponent = /** @class */ (function () {
         })
     ], AppComponent);
     return AppComponent;
-}());
+}()); //component
 exports.AppComponent = AppComponent;
 
 
@@ -1687,7 +1687,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body {\r\n}\r\n\r\nlabel {\r\n  width: 80px;\r\n}\r\n\r\nselect {\r\n    width: 160px;\r\n}\r\n\r\n.red {\r\n    color: red;\r\n}\r\n\r\n.green {\r\n    color: green;\r\n}\r\n\r\n.greyed {\r\n    color: lightgray;\r\n}\r\n", ""]);
+exports.push([module.i, "body {\r\n}\r\n\r\nlabel {\r\n  width: 80px;\r\n}\r\n\r\nselect {\r\n    width: 160px;\r\n}\r\n\r\n.red {\r\n    color: red;\r\n}\r\n\r\n.green {\r\n    color: green;\r\n}\r\n\r\n.greyed {\r\n    color: lightgray;\r\n}\r\n\r\n.fromSelector {\r\n    background: snow;\r\n}\r\n\r\n.toSelector {\r\n    background: floralwhite;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1700,7 +1700,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-add/transaction-add.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionAdd\">\r\n    <h4>Add</h4>\r\n    <p *ngIf=\"!form\">Loading...</p>\r\n\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n        <label>Date</label>\r\n        <input type='date' name=\"date\" formControlName=\"date\" />\r\n        <br />\r\n        <label>To Payee</label>\r\n        <select name=\"payeeTo\" formControlName=\"payeeTo\">\r\n            <option *ngFor=\"let payee of payees\" value=\"{{payee.id}}\">{{payee.name}}</option>\r\n        </select>\r\n        <br />\r\n        <label>To Acct</label>\r\n        <select name=\"acctTo\" formControlName=\"acctTo\">\r\n            <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            <option disabled>──────────</option>\r\n            <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n        </select>\r\n        <br />\r\n        <label>From Acct</label>\r\n        <select name=\"acctFrom\" formControlName=\"acctFrom\">\r\n            <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            <option disabled>──────────</option>\r\n            <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n        </select>\r\n        <br />\r\n        <label>From Payee</label>\r\n        <select name=\"payeeFrom\" formControlName=\"payeeFrom\">\r\n            <option *ngFor=\"let payee of payees\" value=\"{{payee.id}}\">{{payee.name}}</option>\r\n        </select>\r\n        <br />\r\n        <label>Amount<span class=\"pull-right\">$</span></label>\r\n        <input type='number' name=\"amount\" formControlName=\"amount\" />\r\n        <br />\r\n        <label>Category</label>\r\n        <mat-form-field>\r\n            <input type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"auto\" />\r\n            <mat-autocomplete #auto=\"matAutocomplete\">\r\n                <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\">\r\n                    {{ categoryName }}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n        </mat-form-field>\r\n        <br />\r\n        <label>Tax</label>\r\n        <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n        <br />\r\n        <input type='submit' value=\"Add\" />\r\n        <button routerLink=\"/transactions\">Cancel</button>\r\n    </form>\r\n</div>\r\n"
+module.exports = "<div class=\"transactionAdd\">\r\n    <h4>Add</h4>\r\n    <p *ngIf=\"!form\">Loading...</p>\r\n\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n        <label>Date</label>\r\n        <input type='date' name=\"date\" formControlName=\"date\" />\r\n        <br />\r\n        <div class=\"toSelector\">\r\n            <label>To Payee</label>\r\n            <mat-form-field>\r\n                <input type=\"text\" matInput formControlName=\"payeeTo\" [matAutocomplete]=\"autoPT\" />\r\n                <mat-autocomplete #autoPT=\"matAutocomplete\">\r\n                    <mat-option *ngFor=\"let payeeName of filteredPayeeToNames | async\" value=\"{{payeeName}}\">\r\n                        {{ payeeName }}\r\n                    </mat-option>\r\n                </mat-autocomplete>\r\n            </mat-form-field>\r\n            <label>To Acct</label>\r\n            <select name=\"acctTo\" formControlName=\"acctTo\">\r\n                <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                <option disabled>──────────</option>\r\n                <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            </select>\r\n        </div>\r\n        <br />\r\n        <div class=\"fromSelector\">\r\n            <label>From Acct</label>\r\n            <select name=\"acctFrom\" formControlName=\"acctFrom\">\r\n                <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                <option disabled>──────────</option>\r\n                <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            </select>\r\n            <label>From Payee</label>\r\n            <mat-form-field>\r\n                <input type=\"text\" matInput formControlName=\"payeeFrom\" [matAutocomplete]=\"autoPF\" />\r\n                <mat-autocomplete #autoPF=\"matAutocomplete\">\r\n                    <mat-option *ngFor=\"let payeeName of filteredPayeeFromNames | async\" value=\"{{payeeName}}\">\r\n                        {{ payeeName }}\r\n                    </mat-option>\r\n                </mat-autocomplete>\r\n            </mat-form-field>\r\n        </div>\r\n        <br />\r\n        <label>Amount<span class=\"pull-right\">$</span></label>\r\n        <input type='number' name=\"amount\" formControlName=\"amount\" />\r\n        <br />\r\n        <label>Category</label>\r\n        <mat-form-field>\r\n            <input type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"autoC\" />\r\n            <mat-autocomplete #autoC=\"matAutocomplete\">\r\n                <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\">\r\n                    {{ categoryName }}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n        </mat-form-field>\r\n        <br />\r\n        <label>Tax</label>\r\n        <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n        <br />\r\n        <input type='submit' value=\"Add\" />\r\n        <button routerLink=\"/transactions\">Cancel</button>\r\n    </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1754,7 +1754,9 @@ var TransactionAddComponent = /** @class */ (function () {
             .then(function () { return _this.acctAsset = _this.accounts.filter(function (c) { return c.acctType === "Asset"; }); })
             .then(function () { return _this.acctLiability = _this.accounts.filter(function (c) { return c.acctType === "Liability"; }); })
             .then(function () { return _this.instantiateForm(_this.acctFrom, _this.acctTo, _this.amount, _this.category, _this.date, _this.payeeFrom, _this.payeeTo, _this.tax); })
-            .then(function () { return _this.filteredCategoryNames = _this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); })); });
+            .then(function () { return _this.filteredCategoryNames = _this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); })); })
+            .then(function () { return _this.filteredPayeeFromNames = _this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); })); })
+            .then(function () { return _this.filteredPayeeToNames = _this.payeeTo.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); })); });
     };
     ;
     TransactionAddComponent.prototype.ngOnDestroy = function () {
@@ -1768,28 +1770,16 @@ var TransactionAddComponent = /** @class */ (function () {
     TransactionAddComponent.prototype.accountName = function (accountId) {
         return this.accounts.find(function (element) { return element.id === accountId; }).name;
     };
+    TransactionAddComponent.prototype.categoryFilter = function (val) {
+        return this.categories.filter(function (category) {
+            return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+        }).map(function (category) { return category.name; });
+    };
     TransactionAddComponent.prototype.categoryId = function (categoryName) {
         return this.categories.find(function (element) { return element.name === categoryName; }).id;
     };
     TransactionAddComponent.prototype.categoryName = function (categoryId) {
         return this.categories.find(function (element) { return element.id === categoryId; }).name;
-    };
-    TransactionAddComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, date, payeeFrom, payeeTo, tax) {
-        this.form = new forms_1.FormGroup({
-            acctFrom: acctFrom,
-            acctTo: acctTo,
-            amount: amount,
-            category: category,
-            date: date,
-            payeeFrom: payeeFrom,
-            payeeTo: payeeTo,
-            tax: tax,
-        });
-    };
-    TransactionAddComponent.prototype.categoryFilter = function (val) {
-        return this.categories.filter(function (category) {
-            return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
-        }).map(function (category) { return category.name; });
     };
     TransactionAddComponent.prototype.freshNewTransaction = function () {
         return { id: null, amount: 0, category: 0, acctFrom: 0, acctTo: 0, date: new Date().toLocaleDateString(), payeeFrom: 0, payeeTo: 0, tax: false };
@@ -1823,21 +1813,72 @@ var TransactionAddComponent = /** @class */ (function () {
     TransactionAddComponent.prototype.goBack = function () {
         this.location.back();
     };
+    TransactionAddComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, date, payeeFrom, payeeTo, tax) {
+        this.form = new forms_1.FormGroup({
+            acctFrom: acctFrom,
+            acctTo: acctTo,
+            amount: amount,
+            category: category,
+            date: date,
+            payeeFrom: payeeFrom,
+            payeeTo: payeeTo,
+            tax: tax,
+        });
+    };
     TransactionAddComponent.prototype.onSubmit = function () {
-        //set data from the form
+        var _this = this;
+        //add the payee or update its defaults from payeeFrom, if populated
+        if (this.form.get('payeeFrom').value !== '') {
+            var pfMatch = this.payees.filter(function (element) { return element.name === _this.form.get('payeeFrom').value; });
+            if (pfMatch.length === 0) {
+                var pf = { id: 0, balance: 0, defaultAcct: this.form.get('acctTo').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeFrom').value };
+                this.dataService.addPayee(pf);
+            }
+            else {
+                var matchIndex = this.payees.indexOf(pfMatch[0]);
+                this.payees[matchIndex].defaultAcct = this.form.get('acctTo').value;
+                this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
+                this.payees[matchIndex].defaultCat = this.form.get('category').value;
+                this.dataService.updatePayee(this.payees[matchIndex]);
+            }
+        }
+        //add the payee or update its defaults from payeeTo, if populated
+        if (this.form.get('payeeTo').value !== '') {
+            var ptMatch = this.payees.filter(function (element) { return element.name === _this.form.get('payeeTo').value; });
+            if (ptMatch.length === 0) {
+                var pt = { id: 0, balance: 0, defaultAcct: this.form.get('acctFrom').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeTo').value };
+                this.dataService.addPayee(pt);
+            }
+            else {
+                var matchIndex = this.payees.indexOf(ptMatch[0]);
+                this.payees[matchIndex].defaultAcct = this.form.get('acctFrom').value;
+                this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
+                this.payees[matchIndex].defaultCat = this.form.get('category').value;
+                this.dataService.updatePayee(this.payees[matchIndex]);
+            }
+        }
+        //NEED A MECHANISM TO ENSURE NEW PAYEES GET ADDED TO this.payees !BEFORE! TRYING TO GET THEIR ID BELOW, OR IT WILL FAIL!
+        //add the transaction
         this.newTransaction.acctFrom = this.form.get('acctFrom').value;
         this.newTransaction.acctTo = this.form.get('acctTo').value;
         this.newTransaction.amount = this.form.get('amount').value;
         this.newTransaction.category = this.categoryId(this.form.get('category').value);
         this.newTransaction.date = this.form.get('date').value;
-        this.newTransaction.payeeFrom = this.form.get('payeeFrom').value;
-        this.newTransaction.payeeTo = this.form.get('payeeTo').value;
+        this.newTransaction.payeeFrom = this.payeeId(this.form.get('payeeFrom').value);
+        this.newTransaction.payeeTo = this.payeeId(this.form.get('payeeTo').value);
         this.newTransaction.tax = this.form.get('tax').value;
-        //add the transaction
         this.dataService.addTransaction(this.newTransaction);
         //reset and close
         this.ngOnInit();
         this.goBack();
+    };
+    TransactionAddComponent.prototype.payeeFilter = function (val) {
+        return this.payees.filter(function (payee) {
+            return payee.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+        }).map(function (payee) { return payee.name; });
+    };
+    TransactionAddComponent.prototype.payeeId = function (payeeName) {
+        return this.payees.find(function (element) { return element.name === payeeName; }).id;
     };
     TransactionAddComponent.prototype.payeeName = function (payeeId) {
         return this.payees.find(function (element) { return element.id === payeeId; }).name;
@@ -1867,7 +1908,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body {\r\n}\r\n\r\nlabel {\r\n  width: 80px;\r\n}\r\n\r\nselect {\r\n    width: 160px;\r\n}\r\n\r\n.red {\r\n    color: red;\r\n}\r\n\r\n.green {\r\n    color: green;\r\n}\r\n\r\n.greyed {\r\n    color: lightgray;\r\n}\r\n", ""]);
+exports.push([module.i, "body {\r\n}\r\n\r\nlabel {\r\n  width: 80px;\r\n}\r\n\r\nselect {\r\n    width: 160px;\r\n}\r\n\r\n.red {\r\n    color: red;\r\n}\r\n\r\n.green {\r\n    color: green;\r\n}\r\n\r\n.greyed {\r\n    color: lightgray;\r\n}\r\n\r\n.fromSelector {\r\n    background: snow;\r\n}\r\n\r\n.toSelector {\r\n    background: floralwhite;\r\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -1880,7 +1921,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-edit/transaction-edit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n      <label>Date</label>\r\n      <input type='date' name=\"date\" formControlName=\"date\" />\r\n      <br />\r\n      <label>To Payee</label>\r\n      <select name=\"payeeTo\" formControlName=\"payeeTo\">\r\n          <option *ngFor=\"let payee of payees\" value=\"{{payee.id}}\">{{payee.name}}</option>\r\n      </select>\r\n      <br />\r\n      <label>To Acct</label>\r\n      <select name=\"acctTo\" formControlName=\"acctTo\">\r\n          <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          <option disabled>──────────</option>\r\n          <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n      </select>\r\n      <br />\r\n      <label>From Acct</label>\r\n      <select name=\"acctFrom\" formControlName=\"acctFrom\">\r\n          <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          <option disabled>──────────</option>\r\n          <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n      </select>\r\n      <br />\r\n      <label>From Payee</label>\r\n      <select name=\"payeeFrom\" formControlName=\"payeeFrom\">\r\n          <option *ngFor=\"let payee of payees\" value=\"{{payee.id}}\">{{payee.name}}</option>\r\n      </select>\r\n      <br />\r\n      <label>Amount<span class=\"pull-right\">$</span></label>\r\n      <input type='number' name=\"amount\" formControlName=\"amount\" />\r\n      <br />\r\n      <label>Category</label>\r\n      <mat-form-field>\r\n          <input type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"auto\" />\r\n          <mat-autocomplete #auto=\"matAutocomplete\">\r\n              <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\">\r\n                  {{ categoryName }}\r\n              </mat-option>\r\n          </mat-autocomplete>\r\n      </mat-form-field>\r\n      <br />\r\n      <label>Tax</label>\r\n      <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n      <br />\r\n      <input type='submit' value=\"Update\" />\r\n      <button routerLink=\"/transactions\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div class=\"transactionEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n      <label>Date</label>\r\n      <input type='date' name=\"date\" formControlName=\"date\" />\r\n      <br />\r\n      <div class=\"toSelector\">\r\n          <label>To Payee</label>\r\n          <mat-form-field>\r\n              <input type=\"text\" matInput formControlName=\"payeeTo\" [matAutocomplete]=\"autoPT\" />\r\n              <mat-autocomplete #autoPT=\"matAutocomplete\">\r\n                  <mat-option *ngFor=\"let payeeName of filteredPayeeToNames | async\" value=\"{{payeeName}}\">\r\n                      {{ payeeName }}\r\n                  </mat-option>\r\n              </mat-autocomplete>\r\n          </mat-form-field>\r\n          <label>To Acct</label>\r\n          <select name=\"acctTo\" formControlName=\"acctTo\">\r\n              <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n              <option disabled>──────────</option>\r\n              <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          </select>\r\n      </div>\r\n      <br />\r\n      <div class=\"fromSelector\">\r\n          <label>From Acct</label>\r\n          <select name=\"acctFrom\" formControlName=\"acctFrom\">\r\n              <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n              <option disabled>──────────</option>\r\n              <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          </select>\r\n          <label>From Payee</label>\r\n          <mat-form-field>\r\n              <input type=\"text\" matInput formControlName=\"payeeFrom\" [matAutocomplete]=\"autoPF\" />\r\n              <mat-autocomplete #autoPF=\"matAutocomplete\">\r\n                  <mat-option *ngFor=\"let payeeName of filteredPayeeFromNames | async\" value=\"{{payeeName}}\">\r\n                      {{ payeeName }}\r\n                  </mat-option>\r\n              </mat-autocomplete>\r\n          </mat-form-field>\r\n      </div>\r\n      <br />\r\n      <label>Amount<span class=\"pull-right\">$</span></label>\r\n      <input type='number' name=\"amount\" formControlName=\"amount\" />\r\n      <br />\r\n      <label>Category</label>\r\n      <mat-form-field>\r\n          <input type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"autoC\" />\r\n          <mat-autocomplete #autoC=\"matAutocomplete\">\r\n              <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\">\r\n                  {{ categoryName }}\r\n              </mat-option>\r\n          </mat-autocomplete>\r\n      </mat-form-field>\r\n      <br />\r\n      <label>Tax</label>\r\n      <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n      <br />\r\n      <input type='submit' value=\"Update\" />\r\n      <button routerLink=\"/transactions\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1928,7 +1969,9 @@ var TransactionEditComponent = /** @class */ (function () {
             .then(function () { return _this.acctLiability = _this.accounts.filter(function (c) { return c.acctType === "Liability"; }); })
             .then(function () { return _this.instantiateControls(); })
             .then(function () { return _this.instantiateForm(_this.acctFrom, _this.acctTo, _this.amount, _this.category, _this.date, _this.payeeFrom, _this.payeeTo, _this.tax); })
-            .then(function () { return _this.filteredCategoryNames = _this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); })); });
+            .then(function () { return _this.filteredCategoryNames = _this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); })); })
+            .then(function () { return _this.filteredPayeeFromNames = _this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); })); })
+            .then(function () { return _this.filteredPayeeToNames = _this.payeeTo.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); })); });
     };
     TransactionEditComponent.prototype.ngOnDestroy = function () {
         var editlinks = document.getElementsByClassName("editlink");
@@ -1941,38 +1984,16 @@ var TransactionEditComponent = /** @class */ (function () {
     TransactionEditComponent.prototype.accountName = function (accountId) {
         return this.accounts.find(function (element) { return element.id === accountId; }).name;
     };
-    TransactionEditComponent.prototype.categoryId = function (categoryName) {
-        return this.categories.find(function (element) { return element.name === categoryName; }).id;
-    };
-    TransactionEditComponent.prototype.categoryName = function (categoryId) {
-        return this.categories.find(function (element) { return element.id === categoryId; }).name;
-    };
     TransactionEditComponent.prototype.categoryFilter = function (val) {
         return this.categories.filter(function (category) {
             return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
         }).map(function (category) { return category.name; });
     };
-    TransactionEditComponent.prototype.instantiateControls = function () {
-        this.acctFrom = new forms_1.FormControl(this.editTransaction.acctFrom);
-        this.acctTo = new forms_1.FormControl(this.editTransaction.acctTo);
-        this.amount = new forms_1.FormControl(this.editTransaction.amount);
-        this.category = new forms_1.FormControl(this.categoryName(this.editTransaction.category));
-        this.date = new forms_1.FormControl(this.editTransaction.date);
-        this.payeeFrom = new forms_1.FormControl(this.editTransaction.payeeFrom);
-        this.payeeTo = new forms_1.FormControl(this.editTransaction.payeeTo);
-        this.tax = new forms_1.FormControl(this.editTransaction.tax);
+    TransactionEditComponent.prototype.categoryId = function (categoryName) {
+        return this.categories.find(function (element) { return element.name === categoryName; }).id;
     };
-    TransactionEditComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, date, payeeFrom, payeeTo, tax) {
-        this.form = new forms_1.FormGroup({
-            acctFrom: acctFrom,
-            acctTo: acctTo,
-            amount: amount,
-            category: category,
-            date: date,
-            payeeFrom: payeeFrom,
-            payeeTo: payeeTo,
-            tax: tax,
-        });
+    TransactionEditComponent.prototype.categoryName = function (categoryId) {
+        return this.categories.find(function (element) { return element.id === categoryId; }).name;
     };
     TransactionEditComponent.prototype.getAccounts = function () {
         var _this = this;
@@ -2014,21 +2035,82 @@ var TransactionEditComponent = /** @class */ (function () {
     TransactionEditComponent.prototype.goBack = function () {
         this.location.back();
     };
+    TransactionEditComponent.prototype.instantiateControls = function () {
+        this.acctFrom = new forms_1.FormControl(this.editTransaction.acctFrom);
+        this.acctTo = new forms_1.FormControl(this.editTransaction.acctTo);
+        this.amount = new forms_1.FormControl(this.editTransaction.amount);
+        this.category = new forms_1.FormControl(this.categoryName(this.editTransaction.category));
+        this.date = new forms_1.FormControl(this.editTransaction.date);
+        this.payeeFrom = new forms_1.FormControl(this.editTransaction.payeeFrom);
+        this.payeeTo = new forms_1.FormControl(this.editTransaction.payeeTo);
+        this.tax = new forms_1.FormControl(this.editTransaction.tax);
+    };
+    TransactionEditComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, date, payeeFrom, payeeTo, tax) {
+        this.form = new forms_1.FormGroup({
+            acctFrom: acctFrom,
+            acctTo: acctTo,
+            amount: amount,
+            category: category,
+            date: date,
+            payeeFrom: payeeFrom,
+            payeeTo: payeeTo,
+            tax: tax,
+        });
+    };
     TransactionEditComponent.prototype.onSubmit = function () {
-        //set data from the form
+        var _this = this;
+        //add the payee or update its defaults from payeeFrom, if populated
+        if (this.form.get('payeeFrom').value !== '') {
+            var pfMatch = this.payees.filter(function (element) { return element.name === _this.form.get('payeeFrom').value; });
+            if (pfMatch.length === 0) {
+                var pf = { id: 0, balance: 0, defaultAcct: this.form.get('acctTo').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeFrom').value };
+                this.dataService.addPayee(pf);
+            }
+            else {
+                var matchIndex = this.payees.indexOf(pfMatch[0]);
+                this.payees[matchIndex].defaultAcct = this.form.get('acctTo').value;
+                this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
+                this.payees[matchIndex].defaultCat = this.form.get('category').value;
+                this.dataService.updatePayee(this.payees[matchIndex]);
+            }
+        }
+        //add the payee or update its defaults from payeeTo, if populated
+        if (this.form.get('payeeTo').value !== '') {
+            var ptMatch = this.payees.filter(function (element) { return element.name === _this.form.get('payeeTo').value; });
+            if (ptMatch.length === 0) {
+                var pt = { id: 0, balance: 0, defaultAcct: this.form.get('acctFrom').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeTo').value };
+                this.dataService.addPayee(pt);
+            }
+            else {
+                var matchIndex = this.payees.indexOf(ptMatch[0]);
+                this.payees[matchIndex].defaultAcct = this.form.get('acctFrom').value;
+                this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
+                this.payees[matchIndex].defaultCat = this.form.get('category').value;
+                this.dataService.updatePayee(this.payees[matchIndex]);
+            }
+        }
+        //NEED A MECHANISM TO ENSURE NEW PAYEES GET ADDED TO this.payees !BEFORE! TRYING TO GET THEIR ID BELOW, OR IT WILL FAIL!
+        //update the transaction
         this.editTransaction.acctFrom = this.form.get('acctFrom').value;
         this.editTransaction.acctTo = this.form.get('acctTo').value;
         this.editTransaction.amount = this.form.get('amount').value;
         this.editTransaction.category = this.categoryId(this.form.get('category').value);
         this.editTransaction.date = this.form.get('date').value;
-        this.editTransaction.payeeFrom = this.form.get('payeeFrom').value;
-        this.editTransaction.payeeTo = this.form.get('payeeTo').value;
+        this.editTransaction.payeeFrom = this.payeeId(this.form.get('payeeFrom').value);
+        this.editTransaction.payeeTo = this.payeeId(this.form.get('payeeTo').value);
         this.editTransaction.tax = this.form.get('tax').value;
-        //update the transaction
         this.dataService.updateTransaction(this.editTransaction);
         //reset and close
         this.ngOnInit();
         this.goBack();
+    };
+    TransactionEditComponent.prototype.payeeFilter = function (val) {
+        return this.payees.filter(function (payee) {
+            return payee.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+        }).map(function (payee) { return payee.name; });
+    };
+    TransactionEditComponent.prototype.payeeId = function (payeeName) {
+        return this.payees.find(function (element) { return element.name === payeeName; }).id;
     };
     TransactionEditComponent.prototype.payeeName = function (payeeId) {
         return this.payees.find(function (element) { return element.id === payeeId; }).name;
@@ -2097,8 +2179,24 @@ var TransactionListComponent = /** @class */ (function () {
         var _this = this;
         this.dataService = dataService;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
+        this.dataService.payeeAdded.subscribe(function (data) {
+            if (data === null) {
+                alert("There was a problem adding payee.");
+            }
+            else {
+                _this.payees.push(data);
+            }
+        }, function (error) { return alert("There was a problem adding."); });
+        this.dataService.payeeUpdated.subscribe(function (data) {
+            if (data === null) {
+                alert("There was a problem updating payee.");
+            }
+            else {
+                var indexToUpdate = _this.payees.findIndex(function (element) { return element.id == data.id; });
+                _this.payees[indexToUpdate] = data;
+            }
+        }, function (error) { return alert("There was a problem updating."); });
         this.dataService.transactionAdded.subscribe(function (data) {
-            console.log("transactionAdded received from data.service: " + JSON.stringify(data));
             if (data === null) {
                 alert("There was a problem adding.");
             }
@@ -2107,7 +2205,6 @@ var TransactionListComponent = /** @class */ (function () {
             }
         }, function (error) { return alert("There was a problem adding."); });
         this.dataService.transactionDeleted.subscribe(function (data) {
-            console.log("transactionDeleted received from data.service: " + JSON.stringify(data));
             if (data === null) {
                 alert("There was a problem deleting.");
             }
@@ -2117,7 +2214,6 @@ var TransactionListComponent = /** @class */ (function () {
             }
         }, function (error) { return alert("There was a problem deleting."); });
         this.dataService.transactionUpdated.subscribe(function (data) {
-            console.log("transactionUpdated received from data.service: " + JSON.stringify(data));
             if (data === null) {
                 alert("There was a problem updating.");
             }

@@ -16,8 +16,24 @@ var TransactionListComponent = /** @class */ (function () {
         var _this = this;
         this.dataService = dataService;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
+        this.dataService.payeeAdded.subscribe(function (data) {
+            if (data === null) {
+                alert("There was a problem adding payee.");
+            }
+            else {
+                _this.payees.push(data);
+            }
+        }, function (error) { return alert("There was a problem adding."); });
+        this.dataService.payeeUpdated.subscribe(function (data) {
+            if (data === null) {
+                alert("There was a problem updating payee.");
+            }
+            else {
+                var indexToUpdate = _this.payees.findIndex(function (element) { return element.id == data.id; });
+                _this.payees[indexToUpdate] = data;
+            }
+        }, function (error) { return alert("There was a problem updating."); });
         this.dataService.transactionAdded.subscribe(function (data) {
-            console.log("transactionAdded received from data.service: " + JSON.stringify(data));
             if (data === null) {
                 alert("There was a problem adding.");
             }
@@ -26,7 +42,6 @@ var TransactionListComponent = /** @class */ (function () {
             }
         }, function (error) { return alert("There was a problem adding."); });
         this.dataService.transactionDeleted.subscribe(function (data) {
-            console.log("transactionDeleted received from data.service: " + JSON.stringify(data));
             if (data === null) {
                 alert("There was a problem deleting.");
             }
@@ -36,7 +51,6 @@ var TransactionListComponent = /** @class */ (function () {
             }
         }, function (error) { return alert("There was a problem deleting."); });
         this.dataService.transactionUpdated.subscribe(function (data) {
-            console.log("transactionUpdated received from data.service: " + JSON.stringify(data));
             if (data === null) {
                 alert("There was a problem updating.");
             }

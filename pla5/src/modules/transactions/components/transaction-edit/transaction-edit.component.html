@@ -5,37 +5,49 @@
       <label>Date</label>
       <input type='date' name="date" formControlName="date" />
       <br />
-      <label>To Payee</label>
-      <select name="payeeTo" formControlName="payeeTo">
-          <option *ngFor="let payee of payees" value="{{payee.id}}">{{payee.name}}</option>
-      </select>
+      <div class="toSelector">
+          <label>To Payee</label>
+          <mat-form-field>
+              <input type="text" matInput formControlName="payeeTo" [matAutocomplete]="autoPT" />
+              <mat-autocomplete #autoPT="matAutocomplete">
+                  <mat-option *ngFor="let payeeName of filteredPayeeToNames | async" value="{{payeeName}}">
+                      {{ payeeName }}
+                  </mat-option>
+              </mat-autocomplete>
+          </mat-form-field>
+          <label>To Acct</label>
+          <select name="acctTo" formControlName="acctTo">
+              <option *ngFor="let account of acctAsset" [class]="account.active? '' : 'greyed'" value="{{account.id}}">{{account.name}}</option>
+              <option disabled>──────────</option>
+              <option *ngFor="let account of acctLiability" [class]="account.active? '' : 'greyed'" value="{{account.id}}">{{account.name}}</option>
+          </select>
+      </div>
       <br />
-      <label>To Acct</label>
-      <select name="acctTo" formControlName="acctTo">
-          <option *ngFor="let account of acctAsset" [class]="account.active? '' : 'greyed'" value="{{account.id}}">{{account.name}}</option>
-          <option disabled>──────────</option>
-          <option *ngFor="let account of acctLiability" [class]="account.active? '' : 'greyed'" value="{{account.id}}">{{account.name}}</option>
-      </select>
-      <br />
-      <label>From Acct</label>
-      <select name="acctFrom" formControlName="acctFrom">
-          <option *ngFor="let account of acctLiability" [class]="account.active? '' : 'greyed'" value="{{account.id}}">{{account.name}}</option>
-          <option disabled>──────────</option>
-          <option *ngFor="let account of acctAsset" [class]="account.active? '' : 'greyed'" value="{{account.id}}">{{account.name}}</option>
-      </select>
-      <br />
-      <label>From Payee</label>
-      <select name="payeeFrom" formControlName="payeeFrom">
-          <option *ngFor="let payee of payees" value="{{payee.id}}">{{payee.name}}</option>
-      </select>
+      <div class="fromSelector">
+          <label>From Acct</label>
+          <select name="acctFrom" formControlName="acctFrom">
+              <option *ngFor="let account of acctLiability" [class]="account.active? '' : 'greyed'" value="{{account.id}}">{{account.name}}</option>
+              <option disabled>──────────</option>
+              <option *ngFor="let account of acctAsset" [class]="account.active? '' : 'greyed'" value="{{account.id}}">{{account.name}}</option>
+          </select>
+          <label>From Payee</label>
+          <mat-form-field>
+              <input type="text" matInput formControlName="payeeFrom" [matAutocomplete]="autoPF" />
+              <mat-autocomplete #autoPF="matAutocomplete">
+                  <mat-option *ngFor="let payeeName of filteredPayeeFromNames | async" value="{{payeeName}}">
+                      {{ payeeName }}
+                  </mat-option>
+              </mat-autocomplete>
+          </mat-form-field>
+      </div>
       <br />
       <label>Amount<span class="pull-right">$</span></label>
       <input type='number' name="amount" formControlName="amount" />
       <br />
       <label>Category</label>
       <mat-form-field>
-          <input type="text" matInput formControlName="category" [matAutocomplete]="auto" />
-          <mat-autocomplete #auto="matAutocomplete">
+          <input type="text" matInput formControlName="category" [matAutocomplete]="autoC" />
+          <mat-autocomplete #autoC="matAutocomplete">
               <mat-option *ngFor="let categoryName of filteredCategoryNames | async" value="{{categoryName}}">
                   {{ categoryName }}
               </mat-option>

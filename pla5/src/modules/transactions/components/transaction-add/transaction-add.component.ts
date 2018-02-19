@@ -21,6 +21,8 @@ export class TransactionAddComponent {
     categories: Category[];
     payees: Payee[];
     filteredCategoryNames: Observable<string[]>;
+    filteredPayeeFromNames: Observable<string[]>;
+    filteredPayeeToNames: Observable<string[]>;
     newTransaction: Transaction = this.freshNewTransaction();
     form: FormGroup;
     acctFrom: FormControl = new FormControl();
@@ -51,6 +53,8 @@ export class TransactionAddComponent {
             .then(() => this.acctLiability = this.accounts.filter(c => c.acctType === "Liability"))
             .then(() => this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.payeeFrom, this.payeeTo, this.tax))
             .then(() => this.filteredCategoryNames = this.category.valueChanges.pipe(startWith(''), map(val => this.categoryFilter(val))))
+            .then(() => this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith(''), map(val => this.payeeFilter(val))))
+            .then(() => this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith(''), map(val => this.payeeFilter(val))))
     };
 
     ngOnDestroy() {
@@ -66,6 +70,11 @@ export class TransactionAddComponent {
         return this.accounts.find((element) => element.id === accountId).name;
     }
 
+    categoryFilter(val: string): string[] {
+        return this.categories.filter(category =>
+            category.name.toLowerCase().indexOf(val.toLowerCase()) === 0).map(category => category.name);
+    }
+
     categoryId(categoryName: string) {
         return this.categories.find((element) => element.name === categoryName).id;
     }
@@ -74,24 +83,6 @@ export class TransactionAddComponent {
         return this.categories.find((element) => element.id === categoryId).name;
     }
 
-
-    instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, date: FormControl, payeeFrom: FormControl, payeeTo: FormControl, tax: FormControl) {
-        this.form = new FormGroup({
-            acctFrom,
-            acctTo,
-            amount,
-            category,
-            date,
-            payeeFrom,
-            payeeTo,
-            tax,
-        });
-    }
-
-    categoryFilter(val: string): string[] {
-        return this.categories.filter(category =>
-            category.name.toLowerCase().indexOf(val.toLowerCase()) === 0).map(category => category.name);
-    }
 
     displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);
 
@@ -138,22 +129,76 @@ export class TransactionAddComponent {
         this.location.back();
     }
 
+   instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, date: FormControl, payeeFrom: FormControl, payeeTo: FormControl, tax: FormControl) {
+       this.form = new FormGroup({
+           acctFrom,
+           acctTo,
+           amount,
+           category,
+           date,
+           payeeFrom,
+           payeeTo,
+           tax,
+       });
+   }
+
     onSubmit() {
-        //set data from the form
+        //add the payee or update its defaults from payeeFrom, if populated
+        if (this.form.get('payeeFrom').value !== '') {
+            var pfMatch: Payee[] = this.payees.filter((element) => element.name === this.form.get('payeeFrom').value);
+            if (pfMatch.length === 0) {
+                var pf: Payee = { id: 0, balance: 0, defaultAcct: this.form.get('acctTo').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeFrom').value };
+                this.dataService.addPayee(pf);
+            } else {
+                var matchIndex = this.payees.indexOf(pfMatch[0]);
+                this.payees[matchIndex].defaultAcct = this.form.get('acctTo').value;
+                this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
+                this.payees[matchIndex].defaultCat = this.form.get('category').value;
+                this.dataService.updatePayee(this.payees[matchIndex]);
+            }
+        }
+
+        //add the payee or update its defaults from payeeTo, if populated
+        if (this.form.get('payeeTo').value !== '') {
+            var ptMatch: Payee[] = this.payees.filter((element) => element.name === this.form.get('payeeTo').value);
+            if (ptMatch.length === 0) {
+                var pt: Payee = { id: 0, balance: 0, defaultAcct: this.form.get('acctFrom').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeTo').value };
+                this.dataService.addPayee(pt);
+            } else {
+                var matchIndex = this.payees.indexOf(ptMatch[0]);
+                this.payees[matchIndex].defaultAcct = this.form.get('acctFrom').value;
+                this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
+                this.payees[matchIndex].defaultCat = this.form.get('category').value;
+                this.dataService.updatePayee(this.payees[matchIndex]);
+            }
+        }
+
+        //NEED A MECHANISM TO ENSURE NEW PAYEES GET ADDED TO this.payees !BEFORE! TRYING TO GET THEIR ID BELOW, OR IT WILL FAIL!
+
+        //add the transaction
         this.newTransaction.acctFrom = this.form.get('acctFrom').value;
         this.newTransaction.acctTo = this.form.get('acctTo').value;
         this.newTransaction.amount = this.form.get('amount').value;
         this.newTransaction.category = this.categoryId(this.form.get('category').value);
         this.newTransaction.date = this.form.get('date').value;
-        this.newTransaction.payeeFrom = this.form.get('payeeFrom').value;
-        this.newTransaction.payeeTo = this.form.get('payeeTo').value;
+        this.newTransaction.payeeFrom = this.payeeId(this.form.get('payeeFrom').value);
+        this.newTransaction.payeeTo = this.payeeId(this.form.get('payeeTo').value);
         this.newTransaction.tax = this.form.get('tax').value;
-        //add the transaction
         this.dataService.addTransaction(this.newTransaction);
+
         //reset and close
         this.ngOnInit();
         this.goBack();
    }
+
+    payeeFilter(val: string): string[] {
+        return this.payees.filter(payee =>
+            payee.name.toLowerCase().indexOf(val.toLowerCase()) === 0).map(payee => payee.name);
+    }
+
+    payeeId(payeeName: string) {
+        return this.payees.find((element) => element.name === payeeName).id;
+    }
 
     payeeName(payeeId: number) {
         return this.payees.find((element) => element.id === payeeId).name;

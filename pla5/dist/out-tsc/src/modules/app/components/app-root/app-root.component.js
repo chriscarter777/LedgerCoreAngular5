@@ -19,6 +19,6 @@ var AppComponent = /** @class */ (function () {
         })
     ], AppComponent);
     return AppComponent;
-}());
+}()); //component
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app-root.component.js.map

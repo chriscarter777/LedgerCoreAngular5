@@ -20,3 +20,12 @@ select {
 .greyed {
     color: lightgray;
 }
+
+.fromSelector {
+    background: snow;
+}
+
+.toSelector {
+    background: floralwhite;
+}
+

@@ -44,7 +44,9 @@ var TransactionAddComponent = /** @class */ (function () {
             .then(function () { return _this.acctAsset = _this.accounts.filter(function (c) { return c.acctType === "Asset"; }); })
             .then(function () { return _this.acctLiability = _this.accounts.filter(function (c) { return c.acctType === "Liability"; }); })
             .then(function () { return _this.instantiateForm(_this.acctFrom, _this.acctTo, _this.amount, _this.category, _this.date, _this.payeeFrom, _this.payeeTo, _this.tax); })
-            .then(function () { return _this.filteredCategoryNames = _this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); })); });
+            .then(function () { return _this.filteredCategoryNames = _this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); })); })
+            .then(function () { return _this.filteredPayeeFromNames = _this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); })); })
+            .then(function () { return _this.filteredPayeeToNames = _this.payeeTo.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); })); });
     };
     ;
     TransactionAddComponent.prototype.ngOnDestroy = function () {
@@ -58,28 +60,16 @@ var TransactionAddComponent = /** @class */ (function () {
     TransactionAddComponent.prototype.accountName = function (accountId) {
         return this.accounts.find(function (element) { return element.id === accountId; }).name;
     };
+    TransactionAddComponent.prototype.categoryFilter = function (val) {
+        return this.categories.filter(function (category) {
+            return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+        }).map(function (category) { return category.name; });
+    };
     TransactionAddComponent.prototype.categoryId = function (categoryName) {
         return this.categories.find(function (element) { return element.name === categoryName; }).id;
     };
     TransactionAddComponent.prototype.categoryName = function (categoryId) {
         return this.categories.find(function (element) { return element.id === categoryId; }).name;
-    };
-    TransactionAddComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, date, payeeFrom, payeeTo, tax) {
-        this.form = new forms_1.FormGroup({
-            acctFrom: acctFrom,
-            acctTo: acctTo,
-            amount: amount,
-            category: category,
-            date: date,
-            payeeFrom: payeeFrom,
-            payeeTo: payeeTo,
-            tax: tax,
-        });
-    };
-    TransactionAddComponent.prototype.categoryFilter = function (val) {
-        return this.categories.filter(function (category) {
-            return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
-        }).map(function (category) { return category.name; });
     };
     TransactionAddComponent.prototype.freshNewTransaction = function () {
         return { id: null, amount: 0, category: 0, acctFrom: 0, acctTo: 0, date: new Date().toLocaleDateString(), payeeFrom: 0, payeeTo: 0, tax: false };
@@ -113,21 +103,72 @@ var TransactionAddComponent = /** @class */ (function () {
     TransactionAddComponent.prototype.goBack = function () {
         this.location.back();
     };
+    TransactionAddComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, date, payeeFrom, payeeTo, tax) {
+        this.form = new forms_1.FormGroup({
+            acctFrom: acctFrom,
+            acctTo: acctTo,
+            amount: amount,
+            category: category,
+            date: date,
+            payeeFrom: payeeFrom,
+            payeeTo: payeeTo,
+            tax: tax,
+        });
+    };
     TransactionAddComponent.prototype.onSubmit = function () {
-        //set data from the form
+        var _this = this;
+        //add the payee or update its defaults from payeeFrom, if populated
+        if (this.form.get('payeeFrom').value !== '') {
+            var pfMatch = this.payees.filter(function (element) { return element.name === _this.form.get('payeeFrom').value; });
+            if (pfMatch.length === 0) {
+                var pf = { id: 0, balance: 0, defaultAcct: this.form.get('acctTo').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeFrom').value };
+                this.dataService.addPayee(pf);
+            }
+            else {
+                var matchIndex = this.payees.indexOf(pfMatch[0]);
+                this.payees[matchIndex].defaultAcct = this.form.get('acctTo').value;
+                this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
+                this.payees[matchIndex].defaultCat = this.form.get('category').value;
+                this.dataService.updatePayee(this.payees[matchIndex]);
+            }
+        }
+        //add the payee or update its defaults from payeeTo, if populated
+        if (this.form.get('payeeTo').value !== '') {
+            var ptMatch = this.payees.filter(function (element) { return element.name === _this.form.get('payeeTo').value; });
+            if (ptMatch.length === 0) {
+                var pt = { id: 0, balance: 0, defaultAcct: this.form.get('acctFrom').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeTo').value };
+                this.dataService.addPayee(pt);
+            }
+            else {
+                var matchIndex = this.payees.indexOf(ptMatch[0]);
+                this.payees[matchIndex].defaultAcct = this.form.get('acctFrom').value;
+                this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
+                this.payees[matchIndex].defaultCat = this.form.get('category').value;
+                this.dataService.updatePayee(this.payees[matchIndex]);
+            }
+        }
+        //NEED A MECHANISM TO ENSURE NEW PAYEES GET ADDED TO this.payees !BEFORE! TRYING TO GET THEIR ID BELOW, OR IT WILL FAIL!
+        //add the transaction
         this.newTransaction.acctFrom = this.form.get('acctFrom').value;
         this.newTransaction.acctTo = this.form.get('acctTo').value;
         this.newTransaction.amount = this.form.get('amount').value;
         this.newTransaction.category = this.categoryId(this.form.get('category').value);
         this.newTransaction.date = this.form.get('date').value;
-        this.newTransaction.payeeFrom = this.form.get('payeeFrom').value;
-        this.newTransaction.payeeTo = this.form.get('payeeTo').value;
+        this.newTransaction.payeeFrom = this.payeeId(this.form.get('payeeFrom').value);
+        this.newTransaction.payeeTo = this.payeeId(this.form.get('payeeTo').value);
         this.newTransaction.tax = this.form.get('tax').value;
-        //add the transaction
         this.dataService.addTransaction(this.newTransaction);
         //reset and close
         this.ngOnInit();
         this.goBack();
+    };
+    TransactionAddComponent.prototype.payeeFilter = function (val) {
+        return this.payees.filter(function (payee) {
+            return payee.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+        }).map(function (payee) { return payee.name; });
+    };
+    TransactionAddComponent.prototype.payeeId = function (payeeName) {
+        return this.payees.find(function (element) { return element.name === payeeName; }).id;
     };
     TransactionAddComponent.prototype.payeeName = function (payeeId) {
         return this.payees.find(function (element) { return element.id === payeeId; }).name;
