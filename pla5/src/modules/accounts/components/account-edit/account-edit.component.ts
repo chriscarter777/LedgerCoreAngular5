@@ -43,13 +43,8 @@ export class AccountEditComponent {
 
 
     createForm(id): void {
-        this.dataService.getAccount(id).subscribe(
-            account => {
-                this.editAccount = account;
-                this.defineForm();
-            },
-            error => alert("there was an error getting account.")
-        );
+        this.editAccount = this.dataService.Account(id);
+        this.defineForm();
     }
 
     displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);

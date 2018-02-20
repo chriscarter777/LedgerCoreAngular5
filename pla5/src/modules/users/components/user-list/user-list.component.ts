@@ -13,31 +13,10 @@ export class UserListComponent {
     form: FormGroup;
 
     constructor(private dataService: DataService) {
-        this.dataService.userDeleted.subscribe(
-            (data: User) => {              
-                var indexToDelete = this.users.findIndex((element) => element.id === data.id);
-                var udeleted = this.users.splice(indexToDelete, 1);
-            },
-            (error) => alert("There was a problem deleting.")
-        );
-    }
+    }  //ctor
 
     ngOnInit() {
-        this.getUsers();
-    }
-
-    getUsers() {
-        return new Promise(resolve => {
-            this.dataService.getUsers().subscribe(
-                users => {
-                    this.users = users;
-                    resolve(users);
-                },
-                error => {
-                    alert("there was an error getting users.");
-                }
-            )
-        })
+        this.dataService.users.subscribe((users) => this.users = users);
     }
 
     onDelete(id: string): void {

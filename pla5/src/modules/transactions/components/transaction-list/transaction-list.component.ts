@@ -17,75 +17,13 @@ export class TransactionListComponent {
 
     constructor(private dataService: DataService) {
 
-        this.dataService.payeeAdded.subscribe(
-            (data: Payee) => {
-                if (data === null) {
-                    alert("There was a problem adding payee.");
-                }
-                else {
-                    this.payees.push(data);
-                }
-            },
-            error => alert("There was a problem adding.")
-        );
-
-        this.dataService.payeeUpdated.subscribe(
-            (data: Payee) => {
-                if (data === null) {
-                    alert("There was a problem updating payee.");
-                }
-                else {
-                    var indexToUpdate = this.payees.findIndex((element) => element.id == data.id);
-                    this.payees[indexToUpdate] = data;
-                }
-            },
-            error => alert("There was a problem updating.")
-        );
-
-        this.dataService.transactionAdded.subscribe(
-            (data: Transaction) => {
-                if (data === null) {
-                    alert("There was a problem adding.");
-                }
-                else {
-                    this.transactions.push(data);
-                }
-            },
-            error => alert("There was a problem adding.")
-        );
-
-        this.dataService.transactionDeleted.subscribe(
-            (data: Transaction) => {
-                if (data === null) {
-                    alert("There was a problem deleting.");
-                }
-                else {
-                    var indextToDelete = this.transactions.findIndex((element) => element.id === data.id);
-                    this.transactions.splice(indextToDelete, 1);
-                }
-            },
-            error => alert("There was a problem deleting.")
-        );
-
-        this.dataService.transactionUpdated.subscribe(
-            (data: Transaction) => {
-                if (data === null) {
-                    alert("There was a problem updating.");
-                }
-                else {
-                    var indexToUpdate = this.transactions.findIndex((element) => element.id == data.id);
-                    this.transactions[indexToUpdate] = data;
-                }
-            },
-            error => alert("There was a problem updating.")
-        );
     }  //ctor
 
     ngOnInit() {
-        this.getAccounts();
-        this.getCategories();
-        this.getPayees();
-        this.getTransactions();
+        this.dataService.accounts.subscribe((accounts) => this.accounts = accounts);
+        this.dataService.categories.subscribe((categories) => this.categories = categories);
+        this.dataService.payees.subscribe((payees) => this.payees = payees);
+        this.dataService.transactions.subscribe((transactions) => this.transactions = transactions);
     }
 
     accountName(accountId: number) {
@@ -97,34 +35,6 @@ export class TransactionListComponent {
     }
 
     displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);
-
-    getAccounts(): void {
-        this.dataService.getAccounts().subscribe(
-            accounts => this.accounts = accounts,
-            error => alert("there was an error getting accounts.")
-        );
-    }
-
-    getCategories(): void {
-        this.dataService.getCategories().subscribe(
-            categories => this.categories = categories,
-            error => alert("there was an error getting categories.")
-        );
-    }
-
-    getPayees(): void {
-        this.dataService.getPayees().subscribe(
-            payees => this.payees = payees,
-            error => alert("there was an error getting payees.")
-        );
-    }
-
-    getTransactions(): void {
-        this.dataService.getTransactions().subscribe(
-            transactions => this.transactions = transactions,
-            error => alert("there was an error getting transactions.")
-        );
-    }
 
     onDelete(id: number): void {
         var result: Transaction;

@@ -51,14 +51,15 @@ export class TransactionEditComponent {
 
         const id = +this.route.snapshot.paramMap.get('id');
 
-        Promise.all([this.getAccounts(), this.getCategories(), this.getPayees(), this.getTransaction(id)])
-            .then(() => this.acctAsset = this.accounts.filter(c => c.acctType === "Asset"))
-            .then(() => this.acctLiability = this.accounts.filter(c => c.acctType === "Liability"))
-            .then(() => this.instantiateControls())
-            .then(() => this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.payeeFrom, this.payeeTo, this.tax))
-            .then(() => this.filteredCategoryNames = this.category.valueChanges.pipe(startWith(''), map(val => this.categoryFilter(val))))
-            .then(() => this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith(''), map(val => this.payeeFilter(val))))
-            .then(() => this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith(''), map(val => this.payeeFilter(val))))
+        this.accounts = this.dataService.Accounts();
+        this.acctAsset = this.dataService.AssetAccounts();
+        this.acctLiability = this.dataService.LiabilityAccounts();
+        this.categories = this.dataService.Categories();
+        this.editTransaction = this.dataService.Transaction(id);
+        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.payeeFrom, this.payeeTo, this.tax);
+        this.filteredCategoryNames = this.category.valueChanges.pipe(startWith(''), map(val => this.categoryFilter(val)));
+        this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith(''), map(val => this.payeeFilter(val)));
+        this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith(''), map(val => this.payeeFilter(val)));
     }
 
     ngOnDestroy() {
@@ -87,55 +88,6 @@ export class TransactionEditComponent {
     }
 
     displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);
-
-    getAccounts() {
-        return new Promise(resolve => {
-            this.dataService.getAccounts().subscribe(
-                accounts => {
-                    this.accounts = accounts;
-                    resolve(accounts);
-                },
-                error => {
-                    alert("there was an error getting accounts.");
-                }
-            )
-        })
-    }
-
-    getCategories() {
-        return new Promise(resolve => {
-            this.dataService.getCategories().subscribe(
-                categories => {
-                    this.categories = categories;
-                    resolve(categories);
-                },
-                error => {
-                    alert("there was an error getting categories.");
-                }
-            )
-        })
-    }
-
-    getPayees(): void {
-        this.dataService.getPayees().subscribe(
-            payees => this.payees = payees,
-            error => alert("there was an error getting payees.")
-        );
-    }
-
-    getTransaction(id) {
-        return new Promise(resolve => {
-            this.dataService.getTransaction(id).subscribe(
-                transaction => {
-                    this.editTransaction = transaction;
-                    resolve(transaction);
-                },
-                error => {
-                    alert("there was an error getting transaction.");
-                }
-            )
-        })
-    }
 
     goBack(): void {
         this.location.back();

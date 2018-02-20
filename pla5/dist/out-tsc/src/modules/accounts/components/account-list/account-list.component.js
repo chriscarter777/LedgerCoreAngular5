@@ -13,46 +13,13 @@ var core_1 = require("@angular/core");
 var data_service_1 = require("../../../shared/data.service");
 var AccountListComponent = /** @class */ (function () {
     function AccountListComponent(dataService) {
-        var _this = this;
         this.dataService = dataService;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
-        this.dataService.accountAdded.subscribe(function (data) {
-            console.log("accountAdded received from data.service: " + JSON.stringify(data));
-            if (data === null) {
-                alert("There was a problem adding.");
-            }
-            else {
-                _this.accounts.push(data);
-            }
-        }, function (error) { return alert("There was a problem adding."); });
-        this.dataService.accountDeleted.subscribe(function (data) {
-            console.log("accountDeleted received from data.service: " + JSON.stringify(data));
-            if (data === null) {
-                alert("There was a problem deleting.");
-            }
-            else {
-                var indextToDelete = _this.accounts.findIndex(function (element) { return element.id === data.id; });
-                _this.accounts.splice(indextToDelete, 1);
-            }
-        }, function (error) { return alert("There was a problem deleting."); });
-        this.dataService.accountUpdated.subscribe(function (data) {
-            console.log("accountUpdated received from data.service: " + JSON.stringify(data));
-            if (data === null) {
-                alert("There was a problem updating.");
-            }
-            else {
-                var indexToUpdate = _this.accounts.findIndex(function (element) { return element.id == data.id; });
-                _this.accounts[indexToUpdate] = data;
-            }
-        }, function (error) { return alert("There was a problem updating."); });
     } //ctor
     AccountListComponent.prototype.ngOnInit = function () {
-        this.getAccounts();
-    };
-    AccountListComponent.prototype.getAccounts = function () {
         var _this = this;
-        this.dataService.getAccounts().subscribe(function (accounts) { return _this.accounts = accounts; }, function (error) { return alert("there was an error getting accounts."); });
+        this.dataService.accounts.subscribe(function (accounts) { return _this.accounts = accounts; });
     };
     AccountListComponent.prototype.onDelete = function (id) {
         var result;
