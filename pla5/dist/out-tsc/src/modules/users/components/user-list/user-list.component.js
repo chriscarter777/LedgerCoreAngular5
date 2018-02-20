@@ -13,26 +13,11 @@ var core_1 = require("@angular/core");
 var data_service_1 = require("../../../shared/data.service");
 var UserListComponent = /** @class */ (function () {
     function UserListComponent(dataService) {
-        var _this = this;
         this.dataService = dataService;
-        this.dataService.userDeleted.subscribe(function (data) {
-            var indexToDelete = _this.users.findIndex(function (element) { return element.id === data.id; });
-            var udeleted = _this.users.splice(indexToDelete, 1);
-        }, function (error) { return alert("There was a problem deleting."); });
-    }
+    } //ctor
     UserListComponent.prototype.ngOnInit = function () {
-        this.getUsers();
-    };
-    UserListComponent.prototype.getUsers = function () {
         var _this = this;
-        return new Promise(function (resolve) {
-            _this.dataService.getUsers().subscribe(function (users) {
-                _this.users = users;
-                resolve(users);
-            }, function (error) {
-                alert("there was an error getting users.");
-            });
-        });
+        this.dataService.users.subscribe(function (users) { return _this.users = users; });
     };
     UserListComponent.prototype.onDelete = function (id) {
         var userToDelete = this.users.find(function (element) { return element.id == id; }).userName;

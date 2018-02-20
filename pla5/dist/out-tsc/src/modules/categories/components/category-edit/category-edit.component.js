@@ -40,11 +40,8 @@ var CategoryEditComponent = /** @class */ (function () {
         document.getElementById("addlink").removeAttribute("disabled");
     };
     CategoryEditComponent.prototype.createForm = function (id) {
-        var _this = this;
-        this.dataService.getCategory(id).subscribe(function (category) {
-            _this.editCategory = category;
-            _this.defineForm();
-        }, function (error) { return alert("there was an error getting category."); });
+        this.editCategory = this.dataService.Category(id);
+        this.defineForm();
     };
     CategoryEditComponent.prototype.defineForm = function () {
         this.form = new forms_1.FormGroup({

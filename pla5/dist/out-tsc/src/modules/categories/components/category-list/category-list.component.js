@@ -13,44 +13,11 @@ var core_1 = require("@angular/core");
 var data_service_1 = require("../../../shared/data.service");
 var CategoryListComponent = /** @class */ (function () {
     function CategoryListComponent(dataService) {
-        var _this = this;
         this.dataService = dataService;
-        this.dataService.categoryAdded.subscribe(function (data) {
-            console.log("categoryAdded received from data.service: " + JSON.stringify(data));
-            if (data === null) {
-                alert("There was a problem adding.");
-            }
-            else {
-                _this.categories.push(data);
-            }
-        }, function (error) { return alert("There was a problem adding."); });
-        this.dataService.categoryDeleted.subscribe(function (data) {
-            console.log("categoryDeleted received from data.service: " + JSON.stringify(data));
-            if (data === null) {
-                alert("There was a problem deleting.");
-            }
-            else {
-                var indextToDelete = _this.categories.findIndex(function (element) { return element.id === data.id; });
-                _this.categories.splice(indextToDelete, 1);
-            }
-        }, function (error) { return alert("There was a problem deleting."); });
-        this.dataService.categoryUpdated.subscribe(function (data) {
-            console.log("categoryUpdated received from data.service: " + JSON.stringify(data));
-            if (data === null) {
-                alert("There was a problem updating.");
-            }
-            else {
-                var indexToUpdate = _this.categories.findIndex(function (element) { return element.id == data.id; });
-                _this.categories[indexToUpdate] = data;
-            }
-        }, function (error) { return alert("There was a problem updating."); });
     } //ctor
     CategoryListComponent.prototype.ngOnInit = function () {
-        this.getCategories();
-    };
-    CategoryListComponent.prototype.getCategories = function () {
         var _this = this;
-        this.dataService.getCategories().subscribe(function (categories) { return _this.categories = categories; }, function (error) { return alert("there was an error getting categories."); });
+        this.dataService.categories.subscribe(function (categories) { return _this.categories = categories; });
     };
     CategoryListComponent.prototype.onDelete = function (id) {
         var result;

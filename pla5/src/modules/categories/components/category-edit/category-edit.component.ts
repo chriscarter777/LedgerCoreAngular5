@@ -41,13 +41,8 @@ export class CategoryEditComponent {
   }
 
   createForm(id): void {
-    this.dataService.getCategory(id).subscribe(
-      category => {
-        this.editCategory = category;
-        this.defineForm();
-      },
-      error => alert("there was an error getting category.")
-    );
+    this.editCategory = this.dataService.Category(id);
+    this.defineForm();
   }
 
   defineForm() {

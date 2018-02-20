@@ -40,13 +40,14 @@ var TransactionAddComponent = /** @class */ (function () {
         }
         ;
         document.getElementById("addlink").setAttribute("disabled", "true");
-        Promise.all([this.getAccounts(), this.getCategories(), this.getPayees()])
-            .then(function () { return _this.acctAsset = _this.accounts.filter(function (c) { return c.acctType === "Asset"; }); })
-            .then(function () { return _this.acctLiability = _this.accounts.filter(function (c) { return c.acctType === "Liability"; }); })
-            .then(function () { return _this.instantiateForm(_this.acctFrom, _this.acctTo, _this.amount, _this.category, _this.date, _this.payeeFrom, _this.payeeTo, _this.tax); })
-            .then(function () { return _this.filteredCategoryNames = _this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); })); })
-            .then(function () { return _this.filteredPayeeFromNames = _this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); })); })
-            .then(function () { return _this.filteredPayeeToNames = _this.payeeTo.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); })); });
+        this.accounts = this.dataService.Accounts();
+        this.acctAsset = this.dataService.AssetAccounts();
+        this.acctLiability = this.dataService.LiabilityAccounts();
+        this.categories = this.dataService.Categories();
+        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.payeeFrom, this.payeeTo, this.tax);
+        this.filteredCategoryNames = this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); }));
+        this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
+        this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
     };
     ;
     TransactionAddComponent.prototype.ngOnDestroy = function () {
@@ -73,32 +74,6 @@ var TransactionAddComponent = /** @class */ (function () {
     };
     TransactionAddComponent.prototype.freshNewTransaction = function () {
         return { id: null, amount: 0, category: 0, acctFrom: 0, acctTo: 0, date: new Date().toLocaleDateString(), payeeFrom: 0, payeeTo: 0, tax: false };
-    };
-    TransactionAddComponent.prototype.getAccounts = function () {
-        var _this = this;
-        return new Promise(function (resolve) {
-            _this.dataService.getAccounts().subscribe(function (accounts) {
-                _this.accounts = accounts;
-                resolve(accounts);
-            }, function (error) {
-                alert("there was an error getting accounts.");
-            });
-        });
-    };
-    TransactionAddComponent.prototype.getCategories = function () {
-        var _this = this;
-        return new Promise(function (resolve) {
-            _this.dataService.getCategories().subscribe(function (categories) {
-                _this.categories = categories;
-                resolve(categories);
-            }, function (error) {
-                alert("there was an error getting categories.");
-            });
-        });
-    };
-    TransactionAddComponent.prototype.getPayees = function () {
-        var _this = this;
-        this.dataService.getPayees().subscribe(function (payees) { return _this.payees = payees; }, function (error) { return alert("there was an error getting payees."); });
     };
     TransactionAddComponent.prototype.goBack = function () {
         this.location.back();

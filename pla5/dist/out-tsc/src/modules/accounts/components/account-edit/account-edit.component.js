@@ -42,11 +42,8 @@ var AccountEditComponent = /** @class */ (function () {
         document.getElementById("addlink").removeAttribute("disabled");
     };
     AccountEditComponent.prototype.createForm = function (id) {
-        var _this = this;
-        this.dataService.getAccount(id).subscribe(function (account) {
-            _this.editAccount = account;
-            _this.defineForm();
-        }, function (error) { return alert("there was an error getting account."); });
+        this.editAccount = this.dataService.Account(id);
+        this.defineForm();
     };
     AccountEditComponent.prototype.defineForm = function () {
         this.form = new forms_1.FormGroup({

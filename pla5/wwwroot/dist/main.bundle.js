@@ -334,11 +334,8 @@ var AccountEditComponent = /** @class */ (function () {
         document.getElementById("addlink").removeAttribute("disabled");
     };
     AccountEditComponent.prototype.createForm = function (id) {
-        var _this = this;
-        this.dataService.getAccount(id).subscribe(function (account) {
-            _this.editAccount = account;
-            _this.defineForm();
-        }, function (error) { return alert("there was an error getting account."); });
+        this.editAccount = this.dataService.Account(id);
+        this.defineForm();
     };
     AccountEditComponent.prototype.defineForm = function () {
         this.form = new forms_1.FormGroup({
@@ -427,46 +424,13 @@ var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
 var AccountListComponent = /** @class */ (function () {
     function AccountListComponent(dataService) {
-        var _this = this;
         this.dataService = dataService;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
         this.displayAsPercent = function (value) { return value.toFixed(2) + "%"; };
-        this.dataService.accountAdded.subscribe(function (data) {
-            console.log("accountAdded received from data.service: " + JSON.stringify(data));
-            if (data === null) {
-                alert("There was a problem adding.");
-            }
-            else {
-                _this.accounts.push(data);
-            }
-        }, function (error) { return alert("There was a problem adding."); });
-        this.dataService.accountDeleted.subscribe(function (data) {
-            console.log("accountDeleted received from data.service: " + JSON.stringify(data));
-            if (data === null) {
-                alert("There was a problem deleting.");
-            }
-            else {
-                var indextToDelete = _this.accounts.findIndex(function (element) { return element.id === data.id; });
-                _this.accounts.splice(indextToDelete, 1);
-            }
-        }, function (error) { return alert("There was a problem deleting."); });
-        this.dataService.accountUpdated.subscribe(function (data) {
-            console.log("accountUpdated received from data.service: " + JSON.stringify(data));
-            if (data === null) {
-                alert("There was a problem updating.");
-            }
-            else {
-                var indexToUpdate = _this.accounts.findIndex(function (element) { return element.id == data.id; });
-                _this.accounts[indexToUpdate] = data;
-            }
-        }, function (error) { return alert("There was a problem updating."); });
     } //ctor
     AccountListComponent.prototype.ngOnInit = function () {
-        this.getAccounts();
-    };
-    AccountListComponent.prototype.getAccounts = function () {
         var _this = this;
-        this.dataService.getAccounts().subscribe(function (accounts) { return _this.accounts = accounts; }, function (error) { return alert("there was an error getting accounts."); });
+        this.dataService.accounts.subscribe(function (accounts) { return _this.accounts = accounts; });
     };
     AccountListComponent.prototype.onDelete = function (id) {
         var result;
@@ -700,18 +664,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(dataService) {
+        this.dataService = dataService;
         this.title = 'Personal Ledger';
-    }
+        //this gets the dataService initializing early
+    } //ctor
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app-root',
             template: __webpack_require__("../../../../../src/modules/app/components/app-root/app-root.component.html"),
             styles: [__webpack_require__("../../../../../src/modules/app/components/app-root/app-root.component.css")]
-        })
+        }),
+        __metadata("design:paramtypes", [data_service_1.DataService])
     ], AppComponent);
     return AppComponent;
 }()); //component
@@ -1099,11 +1070,8 @@ var CategoryEditComponent = /** @class */ (function () {
         document.getElementById("addlink").removeAttribute("disabled");
     };
     CategoryEditComponent.prototype.createForm = function (id) {
-        var _this = this;
-        this.dataService.getCategory(id).subscribe(function (category) {
-            _this.editCategory = category;
-            _this.defineForm();
-        }, function (error) { return alert("there was an error getting category."); });
+        this.editCategory = this.dataService.Category(id);
+        this.defineForm();
     };
     CategoryEditComponent.prototype.defineForm = function () {
         this.form = new forms_1.FormGroup({
@@ -1184,44 +1152,11 @@ var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
 var CategoryListComponent = /** @class */ (function () {
     function CategoryListComponent(dataService) {
-        var _this = this;
         this.dataService = dataService;
-        this.dataService.categoryAdded.subscribe(function (data) {
-            console.log("categoryAdded received from data.service: " + JSON.stringify(data));
-            if (data === null) {
-                alert("There was a problem adding.");
-            }
-            else {
-                _this.categories.push(data);
-            }
-        }, function (error) { return alert("There was a problem adding."); });
-        this.dataService.categoryDeleted.subscribe(function (data) {
-            console.log("categoryDeleted received from data.service: " + JSON.stringify(data));
-            if (data === null) {
-                alert("There was a problem deleting.");
-            }
-            else {
-                var indextToDelete = _this.categories.findIndex(function (element) { return element.id === data.id; });
-                _this.categories.splice(indextToDelete, 1);
-            }
-        }, function (error) { return alert("There was a problem deleting."); });
-        this.dataService.categoryUpdated.subscribe(function (data) {
-            console.log("categoryUpdated received from data.service: " + JSON.stringify(data));
-            if (data === null) {
-                alert("There was a problem updating.");
-            }
-            else {
-                var indexToUpdate = _this.categories.findIndex(function (element) { return element.id == data.id; });
-                _this.categories[indexToUpdate] = data;
-            }
-        }, function (error) { return alert("There was a problem updating."); });
     } //ctor
     CategoryListComponent.prototype.ngOnInit = function () {
-        this.getCategories();
-    };
-    CategoryListComponent.prototype.getCategories = function () {
         var _this = this;
-        this.dataService.getCategories().subscribe(function (categories) { return _this.categories = categories; }, function (error) { return alert("there was an error getting categories."); });
+        this.dataService.categories.subscribe(function (categories) { return _this.categories = categories; });
     };
     CategoryListComponent.prototype.onDelete = function (id) {
         var result;
@@ -1398,7 +1333,9 @@ exports.ReportRoutingModule = ReportRoutingModule;
 
 "use strict";
 
-//This class is responsible for all interation with the data API (a .NET Core WebAPI, which in turn interacts with a repository), and emitting notifications when data changes 
+//This class is responsible for all interaction with the data API (a .NET Core WebAPI, which in turn interacts with a repository)
+//Data collections are exposed as observable BehaviorSubjects
+//It also serves as the central client-side data store ("single source of truth")
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1411,269 +1348,576 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
+var BehaviorSubject_1 = __webpack_require__("../../../../rxjs/_esm5/BehaviorSubject.js");
 var DataService = /** @class */ (function () {
+    // --Events--
+    //@Output() accountAdded = new EventEmitter();
+    //@Output() accountDeleted = new EventEmitter();
+    //@Output() accountsReceived = new EventEmitter();
+    //@Output() accountUpdated = new EventEmitter();
+    //@Output() categoryAdded = new EventEmitter();
+    //@Output() categoryDeleted = new EventEmitter();
+    //@Output() categoriesReceived = new EventEmitter();
+    //@Output() categoryUpdated = new EventEmitter();
+    //@Output() payeeAdded = new EventEmitter();
+    //@Output() payeeDeleted = new EventEmitter();
+    //@Output() payeesReceived = new EventEmitter();
+    //@Output() payeeUpdated = new EventEmitter();
+    //@Output() transactionAdded = new EventEmitter();
+    //@Output() transactionDeleted = new EventEmitter();
+    //@Output() transactionsReceived = new EventEmitter();
+    //@Output() transactionUpdated = new EventEmitter();
+    //@Output() userDeleted = new EventEmitter();
+    //@Output() userDemoted = new EventEmitter();
+    //@Output() userPromoted = new EventEmitter();
+    //@Output() usersReceived = new EventEmitter();
+    //@Output() userReset = new EventEmitter();
     function DataService(http) {
         this.http = http;
-        // --Events--
-        this.accountAdded = new core_1.EventEmitter();
-        this.accountDeleted = new core_1.EventEmitter();
-        this.accountUpdated = new core_1.EventEmitter();
-        this.categoryAdded = new core_1.EventEmitter();
-        this.categoryDeleted = new core_1.EventEmitter();
-        this.categoryUpdated = new core_1.EventEmitter();
-        this.payeeAdded = new core_1.EventEmitter();
-        this.payeeDeleted = new core_1.EventEmitter();
-        this.payeeUpdated = new core_1.EventEmitter();
-        this.transactionAdded = new core_1.EventEmitter();
-        this.transactionDeleted = new core_1.EventEmitter();
-        this.transactionUpdated = new core_1.EventEmitter();
-        this.userDeleted = new core_1.EventEmitter();
-        this.userDemoted = new core_1.EventEmitter();
-        this.userPromoted = new core_1.EventEmitter();
-        this.userReset = new core_1.EventEmitter();
-    }
+        this.accountsSource = new BehaviorSubject_1.BehaviorSubject(this._accounts);
+        this.accounts = this.accountsSource.asObservable();
+        this.acctAssetSource = new BehaviorSubject_1.BehaviorSubject(this._acctAsset);
+        this.acctAsset = this.acctAssetSource.asObservable();
+        this.acctLiabilitySource = new BehaviorSubject_1.BehaviorSubject(this._acctLiability);
+        this.acctLiability = this.acctLiabilitySource.asObservable();
+        this.categoriesSource = new BehaviorSubject_1.BehaviorSubject(this._categories);
+        this.categories = this.categoriesSource.asObservable();
+        this.catExpenseSource = new BehaviorSubject_1.BehaviorSubject(this._catExpense);
+        this.catExpense = this.catExpenseSource.asObservable();
+        this.catIncomeSource = new BehaviorSubject_1.BehaviorSubject(this._catIncome);
+        this.catIncome = this.catIncomeSource.asObservable();
+        this.catOtherSource = new BehaviorSubject_1.BehaviorSubject(this._catOther);
+        this.catOther = this.catOtherSource.asObservable();
+        this.payeesSource = new BehaviorSubject_1.BehaviorSubject(this._payees);
+        this.payees = this.payeesSource.asObservable();
+        this.transactionsSource = new BehaviorSubject_1.BehaviorSubject(this._transactions);
+        this.transactions = this.transactionsSource.asObservable();
+        this.usersSource = new BehaviorSubject_1.BehaviorSubject(this._users);
+        this.users = this.usersSource.asObservable();
+        console.log('----dataservice initializing');
+        this.getAccounts();
+        this.getCategories();
+        this.getPayees();
+        this.getTransactions();
+        this.getUsers();
+    } //ctor
+    // ---PUBLIC METHODS ---
     // --Accounts--
-    DataService.prototype.getAccounts = function () {
-        console.log("data.service.getAccounts...");
-        return this.http.get('/api/Accounts');
-    };
-    DataService.prototype.getAccount = function (id) {
-        console.log("data.service.getAccount...");
-        return this.http.get('/api/Accounts/' + id);
-    };
     DataService.prototype.addAccount = function (accountToAdd) {
         var _this = this;
-        var response = this.http.post('/api/Accounts', accountToAdd)
-            .toPromise()
-            .then(function (result) {
-            _this.accountAdded.emit(result);
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.post('/api/Accounts', accountToAdd).subscribe(function (account) {
+                resolve(account);
+            }, function (error) {
+                reject(alert("there was an error adding account."));
+            });
         });
-    };
+        promise.then(function (result) {
+            _this._accounts.push(result);
+            _this._accounts.sort(_this.accountComparator);
+            _this.accountsSource.next(_this._accounts);
+            _this._acctAsset.push(result);
+            _this._acctAsset.sort(_this.accountComparator);
+            _this.acctAssetSource.next(_this._acctAsset);
+            _this._acctLiability.push(result);
+            _this._acctLiability.sort(_this.accountComparator);
+            _this.acctLiabilitySource.next(_this._acctLiability);
+        });
+    }; //addAccount
     DataService.prototype.deleteAccount = function (id) {
         var _this = this;
-        var response = this.http.delete('/api/Accounts/' + id)
-            .toPromise()
-            .then(function (result) {
-            _this.accountDeleted.emit(result);
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.delete('/api/Accounts/' + id).subscribe(function (account) {
+                resolve(account);
+            }, function (error) {
+                reject(alert("there was an error deleting account."));
+            });
         });
-    };
+        promise.then(function (result) {
+            //remove from accounts
+            var indexToDelete = _this._accounts.findIndex(function (element) { return element.id === result.id; });
+            _this._accounts.splice(indexToDelete, 1);
+            _this.accountsSource.next(_this._accounts);
+            //remove from acctAsset
+            var aaIdx = _this._acctAsset.indexOf(result);
+            if (aaIdx !== -1) {
+                _this._acctAsset.splice(aaIdx, 1);
+            }
+            _this.acctAssetSource.next(_this._acctAsset);
+            //remove from acctLiability
+            var alIdx = _this._acctLiability.indexOf(result);
+            if (alIdx !== -1) {
+                _this._acctLiability.splice(alIdx, 1);
+            }
+            _this.acctLiabilitySource.next(_this._acctLiability);
+        });
+    }; //deleteAccount
+    DataService.prototype.Account = function (id) {
+        return this._accounts.find(function (x) { return x.id === id; });
+    }; //Account
+    DataService.prototype.Accounts = function () {
+        return this._accounts;
+    }; //Accounts
+    DataService.prototype.AssetAccounts = function () {
+        return this._acctAsset;
+    }; //AssetAccounts
+    DataService.prototype.LiabilityAccounts = function () {
+        return this._acctLiability;
+    }; //LiabilityAccounts
     DataService.prototype.updateAccount = function (accountToUpdate) {
         var _this = this;
-        var response = this.http.put('/api/Accounts', accountToUpdate)
-            .toPromise()
-            .then(function (result) {
-            _this.accountUpdated.emit(result);
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.put('/api/Accounts', accountToUpdate).subscribe(function (account) {
+                resolve(account);
+            }, function (error) {
+                reject(alert("there was an error updating account."));
+            });
         });
-    };
+        promise.then(function (result) {
+            //update accounts
+            var indexToUpdate = _this._accounts.findIndex(function (element) { return element.id == result.id; });
+            _this._accounts[indexToUpdate] = result;
+            _this._accounts.sort(_this.accountComparator);
+            _this.accountsSource.next(_this._accounts);
+            //update acctAsset
+            var aaMatch = _this._acctAsset.find(function (x) { return x.id === result.id; });
+            if (aaMatch) {
+                var aaIdx = _this._acctAsset.indexOf(aaMatch);
+                _this._acctAsset[aaIdx] = result;
+                _this._acctAsset.sort(_this.accountComparator);
+                _this.acctAssetSource.next(_this._acctAsset);
+            }
+            //update acctLiability
+            var alMatch = _this._acctLiability.find(function (x) { return x.id === result.id; });
+            if (alMatch) {
+                var alIdx = _this._acctLiability.indexOf(aaMatch);
+                _this._acctLiability[alIdx] = result;
+                _this._acctLiability.sort(_this.accountComparator);
+                _this.acctLiabilitySource.next(_this._acctLiability);
+            }
+        });
+    }; //updateAccount
     // --Categories--
-    DataService.prototype.getCategories = function () {
-        console.log("data.service.getCategories...");
-        return this.http.get('/api/Categories');
-    };
-    DataService.prototype.getCategory = function (id) {
-        console.log("data.service.getCategory...");
-        return this.http.get('/api/Categories/' + id);
-    };
     DataService.prototype.addCategory = function (categoryToAdd) {
         var _this = this;
-        var response = this.http.post('/api/Categories', categoryToAdd)
-            .toPromise()
-            .then(function (result) {
-            _this.categoryAdded.emit(result);
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.post('/api/Categories', categoryToAdd).subscribe(function (category) {
+                resolve(category);
+            }, function (error) {
+                reject(alert("there was an error adding category."));
+            });
         });
-    };
+        promise.then(function (result) {
+            _this._categories.push(result);
+            _this._categories.sort(_this.categoryComparator);
+            _this.categoriesSource.next(_this._categories);
+            _this._catExpense.push(result);
+            _this._catExpense.sort(_this.categoryComparator);
+            _this.catExpenseSource.next(_this._catExpense);
+            _this._catIncome.push(result);
+            _this._catIncome.sort(_this.categoryComparator);
+            _this.catIncomeSource.next(_this._catIncome);
+            _this._catOther.push(result);
+            _this._catOther.sort(_this.categoryComparator);
+            _this.catOtherSource.next(_this._catOther);
+        });
+    }; //addCategory
     DataService.prototype.deleteCategory = function (id) {
         var _this = this;
-        var response = this.http.delete('/api/Categories/' + id)
-            .toPromise()
-            .then(function (result) {
-            _this.categoryDeleted.emit(result);
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.delete('/api/Categories/' + id).subscribe(function (category) {
+                resolve(category);
+            }, function (error) {
+                reject(alert("there was an error deleting category."));
+            });
         });
-    };
+        promise.then(function (result) {
+            //remove from categories
+            var indexToDelete = _this._categories.findIndex(function (element) { return element.id === result.id; });
+            _this._categories.splice(indexToDelete, 1);
+            _this.categoriesSource.next(_this._categories);
+            //remove from catExpense
+            var ceIdx = _this._catExpense.indexOf(result);
+            if (ceIdx !== -1) {
+                _this._catExpense.splice(ceIdx, 1);
+                _this.catExpenseSource.next(_this._catExpense);
+            }
+            //remove from catIncome
+            var ciIdx = _this._catIncome.indexOf(result);
+            if (ciIdx !== -1) {
+                _this._catIncome.splice(ciIdx, 1);
+                _this.catIncomeSource.next(_this._catIncome);
+            }
+            //remove from catOther
+            var coIdx = _this._catOther.indexOf(result);
+            if (coIdx !== -1) {
+                _this._catOther.splice(coIdx, 1);
+                _this.catOtherSource.next(_this._catOther);
+            }
+        });
+    }; //deleteCategory
+    DataService.prototype.Category = function (id) {
+        return this._categories.find(function (x) { return x.id === id; });
+    }; //Category
+    DataService.prototype.Categories = function () {
+        return this._categories;
+    }; //Categories
+    DataService.prototype.ExpenseCategories = function () {
+        return this._catExpense;
+    }; //ExpenseCategories
+    DataService.prototype.IncomeCategories = function () {
+        return this._catIncome;
+    }; //IncomeCategories
+    DataService.prototype.OtherCategories = function () {
+        return this._catOther;
+    }; //OtherCategories
     DataService.prototype.updateCategory = function (categoryToUpdate) {
         var _this = this;
-        var response = this.http.put('/api/Categories', categoryToUpdate)
-            .toPromise()
-            .then(function (result) {
-            _this.categoryUpdated.emit(result);
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.put('/api/Categories', categoryToUpdate).subscribe(function (category) {
+                resolve(category);
+            }, function (error) {
+                reject(alert("there was an error updating category."));
+            });
         });
-    };
+        promise.then(function (result) {
+            //update categories
+            var indexToUpdate = _this._categories.findIndex(function (element) { return element.id == result.id; });
+            _this._categories[indexToUpdate] = result;
+            _this._categories.sort(_this.categoryComparator);
+            _this.categoriesSource.next(_this._categories);
+            //update catExpense
+            var aaMatch = _this._catExpense.find(function (x) { return x.id === result.id; });
+            if (aaMatch) {
+                var aaIdx = _this._catExpense.indexOf(aaMatch);
+                _this._catExpense[aaIdx] = result;
+                _this._catExpense.sort(_this.categoryComparator);
+                _this.catExpenseSource.next(_this._catExpense);
+            }
+            //update catIncome
+            var aaMatch = _this._catIncome.find(function (x) { return x.id === result.id; });
+            if (aaMatch) {
+                var aaIdx = _this._catIncome.indexOf(aaMatch);
+                _this._catIncome[aaIdx] = result;
+                _this._catIncome.sort(_this.categoryComparator);
+                _this.catIncomeSource.next(_this._catIncome);
+            }
+            //update catOther
+            var aaMatch = _this._catOther.find(function (x) { return x.id === result.id; });
+            if (aaMatch) {
+                var aaIdx = _this._catOther.indexOf(aaMatch);
+                _this._catOther[aaIdx] = result;
+                _this._catOther.sort(_this.categoryComparator);
+                _this.catOtherSource.next(_this._catOther);
+            }
+        });
+    }; //updateCategory
     // --Payees--
-    DataService.prototype.getPayees = function () {
-        console.log("data.service.getPayees...");
-        return this.http.get('/api/Payees');
-    };
-    DataService.prototype.getPayee = function (id) {
-        console.log("data.service.getPayee...");
-        return this.http.get('/api/Payees/' + id);
-    };
     DataService.prototype.addPayee = function (payeeToAdd) {
         var _this = this;
-        var response = this.http.post('/api/Payees', payeeToAdd)
-            .toPromise()
-            .then(function (result) {
-            _this.payeeAdded.emit(result);
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.post('/api/Payees', payeeToAdd).subscribe(function (payee) {
+                resolve(payee);
+            }, function (error) {
+                reject(alert("there was an error adding payee."));
+            });
         });
-    };
+        promise.then(function (result) {
+            _this._payees.push(result);
+            _this._payees.sort(_this.payeeComparator);
+            _this.payeesSource.next(_this._payees);
+        });
+    }; //addPayee
     DataService.prototype.deletePayee = function (id) {
         var _this = this;
-        var response = this.http.delete('/api/Accounts/' + id)
-            .toPromise()
-            .then(function (result) {
-            _this.payeeDeleted.emit(result);
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.delete('/api/Accounts/' + id).subscribe(function (payee) {
+                resolve(payee);
+            }, function (error) {
+                reject(alert("there was an error deleting payee."));
+            });
         });
-    };
+        promise.then(function (result) {
+            var indexToDelete = _this._payees.findIndex(function (element) { return element.id === result.id; });
+            _this._payees.splice(indexToDelete, 1);
+            _this.payeesSource.next(_this._payees);
+        });
+    }; //deletePayee
+    DataService.prototype.Payee = function (id) {
+        return this._payees.find(function (x) { return x.id === id; });
+    }; //Payee
+    DataService.prototype.Payees = function () {
+        return this._payees;
+    }; //Payees
     DataService.prototype.updatePayee = function (payeeToUpdate) {
         var _this = this;
-        var response = this.http.put('/apiPayees', payeeToUpdate)
-            .toPromise()
-            .then(function (result) {
-            _this.payeeUpdated.emit(result);
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.put('/apiPayees', payeeToUpdate).subscribe(function (payee) {
+                resolve(payee);
+            }, function (error) {
+                reject(alert("there was an error updating payee."));
+            });
         });
-    };
+        promise.then(function (result) {
+            var indexToUpdate = _this._payees.findIndex(function (element) { return element.id == result.id; });
+            _this._payees[indexToUpdate] = result;
+            _this._payees.sort(_this.payeeComparator);
+            _this.payeesSource.next(_this._payees);
+        });
+    }; //updatePayee
     // --Transactions--
-    DataService.prototype.getTransactions = function () {
-        console.log("data.service.getTransactions...");
-        return this.http.get('/api/Transactions');
-    };
-    DataService.prototype.getTransaction = function (id) {
-        console.log("data.service.getTransaction...");
-        return this.http.get('/api/Transactions/' + id);
-    };
     DataService.prototype.addTransaction = function (transactionToAdd) {
         var _this = this;
-        var response = this.http.post('/api/Transactions', transactionToAdd)
-            .toPromise()
-            .then(function (result) {
-            _this.transactionAdded.emit(result);
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.post('/api/Payees', transactionToAdd).subscribe(function (transaction) {
+                resolve(transaction);
+            }, function (error) {
+                reject(alert("there was an error adding transaction."));
+            });
         });
-    };
+        promise.then(function (result) {
+            _this._transactions.push(result);
+            _this._transactions.sort(_this.transactionComparator);
+            _this.transactionsSource.next(_this._transactions);
+        });
+    }; //addTransaction
     DataService.prototype.deleteTransaction = function (id) {
         var _this = this;
-        var response = this.http.delete('/api/Transactions/' + id)
-            .toPromise()
-            .then(function (result) {
-            _this.transactionDeleted.emit(result);
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.delete('/api/Transactions/' + id).subscribe(function (transaction) {
+                resolve(transaction);
+            }, function (error) {
+                reject(alert("there was an error deleting transaction."));
+            });
         });
-    };
+        promise.then(function (result) {
+            var indextToDelete = _this._transactions.findIndex(function (element) { return element.id === result.id; });
+            _this._transactions.splice(indextToDelete, 1);
+            _this.transactionsSource.next(_this._transactions);
+        });
+    }; //deleteTransaction
+    DataService.prototype.Transaction = function (id) {
+        return this._transactions.find(function (x) { return x.id === id; });
+    }; //Transaction
+    DataService.prototype.Transactions = function () {
+        return this._transactions;
+    }; //Transactions
     DataService.prototype.updateTransaction = function (transactionToUpdate) {
         var _this = this;
-        var response = this.http.put('/api/Transactions', transactionToUpdate)
-            .toPromise()
-            .then(function (result) {
-            _this.transactionUpdated.emit(result);
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.put('/api/Transactions', transactionToUpdate).subscribe(function (transaction) {
+                resolve(transaction);
+            }, function (error) {
+                reject(alert("there was an error updating transaction."));
+            });
         });
-    };
+        promise.then(function (result) {
+            var indexToUpdate = _this._transactions.findIndex(function (element) { return element.id == result.id; });
+            _this._transactions[indexToUpdate] = result;
+            _this._transactions.sort(_this.transactionComparator);
+            _this.transactionsSource.next(_this._transactions);
+        });
+    }; //updateTransaction
     // --Users--
-    DataService.prototype.getUsers = function () {
-        return this.http.get('/api/Users');
-    };
-    DataService.prototype.getUser = function (id) {
-        console.log("data.service.getUser...");
-        return this.http.get('/api/User/' + id);
-    };
+    DataService.prototype.deleteUser = function (userName) {
+        var _this = this;
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.delete('/api/Users/' + userName).subscribe(function (user) {
+                resolve(user);
+            }, function (error) {
+                reject(alert("there was an error deleting user."));
+            });
+        });
+        promise.then(function (result) {
+            //remove from users
+            var indexToDelete = _this._users.findIndex(function (element) { return element.id === result.id; });
+            _this._users.splice(indexToDelete, 1);
+            _this.usersSource.next(_this._users);
+        });
+    }; //deleteUser
+    DataService.prototype.User = function (id) {
+        return this._users.find(function (x) { return x.id === id; });
+    }; //User
+    DataService.prototype.Users = function () {
+        return this._users;
+    }; //Users
     DataService.prototype.makeAdmin = function (id) {
         var _this = this;
-        var response = this.http.put('/api/Users/Admin/' + id, id)
-            .toPromise()
-            .then(function (result) {
-            _this.userPromoted.emit(result);
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.put('/api/Users/Admin/' + id, id).subscribe(function (user) {
+                resolve();
+            }, function (error) {
+                reject(alert("there was an error promoting user."));
+            });
         });
-    };
-    DataService.prototype.unmakeAdmin = function (id) {
-        var _this = this;
-        var response = this.http.put('/api/Users/NoAdmin/' + id, id)
-            .toPromise()
-            .then(function (result) {
-            _this.userDemoted.emit(result);
+        promise.then(function (result) {
+            //update users
+            var indexToUpdate = _this._users.findIndex(function (element) { return element.id === id; });
+            _this._users[indexToUpdate].admin = true;
+            _this.usersSource.next(_this._users);
         });
-    };
+    }; //makeAdmin
     DataService.prototype.resetPassword = function (id, newPassword) {
         var _this = this;
-        var response = this.http.put('/api/Users/Reset/' + id, newPassword)
-            .toPromise()
-            .then(function (result) {
-            _this.userReset.emit(result);
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.put('/api/Users/Reset/' + id, newPassword).subscribe(function (user) {
+                resolve();
+            }, function (error) {
+                reject(alert("there was an error resetting user password."));
+            });
         });
-    };
-    DataService.prototype.deleteUser = function (id) {
+        promise.then(function (result) {
+            //nothing to do here--passwords not stored in the client
+        });
+    }; //resetPassword
+    DataService.prototype.unmakeAdmin = function (id) {
         var _this = this;
-        var response = this.http.delete('/api/Users/' + id)
-            .toPromise()
-            .then(function (result) {
-            _this.userDeleted.emit(result);
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.put('/api/Users/NoAdmin/' + id, id).subscribe(function (user) {
+                resolve();
+            }, function (error) {
+                reject(alert("there was an error demoting user."));
+            });
         });
+        promise.then(function (result) {
+            //update users
+            var indexToUpdate = _this._users.findIndex(function (element) { return element.id === id; });
+            _this._users[indexToUpdate].admin = false;
+            _this.usersSource.next(_this._users);
+        });
+    }; //unmakeAdmin
+    // ---PRIVATE METHODS ---
+    DataService.prototype.getAccounts = function () {
+        var _this = this;
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.get('/api/Accounts').subscribe(function (accounts) {
+                resolve(accounts);
+            }, function (error) {
+                reject(alert("there was an error getting accounts."));
+            });
+        });
+        promise.then(function (result) {
+            _this._accounts = result;
+            _this._accounts.sort(_this.accountComparator);
+            _this.accountsSource.next(_this._accounts);
+            _this._acctAsset = result.filter(function (element) { return element.acctType === "Asset"; });
+            _this._acctAsset.sort(_this.accountComparator);
+            _this.acctAssetSource.next(_this._acctAsset);
+            _this._acctLiability = result.filter(function (element) { return element.acctType === "Liability"; });
+            _this._acctLiability.sort(_this.accountComparator);
+            _this.acctLiabilitySource.next(_this._acctLiability);
+        });
+    }; //getAccounts
+    DataService.prototype.getCategories = function () {
+        var _this = this;
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.get('/api/Categories').subscribe(function (categories) {
+                resolve(categories);
+            }, function (error) {
+                reject(alert("there was an error getting categories."));
+            });
+        });
+        promise.then(function (result) {
+            _this._categories = result;
+            _this._categories.sort(_this.categoryComparator);
+            _this.categoriesSource.next(_this._categories);
+            _this._catExpense = result.filter(function (element) { return element.type === "Expense"; });
+            _this._catExpense.sort(_this.categoryComparator);
+            _this.catExpenseSource.next(_this._catExpense);
+            _this._catIncome = result.filter(function (element) { return element.type === "Income"; });
+            _this._catIncome.sort(_this.categoryComparator);
+            _this.catIncomeSource.next(_this._catIncome);
+            _this._catOther = result.filter(function (element) { return element.type === "Other"; });
+            _this._catOther.sort(_this.categoryComparator);
+            _this.catOtherSource.next(_this._catOther);
+        });
+    }; //getCategories
+    DataService.prototype.getPayees = function () {
+        var _this = this;
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.get('/api/Payees').subscribe(function (payees) {
+                resolve(payees);
+            }, function (error) {
+                reject(alert("there was an error getting payees."));
+            });
+        });
+        promise.then(function (result) {
+            _this._payees = result;
+            _this._payees.sort(_this.payeeComparator);
+            _this.payeesSource.next(_this._payees);
+        });
+    }; //getPayees
+    DataService.prototype.getTransactions = function () {
+        var _this = this;
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.get('/api/Transactions').subscribe(function (transactions) {
+                resolve(transactions);
+            }, function (error) {
+                reject(alert("there was an error getting transactions."));
+            });
+        });
+        promise.then(function (result) {
+            _this._transactions = result;
+            _this._transactions.sort(_this.transactionComparator);
+            _this.transactionsSource.next(_this._transactions);
+        });
+    }; //getTransactions
+    DataService.prototype.getUsers = function () {
+        var _this = this;
+        var promise = new Promise(function (resolve, reject) {
+            _this.http.get('/api/Users').subscribe(function (users) {
+                resolve(users);
+            }, function (error) {
+                reject(alert("there was an error getting users."));
+            });
+        });
+        promise.then(function (result) {
+            _this._users = result;
+            _this._users.sort(_this.userComparator);
+            _this.usersSource.next(_this._users);
+        });
+    }; //getUsers
+    DataService.prototype.accountComparator = function (elementA, elementB) {
+        if (elementA.name < elementB.name)
+            return -1;
+        if (elementA.name > elementB.name)
+            return 1;
+        return 0;
     };
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], DataService.prototype, "accountAdded", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], DataService.prototype, "accountDeleted", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], DataService.prototype, "accountUpdated", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], DataService.prototype, "categoryAdded", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], DataService.prototype, "categoryDeleted", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], DataService.prototype, "categoryUpdated", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], DataService.prototype, "payeeAdded", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], DataService.prototype, "payeeDeleted", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], DataService.prototype, "payeeUpdated", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], DataService.prototype, "transactionAdded", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], DataService.prototype, "transactionDeleted", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], DataService.prototype, "transactionUpdated", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], DataService.prototype, "userDeleted", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], DataService.prototype, "userDemoted", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], DataService.prototype, "userPromoted", void 0);
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], DataService.prototype, "userReset", void 0);
+    DataService.prototype.categoryComparator = function (elementA, elementB) {
+        if (elementA.name < elementB.name)
+            return -1;
+        if (elementA.name > elementB.name)
+            return 1;
+        return 0;
+    };
+    DataService.prototype.payeeComparator = function (elementA, elementB) {
+        if (elementA.name < elementB.name)
+            return -1;
+        if (elementA.name > elementB.name)
+            return 1;
+        return 0;
+    };
+    DataService.prototype.transactionComparator = function (elementA, elementB) {
+        if (elementA.date < elementB.date)
+            return -1;
+        if (elementA.date > elementB.date)
+            return 1;
+        return 0;
+    };
+    DataService.prototype.userComparator = function (elementA, elementB) {
+        if (elementA.userName < elementB.userName)
+            return -1;
+        if (elementA.userName > elementB.userName)
+            return 1;
+        return 0;
+    };
     DataService = __decorate([
         core_1.Injectable(),
         __metadata("design:paramtypes", [http_1.HttpClient])
     ], DataService);
     return DataService;
-}());
+}()); //service
 exports.DataService = DataService;
 
 
@@ -1750,13 +1994,14 @@ var TransactionAddComponent = /** @class */ (function () {
         }
         ;
         document.getElementById("addlink").setAttribute("disabled", "true");
-        Promise.all([this.getAccounts(), this.getCategories(), this.getPayees()])
-            .then(function () { return _this.acctAsset = _this.accounts.filter(function (c) { return c.acctType === "Asset"; }); })
-            .then(function () { return _this.acctLiability = _this.accounts.filter(function (c) { return c.acctType === "Liability"; }); })
-            .then(function () { return _this.instantiateForm(_this.acctFrom, _this.acctTo, _this.amount, _this.category, _this.date, _this.payeeFrom, _this.payeeTo, _this.tax); })
-            .then(function () { return _this.filteredCategoryNames = _this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); })); })
-            .then(function () { return _this.filteredPayeeFromNames = _this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); })); })
-            .then(function () { return _this.filteredPayeeToNames = _this.payeeTo.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); })); });
+        this.accounts = this.dataService.Accounts();
+        this.acctAsset = this.dataService.AssetAccounts();
+        this.acctLiability = this.dataService.LiabilityAccounts();
+        this.categories = this.dataService.Categories();
+        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.payeeFrom, this.payeeTo, this.tax);
+        this.filteredCategoryNames = this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); }));
+        this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
+        this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
     };
     ;
     TransactionAddComponent.prototype.ngOnDestroy = function () {
@@ -1783,32 +2028,6 @@ var TransactionAddComponent = /** @class */ (function () {
     };
     TransactionAddComponent.prototype.freshNewTransaction = function () {
         return { id: null, amount: 0, category: 0, acctFrom: 0, acctTo: 0, date: new Date().toLocaleDateString(), payeeFrom: 0, payeeTo: 0, tax: false };
-    };
-    TransactionAddComponent.prototype.getAccounts = function () {
-        var _this = this;
-        return new Promise(function (resolve) {
-            _this.dataService.getAccounts().subscribe(function (accounts) {
-                _this.accounts = accounts;
-                resolve(accounts);
-            }, function (error) {
-                alert("there was an error getting accounts.");
-            });
-        });
-    };
-    TransactionAddComponent.prototype.getCategories = function () {
-        var _this = this;
-        return new Promise(function (resolve) {
-            _this.dataService.getCategories().subscribe(function (categories) {
-                _this.categories = categories;
-                resolve(categories);
-            }, function (error) {
-                alert("there was an error getting categories.");
-            });
-        });
-    };
-    TransactionAddComponent.prototype.getPayees = function () {
-        var _this = this;
-        this.dataService.getPayees().subscribe(function (payees) { return _this.payees = payees; }, function (error) { return alert("there was an error getting payees."); });
     };
     TransactionAddComponent.prototype.goBack = function () {
         this.location.back();
@@ -1964,14 +2183,15 @@ var TransactionEditComponent = /** @class */ (function () {
         ;
         document.getElementById("addlink").setAttribute("disabled", "true");
         var id = +this.route.snapshot.paramMap.get('id');
-        Promise.all([this.getAccounts(), this.getCategories(), this.getPayees(), this.getTransaction(id)])
-            .then(function () { return _this.acctAsset = _this.accounts.filter(function (c) { return c.acctType === "Asset"; }); })
-            .then(function () { return _this.acctLiability = _this.accounts.filter(function (c) { return c.acctType === "Liability"; }); })
-            .then(function () { return _this.instantiateControls(); })
-            .then(function () { return _this.instantiateForm(_this.acctFrom, _this.acctTo, _this.amount, _this.category, _this.date, _this.payeeFrom, _this.payeeTo, _this.tax); })
-            .then(function () { return _this.filteredCategoryNames = _this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); })); })
-            .then(function () { return _this.filteredPayeeFromNames = _this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); })); })
-            .then(function () { return _this.filteredPayeeToNames = _this.payeeTo.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); })); });
+        this.accounts = this.dataService.Accounts();
+        this.acctAsset = this.dataService.AssetAccounts();
+        this.acctLiability = this.dataService.LiabilityAccounts();
+        this.categories = this.dataService.Categories();
+        this.editTransaction = this.dataService.Transaction(id);
+        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.payeeFrom, this.payeeTo, this.tax);
+        this.filteredCategoryNames = this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); }));
+        this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
+        this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
     };
     TransactionEditComponent.prototype.ngOnDestroy = function () {
         var editlinks = document.getElementsByClassName("editlink");
@@ -1994,43 +2214,6 @@ var TransactionEditComponent = /** @class */ (function () {
     };
     TransactionEditComponent.prototype.categoryName = function (categoryId) {
         return this.categories.find(function (element) { return element.id === categoryId; }).name;
-    };
-    TransactionEditComponent.prototype.getAccounts = function () {
-        var _this = this;
-        return new Promise(function (resolve) {
-            _this.dataService.getAccounts().subscribe(function (accounts) {
-                _this.accounts = accounts;
-                resolve(accounts);
-            }, function (error) {
-                alert("there was an error getting accounts.");
-            });
-        });
-    };
-    TransactionEditComponent.prototype.getCategories = function () {
-        var _this = this;
-        return new Promise(function (resolve) {
-            _this.dataService.getCategories().subscribe(function (categories) {
-                _this.categories = categories;
-                resolve(categories);
-            }, function (error) {
-                alert("there was an error getting categories.");
-            });
-        });
-    };
-    TransactionEditComponent.prototype.getPayees = function () {
-        var _this = this;
-        this.dataService.getPayees().subscribe(function (payees) { return _this.payees = payees; }, function (error) { return alert("there was an error getting payees."); });
-    };
-    TransactionEditComponent.prototype.getTransaction = function (id) {
-        var _this = this;
-        return new Promise(function (resolve) {
-            _this.dataService.getTransaction(id).subscribe(function (transaction) {
-                _this.editTransaction = transaction;
-                resolve(transaction);
-            }, function (error) {
-                alert("there was an error getting transaction.");
-            });
-        });
     };
     TransactionEditComponent.prototype.goBack = function () {
         this.location.back();
@@ -2176,80 +2359,21 @@ var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
 var TransactionListComponent = /** @class */ (function () {
     function TransactionListComponent(dataService) {
-        var _this = this;
         this.dataService = dataService;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
-        this.dataService.payeeAdded.subscribe(function (data) {
-            if (data === null) {
-                alert("There was a problem adding payee.");
-            }
-            else {
-                _this.payees.push(data);
-            }
-        }, function (error) { return alert("There was a problem adding."); });
-        this.dataService.payeeUpdated.subscribe(function (data) {
-            if (data === null) {
-                alert("There was a problem updating payee.");
-            }
-            else {
-                var indexToUpdate = _this.payees.findIndex(function (element) { return element.id == data.id; });
-                _this.payees[indexToUpdate] = data;
-            }
-        }, function (error) { return alert("There was a problem updating."); });
-        this.dataService.transactionAdded.subscribe(function (data) {
-            if (data === null) {
-                alert("There was a problem adding.");
-            }
-            else {
-                _this.transactions.push(data);
-            }
-        }, function (error) { return alert("There was a problem adding."); });
-        this.dataService.transactionDeleted.subscribe(function (data) {
-            if (data === null) {
-                alert("There was a problem deleting.");
-            }
-            else {
-                var indextToDelete = _this.transactions.findIndex(function (element) { return element.id === data.id; });
-                _this.transactions.splice(indextToDelete, 1);
-            }
-        }, function (error) { return alert("There was a problem deleting."); });
-        this.dataService.transactionUpdated.subscribe(function (data) {
-            if (data === null) {
-                alert("There was a problem updating.");
-            }
-            else {
-                var indexToUpdate = _this.transactions.findIndex(function (element) { return element.id == data.id; });
-                _this.transactions[indexToUpdate] = data;
-            }
-        }, function (error) { return alert("There was a problem updating."); });
     } //ctor
     TransactionListComponent.prototype.ngOnInit = function () {
-        this.getAccounts();
-        this.getCategories();
-        this.getPayees();
-        this.getTransactions();
+        var _this = this;
+        this.dataService.accounts.subscribe(function (accounts) { return _this.accounts = accounts; });
+        this.dataService.categories.subscribe(function (categories) { return _this.categories = categories; });
+        this.dataService.payees.subscribe(function (payees) { return _this.payees = payees; });
+        this.dataService.transactions.subscribe(function (transactions) { return _this.transactions = transactions; });
     };
     TransactionListComponent.prototype.accountName = function (accountId) {
         return this.accounts.find(function (element) { return element.id === accountId; }).name;
     };
     TransactionListComponent.prototype.categoryName = function (categoryId) {
         return this.categories.find(function (element) { return element.id === categoryId; }).name;
-    };
-    TransactionListComponent.prototype.getAccounts = function () {
-        var _this = this;
-        this.dataService.getAccounts().subscribe(function (accounts) { return _this.accounts = accounts; }, function (error) { return alert("there was an error getting accounts."); });
-    };
-    TransactionListComponent.prototype.getCategories = function () {
-        var _this = this;
-        this.dataService.getCategories().subscribe(function (categories) { return _this.categories = categories; }, function (error) { return alert("there was an error getting categories."); });
-    };
-    TransactionListComponent.prototype.getPayees = function () {
-        var _this = this;
-        this.dataService.getPayees().subscribe(function (payees) { return _this.payees = payees; }, function (error) { return alert("there was an error getting payees."); });
-    };
-    TransactionListComponent.prototype.getTransactions = function () {
-        var _this = this;
-        this.dataService.getTransactions().subscribe(function (transactions) { return _this.transactions = transactions; }, function (error) { return alert("there was an error getting transactions."); });
     };
     TransactionListComponent.prototype.onDelete = function (id) {
         var result;
@@ -2420,26 +2544,11 @@ var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
 var UserListComponent = /** @class */ (function () {
     function UserListComponent(dataService) {
-        var _this = this;
         this.dataService = dataService;
-        this.dataService.userDeleted.subscribe(function (data) {
-            var indexToDelete = _this.users.findIndex(function (element) { return element.id === data.id; });
-            var udeleted = _this.users.splice(indexToDelete, 1);
-        }, function (error) { return alert("There was a problem deleting."); });
-    }
+    } //ctor
     UserListComponent.prototype.ngOnInit = function () {
-        this.getUsers();
-    };
-    UserListComponent.prototype.getUsers = function () {
         var _this = this;
-        return new Promise(function (resolve) {
-            _this.dataService.getUsers().subscribe(function (users) {
-                _this.users = users;
-                resolve(users);
-            }, function (error) {
-                alert("there was an error getting users.");
-            });
-        });
+        this.dataService.users.subscribe(function (users) { return _this.users = users; });
     };
     UserListComponent.prototype.onDelete = function (id) {
         var userToDelete = this.users.find(function (element) { return element.id == id; }).userName;
