@@ -5,34 +5,33 @@
     <caption>Transactions</caption>
     <thead>
         <tr>
-            <th colspan="2">&nbsp;</th>
-            <th colspan="2">To</th>
-            <th colspan="2">From</th>
-            <th colspan="3">&nbsp;</th>
-        </tr>
-        <tr>
             <th>ID</th>
             <th>Date</th>
-            <th>Payee</th>
-            <th>Account</th>
-            <th>Account</th>
-            <th>Payee</th>
+            <th>To</th>
+            <th>From</th>
             <th>Amount</th>
             <th>Category</th>
             <th>Tax?</th>
+            <th>Comment</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let transaction of transactions">
             <td>{{transaction.id}}</td>
             <td>{{transaction.date | date}}</td>
-            <td>{{payeeName(transaction.payeeTo)}}</td>
-            <td>{{accountName(transaction.acctTo)}}</td>
-            <td>{{accountName(transaction.acctFrom)}}</td>
-            <td>{{payeeName(transaction.payeeFrom)}}</td>
+
+            <td *ngIf="transaction.payeeTo">{{transaction.payeeTo}}</td>
+            <td *ngIf="transaction.acctTo" class="account-name">{{accountName(transaction.acctTo)}}</td>
+            <td *ngIf="!transaction.payeeTo && !transaction.acctTo">&nbsp;</td> <!--occurs for (-) adjustment-type transactions-->
+
+            <td *ngIf="transaction.payeeFrom">{{transaction.payeeFrom}}</td>
+            <td *ngIf="transaction.acctFrom" class="account-name">{{accountName(transaction.acctFrom)}}</td>
+            <td *ngIf="!transaction.payeeFrom && !transaction.acctFrom">&nbsp;</td> <!--occurs for (+) adjustment-type transactions-->
+
             <td className='right'>{{displayAsDollar(transaction.amount)}}</td>
             <td>{{categoryName(transaction.category)}}</td>
             <td>&nbsp;<span *ngIf="transaction.tax" class='glyphicon glyphicon-copy' style='color:green;'></span></td>
+            <td>{{transaction.comment}}</td>
             <td><a class="btn btn-xs editlink" routerLink="./transaction-edit/{{transaction.id}}">Edit</a></td>
             <td><a class="btn btn-xs deletelink" (click)="onDelete(transaction.id);">Delete</a></td>
         </tr>

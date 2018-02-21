@@ -1,2 +1,7 @@
-﻿body {
+body {
+}
+
+.account-name{
+    font-weight: bold;
+    color:darkblue;
 }

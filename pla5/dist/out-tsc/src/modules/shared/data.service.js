@@ -313,7 +313,7 @@ var DataService = /** @class */ (function () {
     DataService.prototype.addTransaction = function (transactionToAdd) {
         var _this = this;
         var promise = new Promise(function (resolve, reject) {
-            _this.http.post('/api/Payees', transactionToAdd).subscribe(function (transaction) {
+            _this.http.post('/api/Transactions', transactionToAdd).subscribe(function (transaction) {
                 resolve(transaction);
             }, function (error) {
                 reject(alert("there was an error adding transaction."));

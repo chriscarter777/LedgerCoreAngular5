@@ -43,6 +43,7 @@ namespace pla5.Data
             modelBuilder.Entity<Payee>().Property(x => x.User).HasColumnType("nvarchar(128)");
 
             modelBuilder.Entity<Transaction>().Property(x => x.Amount).HasColumnType("money");
+            modelBuilder.Entity<Transaction>().Property(x => x.Comment).HasColumnType("nvarchar(1024)");
             modelBuilder.Entity<Transaction>().Property(x => x.User).HasColumnType("nvarchar(128)");
         }
 

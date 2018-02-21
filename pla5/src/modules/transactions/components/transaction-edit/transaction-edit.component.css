@@ -30,3 +30,7 @@ select, input {
     background: floralwhite;
 }
 
+.comments {
+    width: 610px;
+    margin-bottom:20px;
+}

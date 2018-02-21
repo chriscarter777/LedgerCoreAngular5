@@ -26,6 +26,7 @@ var TransactionAddComponent = /** @class */ (function () {
         this.acctTo = new forms_1.FormControl();
         this.amount = new forms_1.FormControl();
         this.category = new forms_1.FormControl();
+        this.comment = new forms_1.FormControl();
         this.date = new forms_1.FormControl(this.newTransaction.date);
         this.payeeFrom = new forms_1.FormControl();
         this.payeeTo = new forms_1.FormControl();
@@ -45,7 +46,7 @@ var TransactionAddComponent = /** @class */ (function () {
         this.acctLiability = this.dataService.LiabilityAccounts();
         this.categories = this.dataService.Categories();
         this.payees = this.dataService.Payees();
-        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.payeeFrom, this.payeeTo, this.tax);
+        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.comment, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); }));
         this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
         this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
@@ -79,17 +80,18 @@ var TransactionAddComponent = /** @class */ (function () {
         return this.categories.find(function (element) { return element.id === categoryId; }).name;
     };
     TransactionAddComponent.prototype.freshNewTransaction = function () {
-        return { id: null, amount: 0, category: 0, acctFrom: 0, acctTo: 0, date: new Date().toLocaleDateString(), payeeFrom: 0, payeeTo: 0, tax: false };
+        return { id: null, acctFrom: 0, acctTo: 0, amount: 0, category: 0, comment: '', date: new Date().toLocaleDateString(), payeeFrom: '', payeeTo: '', tax: false };
     };
     TransactionAddComponent.prototype.goBack = function () {
         this.location.back();
     };
-    TransactionAddComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, date, payeeFrom, payeeTo, tax) {
+    TransactionAddComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, comment, date, payeeFrom, payeeTo, tax) {
         this.form = new forms_1.FormGroup({
             acctFrom: acctFrom,
             acctTo: acctTo,
             amount: amount,
             category: category,
+            comment: comment,
             date: date,
             payeeFrom: payeeFrom,
             payeeTo: payeeTo,
@@ -99,44 +101,44 @@ var TransactionAddComponent = /** @class */ (function () {
     TransactionAddComponent.prototype.onSubmit = function () {
         var _this = this;
         //add the payee or update its defaults from payeeFrom, if populated
-        if (this.form.get('payeeFrom').value !== '') {
-            var pfMatch = this.payees.filter(function (element) { return element.name === _this.form.get('payeeFrom').value; });
-            if (pfMatch.length === 0) {
-                var pf = { id: 0, balance: 0, defaultAcct: this.form.get('acctTo').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeFrom').value };
-                this.dataService.addPayee(pf);
-            }
-            else {
-                var matchIndex = this.payees.indexOf(pfMatch[0]);
+        if (this.form.get('payeeFrom').value !== null) {
+            var pfMatch = this.payees.find(function (element) { return element.name === _this.form.get('payeeFrom').value; });
+            if (pfMatch) {
+                var matchIndex = this.payees.indexOf(pfMatch);
                 this.payees[matchIndex].defaultAcct = this.form.get('acctTo').value;
                 this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
                 this.payees[matchIndex].defaultCat = this.form.get('category').value;
                 this.dataService.updatePayee(this.payees[matchIndex]);
             }
+            else {
+                var pf = { id: 0, balance: 0, defaultAcct: this.form.get('acctTo').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeFrom').value };
+                this.dataService.addPayee(pf);
+            }
         }
         //add the payee or update its defaults from payeeTo, if populated
-        if (this.form.get('payeeTo').value !== '') {
-            var ptMatch = this.payees.filter(function (element) { return element.name === _this.form.get('payeeTo').value; });
-            if (ptMatch.length === 0) {
-                var pt = { id: 0, balance: 0, defaultAcct: this.form.get('acctFrom').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeTo').value };
-                this.dataService.addPayee(pt);
-            }
-            else {
-                var matchIndex = this.payees.indexOf(ptMatch[0]);
+        if (this.form.get('payeeTo').value !== null) {
+            var ptMatch = this.payees.find(function (element) { return element.name === _this.form.get('payeeTo').value; });
+            if (ptMatch) {
+                var matchIndex = this.payees.indexOf(ptMatch);
                 this.payees[matchIndex].defaultAcct = this.form.get('acctFrom').value;
                 this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
                 this.payees[matchIndex].defaultCat = this.form.get('category').value;
                 this.dataService.updatePayee(this.payees[matchIndex]);
             }
+            else {
+                var pt = { id: 0, balance: 0, defaultAcct: this.form.get('acctFrom').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeTo').value };
+                this.dataService.addPayee(pt);
+            }
         }
-        //NEED A MECHANISM TO ENSURE NEW PAYEES GET ADDED TO this.payees !BEFORE! TRYING TO GET THEIR ID BELOW, OR IT WILL FAIL!
         //add the transaction
         this.newTransaction.acctFrom = this.form.get('acctFrom').value;
         this.newTransaction.acctTo = this.form.get('acctTo').value;
         this.newTransaction.amount = this.form.get('amount').value;
         this.newTransaction.category = this.categoryId(this.form.get('category').value);
+        this.newTransaction.comment = this.form.get('comment').value;
         this.newTransaction.date = this.form.get('date').value;
-        this.newTransaction.payeeFrom = this.payeeId(this.form.get('payeeFrom').value);
-        this.newTransaction.payeeTo = this.payeeId(this.form.get('payeeTo').value);
+        this.newTransaction.payeeFrom = this.form.get('payeeFrom').value;
+        this.newTransaction.payeeTo = this.form.get('payeeTo').value;
         this.newTransaction.tax = this.form.get('tax').value;
         this.dataService.addTransaction(this.newTransaction);
         //reset and close
@@ -240,6 +242,14 @@ var TransactionAddComponent = /** @class */ (function () {
             this.tax.setValue(false);
         }
     }; //onTPChange
+    TransactionAddComponent.prototype.onFPSelection = function (val) {
+        this.onFPInput(val);
+        this.onFPChange(val);
+    };
+    TransactionAddComponent.prototype.onTPSelection = function (val) {
+        this.onTPInput(val);
+        this.onTPChange(val);
+    };
     TransactionAddComponent.prototype.payeeFilter = function (val) {
         if (this.payees) {
             return this.payees.filter(function (payee) {
@@ -249,12 +259,6 @@ var TransactionAddComponent = /** @class */ (function () {
         else {
             return [];
         }
-    };
-    TransactionAddComponent.prototype.payeeId = function (payeeName) {
-        return this.payees.find(function (element) { return element.name === payeeName; }).id;
-    };
-    TransactionAddComponent.prototype.payeeName = function (payeeId) {
-        return this.payees.find(function (element) { return element.id === payeeId; }).name;
     };
     TransactionAddComponent = __decorate([
         core_1.Component({

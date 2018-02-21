@@ -32,9 +32,10 @@ export interface Transaction {
     acctTo: number;
     amount: number;
     category: number;
+    comment: string;
     date: string;
-    payeeFrom: number;
-    payeeTo: number;
+    payeeFrom: string;
+    payeeTo: string;
     tax: boolean;
 }
 

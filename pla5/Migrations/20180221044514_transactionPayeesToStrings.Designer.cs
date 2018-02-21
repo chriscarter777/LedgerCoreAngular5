@@ -11,9 +11,10 @@ using System;
 namespace pla5.Migrations
 {
     [DbContext(typeof(LedgerDbContext))]
-    partial class LedgerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180221044514_transactionPayeesToStrings")]
+    partial class transactionPayeesToStrings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -284,9 +285,6 @@ namespace pla5.Migrations
                         .HasColumnType("money");
 
                     b.Property<int>("Category");
-
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(1024)");
 
                     b.Property<DateTime>("Date");
 

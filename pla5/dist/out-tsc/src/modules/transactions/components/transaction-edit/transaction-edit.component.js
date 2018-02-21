@@ -39,7 +39,7 @@ var TransactionEditComponent = /** @class */ (function () {
         this.categories = this.dataService.Categories();
         this.payees = this.dataService.Payees();
         this.editTransaction = this.dataService.Transaction(id);
-        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.payeeFrom, this.payeeTo, this.tax);
+        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.comment, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); }));
         this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
         this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
@@ -79,17 +79,19 @@ var TransactionEditComponent = /** @class */ (function () {
         this.acctTo = new forms_1.FormControl(this.editTransaction.acctTo);
         this.amount = new forms_1.FormControl(this.editTransaction.amount);
         this.category = new forms_1.FormControl(this.categoryName(this.editTransaction.category));
+        this.comment = new forms_1.FormControl(this.editTransaction.comment);
         this.date = new forms_1.FormControl(this.editTransaction.date);
         this.payeeFrom = new forms_1.FormControl(this.editTransaction.payeeFrom);
         this.payeeTo = new forms_1.FormControl(this.editTransaction.payeeTo);
         this.tax = new forms_1.FormControl(this.editTransaction.tax);
     };
-    TransactionEditComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, date, payeeFrom, payeeTo, tax) {
+    TransactionEditComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, comment, date, payeeFrom, payeeTo, tax) {
         this.form = new forms_1.FormGroup({
             acctFrom: acctFrom,
             acctTo: acctTo,
             amount: amount,
             category: category,
+            comment: comment,
             date: date,
             payeeFrom: payeeFrom,
             payeeTo: payeeTo,
@@ -117,43 +119,43 @@ var TransactionEditComponent = /** @class */ (function () {
         var _this = this;
         //add the payee or update its defaults from payeeFrom, if populated
         if (this.form.get('payeeFrom').value !== '') {
-            var pfMatch = this.payees.filter(function (element) { return element.name === _this.form.get('payeeFrom').value; });
-            if (pfMatch.length === 0) {
-                var pf = { id: 0, balance: 0, defaultAcct: this.form.get('acctTo').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeFrom').value };
-                this.dataService.addPayee(pf);
-            }
-            else {
-                var matchIndex = this.payees.indexOf(pfMatch[0]);
+            var pfMatch = this.payees.find(function (element) { return element.name === _this.form.get('payeeFrom').value; });
+            if (pfMatch) {
+                var matchIndex = this.payees.indexOf(pfMatch);
                 this.payees[matchIndex].defaultAcct = this.form.get('acctTo').value;
                 this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
                 this.payees[matchIndex].defaultCat = this.form.get('category').value;
                 this.dataService.updatePayee(this.payees[matchIndex]);
             }
+            else {
+                var pf = { id: 0, balance: 0, defaultAcct: this.form.get('acctTo').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeFrom').value };
+                this.dataService.addPayee(pf);
+            }
         }
         //add the payee or update its defaults from payeeTo, if populated
         if (this.form.get('payeeTo').value !== '') {
-            var ptMatch = this.payees.filter(function (element) { return element.name === _this.form.get('payeeTo').value; });
-            if (ptMatch.length === 0) {
-                var pt = { id: 0, balance: 0, defaultAcct: this.form.get('acctFrom').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeTo').value };
-                this.dataService.addPayee(pt);
-            }
-            else {
-                var matchIndex = this.payees.indexOf(ptMatch[0]);
+            var ptMatch = this.payees.find(function (element) { return element.name === _this.form.get('payeeTo').value; });
+            if (ptMatch) {
+                var matchIndex = this.payees.indexOf(ptMatch);
                 this.payees[matchIndex].defaultAcct = this.form.get('acctFrom').value;
                 this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
                 this.payees[matchIndex].defaultCat = this.form.get('category').value;
                 this.dataService.updatePayee(this.payees[matchIndex]);
             }
+            else {
+                var pt = { id: 0, balance: 0, defaultAcct: this.form.get('acctFrom').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeTo').value };
+                this.dataService.addPayee(pt);
+            }
         }
-        //NEED A MECHANISM TO ENSURE NEW PAYEES GET ADDED TO this.payees !BEFORE! TRYING TO GET THEIR ID BELOW, OR IT WILL FAIL!
         //update the transaction
         this.editTransaction.acctFrom = this.form.get('acctFrom').value;
         this.editTransaction.acctTo = this.form.get('acctTo').value;
         this.editTransaction.amount = this.form.get('amount').value;
         this.editTransaction.category = this.categoryId(this.form.get('category').value);
-        this.editTransaction.date = this.form.get('date').value;
-        this.editTransaction.payeeFrom = this.payeeId(this.form.get('payeeFrom').value);
-        this.editTransaction.payeeTo = this.payeeId(this.form.get('payeeTo').value);
+        this.editTransaction.amount = this.form.get('amount').value;
+        this.editTransaction.comment = this.form.get('comment').value;
+        this.editTransaction.payeeFrom = this.form.get('payeeFrom').value;
+        this.editTransaction.payeeTo = this.form.get('payeeTo').value;
         this.editTransaction.tax = this.form.get('tax').value;
         this.dataService.updateTransaction(this.editTransaction);
         //reset and close
@@ -169,12 +171,6 @@ var TransactionEditComponent = /** @class */ (function () {
         else {
             return [];
         }
-    };
-    TransactionEditComponent.prototype.payeeId = function (payeeName) {
-        return this.payees.find(function (element) { return element.name === payeeName; }).id;
-    };
-    TransactionEditComponent.prototype.payeeName = function (payeeId) {
-        return this.payees.find(function (element) { return element.id === payeeId; }).name;
     };
     TransactionEditComponent = __decorate([
         core_1.Component({

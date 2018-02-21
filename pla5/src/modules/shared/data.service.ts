@@ -379,7 +379,7 @@ export class DataService {
     // --Transactions--
     public addTransaction(transactionToAdd: Transaction) {
         const promise = new Promise<Transaction>((resolve, reject) => {
-            this.http.post<Transaction>('/api/Payees', transactionToAdd).subscribe(
+            this.http.post<Transaction>('/api/Transactions', transactionToAdd).subscribe(
                 transaction => {
                     resolve(transaction);
                 },

@@ -29,6 +29,7 @@ export class TransactionAddComponent {
     acctTo: FormControl = new FormControl();
     amount: FormControl = new FormControl();
     category: FormControl = new FormControl();
+    comment: FormControl = new FormControl();
     date: FormControl = new FormControl(this.newTransaction.date);
     payeeFrom: FormControl = new FormControl();
     payeeTo: FormControl = new FormControl();
@@ -53,7 +54,7 @@ export class TransactionAddComponent {
         this.acctLiability = this.dataService.LiabilityAccounts();
         this.categories = this.dataService.Categories();
         this.payees = this.dataService.Payees();
-        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.payeeFrom, this.payeeTo, this.tax);
+        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.comment, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith(''), map(val => this.categoryFilter(val)));
         this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith(''), map(val => this.payeeFilter(val)));
         this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith(''), map(val => this.payeeFilter(val)));
@@ -93,19 +94,20 @@ export class TransactionAddComponent {
     displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);
 
     freshNewTransaction() {
-        return { id: null, amount: 0, category: 0, acctFrom: 0, acctTo: 0, date: new Date().toLocaleDateString(), payeeFrom: 0, payeeTo: 0, tax: false }
+        return { id: null, acctFrom: 0, acctTo: 0, amount: 0, category: 0, comment: '', date: new Date().toLocaleDateString(), payeeFrom: '', payeeTo: '', tax: false }
     }
 
     goBack(): void {
         this.location.back();
     }
 
-    instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, date: FormControl, payeeFrom: FormControl, payeeTo: FormControl, tax: FormControl) {
+    instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, comment: FormControl, date: FormControl, payeeFrom: FormControl, payeeTo: FormControl, tax: FormControl) {
         this.form = new FormGroup({
             acctFrom,
             acctTo,
             amount,
             category,
+            comment,
             date,
             payeeFrom,
             payeeTo,
@@ -115,45 +117,42 @@ export class TransactionAddComponent {
 
     onSubmit() {
         //add the payee or update its defaults from payeeFrom, if populated
-        if (this.form.get('payeeFrom').value !== '') {
-            var pfMatch: Payee[] = this.payees.filter((element) => element.name === this.form.get('payeeFrom').value);
-            if (pfMatch.length === 0) {
-                var pf: Payee = { id: 0, balance: 0, defaultAcct: this.form.get('acctTo').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeFrom').value };
-                this.dataService.addPayee(pf);
-            } else {
-                var matchIndex = this.payees.indexOf(pfMatch[0]);
+        if (this.form.get('payeeFrom').value !== null) {
+            var pfMatch: Payee = this.payees.find((element) => element.name === this.form.get('payeeFrom').value);
+            if (pfMatch) {
+                var matchIndex = this.payees.indexOf(pfMatch);
                 this.payees[matchIndex].defaultAcct = this.form.get('acctTo').value;
                 this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
                 this.payees[matchIndex].defaultCat = this.form.get('category').value;
                 this.dataService.updatePayee(this.payees[matchIndex]);
-            }
+            } else {
+                var pf: Payee = { id: 0, balance: 0, defaultAcct: this.form.get('acctTo').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeFrom').value };
+                this.dataService.addPayee(pf);}
         }
 
         //add the payee or update its defaults from payeeTo, if populated
-        if (this.form.get('payeeTo').value !== '') {
-            var ptMatch: Payee[] = this.payees.filter((element) => element.name === this.form.get('payeeTo').value);
-            if (ptMatch.length === 0) {
-                var pt: Payee = { id: 0, balance: 0, defaultAcct: this.form.get('acctFrom').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeTo').value };
-                this.dataService.addPayee(pt);
-            } else {
-                var matchIndex = this.payees.indexOf(ptMatch[0]);
+        if (this.form.get('payeeTo').value !== null) {
+            var ptMatch: Payee = this.payees.find((element) => element.name === this.form.get('payeeTo').value);
+            if (ptMatch) {
+                var matchIndex = this.payees.indexOf(ptMatch);
                 this.payees[matchIndex].defaultAcct = this.form.get('acctFrom').value;
                 this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
                 this.payees[matchIndex].defaultCat = this.form.get('category').value;
                 this.dataService.updatePayee(this.payees[matchIndex]);
-            }
+            } else {
+                var pt: Payee = { id: 0, balance: 0, defaultAcct: this.form.get('acctFrom').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeTo').value };
+                this.dataService.addPayee(pt);}
         }
-
-        //NEED A MECHANISM TO ENSURE NEW PAYEES GET ADDED TO this.payees !BEFORE! TRYING TO GET THEIR ID BELOW, OR IT WILL FAIL!
 
         //add the transaction
         this.newTransaction.acctFrom = this.form.get('acctFrom').value;
         this.newTransaction.acctTo = this.form.get('acctTo').value;
         this.newTransaction.amount = this.form.get('amount').value;
         this.newTransaction.category = this.categoryId(this.form.get('category').value);
+        this.newTransaction.comment = this.form.get('comment').value;
         this.newTransaction.date = this.form.get('date').value;
-        this.newTransaction.payeeFrom = this.payeeId(this.form.get('payeeFrom').value);
-        this.newTransaction.payeeTo = this.payeeId(this.form.get('payeeTo').value);
+        this.newTransaction.payeeFrom = this.form.get('payeeFrom').value;
+        this.newTransaction.payeeTo = this.form.get('payeeTo').value;
         this.newTransaction.tax = this.form.get('tax').value;
         this.dataService.addTransaction(this.newTransaction);
 
@@ -256,6 +255,16 @@ export class TransactionAddComponent {
         }
     }  //onTPChange
 
+    onFPSelection(val: string) {
+        this.onFPInput(val);
+        this.onFPChange(val);
+
+    }
+
+    onTPSelection(val: string) {
+        this.onTPInput(val);
+        this.onTPChange(val);
+    }
 
 
     payeeFilter(val: string): string[] {
@@ -267,13 +276,4 @@ export class TransactionAddComponent {
             return [];
         }
     }
-
-    payeeId(payeeName: string) {
-        return this.payees.find((element) => element.name === payeeName).id;
-    }
-
-    payeeName(payeeId: number) {
-        return this.payees.find((element) => element.id === payeeId).name;
-    }
-
 }  //component

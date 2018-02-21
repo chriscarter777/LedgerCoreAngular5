@@ -39,9 +39,6 @@ var TransactionListComponent = /** @class */ (function () {
         }
         ;
     };
-    TransactionListComponent.prototype.payeeName = function (payeeId) {
-        return this.payees.find(function (element) { return element.id === payeeId; }).name;
-    };
     TransactionListComponent = __decorate([
         core_1.Component({
             selector: 'transaction-list',

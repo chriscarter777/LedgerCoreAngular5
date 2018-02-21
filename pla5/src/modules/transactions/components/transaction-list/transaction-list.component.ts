@@ -43,9 +43,4 @@ export class TransactionListComponent {
         var confirmation = confirm('Are you sure you want to delete transaction on ' + dateToDelete + '?');
         if (confirmation) { this.dataService.deleteAccount(id); };
     }
-
-    payeeName(payeeId: number) {
-        return this.payees.find((element) => element.id === payeeId).name;
-    }
-
 }
