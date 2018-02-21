@@ -51,29 +51,6 @@ export class DataService {
     private usersSource = new BehaviorSubject<User[]>(this._users);
     users = this.usersSource.asObservable();
 
-    // --Events--
-    //@Output() accountAdded = new EventEmitter();
-    //@Output() accountDeleted = new EventEmitter();
-    //@Output() accountsReceived = new EventEmitter();
-    //@Output() accountUpdated = new EventEmitter();
-    //@Output() categoryAdded = new EventEmitter();
-    //@Output() categoryDeleted = new EventEmitter();
-    //@Output() categoriesReceived = new EventEmitter();
-    //@Output() categoryUpdated = new EventEmitter();
-    //@Output() payeeAdded = new EventEmitter();
-    //@Output() payeeDeleted = new EventEmitter();
-    //@Output() payeesReceived = new EventEmitter();
-    //@Output() payeeUpdated = new EventEmitter();
-    //@Output() transactionAdded = new EventEmitter();
-    //@Output() transactionDeleted = new EventEmitter();
-    //@Output() transactionsReceived = new EventEmitter();
-    //@Output() transactionUpdated = new EventEmitter();
-    //@Output() userDeleted = new EventEmitter();
-    //@Output() userDemoted = new EventEmitter();
-    //@Output() userPromoted = new EventEmitter();
-    //@Output() usersReceived = new EventEmitter();
-    //@Output() userReset = new EventEmitter();
-
     constructor(private http: HttpClient) {
         console.log('----dataservice initializing')
         this.getAccounts()

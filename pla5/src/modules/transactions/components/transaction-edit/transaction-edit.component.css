@@ -5,8 +5,9 @@ label {
   width: 80px;
 }
 
-select {
-    width: 160px;
+select, input {
+    width: 180px;
+    margin-right: 10px;
 }
 
 .red {
@@ -21,11 +22,11 @@ select {
     color: lightgray;
 }
 
-.fromSelector {
+.payeeSelector {
     background: snow;
 }
 
-.toSelector {
+.accontSelector {
     background: floralwhite;
 }
 

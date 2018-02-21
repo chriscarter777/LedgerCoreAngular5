@@ -55,6 +55,7 @@ export class TransactionEditComponent {
         this.acctAsset = this.dataService.AssetAccounts();
         this.acctLiability = this.dataService.LiabilityAccounts();
         this.categories = this.dataService.Categories();
+        this.payees = this.dataService.Payees();
         this.editTransaction = this.dataService.Transaction(id);
         this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith(''), map(val => this.categoryFilter(val)));
@@ -75,8 +76,12 @@ export class TransactionEditComponent {
     }
 
     categoryFilter(val: string): string[] {
-        return this.categories.filter(category =>
-            category.name.toLowerCase().indexOf(val.toLowerCase()) === 0).map(category => category.name);
+        if (this.categories) {
+            return this.categories.filter(category =>
+                category.name.toLowerCase().indexOf(val.toLowerCase()) === 0).map(category => category.name);
+        } else {
+            return [];
+        }
     }
 
     categoryId(categoryName: string) {
@@ -116,6 +121,22 @@ export class TransactionEditComponent {
             tax,
         });
     }
+
+    onCChange(val: string) {
+        if (val !== null) {
+            if (this.categories) {
+                var cat: Category = this.categories.find((c) => c.name.trim().toLowerCase() === val.trim().toLowerCase());
+                if (cat) {
+                    var taxcheck = cat.tax;
+                    this.tax.setValue(taxcheck);
+                } else {
+                    this.tax.setValue(false);
+                }
+            }
+        } else {
+            this.tax.setValue(false);
+        }
+    }  //onCChange
 
     onSubmit() {
         //add the payee or update its defaults from payeeFrom, if populated
@@ -167,8 +188,13 @@ export class TransactionEditComponent {
     }
 
     payeeFilter(val: string): string[] {
-        return this.payees.filter(payee =>
-            payee.name.toLowerCase().indexOf(val.toLowerCase()) === 0).map(payee => payee.name);
+        if (this.payees) {
+            return this.payees.filter(payee =>
+                payee.name.toLowerCase().indexOf(val.toLowerCase()) === 0).map(payee => payee.name);
+        }
+        else {
+            return [];
+        }
     }
 
     payeeId(payeeName: string) {

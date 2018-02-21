@@ -44,6 +44,7 @@ var TransactionAddComponent = /** @class */ (function () {
         this.acctAsset = this.dataService.AssetAccounts();
         this.acctLiability = this.dataService.LiabilityAccounts();
         this.categories = this.dataService.Categories();
+        this.payees = this.dataService.Payees();
         this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); }));
         this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
@@ -62,9 +63,14 @@ var TransactionAddComponent = /** @class */ (function () {
         return this.accounts.find(function (element) { return element.id === accountId; }).name;
     };
     TransactionAddComponent.prototype.categoryFilter = function (val) {
-        return this.categories.filter(function (category) {
-            return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
-        }).map(function (category) { return category.name; });
+        if (this.categories) {
+            return this.categories.filter(function (category) {
+                return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+            }).map(function (category) { return category.name; });
+        }
+        else {
+            return [];
+        }
     };
     TransactionAddComponent.prototype.categoryId = function (categoryName) {
         return this.categories.find(function (element) { return element.name === categoryName; }).id;
@@ -137,10 +143,112 @@ var TransactionAddComponent = /** @class */ (function () {
         this.ngOnInit();
         this.goBack();
     };
+    TransactionAddComponent.prototype.onFPInput = function (val) {
+        if (val === '') {
+            document.getElementById('payeeToControl').style.display = "inline";
+            document.getElementById('accountFromControl').style.display = "inline";
+            document.getElementById('accountToControl').style.display = "inline";
+        }
+        else {
+            document.getElementById('payeeToControl').style.display = "none";
+            document.getElementById('accountFromControl').style.display = "none";
+        }
+    }; //onFPInput
+    TransactionAddComponent.prototype.onTPInput = function (val) {
+        if (val === '') {
+            document.getElementById('payeeFromControl').style.display = "inline";
+            document.getElementById('accountFromControl').style.display = "inline";
+            document.getElementById('accountToControl').style.display = "inline";
+        }
+        else {
+            document.getElementById('payeeFromControl').style.display = "none";
+            document.getElementById('accountToControl').style.display = "none";
+        }
+    }; //onTPInput
+    TransactionAddComponent.prototype.onCChange = function (val) {
+        if (val !== null) {
+            if (this.categories) {
+                var cat = this.categories.find(function (c) { return c.name.trim().toLowerCase() === val.trim().toLowerCase(); });
+                if (cat) {
+                    var taxcheck = cat.tax;
+                    this.tax.setValue(taxcheck);
+                }
+                else {
+                    this.tax.setValue(false);
+                }
+            }
+        }
+        else {
+            this.tax.setValue(false);
+        }
+    }; //onCChange
+    TransactionAddComponent.prototype.onFPChange = function (val) {
+        if (val !== null) {
+            if (this.payees) {
+                var fp = this.payees.find(function (p) { return p.name.trim().toLowerCase() === val.trim().toLowerCase(); });
+                if (fp) {
+                    var acctid = fp.defaultAcct;
+                    var amt = fp.defaultAmt.toString();
+                    var catname = this.categoryName(fp.defaultCat);
+                    var taxcheck = this.categories.find(function (c) { return c.id === fp.defaultCat; }).tax;
+                    this.acctTo.setValue(acctid);
+                    this.amount.setValue(amt);
+                    this.category.setValue(catname);
+                    this.tax.setValue(taxcheck);
+                }
+                else {
+                    this.acctTo.setValue('');
+                    this.amount.setValue('');
+                    this.category.setValue('');
+                    this.tax.setValue(false);
+                }
+            }
+        }
+        else {
+            this.acctTo.setValue('');
+            this.amount.setValue('');
+            this.category.setValue('');
+            this.tax.setValue(false);
+        }
+    }; //onFPChange
+    TransactionAddComponent.prototype.onTPChange = function (val) {
+        if (val !== null) {
+            if (this.payees) {
+                var tp = this.payees.find(function (p) { return p.name.trim().toLowerCase() === val.trim().toLowerCase(); });
+                if (tp) {
+                    var acctid = tp.defaultAcct;
+                    var amt = tp.defaultAmt.toString();
+                    var catname = this.categoryName(tp.defaultCat);
+                    var taxcheck = this.categories.find(function (c) { return c.id === tp.defaultCat; }).tax;
+                    this.acctFrom.setValue(acctid);
+                    this.amount.setValue(amt);
+                    this.category.setValue(catname);
+                    this.tax.setValue(taxcheck);
+                }
+                else {
+                    this.acctFrom.setValue('');
+                    this.amount.setValue('');
+                    this.category.setValue('');
+                    this.tax.setValue(false);
+                }
+            }
+        }
+        else {
+            this.acctFrom.setValue('');
+            this.amount.setValue('');
+            this.category.setValue('');
+            this.tax.setValue(false);
+        }
+    }; //onTPChange
     TransactionAddComponent.prototype.payeeFilter = function (val) {
-        return this.payees.filter(function (payee) {
-            return payee.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
-        }).map(function (payee) { return payee.name; });
+        if (this.payees) {
+            return this.payees.filter(function (payee) {
+                return payee.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+            }).map(function (payee) { return payee.name; });
+        }
+        else {
+            return [];
+        }
     };
     TransactionAddComponent.prototype.payeeId = function (payeeName) {
         return this.payees.find(function (element) { return element.name === payeeName; }).id;
@@ -159,6 +267,6 @@ var TransactionAddComponent = /** @class */ (function () {
             common_1.Location])
     ], TransactionAddComponent);
     return TransactionAddComponent;
-}());
+}()); //component
 exports.TransactionAddComponent = TransactionAddComponent;
 //# sourceMappingURL=transaction-add.component.js.map

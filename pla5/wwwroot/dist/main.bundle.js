@@ -168,7 +168,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/accounts/components/account-add/account-add.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"accountAdd\">\r\n  <h4>Add</h4>\r\n\r\n  <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Type</label>\r\n    <input type='radio' name=\"acctType\" formControlName=\"acctType\" value=\"Asset\" /> Asset\r\n    <input type='radio' name=\"acctType\" formControlName=\"acctType\" value=\"Liability\" /> Liability <br />\r\n    <label>Name</label>\r\n    <input type='text' name=\"name\" formControlName=\"name\" /> <br />\r\n    <label>Institution</label>\r\n    <input type='text' name=\"institution\" formControlName=\"institution\" /> <br />\r\n    <label>Number</label>\r\n    <input type='text' name=\"number\" formControlName=\"number\" /> <br />\r\n    <label>Interest Rate</label>\r\n    <input type='number' name=\"interest\" formControlName=\"interest\" />% <br />\r\n    <label>Limit<span class=\"pull-right\">$</span></label>\r\n    <input type='number' name=\"limit\" formControlName=\"limit\" /> <br />\r\n    <input type='submit' value=\"Add\" />\r\n    <button routerLink=\"/accounts\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div class=\"accountAdd\">\r\n  <h4>Add</h4>\r\n\r\n  <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Type</label>\r\n    <input type='radio' name=\"acctType\" formControlName=\"acctType\" value=\"Asset\" /> Asset\r\n    <input type='radio' name=\"acctType\" formControlName=\"acctType\" value=\"Liability\" /> Liability <br />\r\n    <label>Name</label>\r\n    <input type='text' name=\"name\" formControlName=\"name\" autofocus/> <br />\r\n    <label>Institution</label>\r\n    <input type='text' name=\"institution\" formControlName=\"institution\" /> <br />\r\n    <label>Number</label>\r\n    <input type='text' name=\"number\" formControlName=\"number\" /> <br />\r\n    <label>Interest Rate</label>\r\n    <input type='number' name=\"interest\" formControlName=\"interest\" />% <br />\r\n    <label>Limit<span class=\"pull-right\">$</span></label>\r\n    <input type='number' name=\"limit\" formControlName=\"limit\" /> <br />\r\n    <input type='submit' value=\"Add\" />\r\n    <button routerLink=\"/accounts\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -522,6 +522,7 @@ var categories_module_1 = __webpack_require__("../../../../../src/modules/catego
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
+var payees_module_1 = __webpack_require__("../../../../../src/modules/payees/payees.module.ts");
 var reports_module_1 = __webpack_require__("../../../../../src/modules/reports/reports.module.ts");
 var transactions_module_1 = __webpack_require__("../../../../../src/modules/transactions/transactions.module.ts");
 var users_module_1 = __webpack_require__("../../../../../src/modules/users/users.module.ts");
@@ -543,6 +544,7 @@ var AppModule = /** @class */ (function () {
                 forms_1.ReactiveFormsModule,
                 accounts_module_1.AccountsModule,
                 categories_module_1.CategoriesModule,
+                payees_module_1.PayeesModule,
                 reports_module_1.ReportsModule,
                 transactions_module_1.TransactionsModule,
                 users_module_1.UsersModule,
@@ -712,7 +714,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/nav-menu/nav-menu.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse'>\r\n            <ul class='nav navbar-nav'>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/home\">\r\n                        <span class='glyphicon glyphicon-home'></span> Home\r\n                    </a>\r\n                </li>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/accounts\">\r\n                        <span class='glyphicon glyphicon-credit-card'></span> Accounts\r\n                    </a>\r\n                </li>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/categories\">\r\n                        <span class='glyphicon glyphicon-list-alt'></span> Categories\r\n                    </a>\r\n                </li>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/transactions\">\r\n                        <span class='glyphicon glyphicon-transfer'></span> Transactions\r\n                    </a>\r\n                </li>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/reports\">\r\n                        <span class='glyphicon glyphicon-stats'></span> Reports\r\n                    </a>\r\n                </li>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/users\">\r\n                        <span class='glyphicon glyphicon-user'></span> Users\r\n                    </a>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</nav>\r\n"
+module.exports = "<nav class='main-nav'>\r\n    <div class='navbar navbar-inverse'>\r\n        <div class='navbar-header'>\r\n            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\r\n                <span class='sr-only'>Toggle navigation</span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n                <span class='icon-bar'></span>\r\n            </button>\r\n        </div>\r\n        <div class='clearfix'></div>\r\n        <div class='navbar-collapse collapse'>\r\n            <ul class='nav navbar-nav'>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/home\">\r\n                        <span class='glyphicon glyphicon-home'></span> Home\r\n                    </a>\r\n                </li>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/accounts\">\r\n                        <span class='glyphicon glyphicon-credit-card'></span> Accounts\r\n                    </a>\r\n                </li>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/categories\">\r\n                        <span class='glyphicon glyphicon-list-alt'></span> Categories\r\n                    </a>\r\n                </li>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/payees\">\r\n                        <span class='glyphicon glyphicon-globe'></span> Payees\r\n                    </a>\r\n                </li>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/transactions\">\r\n                        <span class='glyphicon glyphicon-transfer'></span> Transactions\r\n                    </a>\r\n                </li>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/reports\">\r\n                        <span class='glyphicon glyphicon-stats'></span> Reports\r\n                    </a>\r\n                </li>\r\n                <li routerLinkActive=\"link-active\">\r\n                    <a routerLink=\"/users\">\r\n                        <span class='glyphicon glyphicon-user'></span> Users\r\n                    </a>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -914,7 +916,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/categories/components/category-add/category-add.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"categoryAdd\">\r\n  <h4>Add</h4>\r\n\r\n  <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Name</label>\r\n    <input type='text' name=\"name\" formControlName=\"name\" /> <br />\r\n    <label>Type</label>\r\n    <select name=\"type\" formControlName=\"type\">\r\n      <option value=\"Expense\">Expense</option>\r\n      <option value=\"Income\">Income</option>\r\n      <option value=\"Other\">Other</option>\r\n    </select> <br />\r\n    <!--<input type='text' name=\"type\" formControlName=\"type\" /> <br />-->\r\n    <label>Tax</label>\r\n    <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" /> <br />\r\n    <input type='submit' value=\"Add\" />\r\n    <button routerLink=\"/categories\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div class=\"categoryAdd\">\r\n  <h4>Add</h4>\r\n\r\n  <form [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n    <label>Name</label>\r\n    <input type='text' name=\"name\" formControlName=\"name\" autofocus/> <br />\r\n    <label>Type</label>\r\n    <select name=\"type\" formControlName=\"type\">\r\n      <option value=\"Expense\">Expense</option>\r\n      <option value=\"Income\">Income</option>\r\n      <option value=\"Other\">Other</option>\r\n    </select> <br />\r\n    <!--<input type='text' name=\"type\" formControlName=\"type\" /> <br />-->\r\n    <label>Tax</label>\r\n    <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" /> <br />\r\n    <input type='submit' value=\"Add\" />\r\n    <button routerLink=\"/categories\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1183,6 +1185,163 @@ exports.CategoryListComponent = CategoryListComponent;
 
 /***/ }),
 
+/***/ "../../../../../src/modules/payees/components/payee-list/payee-list.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "body {\r\n}\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/modules/payees/components/payee-list/payee-list.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"payees\">\r\n    <p *ngIf=\"!categories\"><em>Loading...</em></p>\r\n\r\n    <table>\r\n        <caption>Payees</caption>\r\n        <thead>\r\n            <tr>\r\n                <th>ID</th>\r\n                <th>Name</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr *ngFor=\"let payee of payees\">\r\n                <td>{{payee.id}}</td>\r\n                <td>{{payee.name}}</td>\r\n                <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(payee.id);\">Delete</a></td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/modules/payees/components/payee-list/payee-list.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+var PayeeListComponent = /** @class */ (function () {
+    function PayeeListComponent(dataService) {
+        this.dataService = dataService;
+    } //ctor
+    PayeeListComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.dataService.payees.subscribe(function (payees) { return _this.payees = payees; });
+    };
+    PayeeListComponent.prototype.onDelete = function (id) {
+        var result;
+        var indextToDelete = this.payees.findIndex(function (element) { return element.id === id; });
+        var nameToDelete = this.payees[indextToDelete].name;
+        var confirmation = confirm('are you sure you want to delete ' + this.payees[indextToDelete].name + '?');
+        if (confirmation) {
+            this.dataService.deletePayee(id);
+        }
+        ;
+    };
+    PayeeListComponent = __decorate([
+        core_1.Component({
+            selector: 'payee-list',
+            template: __webpack_require__("../../../../../src/modules/payees/components/payee-list/payee-list.component.html"),
+            styles: [__webpack_require__("../../../../../src/modules/payees/components/payee-list/payee-list.component.css")]
+        }),
+        __metadata("design:paramtypes", [data_service_1.DataService])
+    ], PayeeListComponent);
+    return PayeeListComponent;
+}());
+exports.PayeeListComponent = PayeeListComponent;
+
+
+/***/ }),
+
+/***/ "../../../../../src/modules/payees/payees.module.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var common_1 = __webpack_require__("../../../common/esm5/common.js");
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
+var payee_list_component_1 = __webpack_require__("../../../../../src/modules/payees/components/payee-list/payee-list.component.ts");
+var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+var payees_routing_module_1 = __webpack_require__("../../../../../src/modules/payees/payees.routing.module.ts");
+var PayeesModule = /** @class */ (function () {
+    function PayeesModule() {
+    }
+    PayeesModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                common_1.CommonModule,
+                forms_1.ReactiveFormsModule,
+                payees_routing_module_1.PayeeRoutingModule
+            ],
+            declarations: [
+                payee_list_component_1.PayeeListComponent
+            ],
+            providers: [data_service_1.DataService]
+        })
+    ], PayeesModule);
+    return PayeesModule;
+}());
+exports.PayeesModule = PayeesModule;
+
+
+/***/ }),
+
+/***/ "../../../../../src/modules/payees/payees.routing.module.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var router_1 = __webpack_require__("../../../router/esm5/router.js");
+var payee_list_component_1 = __webpack_require__("../../../../../src/modules/payees/components/payee-list/payee-list.component.ts");
+var payeesRoutes = [
+    {
+        path: 'payees',
+        component: payee_list_component_1.PayeeListComponent
+    }
+];
+var PayeeRoutingModule = /** @class */ (function () {
+    function PayeeRoutingModule() {
+    }
+    PayeeRoutingModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                router_1.RouterModule.forChild(payeesRoutes)
+            ],
+            exports: [
+                router_1.RouterModule
+            ]
+        })
+    ], PayeeRoutingModule);
+    return PayeeRoutingModule;
+}());
+exports.PayeeRoutingModule = PayeeRoutingModule;
+
+
+/***/ }),
+
 /***/ "../../../../../src/modules/reports/components/report-list/report-list.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1350,28 +1509,6 @@ var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
 var BehaviorSubject_1 = __webpack_require__("../../../../rxjs/_esm5/BehaviorSubject.js");
 var DataService = /** @class */ (function () {
-    // --Events--
-    //@Output() accountAdded = new EventEmitter();
-    //@Output() accountDeleted = new EventEmitter();
-    //@Output() accountsReceived = new EventEmitter();
-    //@Output() accountUpdated = new EventEmitter();
-    //@Output() categoryAdded = new EventEmitter();
-    //@Output() categoryDeleted = new EventEmitter();
-    //@Output() categoriesReceived = new EventEmitter();
-    //@Output() categoryUpdated = new EventEmitter();
-    //@Output() payeeAdded = new EventEmitter();
-    //@Output() payeeDeleted = new EventEmitter();
-    //@Output() payeesReceived = new EventEmitter();
-    //@Output() payeeUpdated = new EventEmitter();
-    //@Output() transactionAdded = new EventEmitter();
-    //@Output() transactionDeleted = new EventEmitter();
-    //@Output() transactionsReceived = new EventEmitter();
-    //@Output() transactionUpdated = new EventEmitter();
-    //@Output() userDeleted = new EventEmitter();
-    //@Output() userDemoted = new EventEmitter();
-    //@Output() userPromoted = new EventEmitter();
-    //@Output() usersReceived = new EventEmitter();
-    //@Output() userReset = new EventEmitter();
     function DataService(http) {
         this.http = http;
         this.accountsSource = new BehaviorSubject_1.BehaviorSubject(this._accounts);
@@ -1931,7 +2068,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body {\r\n}\r\n\r\nlabel {\r\n  width: 80px;\r\n}\r\n\r\nselect {\r\n    width: 160px;\r\n}\r\n\r\n.red {\r\n    color: red;\r\n}\r\n\r\n.green {\r\n    color: green;\r\n}\r\n\r\n.greyed {\r\n    color: lightgray;\r\n}\r\n\r\n.fromSelector {\r\n    background: snow;\r\n}\r\n\r\n.toSelector {\r\n    background: floralwhite;\r\n}\r\n", ""]);
+exports.push([module.i, "body {\r\n}\r\n\r\nlabel {\r\n  width: 80px;\r\n}\r\n\r\nselect, input, .mat-form-field {\r\n    width: 250px;\r\n    margin-right:20px;\r\n}\r\n\r\ninput[type='checkbox'], input[type='submit'] {\r\n    width: auto;\r\n}\r\n\r\n.red {\r\n    color: red;\r\n}\r\n\r\n.green {\r\n    color: green;\r\n}\r\n\r\n.greyed {\r\n    color: lightgray;\r\n}\r\n\r\n.payeeSelector {\r\n    background: snow;\r\n}\r\n\r\n.accountSelector {\r\n    background: floralwhite;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1944,7 +2081,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-add/transaction-add.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionAdd\">\r\n    <h4>Add</h4>\r\n    <p *ngIf=\"!form\">Loading...</p>\r\n\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n        <label>Date</label>\r\n        <input type='date' name=\"date\" formControlName=\"date\" />\r\n        <br />\r\n        <div class=\"toSelector\">\r\n            <label>To Payee</label>\r\n            <mat-form-field>\r\n                <input type=\"text\" matInput formControlName=\"payeeTo\" [matAutocomplete]=\"autoPT\" />\r\n                <mat-autocomplete #autoPT=\"matAutocomplete\">\r\n                    <mat-option *ngFor=\"let payeeName of filteredPayeeToNames | async\" value=\"{{payeeName}}\">\r\n                        {{ payeeName }}\r\n                    </mat-option>\r\n                </mat-autocomplete>\r\n            </mat-form-field>\r\n            <label>To Acct</label>\r\n            <select name=\"acctTo\" formControlName=\"acctTo\">\r\n                <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                <option disabled>──────────</option>\r\n                <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            </select>\r\n        </div>\r\n        <br />\r\n        <div class=\"fromSelector\">\r\n            <label>From Acct</label>\r\n            <select name=\"acctFrom\" formControlName=\"acctFrom\">\r\n                <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                <option disabled>──────────</option>\r\n                <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            </select>\r\n            <label>From Payee</label>\r\n            <mat-form-field>\r\n                <input type=\"text\" matInput formControlName=\"payeeFrom\" [matAutocomplete]=\"autoPF\" />\r\n                <mat-autocomplete #autoPF=\"matAutocomplete\">\r\n                    <mat-option *ngFor=\"let payeeName of filteredPayeeFromNames | async\" value=\"{{payeeName}}\">\r\n                        {{ payeeName }}\r\n                    </mat-option>\r\n                </mat-autocomplete>\r\n            </mat-form-field>\r\n        </div>\r\n        <br />\r\n        <label>Amount<span class=\"pull-right\">$</span></label>\r\n        <input type='number' name=\"amount\" formControlName=\"amount\" />\r\n        <br />\r\n        <label>Category</label>\r\n        <mat-form-field>\r\n            <input type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"autoC\" />\r\n            <mat-autocomplete #autoC=\"matAutocomplete\">\r\n                <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\">\r\n                    {{ categoryName }}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n        </mat-form-field>\r\n        <br />\r\n        <label>Tax</label>\r\n        <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n        <br />\r\n        <input type='submit' value=\"Add\" />\r\n        <button routerLink=\"/transactions\">Cancel</button>\r\n    </form>\r\n</div>\r\n"
+module.exports = "<div class=\"transactionAdd\">\r\n    <h4>Add</h4>\r\n    <p *ngIf=\"!form\">Loading...</p>\r\n\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n        <label>Date</label>\r\n        <input type='date' name=\"date\" formControlName=\"date\" autofocus />\r\n        <br />\r\n        <div class=\"payeeSelector\">\r\n            <span id=\"payeeToControl\">\r\n                <label id=\"tpLabel\">To Payee</label>\r\n                <mat-form-field>\r\n                    <input type=\"text\" matInput formControlName=\"payeeTo\" [matAutocomplete]=\"autoPT\" (input)=\"onTPInput($event.target.value)\" (change)=\"onTPChange($event.target.value)\" />\r\n                    <mat-autocomplete #autoPT=\"matAutocomplete\" >\r\n                        <mat-option *ngFor=\"let payeeName of filteredPayeeToNames | async\" value=\"{{payeeName}}\" (onSelectionChange)=\"onTPChange(payeeName)\" >\r\n                            {{ payeeName }}\r\n                        </mat-option>\r\n                    </mat-autocomplete>\r\n                </mat-form-field>\r\n            </span>\r\n            <span id=\"payeeFromControl\">\r\n                <label id=\"fpLabel\">From Payee</label>\r\n                <mat-form-field>\r\n                    <input type=\"text\" matInput formControlName=\"payeeFrom\" [matAutocomplete]=\"autoPF\" (input)=\"onFPInput($event.target.value)\" (change)=\"onFPChange($event.target.value)\" id=\"fpField\" />\r\n                    <mat-autocomplete #autoPF=\"matAutocomplete\">\r\n                        <mat-option *ngFor=\"let payeeName of filteredPayeeFromNames | async\" value=\"{{payeeName}}\"  (onSelectionChange)=\"onTPChange(payeeName)\">\r\n                            {{ payeeName }}\r\n                        </mat-option>\r\n                    </mat-autocomplete>\r\n                </mat-form-field>\r\n            </span>\r\n        </div>\r\n<br />\r\n<div class=\"accountSelector\">\r\n    <span id=\"accountFromControl\">\r\n        <label id=\"faLabel\">From Acct</label>\r\n        <select id=\"faField\" name=\"acctFrom\" formControlName=\"acctFrom\">\r\n            <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            <option disabled>──────────</option>\r\n            <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n        </select>\r\n    </span>\r\n    <span id=\"accountToControl\">\r\n        <label id=\"taLabel\">To Acct</label>\r\n        <select id=\"taField\" name=\"acctTo\" formControlName=\"acctTo\">\r\n            <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n            <option disabled>──────────</option>\r\n            <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n        </select>\r\n    </span>\r\n</div>\r\n<br />\r\n<label>Amount<span class=\"pull-right\">$</span></label>\r\n<input id=\"amtField\" type='number' name=\"amount\" formControlName=\"amount\" />\r\n<br />\r\n<label>Category</label>\r\n<mat-form-field>\r\n    <input id=\"catField\" type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"autoC\" (change)=\"onCChange($event.target.value)\" />\r\n    <mat-autocomplete #autoC=\"matAutocomplete\">\r\n        <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\" (onSelectionChange)=\"onCChange(categoryName)\">\r\n            {{ categoryName }}\r\n        </mat-option>\r\n    </mat-autocomplete>\r\n</mat-form-field>\r\n<br />\r\n<label>Tax</label>\r\n<input id=\"taxField\" type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n<br />\r\n<input type='submit' value=\"Add\" />\r\n<button routerLink=\"/transactions\">Cancel</button>\r\n    </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1998,6 +2135,7 @@ var TransactionAddComponent = /** @class */ (function () {
         this.acctAsset = this.dataService.AssetAccounts();
         this.acctLiability = this.dataService.LiabilityAccounts();
         this.categories = this.dataService.Categories();
+        this.payees = this.dataService.Payees();
         this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); }));
         this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
@@ -2016,9 +2154,14 @@ var TransactionAddComponent = /** @class */ (function () {
         return this.accounts.find(function (element) { return element.id === accountId; }).name;
     };
     TransactionAddComponent.prototype.categoryFilter = function (val) {
-        return this.categories.filter(function (category) {
-            return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
-        }).map(function (category) { return category.name; });
+        if (this.categories) {
+            return this.categories.filter(function (category) {
+                return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+            }).map(function (category) { return category.name; });
+        }
+        else {
+            return [];
+        }
     };
     TransactionAddComponent.prototype.categoryId = function (categoryName) {
         return this.categories.find(function (element) { return element.name === categoryName; }).id;
@@ -2091,10 +2234,112 @@ var TransactionAddComponent = /** @class */ (function () {
         this.ngOnInit();
         this.goBack();
     };
+    TransactionAddComponent.prototype.onFPInput = function (val) {
+        if (val === '') {
+            document.getElementById('payeeToControl').style.display = "inline";
+            document.getElementById('accountFromControl').style.display = "inline";
+            document.getElementById('accountToControl').style.display = "inline";
+        }
+        else {
+            document.getElementById('payeeToControl').style.display = "none";
+            document.getElementById('accountFromControl').style.display = "none";
+        }
+    }; //onFPInput
+    TransactionAddComponent.prototype.onTPInput = function (val) {
+        if (val === '') {
+            document.getElementById('payeeFromControl').style.display = "inline";
+            document.getElementById('accountFromControl').style.display = "inline";
+            document.getElementById('accountToControl').style.display = "inline";
+        }
+        else {
+            document.getElementById('payeeFromControl').style.display = "none";
+            document.getElementById('accountToControl').style.display = "none";
+        }
+    }; //onTPInput
+    TransactionAddComponent.prototype.onCChange = function (val) {
+        if (val !== null) {
+            if (this.categories) {
+                var cat = this.categories.find(function (c) { return c.name.trim().toLowerCase() === val.trim().toLowerCase(); });
+                if (cat) {
+                    var taxcheck = cat.tax;
+                    this.tax.setValue(taxcheck);
+                }
+                else {
+                    this.tax.setValue(false);
+                }
+            }
+        }
+        else {
+            this.tax.setValue(false);
+        }
+    }; //onCChange
+    TransactionAddComponent.prototype.onFPChange = function (val) {
+        if (val !== null) {
+            if (this.payees) {
+                var fp = this.payees.find(function (p) { return p.name.trim().toLowerCase() === val.trim().toLowerCase(); });
+                if (fp) {
+                    var acctid = fp.defaultAcct;
+                    var amt = fp.defaultAmt.toString();
+                    var catname = this.categoryName(fp.defaultCat);
+                    var taxcheck = this.categories.find(function (c) { return c.id === fp.defaultCat; }).tax;
+                    this.acctTo.setValue(acctid);
+                    this.amount.setValue(amt);
+                    this.category.setValue(catname);
+                    this.tax.setValue(taxcheck);
+                }
+                else {
+                    this.acctTo.setValue('');
+                    this.amount.setValue('');
+                    this.category.setValue('');
+                    this.tax.setValue(false);
+                }
+            }
+        }
+        else {
+            this.acctTo.setValue('');
+            this.amount.setValue('');
+            this.category.setValue('');
+            this.tax.setValue(false);
+        }
+    }; //onFPChange
+    TransactionAddComponent.prototype.onTPChange = function (val) {
+        if (val !== null) {
+            if (this.payees) {
+                var tp = this.payees.find(function (p) { return p.name.trim().toLowerCase() === val.trim().toLowerCase(); });
+                if (tp) {
+                    var acctid = tp.defaultAcct;
+                    var amt = tp.defaultAmt.toString();
+                    var catname = this.categoryName(tp.defaultCat);
+                    var taxcheck = this.categories.find(function (c) { return c.id === tp.defaultCat; }).tax;
+                    this.acctFrom.setValue(acctid);
+                    this.amount.setValue(amt);
+                    this.category.setValue(catname);
+                    this.tax.setValue(taxcheck);
+                }
+                else {
+                    this.acctFrom.setValue('');
+                    this.amount.setValue('');
+                    this.category.setValue('');
+                    this.tax.setValue(false);
+                }
+            }
+        }
+        else {
+            this.acctFrom.setValue('');
+            this.amount.setValue('');
+            this.category.setValue('');
+            this.tax.setValue(false);
+        }
+    }; //onTPChange
     TransactionAddComponent.prototype.payeeFilter = function (val) {
-        return this.payees.filter(function (payee) {
-            return payee.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
-        }).map(function (payee) { return payee.name; });
+        if (this.payees) {
+            return this.payees.filter(function (payee) {
+                return payee.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+            }).map(function (payee) { return payee.name; });
+        }
+        else {
+            return [];
+        }
     };
     TransactionAddComponent.prototype.payeeId = function (payeeName) {
         return this.payees.find(function (element) { return element.name === payeeName; }).id;
@@ -2113,7 +2358,7 @@ var TransactionAddComponent = /** @class */ (function () {
             common_1.Location])
     ], TransactionAddComponent);
     return TransactionAddComponent;
-}());
+}()); //component
 exports.TransactionAddComponent = TransactionAddComponent;
 
 
@@ -2127,7 +2372,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body {\r\n}\r\n\r\nlabel {\r\n  width: 80px;\r\n}\r\n\r\nselect {\r\n    width: 160px;\r\n}\r\n\r\n.red {\r\n    color: red;\r\n}\r\n\r\n.green {\r\n    color: green;\r\n}\r\n\r\n.greyed {\r\n    color: lightgray;\r\n}\r\n\r\n.fromSelector {\r\n    background: snow;\r\n}\r\n\r\n.toSelector {\r\n    background: floralwhite;\r\n}\r\n\r\n", ""]);
+exports.push([module.i, "body {\r\n}\r\n\r\nlabel {\r\n  width: 80px;\r\n}\r\n\r\nselect, input {\r\n    width: 180px;\r\n    margin-right: 10px;\r\n}\r\n\r\n.red {\r\n    color: red;\r\n}\r\n\r\n.green {\r\n    color: green;\r\n}\r\n\r\n.greyed {\r\n    color: lightgray;\r\n}\r\n\r\n.payeeSelector {\r\n    background: snow;\r\n}\r\n\r\n.accontSelector {\r\n    background: floralwhite;\r\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -2140,7 +2385,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-edit/transaction-edit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n      <label>Date</label>\r\n      <input type='date' name=\"date\" formControlName=\"date\" />\r\n      <br />\r\n      <div class=\"toSelector\">\r\n          <label>To Payee</label>\r\n          <mat-form-field>\r\n              <input type=\"text\" matInput formControlName=\"payeeTo\" [matAutocomplete]=\"autoPT\" />\r\n              <mat-autocomplete #autoPT=\"matAutocomplete\">\r\n                  <mat-option *ngFor=\"let payeeName of filteredPayeeToNames | async\" value=\"{{payeeName}}\">\r\n                      {{ payeeName }}\r\n                  </mat-option>\r\n              </mat-autocomplete>\r\n          </mat-form-field>\r\n          <label>To Acct</label>\r\n          <select name=\"acctTo\" formControlName=\"acctTo\">\r\n              <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n              <option disabled>──────────</option>\r\n              <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          </select>\r\n      </div>\r\n      <br />\r\n      <div class=\"fromSelector\">\r\n          <label>From Acct</label>\r\n          <select name=\"acctFrom\" formControlName=\"acctFrom\">\r\n              <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n              <option disabled>──────────</option>\r\n              <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          </select>\r\n          <label>From Payee</label>\r\n          <mat-form-field>\r\n              <input type=\"text\" matInput formControlName=\"payeeFrom\" [matAutocomplete]=\"autoPF\" />\r\n              <mat-autocomplete #autoPF=\"matAutocomplete\">\r\n                  <mat-option *ngFor=\"let payeeName of filteredPayeeFromNames | async\" value=\"{{payeeName}}\">\r\n                      {{ payeeName }}\r\n                  </mat-option>\r\n              </mat-autocomplete>\r\n          </mat-form-field>\r\n      </div>\r\n      <br />\r\n      <label>Amount<span class=\"pull-right\">$</span></label>\r\n      <input type='number' name=\"amount\" formControlName=\"amount\" />\r\n      <br />\r\n      <label>Category</label>\r\n      <mat-form-field>\r\n          <input type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"autoC\" />\r\n          <mat-autocomplete #autoC=\"matAutocomplete\">\r\n              <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\">\r\n                  {{ categoryName }}\r\n              </mat-option>\r\n          </mat-autocomplete>\r\n      </mat-form-field>\r\n      <br />\r\n      <label>Tax</label>\r\n      <input type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n      <br />\r\n      <input type='submit' value=\"Update\" />\r\n      <button routerLink=\"/transactions\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div class=\"transactionEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n      <label>Date</label>\r\n      <input type='date' name=\"date\" formControlName=\"date\" />\r\n      <br />\r\n      <div class=\"payeeSelector\">\r\n          <label>To Payee</label>\r\n          <mat-form-field>\r\n              <input type=\"text\" matInput formControlName=\"payeeTo\" [matAutocomplete]=\"autoPT\" />\r\n              <mat-autocomplete #autoPT=\"matAutocomplete\">\r\n                  <mat-option *ngFor=\"let payeeName of filteredPayeeToNames | async\" value=\"{{payeeName}}\">\r\n                      {{ payeeName }}\r\n                  </mat-option>\r\n              </mat-autocomplete>\r\n          </mat-form-field>\r\n          <label>From Payee</label>\r\n          <mat-form-field>\r\n              <input type=\"text\" matInput formControlName=\"payeeFrom\" [matAutocomplete]=\"autoPF\" />\r\n              <mat-autocomplete #autoPF=\"matAutocomplete\">\r\n                  <mat-option *ngFor=\"let payeeName of filteredPayeeFromNames | async\" value=\"{{payeeName}}\">\r\n                      {{ payeeName }}\r\n                  </mat-option>\r\n              </mat-autocomplete>\r\n          </mat-form-field>\r\n      </div>\r\n      <br />\r\n      <div class=\"accountSelector\">\r\n          <label>From Acct</label>\r\n          <select name=\"acctFrom\" formControlName=\"acctFrom\">\r\n              <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n              <option disabled>──────────</option>\r\n              <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          </select>\r\n          <label>To Acct</label>\r\n          <select name=\"acctTo\" formControlName=\"acctTo\">\r\n              <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n              <option disabled>──────────</option>\r\n              <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          </select>\r\n      </div>\r\n      <br />\r\n      <label>Amount<span class=\"pull-right\">$</span></label>\r\n      <input type='number' name=\"amount\" formControlName=\"amount\" />\r\n      <br />\r\n      <label>Category</label>\r\n      <mat-form-field>\r\n          <input id=\"catField\" type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"autoC\" (change)=\"onCChange($event.target.value)\" />\r\n          <mat-autocomplete #autoC=\"matAutocomplete\">\r\n              <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\" (onSelectionChange)=\"onCChange(categoryName)\">\r\n                  {{ categoryName }}\r\n              </mat-option>\r\n          </mat-autocomplete>\r\n      </mat-form-field>\r\n      <br />\r\n      <label>Tax</label>\r\n      <input id=\"taxField\" type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n      <br />\r\n      <input type='submit' value=\"Update\" />\r\n      <button routerLink=\"/transactions\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2187,6 +2432,7 @@ var TransactionEditComponent = /** @class */ (function () {
         this.acctAsset = this.dataService.AssetAccounts();
         this.acctLiability = this.dataService.LiabilityAccounts();
         this.categories = this.dataService.Categories();
+        this.payees = this.dataService.Payees();
         this.editTransaction = this.dataService.Transaction(id);
         this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); }));
@@ -2205,9 +2451,14 @@ var TransactionEditComponent = /** @class */ (function () {
         return this.accounts.find(function (element) { return element.id === accountId; }).name;
     };
     TransactionEditComponent.prototype.categoryFilter = function (val) {
-        return this.categories.filter(function (category) {
-            return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
-        }).map(function (category) { return category.name; });
+        if (this.categories) {
+            return this.categories.filter(function (category) {
+                return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+            }).map(function (category) { return category.name; });
+        }
+        else {
+            return [];
+        }
     };
     TransactionEditComponent.prototype.categoryId = function (categoryName) {
         return this.categories.find(function (element) { return element.name === categoryName; }).id;
@@ -2240,6 +2491,23 @@ var TransactionEditComponent = /** @class */ (function () {
             tax: tax,
         });
     };
+    TransactionEditComponent.prototype.onCChange = function (val) {
+        if (val !== null) {
+            if (this.categories) {
+                var cat = this.categories.find(function (c) { return c.name.trim().toLowerCase() === val.trim().toLowerCase(); });
+                if (cat) {
+                    var taxcheck = cat.tax;
+                    this.tax.setValue(taxcheck);
+                }
+                else {
+                    this.tax.setValue(false);
+                }
+            }
+        }
+        else {
+            this.tax.setValue(false);
+        }
+    }; //onCChange
     TransactionEditComponent.prototype.onSubmit = function () {
         var _this = this;
         //add the payee or update its defaults from payeeFrom, if populated
@@ -2288,9 +2556,14 @@ var TransactionEditComponent = /** @class */ (function () {
         this.goBack();
     };
     TransactionEditComponent.prototype.payeeFilter = function (val) {
-        return this.payees.filter(function (payee) {
-            return payee.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
-        }).map(function (payee) { return payee.name; });
+        if (this.payees) {
+            return this.payees.filter(function (payee) {
+                return payee.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+            }).map(function (payee) { return payee.name; });
+        }
+        else {
+            return [];
+        }
     };
     TransactionEditComponent.prototype.payeeId = function (payeeName) {
         return this.payees.find(function (element) { return element.name === payeeName; }).id;

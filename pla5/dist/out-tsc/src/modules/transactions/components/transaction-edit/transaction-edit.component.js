@@ -37,6 +37,7 @@ var TransactionEditComponent = /** @class */ (function () {
         this.acctAsset = this.dataService.AssetAccounts();
         this.acctLiability = this.dataService.LiabilityAccounts();
         this.categories = this.dataService.Categories();
+        this.payees = this.dataService.Payees();
         this.editTransaction = this.dataService.Transaction(id);
         this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); }));
@@ -55,9 +56,14 @@ var TransactionEditComponent = /** @class */ (function () {
         return this.accounts.find(function (element) { return element.id === accountId; }).name;
     };
     TransactionEditComponent.prototype.categoryFilter = function (val) {
-        return this.categories.filter(function (category) {
-            return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
-        }).map(function (category) { return category.name; });
+        if (this.categories) {
+            return this.categories.filter(function (category) {
+                return category.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+            }).map(function (category) { return category.name; });
+        }
+        else {
+            return [];
+        }
     };
     TransactionEditComponent.prototype.categoryId = function (categoryName) {
         return this.categories.find(function (element) { return element.name === categoryName; }).id;
@@ -90,6 +96,23 @@ var TransactionEditComponent = /** @class */ (function () {
             tax: tax,
         });
     };
+    TransactionEditComponent.prototype.onCChange = function (val) {
+        if (val !== null) {
+            if (this.categories) {
+                var cat = this.categories.find(function (c) { return c.name.trim().toLowerCase() === val.trim().toLowerCase(); });
+                if (cat) {
+                    var taxcheck = cat.tax;
+                    this.tax.setValue(taxcheck);
+                }
+                else {
+                    this.tax.setValue(false);
+                }
+            }
+        }
+        else {
+            this.tax.setValue(false);
+        }
+    }; //onCChange
     TransactionEditComponent.prototype.onSubmit = function () {
         var _this = this;
         //add the payee or update its defaults from payeeFrom, if populated
@@ -138,9 +161,14 @@ var TransactionEditComponent = /** @class */ (function () {
         this.goBack();
     };
     TransactionEditComponent.prototype.payeeFilter = function (val) {
-        return this.payees.filter(function (payee) {
-            return payee.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
-        }).map(function (payee) { return payee.name; });
+        if (this.payees) {
+            return this.payees.filter(function (payee) {
+                return payee.name.toLowerCase().indexOf(val.toLowerCase()) === 0;
+            }).map(function (payee) { return payee.name; });
+        }
+        else {
+            return [];
+        }
     };
     TransactionEditComponent.prototype.payeeId = function (payeeName) {
         return this.payees.find(function (element) { return element.name === payeeName; }).id;

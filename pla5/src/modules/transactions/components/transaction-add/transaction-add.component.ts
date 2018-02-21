@@ -52,6 +52,7 @@ export class TransactionAddComponent {
         this.acctAsset = this.dataService.AssetAccounts();
         this.acctLiability = this.dataService.LiabilityAccounts();
         this.categories = this.dataService.Categories();
+        this.payees = this.dataService.Payees();
         this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith(''), map(val => this.categoryFilter(val)));
         this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith(''), map(val => this.payeeFilter(val)));
@@ -72,8 +73,12 @@ export class TransactionAddComponent {
     }
 
     categoryFilter(val: string): string[] {
+        if (this.categories) {
         return this.categories.filter(category =>
             category.name.toLowerCase().indexOf(val.toLowerCase()) === 0).map(category => category.name);
+        } else {
+            return [];
+        }
     }
 
     categoryId(categoryName: string) {
@@ -91,22 +96,22 @@ export class TransactionAddComponent {
         return { id: null, amount: 0, category: 0, acctFrom: 0, acctTo: 0, date: new Date().toLocaleDateString(), payeeFrom: 0, payeeTo: 0, tax: false }
     }
 
-   goBack(): void {
+    goBack(): void {
         this.location.back();
     }
 
-   instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, date: FormControl, payeeFrom: FormControl, payeeTo: FormControl, tax: FormControl) {
-       this.form = new FormGroup({
-           acctFrom,
-           acctTo,
-           amount,
-           category,
-           date,
-           payeeFrom,
-           payeeTo,
-           tax,
-       });
-   }
+    instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, date: FormControl, payeeFrom: FormControl, payeeTo: FormControl, tax: FormControl) {
+        this.form = new FormGroup({
+            acctFrom,
+            acctTo,
+            amount,
+            category,
+            date,
+            payeeFrom,
+            payeeTo,
+            tax,
+        });
+    }
 
     onSubmit() {
         //add the payee or update its defaults from payeeFrom, if populated
@@ -155,11 +160,112 @@ export class TransactionAddComponent {
         //reset and close
         this.ngOnInit();
         this.goBack();
-   }
+    }
+
+    onFPInput(val: string) {
+        if (val === '') {
+            document.getElementById('payeeToControl').style.display = "inline";
+            document.getElementById('accountFromControl').style.display = "inline";
+            document.getElementById('accountToControl').style.display = "inline";
+        } else {
+            document.getElementById('payeeToControl').style.display = "none";
+            document.getElementById('accountFromControl').style.display = "none";
+        }
+    }  //onFPInput
+
+    onTPInput(val: string) {
+        if (val === '') {
+            document.getElementById('payeeFromControl').style.display = "inline";
+            document.getElementById('accountFromControl').style.display = "inline";
+            document.getElementById('accountToControl').style.display = "inline";
+        } else {
+            document.getElementById('payeeFromControl').style.display = "none";
+            document.getElementById('accountToControl').style.display = "none";
+        }
+    }  //onTPInput
+
+    onCChange(val: string) {
+        if (val !== null) {
+            if (this.categories) {
+                var cat: Category = this.categories.find((c) => c.name.trim().toLowerCase() === val.trim().toLowerCase());
+                if (cat) {
+                    var taxcheck = cat.tax;
+                    this.tax.setValue(taxcheck);
+                } else {
+                    this.tax.setValue(false);
+                }
+            }
+        } else {
+            this.tax.setValue(false);
+        }
+    }  //onCChange
+
+    onFPChange(val: string) {
+        if (val !== null) {
+            if (this.payees) {
+                var fp: Payee = this.payees.find((p) => p.name.trim().toLowerCase() === val.trim().toLowerCase());
+                if (fp) {
+                    var acctid = fp.defaultAcct;
+                    var amt = fp.defaultAmt.toString();
+                    var catname = this.categoryName(fp.defaultCat);
+                    var taxcheck = this.categories.find((c) => c.id === fp.defaultCat).tax;
+                    this.acctTo.setValue(acctid);
+                    this.amount.setValue(amt);
+                    this.category.setValue(catname);
+                    this.tax.setValue(taxcheck);
+                } else {
+                    this.acctTo.setValue('')
+                    this.amount.setValue('')
+                    this.category.setValue('')
+                    this.tax.setValue(false);
+                }
+            }
+        } else {
+            this.acctTo.setValue('');
+            this.amount.setValue('');
+            this.category.setValue('');
+            this.tax.setValue(false);
+        }
+    }  //onFPChange
+
+    onTPChange(val: string) {
+        if (val !== null) {
+            if (this.payees) {
+                var tp: Payee = this.payees.find((p) => p.name.trim().toLowerCase() === val.trim().toLowerCase());
+                if (tp) {
+                    var acctid = tp.defaultAcct;
+                    var amt = tp.defaultAmt.toString();
+                    var catname = this.categoryName(tp.defaultCat);
+                    var taxcheck = this.categories.find((c) => c.id === tp.defaultCat).tax;
+                    this.acctFrom.setValue(acctid);
+                    this.amount.setValue(amt);
+                    this.category.setValue(catname);
+                    this.tax.setValue(taxcheck);
+                } else {
+                    this.acctFrom.setValue('');
+                    this.amount.setValue('');
+                    this.category.setValue('');
+                    this.tax.setValue(false);
+                }
+            }
+        } else {
+            this.acctFrom.setValue('');
+            this.amount.setValue('');
+            this.category.setValue('');
+            this.tax.setValue(false);
+        }
+    }  //onTPChange
+
+
 
     payeeFilter(val: string): string[] {
-        return this.payees.filter(payee =>
-            payee.name.toLowerCase().indexOf(val.toLowerCase()) === 0).map(payee => payee.name);
+        if (this.payees) {
+            return this.payees.filter(payee =>
+                payee.name.toLowerCase().indexOf(val.toLowerCase()) === 0).map(payee => payee.name);
+        }
+        else {
+            return [];
+        }
     }
 
     payeeId(payeeName: string) {
@@ -170,4 +276,4 @@ export class TransactionAddComponent {
         return this.payees.find((element) => element.id === payeeId).name;
     }
 
-}
+}  //component

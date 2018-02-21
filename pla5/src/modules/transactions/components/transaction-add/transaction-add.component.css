@@ -5,8 +5,13 @@ label {
   width: 80px;
 }
 
-select {
-    width: 160px;
+select, input, .mat-form-field {
+    width: 250px;
+    margin-right:20px;
+}
+
+input[type='checkbox'], input[type='submit'] {
+    width: auto;
 }
 
 .red {
@@ -21,10 +26,10 @@ select {
     color: lightgray;
 }
 
-.fromSelector {
+.payeeSelector {
     background: snow;
 }
 
-.toSelector {
+.accountSelector {
     background: floralwhite;
 }

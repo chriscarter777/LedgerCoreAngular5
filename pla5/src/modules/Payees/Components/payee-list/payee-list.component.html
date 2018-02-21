@@ -1,0 +1,20 @@
+<div class="payees">
+    <p *ngIf="!categories"><em>Loading...</em></p>
+
+    <table>
+        <caption>Payees</caption>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let payee of payees">
+                <td>{{payee.id}}</td>
+                <td>{{payee.name}}</td>
+                <td><a class="btn btn-xs deletelink" (click)="onDelete(payee.id);">Delete</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -8,6 +8,7 @@ import { CategoriesModule } from '../categories/categories.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PayeesModule } from '../payees/payees.module';
 import { ReportsModule } from '../reports/reports.module';
 import { TransactionsModule } from '../transactions/transactions.module';
 import { UsersModule } from '../users/users.module';
@@ -29,6 +30,7 @@ import { PageNotFoundComponent } from './components/not-found/not-found.componen
 
         AccountsModule,
         CategoriesModule,
+        PayeesModule,
         ReportsModule,
         TransactionsModule,
         UsersModule,

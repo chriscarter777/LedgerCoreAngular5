@@ -15,6 +15,7 @@ var categories_module_1 = require("../categories/categories.module");
 var http_1 = require("@angular/common/http");
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
+var payees_module_1 = require("../payees/payees.module");
 var reports_module_1 = require("../reports/reports.module");
 var transactions_module_1 = require("../transactions/transactions.module");
 var users_module_1 = require("../users/users.module");
@@ -36,6 +37,7 @@ var AppModule = /** @class */ (function () {
                 forms_1.ReactiveFormsModule,
                 accounts_module_1.AccountsModule,
                 categories_module_1.CategoriesModule,
+                payees_module_1.PayeesModule,
                 reports_module_1.ReportsModule,
                 transactions_module_1.TransactionsModule,
                 users_module_1.UsersModule,
