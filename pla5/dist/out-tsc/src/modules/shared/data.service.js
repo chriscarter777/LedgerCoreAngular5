@@ -295,8 +295,9 @@ var DataService = /** @class */ (function () {
     }; //Payees
     DataService.prototype.updatePayee = function (payeeToUpdate) {
         var _this = this;
+        console.log('dataService executing updatePayee with ' + JSON.stringify(payeeToUpdate));
         var promise = new Promise(function (resolve, reject) {
-            _this.http.put('/apiPayees', payeeToUpdate).subscribe(function (payee) {
+            _this.http.put('/api/Payees', payeeToUpdate).subscribe(function (payee) {
                 resolve(payee);
             }, function (error) {
                 reject(alert("there was an error updating payee."));

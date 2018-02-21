@@ -31,7 +31,7 @@
             <td className='right'>{{displayAsDollar(transaction.amount)}}</td>
             <td>{{categoryName(transaction.category)}}</td>
             <td>&nbsp;<span *ngIf="transaction.tax" class='glyphicon glyphicon-copy' style='color:green;'></span></td>
-            <td>{{transaction.comment}}</td>
+            <td>{{transaction.comments}}</td>
             <td><a class="btn btn-xs editlink" routerLink="./transaction-edit/{{transaction.id}}">Edit</a></td>
             <td><a class="btn btn-xs deletelink" (click)="onDelete(transaction.id);">Delete</a></td>
         </tr>

@@ -1788,8 +1788,9 @@ var DataService = /** @class */ (function () {
     }; //Payees
     DataService.prototype.updatePayee = function (payeeToUpdate) {
         var _this = this;
+        console.log('dataService executing updatePayee with ' + JSON.stringify(payeeToUpdate));
         var promise = new Promise(function (resolve, reject) {
-            _this.http.put('/apiPayees', payeeToUpdate).subscribe(function (payee) {
+            _this.http.put('/api/Payees', payeeToUpdate).subscribe(function (payee) {
                 resolve(payee);
             }, function (error) {
                 reject(alert("there was an error updating payee."));
@@ -2081,7 +2082,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-add/transaction-add.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionAdd\">\r\n    <h4>Add</h4>\r\n    <p *ngIf=\"!form\">Loading...</p>\r\n\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n        <label>Date</label>\r\n        <input type='date' name=\"date\" formControlName=\"date\" autofocus />\r\n        <br />\r\n        <div class=\"payeeSelector\">\r\n            <span id=\"payeeToControl\">\r\n                <label id=\"tpLabel\">To Payee</label>\r\n                <mat-form-field>\r\n                    <input type=\"text\" matInput formControlName=\"payeeTo\" [matAutocomplete]=\"autoPT\" (input)=\"onTPInput($event.target.value)\" (change)=\"onTPChange($event.target.value)\" />\r\n                    <mat-autocomplete #autoPT=\"matAutocomplete\">\r\n                        <mat-option *ngFor=\"let payeeName of filteredPayeeToNames | async\" value=\"{{payeeName}}\" (onSelectionChange)=\"onTPSelection(payeeName)\">\r\n                            {{ payeeName }}\r\n                        </mat-option>\r\n                    </mat-autocomplete>\r\n                </mat-form-field>\r\n            </span>\r\n            <span id=\"payeeFromControl\">\r\n                <label id=\"fpLabel\">From Payee</label>\r\n                <mat-form-field>\r\n                    <input type=\"text\" matInput formControlName=\"payeeFrom\" [matAutocomplete]=\"autoPF\" (input)=\"onFPInput($event.target.value)\" (change)=\"onFPChange($event.target.value)\" id=\"fpField\" />\r\n                    <mat-autocomplete #autoPF=\"matAutocomplete\">\r\n                        <mat-option *ngFor=\"let payeeName of filteredPayeeFromNames | async\" value=\"{{payeeName}}\" (onSelectionChange)=\"onTPSelection(payeeName)\">\r\n                            {{ payeeName }}\r\n                        </mat-option>\r\n                    </mat-autocomplete>\r\n                </mat-form-field>\r\n            </span>\r\n        </div>\r\n        <br />\r\n        <div class=\"accountSelector\">\r\n            <span id=\"accountFromControl\">\r\n                <label id=\"faLabel\">From Acct</label>\r\n                <select id=\"faField\" name=\"acctFrom\" formControlName=\"acctFrom\">\r\n                    <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                    <option disabled>──────────</option>\r\n                    <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                </select>\r\n            </span>\r\n            <span id=\"accountToControl\">\r\n                <label id=\"taLabel\">To Acct</label>\r\n                <select id=\"taField\" name=\"acctTo\" formControlName=\"acctTo\">\r\n                    <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                    <option disabled>──────────</option>\r\n                    <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                </select>\r\n            </span>\r\n        </div>\r\n        <br />\r\n        <label>Amount<span class=\"pull-right\">$</span></label>\r\n        <input id=\"amtField\" type='number' name=\"amount\" formControlName=\"amount\" />\r\n        <br />\r\n        <label>Category</label>\r\n        <mat-form-field>\r\n            <input id=\"catField\" type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"autoC\" (change)=\"onCChange($event.target.value)\" />\r\n            <mat-autocomplete #autoC=\"matAutocomplete\">\r\n                <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\" (onSelectionChange)=\"onCChange(categoryName)\">\r\n                    {{ categoryName }}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n        </mat-form-field>\r\n        <br />\r\n        <label>Tax</label>\r\n        <input id=\"taxField\" type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n        <br />\r\n        <label>Comment</label>\r\n        <input type='text' class=\"comments\" name=\"comment\" formControlName=\"comment\" />\r\n        <br />\r\n        <input type='submit' value=\"Add\" />\r\n        <button routerLink=\"/transactions\">Cancel</button>\r\n    </form>\r\n</div>\r\n"
+module.exports = "<div class=\"transactionAdd\">\r\n    <h4>Add</h4>\r\n    <p *ngIf=\"!form\">Loading...</p>\r\n\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n        <label>Date</label>\r\n        <input type='date' name=\"date\" formControlName=\"date\" autofocus />\r\n        <br />\r\n        <div class=\"payeeSelector\">\r\n            <span id=\"payeeToControl\">\r\n                <label id=\"tpLabel\">To Payee</label>\r\n                <mat-form-field>\r\n                    <input type=\"text\" matInput formControlName=\"payeeTo\" [matAutocomplete]=\"autoPT\" (input)=\"onTPInput($event.target.value)\" (change)=\"onTPChange($event.target.value)\" />\r\n                    <mat-autocomplete #autoPT=\"matAutocomplete\">\r\n                        <mat-option *ngFor=\"let payeeName of filteredPayeeToNames | async\" value=\"{{payeeName}}\" (onSelectionChange)=\"onTPSelection(payeeName)\">\r\n                            {{ payeeName }}\r\n                        </mat-option>\r\n                    </mat-autocomplete>\r\n                </mat-form-field>\r\n            </span>\r\n            <span id=\"payeeFromControl\">\r\n                <label id=\"fpLabel\">From Payee</label>\r\n                <mat-form-field>\r\n                    <input type=\"text\" matInput formControlName=\"payeeFrom\" [matAutocomplete]=\"autoPF\" (input)=\"onFPInput($event.target.value)\" (change)=\"onFPChange($event.target.value)\" id=\"fpField\" />\r\n                    <mat-autocomplete #autoPF=\"matAutocomplete\">\r\n                        <mat-option *ngFor=\"let payeeName of filteredPayeeFromNames | async\" value=\"{{payeeName}}\" (onSelectionChange)=\"onTPSelection(payeeName)\">\r\n                            {{ payeeName }}\r\n                        </mat-option>\r\n                    </mat-autocomplete>\r\n                </mat-form-field>\r\n            </span>\r\n        </div>\r\n        <br />\r\n        <div class=\"accountSelector\">\r\n            <span id=\"accountFromControl\">\r\n                <label id=\"faLabel\">From Acct</label>\r\n                <select id=\"faField\" name=\"acctFrom\" formControlName=\"acctFrom\">\r\n                    <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                    <option disabled>──────────</option>\r\n                    <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                </select>\r\n            </span>\r\n            <span id=\"accountToControl\">\r\n                <label id=\"taLabel\">To Acct</label>\r\n                <select id=\"taField\" name=\"acctTo\" formControlName=\"acctTo\">\r\n                    <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                    <option disabled>──────────</option>\r\n                    <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                </select>\r\n            </span>\r\n        </div>\r\n        <br />\r\n        <label>Amount<span class=\"pull-right\">$</span></label>\r\n        <input id=\"amtField\" type='number' name=\"amount\" formControlName=\"amount\" />\r\n        <br />\r\n        <label>Category</label>\r\n        <mat-form-field>\r\n            <input id=\"catField\" type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"autoC\" (change)=\"onCChange($event.target.value)\" />\r\n            <mat-autocomplete #autoC=\"matAutocomplete\">\r\n                <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\" (onSelectionChange)=\"onCChange(categoryName)\">\r\n                    {{ categoryName }}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n        </mat-form-field>\r\n        <br />\r\n        <label>Tax</label>\r\n        <input id=\"taxField\" type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n        <br />\r\n        <label>Comments</label>\r\n        <input type='text' class=\"comments\" name=\"comments\" formControlName=\"comments\" />\r\n        <br />\r\n        <input type='submit' value=\"Add\" />\r\n        <button routerLink=\"/transactions\">Cancel</button>\r\n    </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2117,7 +2118,7 @@ var TransactionAddComponent = /** @class */ (function () {
         this.acctTo = new forms_1.FormControl();
         this.amount = new forms_1.FormControl();
         this.category = new forms_1.FormControl();
-        this.comment = new forms_1.FormControl();
+        this.comments = new forms_1.FormControl();
         this.date = new forms_1.FormControl(this.newTransaction.date);
         this.payeeFrom = new forms_1.FormControl();
         this.payeeTo = new forms_1.FormControl();
@@ -2137,7 +2138,7 @@ var TransactionAddComponent = /** @class */ (function () {
         this.acctLiability = this.dataService.LiabilityAccounts();
         this.categories = this.dataService.Categories();
         this.payees = this.dataService.Payees();
-        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.comment, this.date, this.payeeFrom, this.payeeTo, this.tax);
+        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.comments, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); }));
         this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
         this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
@@ -2171,18 +2172,18 @@ var TransactionAddComponent = /** @class */ (function () {
         return this.categories.find(function (element) { return element.id === categoryId; }).name;
     };
     TransactionAddComponent.prototype.freshNewTransaction = function () {
-        return { id: null, acctFrom: 0, acctTo: 0, amount: 0, category: 0, comment: '', date: new Date().toLocaleDateString(), payeeFrom: '', payeeTo: '', tax: false };
+        return { id: null, acctFrom: 0, acctTo: 0, amount: 0, category: 0, comments: '', date: new Date().toLocaleDateString(), payeeFrom: '', payeeTo: '', tax: false };
     };
     TransactionAddComponent.prototype.goBack = function () {
         this.location.back();
     };
-    TransactionAddComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, comment, date, payeeFrom, payeeTo, tax) {
+    TransactionAddComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, comments, date, payeeFrom, payeeTo, tax) {
         this.form = new forms_1.FormGroup({
             acctFrom: acctFrom,
             acctTo: acctTo,
             amount: amount,
             category: category,
-            comment: comment,
+            comments: comments,
             date: date,
             payeeFrom: payeeFrom,
             payeeTo: payeeTo,
@@ -2193,31 +2194,37 @@ var TransactionAddComponent = /** @class */ (function () {
         var _this = this;
         //add the payee or update its defaults from payeeFrom, if populated
         if (this.form.get('payeeFrom').value !== null) {
+            console.log('adding payeeFrom ' + this.form.get('payeeFrom').value);
             var pfMatch = this.payees.find(function (element) { return element.name === _this.form.get('payeeFrom').value; });
             if (pfMatch) {
                 var matchIndex = this.payees.indexOf(pfMatch);
                 this.payees[matchIndex].defaultAcct = this.form.get('acctTo').value;
                 this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
-                this.payees[matchIndex].defaultCat = this.form.get('category').value;
+                this.payees[matchIndex].defaultCat = this.categoryId(this.form.get('category').value);
+                console.log('calling update payeeFrom with ' + JSON.stringify(this.payees[matchIndex]));
                 this.dataService.updatePayee(this.payees[matchIndex]);
             }
             else {
                 var pf = { id: 0, balance: 0, defaultAcct: this.form.get('acctTo').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeFrom').value };
+                console.log('calling add payeeFrom with ' + JSON.stringify(pf));
                 this.dataService.addPayee(pf);
             }
         }
         //add the payee or update its defaults from payeeTo, if populated
         if (this.form.get('payeeTo').value !== null) {
+            console.log('adding payeeTo ' + this.form.get('payeeTo').value);
             var ptMatch = this.payees.find(function (element) { return element.name === _this.form.get('payeeTo').value; });
             if (ptMatch) {
                 var matchIndex = this.payees.indexOf(ptMatch);
                 this.payees[matchIndex].defaultAcct = this.form.get('acctFrom').value;
                 this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
-                this.payees[matchIndex].defaultCat = this.form.get('category').value;
+                this.payees[matchIndex].defaultCat = this.categoryId(this.form.get('category').value);
+                console.log('calling update payeeFrom with ' + JSON.stringify(this.payees[matchIndex]));
                 this.dataService.updatePayee(this.payees[matchIndex]);
             }
             else {
                 var pt = { id: 0, balance: 0, defaultAcct: this.form.get('acctFrom').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeTo').value };
+                console.log('calling add payeeTo with ' + JSON.stringify(pt));
                 this.dataService.addPayee(pt);
             }
         }
@@ -2226,11 +2233,12 @@ var TransactionAddComponent = /** @class */ (function () {
         this.newTransaction.acctTo = this.form.get('acctTo').value;
         this.newTransaction.amount = this.form.get('amount').value;
         this.newTransaction.category = this.categoryId(this.form.get('category').value);
-        this.newTransaction.comment = this.form.get('comment').value;
+        this.newTransaction.comments = this.form.get('comments').value;
         this.newTransaction.date = this.form.get('date').value;
         this.newTransaction.payeeFrom = this.form.get('payeeFrom').value;
         this.newTransaction.payeeTo = this.form.get('payeeTo').value;
         this.newTransaction.tax = this.form.get('tax').value;
+        console.log('calling addTransaction with ' + JSON.stringify(this.newTransaction));
         this.dataService.addTransaction(this.newTransaction);
         //reset and close
         this.ngOnInit();
@@ -2389,7 +2397,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-edit/transaction-edit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n      <label>Date</label>\r\n      <input type='date' name=\"date\" formControlName=\"date\" />\r\n      <br />\r\n      <div class=\"payeeSelector\">\r\n          <label>To Payee</label>\r\n          <mat-form-field>\r\n              <input type=\"text\" matInput formControlName=\"payeeTo\" [matAutocomplete]=\"autoPT\" />\r\n              <mat-autocomplete #autoPT=\"matAutocomplete\">\r\n                  <mat-option *ngFor=\"let payeeName of filteredPayeeToNames | async\" value=\"{{payeeName}}\">\r\n                      {{ payeeName }}\r\n                  </mat-option>\r\n              </mat-autocomplete>\r\n          </mat-form-field>\r\n          <label>From Payee</label>\r\n          <mat-form-field>\r\n              <input type=\"text\" matInput formControlName=\"payeeFrom\" [matAutocomplete]=\"autoPF\" />\r\n              <mat-autocomplete #autoPF=\"matAutocomplete\">\r\n                  <mat-option *ngFor=\"let payeeName of filteredPayeeFromNames | async\" value=\"{{payeeName}}\">\r\n                      {{ payeeName }}\r\n                  </mat-option>\r\n              </mat-autocomplete>\r\n          </mat-form-field>\r\n      </div>\r\n      <br />\r\n      <div class=\"accountSelector\">\r\n          <label>From Acct</label>\r\n          <select name=\"acctFrom\" formControlName=\"acctFrom\">\r\n              <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n              <option disabled>──────────</option>\r\n              <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          </select>\r\n          <label>To Acct</label>\r\n          <select name=\"acctTo\" formControlName=\"acctTo\">\r\n              <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n              <option disabled>──────────</option>\r\n              <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          </select>\r\n      </div>\r\n      <br />\r\n      <label>Amount<span class=\"pull-right\">$</span></label>\r\n      <input type='number' name=\"amount\" formControlName=\"amount\" />\r\n      <br />\r\n      <label>Category</label>\r\n      <mat-form-field>\r\n          <input id=\"catField\" type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"autoC\" (change)=\"onCChange($event.target.value)\" />\r\n          <mat-autocomplete #autoC=\"matAutocomplete\">\r\n              <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\" (onSelectionChange)=\"onCChange(categoryName)\">\r\n                  {{ categoryName }}\r\n              </mat-option>\r\n          </mat-autocomplete>\r\n      </mat-form-field>\r\n      <br />\r\n      <label>Tax</label>\r\n      <input id=\"taxField\" type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n      <br />\r\n      <label>Comment</label>\r\n      <input type='text' class=\"comments\" name=\"comment\" formControlName=\"comment\" />\r\n      <br />\r\n      <input type='submit' value=\"Update\" />\r\n      <button routerLink=\"/transactions\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div class=\"transactionEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n      <label>Date</label>\r\n      <input type='date' name=\"date\" formControlName=\"date\" />\r\n      <br />\r\n      <div class=\"payeeSelector\">\r\n          <label>To Payee</label>\r\n          <mat-form-field>\r\n              <input type=\"text\" matInput formControlName=\"payeeTo\" [matAutocomplete]=\"autoPT\" />\r\n              <mat-autocomplete #autoPT=\"matAutocomplete\">\r\n                  <mat-option *ngFor=\"let payeeName of filteredPayeeToNames | async\" value=\"{{payeeName}}\">\r\n                      {{ payeeName }}\r\n                  </mat-option>\r\n              </mat-autocomplete>\r\n          </mat-form-field>\r\n          <label>From Payee</label>\r\n          <mat-form-field>\r\n              <input type=\"text\" matInput formControlName=\"payeeFrom\" [matAutocomplete]=\"autoPF\" />\r\n              <mat-autocomplete #autoPF=\"matAutocomplete\">\r\n                  <mat-option *ngFor=\"let payeeName of filteredPayeeFromNames | async\" value=\"{{payeeName}}\">\r\n                      {{ payeeName }}\r\n                  </mat-option>\r\n              </mat-autocomplete>\r\n          </mat-form-field>\r\n      </div>\r\n      <br />\r\n      <div class=\"accountSelector\">\r\n          <label>From Acct</label>\r\n          <select name=\"acctFrom\" formControlName=\"acctFrom\">\r\n              <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n              <option disabled>──────────</option>\r\n              <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          </select>\r\n          <label>To Acct</label>\r\n          <select name=\"acctTo\" formControlName=\"acctTo\">\r\n              <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n              <option disabled>──────────</option>\r\n              <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          </select>\r\n      </div>\r\n      <br />\r\n      <label>Amount<span class=\"pull-right\">$</span></label>\r\n      <input type='number' name=\"amount\" formControlName=\"amount\" />\r\n      <br />\r\n      <label>Category</label>\r\n      <mat-form-field>\r\n          <input id=\"catField\" type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"autoC\" (change)=\"onCChange($event.target.value)\" />\r\n          <mat-autocomplete #autoC=\"matAutocomplete\">\r\n              <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\" (onSelectionChange)=\"onCChange(categoryName)\">\r\n                  {{ categoryName }}\r\n              </mat-option>\r\n          </mat-autocomplete>\r\n      </mat-form-field>\r\n      <br />\r\n      <label>Tax</label>\r\n      <input id=\"taxField\" type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n      <br />\r\n      <label>Comments</label>\r\n      <input type='text' class=\"comments\" name=\"comments\" formControlName=\"comments\" />\r\n      <br />\r\n      <input type='submit' value=\"Update\" />\r\n      <button routerLink=\"/transactions\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2438,7 +2446,7 @@ var TransactionEditComponent = /** @class */ (function () {
         this.categories = this.dataService.Categories();
         this.payees = this.dataService.Payees();
         this.editTransaction = this.dataService.Transaction(id);
-        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.comment, this.date, this.payeeFrom, this.payeeTo, this.tax);
+        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.comments, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); }));
         this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
         this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
@@ -2478,19 +2486,19 @@ var TransactionEditComponent = /** @class */ (function () {
         this.acctTo = new forms_1.FormControl(this.editTransaction.acctTo);
         this.amount = new forms_1.FormControl(this.editTransaction.amount);
         this.category = new forms_1.FormControl(this.categoryName(this.editTransaction.category));
-        this.comment = new forms_1.FormControl(this.editTransaction.comment);
+        this.comments = new forms_1.FormControl(this.editTransaction.comments);
         this.date = new forms_1.FormControl(this.editTransaction.date);
         this.payeeFrom = new forms_1.FormControl(this.editTransaction.payeeFrom);
         this.payeeTo = new forms_1.FormControl(this.editTransaction.payeeTo);
         this.tax = new forms_1.FormControl(this.editTransaction.tax);
     };
-    TransactionEditComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, comment, date, payeeFrom, payeeTo, tax) {
+    TransactionEditComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, comments, date, payeeFrom, payeeTo, tax) {
         this.form = new forms_1.FormGroup({
             acctFrom: acctFrom,
             acctTo: acctTo,
             amount: amount,
             category: category,
-            comment: comment,
+            comments: comments,
             date: date,
             payeeFrom: payeeFrom,
             payeeTo: payeeTo,
@@ -2552,7 +2560,7 @@ var TransactionEditComponent = /** @class */ (function () {
         this.editTransaction.amount = this.form.get('amount').value;
         this.editTransaction.category = this.categoryId(this.form.get('category').value);
         this.editTransaction.amount = this.form.get('amount').value;
-        this.editTransaction.comment = this.form.get('comment').value;
+        this.editTransaction.comments = this.form.get('comments').value;
         this.editTransaction.payeeFrom = this.form.get('payeeFrom').value;
         this.editTransaction.payeeTo = this.form.get('payeeTo').value;
         this.editTransaction.tax = this.form.get('tax').value;
@@ -2609,7 +2617,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-list/transaction-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactions\">\r\n  <p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n\r\n  <table *ngIf=\"transactions && payees && categories && accounts\">\r\n    <caption>Transactions</caption>\r\n    <thead>\r\n        <tr>\r\n            <th>ID</th>\r\n            <th>Date</th>\r\n            <th>To</th>\r\n            <th>From</th>\r\n            <th>Amount</th>\r\n            <th>Category</th>\r\n            <th>Tax?</th>\r\n            <th>Comment</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let transaction of transactions\">\r\n            <td>{{transaction.id}}</td>\r\n            <td>{{transaction.date | date}}</td>\r\n\r\n            <td *ngIf=\"transaction.payeeTo\">{{transaction.payeeTo}}</td>\r\n            <td *ngIf=\"transaction.acctTo\" class=\"account-name\">{{accountName(transaction.acctTo)}}</td>\r\n            <td *ngIf=\"!transaction.payeeTo && !transaction.acctTo\">&nbsp;</td> <!--occurs for (-) adjustment-type transactions-->\r\n\r\n            <td *ngIf=\"transaction.payeeFrom\">{{transaction.payeeFrom}}</td>\r\n            <td *ngIf=\"transaction.acctFrom\" class=\"account-name\">{{accountName(transaction.acctFrom)}}</td>\r\n            <td *ngIf=\"!transaction.payeeFrom && !transaction.acctFrom\">&nbsp;</td> <!--occurs for (+) adjustment-type transactions-->\r\n\r\n            <td className='right'>{{displayAsDollar(transaction.amount)}}</td>\r\n            <td>{{categoryName(transaction.category)}}</td>\r\n            <td>&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n            <td>{{transaction.comment}}</td>\r\n            <td><a class=\"btn btn-xs editlink\" routerLink=\"./transaction-edit/{{transaction.id}}\">Edit</a></td>\r\n            <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(transaction.id);\">Delete</a></td>\r\n        </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./transaction-add\">Add New Transaction</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
+module.exports = "<div class=\"transactions\">\r\n  <p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n\r\n  <table *ngIf=\"transactions && payees && categories && accounts\">\r\n    <caption>Transactions</caption>\r\n    <thead>\r\n        <tr>\r\n            <th>ID</th>\r\n            <th>Date</th>\r\n            <th>To</th>\r\n            <th>From</th>\r\n            <th>Amount</th>\r\n            <th>Category</th>\r\n            <th>Tax?</th>\r\n            <th>Comment</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let transaction of transactions\">\r\n            <td>{{transaction.id}}</td>\r\n            <td>{{transaction.date | date}}</td>\r\n\r\n            <td *ngIf=\"transaction.payeeTo\">{{transaction.payeeTo}}</td>\r\n            <td *ngIf=\"transaction.acctTo\" class=\"account-name\">{{accountName(transaction.acctTo)}}</td>\r\n            <td *ngIf=\"!transaction.payeeTo && !transaction.acctTo\">&nbsp;</td> <!--occurs for (-) adjustment-type transactions-->\r\n\r\n            <td *ngIf=\"transaction.payeeFrom\">{{transaction.payeeFrom}}</td>\r\n            <td *ngIf=\"transaction.acctFrom\" class=\"account-name\">{{accountName(transaction.acctFrom)}}</td>\r\n            <td *ngIf=\"!transaction.payeeFrom && !transaction.acctFrom\">&nbsp;</td> <!--occurs for (+) adjustment-type transactions-->\r\n\r\n            <td className='right'>{{displayAsDollar(transaction.amount)}}</td>\r\n            <td>{{categoryName(transaction.category)}}</td>\r\n            <td>&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n            <td>{{transaction.comments}}</td>\r\n            <td><a class=\"btn btn-xs editlink\" routerLink=\"./transaction-edit/{{transaction.id}}\">Edit</a></td>\r\n            <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(transaction.id);\">Delete</a></td>\r\n        </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./transaction-add\">Add New Transaction</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 

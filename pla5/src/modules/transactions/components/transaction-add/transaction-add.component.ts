@@ -29,7 +29,7 @@ export class TransactionAddComponent {
     acctTo: FormControl = new FormControl();
     amount: FormControl = new FormControl();
     category: FormControl = new FormControl();
-    comment: FormControl = new FormControl();
+    comments: FormControl = new FormControl();
     date: FormControl = new FormControl(this.newTransaction.date);
     payeeFrom: FormControl = new FormControl();
     payeeTo: FormControl = new FormControl();
@@ -54,7 +54,7 @@ export class TransactionAddComponent {
         this.acctLiability = this.dataService.LiabilityAccounts();
         this.categories = this.dataService.Categories();
         this.payees = this.dataService.Payees();
-        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.comment, this.date, this.payeeFrom, this.payeeTo, this.tax);
+        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.comments, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith(''), map(val => this.categoryFilter(val)));
         this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith(''), map(val => this.payeeFilter(val)));
         this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith(''), map(val => this.payeeFilter(val)));
@@ -94,20 +94,20 @@ export class TransactionAddComponent {
     displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);
 
     freshNewTransaction() {
-        return { id: null, acctFrom: 0, acctTo: 0, amount: 0, category: 0, comment: '', date: new Date().toLocaleDateString(), payeeFrom: '', payeeTo: '', tax: false }
+        return { id: null, acctFrom: 0, acctTo: 0, amount: 0, category: 0, comments: '', date: new Date().toLocaleDateString(), payeeFrom: '', payeeTo: '', tax: false }
     }
 
     goBack(): void {
         this.location.back();
     }
 
-    instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, comment: FormControl, date: FormControl, payeeFrom: FormControl, payeeTo: FormControl, tax: FormControl) {
+    instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, comments: FormControl, date: FormControl, payeeFrom: FormControl, payeeTo: FormControl, tax: FormControl) {
         this.form = new FormGroup({
             acctFrom,
             acctTo,
             amount,
             category,
-            comment,
+            comments,
             date,
             payeeFrom,
             payeeTo,
@@ -118,29 +118,35 @@ export class TransactionAddComponent {
     onSubmit() {
         //add the payee or update its defaults from payeeFrom, if populated
         if (this.form.get('payeeFrom').value !== null) {
+            console.log('adding payeeFrom ' + this.form.get('payeeFrom').value);
             var pfMatch: Payee = this.payees.find((element) => element.name === this.form.get('payeeFrom').value);
             if (pfMatch) {
                 var matchIndex = this.payees.indexOf(pfMatch);
                 this.payees[matchIndex].defaultAcct = this.form.get('acctTo').value;
                 this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
-                this.payees[matchIndex].defaultCat = this.form.get('category').value;
+                this.payees[matchIndex].defaultCat = this.categoryId(this.form.get('category').value);
+                console.log('calling update payeeFrom with ' + JSON.stringify(this.payees[matchIndex]));
                 this.dataService.updatePayee(this.payees[matchIndex]);
             } else {
                 var pf: Payee = { id: 0, balance: 0, defaultAcct: this.form.get('acctTo').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeFrom').value };
+                console.log('calling add payeeFrom with ' + JSON.stringify(pf));
                 this.dataService.addPayee(pf);}
         }
 
         //add the payee or update its defaults from payeeTo, if populated
         if (this.form.get('payeeTo').value !== null) {
+            console.log('adding payeeTo ' + this.form.get('payeeTo').value);
             var ptMatch: Payee = this.payees.find((element) => element.name === this.form.get('payeeTo').value);
             if (ptMatch) {
                 var matchIndex = this.payees.indexOf(ptMatch);
                 this.payees[matchIndex].defaultAcct = this.form.get('acctFrom').value;
                 this.payees[matchIndex].defaultAmt = this.form.get('amount').value;
-                this.payees[matchIndex].defaultCat = this.form.get('category').value;
+                this.payees[matchIndex].defaultCat = this.categoryId(this.form.get('category').value);
+                console.log('calling update payeeFrom with ' + JSON.stringify(this.payees[matchIndex]));
                 this.dataService.updatePayee(this.payees[matchIndex]);
             } else {
                 var pt: Payee = { id: 0, balance: 0, defaultAcct: this.form.get('acctFrom').value, defaultAmt: this.form.get('amount').value, defaultCat: this.form.get('category').value, name: this.form.get('payeeTo').value };
+                console.log('calling add payeeTo with ' + JSON.stringify(pt));
                 this.dataService.addPayee(pt);}
         }
 
@@ -149,11 +155,12 @@ export class TransactionAddComponent {
         this.newTransaction.acctTo = this.form.get('acctTo').value;
         this.newTransaction.amount = this.form.get('amount').value;
         this.newTransaction.category = this.categoryId(this.form.get('category').value);
-        this.newTransaction.comment = this.form.get('comment').value;
+        this.newTransaction.comments = this.form.get('comments').value;
         this.newTransaction.date = this.form.get('date').value;
         this.newTransaction.payeeFrom = this.form.get('payeeFrom').value;
         this.newTransaction.payeeTo = this.form.get('payeeTo').value;
         this.newTransaction.tax = this.form.get('tax').value;
+        console.log('calling addTransaction with ' + JSON.stringify(this.newTransaction));
         this.dataService.addTransaction(this.newTransaction);
 
         //reset and close

@@ -39,7 +39,7 @@ var TransactionEditComponent = /** @class */ (function () {
         this.categories = this.dataService.Categories();
         this.payees = this.dataService.Payees();
         this.editTransaction = this.dataService.Transaction(id);
-        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.comment, this.date, this.payeeFrom, this.payeeTo, this.tax);
+        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.comments, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); }));
         this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
         this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
@@ -79,19 +79,19 @@ var TransactionEditComponent = /** @class */ (function () {
         this.acctTo = new forms_1.FormControl(this.editTransaction.acctTo);
         this.amount = new forms_1.FormControl(this.editTransaction.amount);
         this.category = new forms_1.FormControl(this.categoryName(this.editTransaction.category));
-        this.comment = new forms_1.FormControl(this.editTransaction.comment);
+        this.comments = new forms_1.FormControl(this.editTransaction.comments);
         this.date = new forms_1.FormControl(this.editTransaction.date);
         this.payeeFrom = new forms_1.FormControl(this.editTransaction.payeeFrom);
         this.payeeTo = new forms_1.FormControl(this.editTransaction.payeeTo);
         this.tax = new forms_1.FormControl(this.editTransaction.tax);
     };
-    TransactionEditComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, comment, date, payeeFrom, payeeTo, tax) {
+    TransactionEditComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, comments, date, payeeFrom, payeeTo, tax) {
         this.form = new forms_1.FormGroup({
             acctFrom: acctFrom,
             acctTo: acctTo,
             amount: amount,
             category: category,
-            comment: comment,
+            comments: comments,
             date: date,
             payeeFrom: payeeFrom,
             payeeTo: payeeTo,
@@ -153,7 +153,7 @@ var TransactionEditComponent = /** @class */ (function () {
         this.editTransaction.amount = this.form.get('amount').value;
         this.editTransaction.category = this.categoryId(this.form.get('category').value);
         this.editTransaction.amount = this.form.get('amount').value;
-        this.editTransaction.comment = this.form.get('comment').value;
+        this.editTransaction.comments = this.form.get('comments').value;
         this.editTransaction.payeeFrom = this.form.get('payeeFrom').value;
         this.editTransaction.payeeTo = this.form.get('payeeTo').value;
         this.editTransaction.tax = this.form.get('tax').value;

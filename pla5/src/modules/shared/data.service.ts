@@ -357,8 +357,9 @@ export class DataService {
     }  //Payees
 
     public updatePayee(payeeToUpdate: Payee) {
+        console.log('dataService executing updatePayee with ' + JSON.stringify(payeeToUpdate));
         const promise = new Promise<Payee>((resolve, reject) => {
-            this.http.put<Payee>('/apiPayees', payeeToUpdate).subscribe(
+            this.http.put<Payee>('/api/Payees', payeeToUpdate).subscribe(
                 payee => {
                     resolve(payee);
                 },

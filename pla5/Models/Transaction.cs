@@ -12,7 +12,7 @@ namespace pla5.Models
         public int? AcctTo { get; set; }
         public decimal Amount { get; set; }
         public int Category { get; set; }
-        public string Comment { get; set; }
+        public string Comments { get; set; }
         public DateTime Date { get; set; }
         public string PayeeFrom { get; set; }
         public string PayeeTo { get; set; }
