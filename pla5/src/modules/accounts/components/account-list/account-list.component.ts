@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { DataService } from '../../../shared/data.service';
-import { Account } from '../../../shared/interfaces';
+import { Account, Transaction } from '../../../shared/interfaces';
 
 @Component({
   selector: 'account-list',
@@ -9,13 +9,27 @@ import { Account } from '../../../shared/interfaces';
 })
 
 export class AccountListComponent {
-  accounts: Account[];
+    accounts: Account[];
+    transactions: Transaction[];
 
   constructor(private dataService: DataService) {
   }  //ctor
 
 ngOnInit() {
     this.dataService.accounts.subscribe((accounts) => this.accounts = accounts);
+    this.dataService.transactions.subscribe((transactions) => this.transactions = transactions);
+    this.accounts.forEach((account) => {
+        account.balance = this.calculateBalance(account, this.transactions);
+    });
+}
+
+calculateBalance(account: Account, transactions: Transaction[]) :number {
+    var balance: number = 0;
+    var transactionsFrom: Transaction[] = transactions.filter((transaction) => transaction.acctFrom === account.id);
+    var transactionsTo: Transaction[] = transactions.filter((transaction) => transaction.acctTo === account.id);
+    transactionsFrom.forEach((transaction: Transaction) => balance = balance - transaction.amount);
+    transactionsTo.forEach((transaction: Transaction) => balance = balance + transaction.amount);
+    return balance;
 }
 
 displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);

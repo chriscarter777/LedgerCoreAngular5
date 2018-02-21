@@ -20,6 +20,18 @@ var AccountListComponent = /** @class */ (function () {
     AccountListComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.dataService.accounts.subscribe(function (accounts) { return _this.accounts = accounts; });
+        this.dataService.transactions.subscribe(function (transactions) { return _this.transactions = transactions; });
+        this.accounts.forEach(function (account) {
+            account.balance = _this.calculateBalance(account, _this.transactions);
+        });
+    };
+    AccountListComponent.prototype.calculateBalance = function (account, transactions) {
+        var balance = 0;
+        var transactionsFrom = transactions.filter(function (transaction) { return transaction.acctFrom === account.id; });
+        var transactionsTo = transactions.filter(function (transaction) { return transaction.acctTo === account.id; });
+        transactionsFrom.forEach(function (transaction) { return balance = balance - transaction.amount; });
+        transactionsTo.forEach(function (transaction) { return balance = balance + transaction.amount; });
+        return balance;
     };
     AccountListComponent.prototype.onDelete = function (id) {
         var result;

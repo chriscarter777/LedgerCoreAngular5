@@ -1,43 +1,46 @@
 <div class="transactions">
-  <p *ngIf="!transactions"><em>Loading...</em></p>
+    <p *ngIf="!transactions"><em>Loading...</em></p>
 
-  <table *ngIf="transactions && payees && categories && accounts">
-    <caption>Transactions</caption>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Date</th>
-            <th>To</th>
-            <th>From</th>
-            <th>Amount</th>
-            <th>Category</th>
-            <th>Tax?</th>
-            <th>Comment</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let transaction of transactions">
-            <td>{{transaction.id}}</td>
-            <td>{{transaction.date | date}}</td>
+    <table *ngIf="transactions && payees && categories && accounts">
+        <caption>Transactions</caption>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>To</th>
+                <th>From</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Tax?</th>
+                <th>Comment</th>
+                <th colspan="2">Actions</th>
+                <th *ngFor="let account of accounts">{{account.name}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transaction of transactions; let tidx = index">
+                <td>{{transaction.id}}</td>
+                <td>{{transaction.date | date}}</td>
 
-            <td *ngIf="transaction.payeeTo">{{transaction.payeeTo}}</td>
-            <td *ngIf="transaction.acctTo" class="account-name">{{accountName(transaction.acctTo)}}</td>
-            <td *ngIf="!transaction.payeeTo && !transaction.acctTo">&nbsp;</td> <!--occurs for (-) adjustment-type transactions-->
+                <td *ngIf="transaction.payeeTo">{{transaction.payeeTo}}</td>
+                <td *ngIf="transaction.acctTo" class="account-name">{{accountName(transaction.acctTo)}}</td>
+                <td *ngIf="!transaction.payeeTo && !transaction.acctTo">&nbsp;</td> <!--occurs for (-) adjustment-type transactions-->
 
-            <td *ngIf="transaction.payeeFrom">{{transaction.payeeFrom}}</td>
-            <td *ngIf="transaction.acctFrom" class="account-name">{{accountName(transaction.acctFrom)}}</td>
-            <td *ngIf="!transaction.payeeFrom && !transaction.acctFrom">&nbsp;</td> <!--occurs for (+) adjustment-type transactions-->
+                <td *ngIf="transaction.payeeFrom">{{transaction.payeeFrom}}</td>
+                <td *ngIf="transaction.acctFrom" class="account-name">{{accountName(transaction.acctFrom)}}</td>
+                <td *ngIf="!transaction.payeeFrom && !transaction.acctFrom">&nbsp;</td> <!--occurs for (+) adjustment-type transactions-->
 
-            <td className='right'>{{displayAsDollar(transaction.amount)}}</td>
-            <td>{{categoryName(transaction.category)}}</td>
-            <td>&nbsp;<span *ngIf="transaction.tax" class='glyphicon glyphicon-copy' style='color:green;'></span></td>
-            <td>{{transaction.comments}}</td>
-            <td><a class="btn btn-xs editlink" routerLink="./transaction-edit/{{transaction.id}}">Edit</a></td>
-            <td><a class="btn btn-xs deletelink" (click)="onDelete(transaction.id);">Delete</a></td>
-        </tr>
-    </tbody>
-  </table>
-  <a class="btn" id="addlink" routerLink="./transaction-add">Add New Transaction</a>
-  <br />
-  <router-outlet></router-outlet>
+                <td class='right'>{{displayAsDollar(transaction.amount)}}</td>
+                <td>{{categoryName(transaction.category)}}</td>
+                <td>&nbsp;<span *ngIf="transaction.tax" class='glyphicon glyphicon-copy' style='color:green;'></span></td>
+                <td>{{transaction.comments}}</td>
+                <td class="actionCell"><a class="btn btn-xs editlink" routerLink="./transaction-edit/{{transaction.id}}">Edit</a></td>
+                <td class="actionCell"><a class="btn btn-xs deletelink" (click)="onDelete(transaction.id);">Delete</a></td>
+                <td *ngFor="let account of accounts; let aidx = index" class="balanceCell">{{displayAsDollar(balances[tidx][aidx])}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn" id="addlink" routerLink="./transaction-add">Add New Transaction</a>
+    <br />
+    <router-outlet></router-outlet>
 </div>

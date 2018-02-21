@@ -84,7 +84,7 @@ namespace pla5Tests
 
                var result = await controller.DeleteUser("tester");
 
-               var res = Assert.IsType<OkResult>(result);
+               var res = Assert.IsType<OkObjectResult>(result);
           }
      }  //test class
 }  //namespace

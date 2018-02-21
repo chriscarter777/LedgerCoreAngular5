@@ -21,7 +21,37 @@ var TransactionListComponent = /** @class */ (function () {
         this.dataService.accounts.subscribe(function (accounts) { return _this.accounts = accounts; });
         this.dataService.categories.subscribe(function (categories) { return _this.categories = categories; });
         this.dataService.payees.subscribe(function (payees) { return _this.payees = payees; });
-        this.dataService.transactions.subscribe(function (transactions) { return _this.transactions = transactions; });
+        this.dataService.transactions.subscribe(function (transactions) {
+            _this.transactions = transactions;
+            _this.balances = [];
+            _this.transactions.forEach(function (transaction, tidx) {
+                _this.balances[tidx] = [];
+                _this.accounts.forEach(function (account, aidx) {
+                    if (tidx === 0) {
+                        if (transaction.acctFrom === account.id) {
+                            _this.balances[tidx][aidx] = (-1) * transaction.amount;
+                        }
+                        else if (transaction.acctTo === account.id) {
+                            _this.balances[tidx][aidx] = transaction.amount;
+                        }
+                        else {
+                            _this.balances[tidx][aidx] = 0;
+                        }
+                    }
+                    else {
+                        if (transaction.acctFrom === account.id) {
+                            _this.balances[tidx][aidx] = _this.balances[tidx - 1][aidx] - transaction.amount;
+                        }
+                        else if (transaction.acctTo === account.id) {
+                            _this.balances[tidx][aidx] = _this.balances[tidx - 1][aidx] + transaction.amount;
+                        }
+                        else {
+                            _this.balances[tidx][aidx] = _this.balances[tidx - 1][aidx];
+                        }
+                    }
+                });
+            });
+        });
     };
     TransactionListComponent.prototype.accountName = function (accountId) {
         return this.accounts.find(function (element) { return element.id === accountId; }).name;

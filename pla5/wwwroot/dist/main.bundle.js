@@ -431,6 +431,18 @@ var AccountListComponent = /** @class */ (function () {
     AccountListComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.dataService.accounts.subscribe(function (accounts) { return _this.accounts = accounts; });
+        this.dataService.transactions.subscribe(function (transactions) { return _this.transactions = transactions; });
+        this.accounts.forEach(function (account) {
+            account.balance = _this.calculateBalance(account, _this.transactions);
+        });
+    };
+    AccountListComponent.prototype.calculateBalance = function (account, transactions) {
+        var balance = 0;
+        var transactionsFrom = transactions.filter(function (transaction) { return transaction.acctFrom === account.id; });
+        var transactionsTo = transactions.filter(function (transaction) { return transaction.acctTo === account.id; });
+        transactionsFrom.forEach(function (transaction) { return balance = balance - transaction.amount; });
+        transactionsTo.forEach(function (transaction) { return balance = balance + transaction.amount; });
+        return balance;
     };
     AccountListComponent.prototype.onDelete = function (id) {
         var result;
@@ -2604,7 +2616,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body {\r\n}\r\n\r\n.account-name{\r\n    font-weight: bold;\r\n    color:darkblue;\r\n}\r\n", ""]);
+exports.push([module.i, "body {\r\n}\r\n\r\n.account-name{\r\n    font-weight: bold;\r\n    color:darkblue;\r\n}\r\n\r\n.actionCell {\r\n    background: floralwhite;\r\n}\r\n\r\n.balanceCell{\r\n    background:mintcream;\r\n    color:darkgreen;\r\n    text-align:right;\r\n}\r\n\r\ntable {\r\n    display: block;\r\n    font-size:12px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -2617,7 +2629,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-list/transaction-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactions\">\r\n  <p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n\r\n  <table *ngIf=\"transactions && payees && categories && accounts\">\r\n    <caption>Transactions</caption>\r\n    <thead>\r\n        <tr>\r\n            <th>ID</th>\r\n            <th>Date</th>\r\n            <th>To</th>\r\n            <th>From</th>\r\n            <th>Amount</th>\r\n            <th>Category</th>\r\n            <th>Tax?</th>\r\n            <th>Comment</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let transaction of transactions\">\r\n            <td>{{transaction.id}}</td>\r\n            <td>{{transaction.date | date}}</td>\r\n\r\n            <td *ngIf=\"transaction.payeeTo\">{{transaction.payeeTo}}</td>\r\n            <td *ngIf=\"transaction.acctTo\" class=\"account-name\">{{accountName(transaction.acctTo)}}</td>\r\n            <td *ngIf=\"!transaction.payeeTo && !transaction.acctTo\">&nbsp;</td> <!--occurs for (-) adjustment-type transactions-->\r\n\r\n            <td *ngIf=\"transaction.payeeFrom\">{{transaction.payeeFrom}}</td>\r\n            <td *ngIf=\"transaction.acctFrom\" class=\"account-name\">{{accountName(transaction.acctFrom)}}</td>\r\n            <td *ngIf=\"!transaction.payeeFrom && !transaction.acctFrom\">&nbsp;</td> <!--occurs for (+) adjustment-type transactions-->\r\n\r\n            <td className='right'>{{displayAsDollar(transaction.amount)}}</td>\r\n            <td>{{categoryName(transaction.category)}}</td>\r\n            <td>&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n            <td>{{transaction.comments}}</td>\r\n            <td><a class=\"btn btn-xs editlink\" routerLink=\"./transaction-edit/{{transaction.id}}\">Edit</a></td>\r\n            <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(transaction.id);\">Delete</a></td>\r\n        </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./transaction-add\">Add New Transaction</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
+module.exports = "<div class=\"transactions\">\r\n    <p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n\r\n    <table *ngIf=\"transactions && payees && categories && accounts\">\r\n        <caption>Transactions</caption>\r\n        <thead>\r\n            <tr>\r\n                <th>ID</th>\r\n                <th>Date</th>\r\n                <th>To</th>\r\n                <th>From</th>\r\n                <th>Amount</th>\r\n                <th>Category</th>\r\n                <th>Tax?</th>\r\n                <th>Comment</th>\r\n                <th colspan=\"2\">Actions</th>\r\n                <th *ngFor=\"let account of accounts\">{{account.name}}</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr *ngFor=\"let transaction of transactions; let tidx = index\">\r\n                <td>{{transaction.id}}</td>\r\n                <td>{{transaction.date | date}}</td>\r\n\r\n                <td *ngIf=\"transaction.payeeTo\">{{transaction.payeeTo}}</td>\r\n                <td *ngIf=\"transaction.acctTo\" class=\"account-name\">{{accountName(transaction.acctTo)}}</td>\r\n                <td *ngIf=\"!transaction.payeeTo && !transaction.acctTo\">&nbsp;</td> <!--occurs for (-) adjustment-type transactions-->\r\n\r\n                <td *ngIf=\"transaction.payeeFrom\">{{transaction.payeeFrom}}</td>\r\n                <td *ngIf=\"transaction.acctFrom\" class=\"account-name\">{{accountName(transaction.acctFrom)}}</td>\r\n                <td *ngIf=\"!transaction.payeeFrom && !transaction.acctFrom\">&nbsp;</td> <!--occurs for (+) adjustment-type transactions-->\r\n\r\n                <td class='right'>{{displayAsDollar(transaction.amount)}}</td>\r\n                <td>{{categoryName(transaction.category)}}</td>\r\n                <td>&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n                <td>{{transaction.comments}}</td>\r\n                <td class=\"actionCell\"><a class=\"btn btn-xs editlink\" routerLink=\"./transaction-edit/{{transaction.id}}\">Edit</a></td>\r\n                <td class=\"actionCell\"><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(transaction.id);\">Delete</a></td>\r\n                <td *ngFor=\"let account of accounts; let aidx = index\" class=\"balanceCell\">{{displayAsDollar(balances[tidx][aidx])}}</td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n    <a class=\"btn\" id=\"addlink\" routerLink=\"./transaction-add\">Add New Transaction</a>\r\n    <br />\r\n    <router-outlet></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2648,7 +2660,37 @@ var TransactionListComponent = /** @class */ (function () {
         this.dataService.accounts.subscribe(function (accounts) { return _this.accounts = accounts; });
         this.dataService.categories.subscribe(function (categories) { return _this.categories = categories; });
         this.dataService.payees.subscribe(function (payees) { return _this.payees = payees; });
-        this.dataService.transactions.subscribe(function (transactions) { return _this.transactions = transactions; });
+        this.dataService.transactions.subscribe(function (transactions) {
+            _this.transactions = transactions;
+            _this.balances = [];
+            _this.transactions.forEach(function (transaction, tidx) {
+                _this.balances[tidx] = [];
+                _this.accounts.forEach(function (account, aidx) {
+                    if (tidx === 0) {
+                        if (transaction.acctFrom === account.id) {
+                            _this.balances[tidx][aidx] = (-1) * transaction.amount;
+                        }
+                        else if (transaction.acctTo === account.id) {
+                            _this.balances[tidx][aidx] = transaction.amount;
+                        }
+                        else {
+                            _this.balances[tidx][aidx] = 0;
+                        }
+                    }
+                    else {
+                        if (transaction.acctFrom === account.id) {
+                            _this.balances[tidx][aidx] = _this.balances[tidx - 1][aidx] - transaction.amount;
+                        }
+                        else if (transaction.acctTo === account.id) {
+                            _this.balances[tidx][aidx] = _this.balances[tidx - 1][aidx] + transaction.amount;
+                        }
+                        else {
+                            _this.balances[tidx][aidx] = _this.balances[tidx - 1][aidx];
+                        }
+                    }
+                });
+            });
+        });
     };
     TransactionListComponent.prototype.accountName = function (accountId) {
         return this.accounts.find(function (element) { return element.id === accountId; }).name;

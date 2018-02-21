@@ -5,3 +5,18 @@ body {
     font-weight: bold;
     color:darkblue;
 }
+
+.actionCell {
+    background: floralwhite;
+}
+
+.balanceCell{
+    background:mintcream;
+    color:darkgreen;
+    text-align:right;
+}
+
+table {
+    display: block;
+    font-size:12px;
+}

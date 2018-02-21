@@ -13,6 +13,7 @@ export class TransactionListComponent {
     categories: Category[];
     payees: Payee[];
     transactions: Transaction[];
+    balances: number[][];
 
 
     constructor(private dataService: DataService) {
@@ -23,7 +24,33 @@ export class TransactionListComponent {
         this.dataService.accounts.subscribe((accounts) => this.accounts = accounts);
         this.dataService.categories.subscribe((categories) => this.categories = categories);
         this.dataService.payees.subscribe((payees) => this.payees = payees);
-        this.dataService.transactions.subscribe((transactions) => this.transactions = transactions);
+        this.dataService.transactions.subscribe((transactions) => {
+            this.transactions = transactions;
+            this.balances = [];
+            this.transactions.forEach((transaction: Transaction, tidx) => {
+                this.balances[tidx] = [];
+                this.accounts.forEach((account: Account, aidx) => {
+                    if (tidx === 0) {
+                        if (transaction.acctFrom === account.id) {
+                            this.balances[tidx][aidx] = (-1) * transaction.amount;
+                        } else if (transaction.acctTo === account.id) {
+                            this.balances[tidx][aidx] = transaction.amount;
+                        } else {
+                            this.balances[tidx][aidx] = 0;
+
+                        }
+                    } else {
+                        if (transaction.acctFrom === account.id) {
+                            this.balances[tidx][aidx] = this.balances[tidx - 1][aidx] - transaction.amount;
+                        } else if (transaction.acctTo === account.id) {
+                            this.balances[tidx][aidx] = this.balances[tidx - 1][aidx] + transaction.amount;
+                        } else {
+                            this.balances[tidx][aidx] = this.balances[tidx - 1][aidx];
+                        }
+                    }
+                });
+            });
+        });
     }
 
     accountName(accountId: number) {

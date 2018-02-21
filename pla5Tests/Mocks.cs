@@ -107,7 +107,9 @@ namespace pla5Tests
                mockUM.Setup(mock => mock.FindByNameAsync(It.IsAny<string>())).Returns(Task.FromResult(new IdentityUser()));
                mockUM.Setup(mock => mock.FindByIdAsync(It.IsAny<string>())).Returns(Task.FromResult(new IdentityUser()));
                mockUM.Setup(mock => mock.AddClaimAsync(It.IsAny<IdentityUser>(), It.IsAny<Claim>())).Returns(Task.FromResult(IdentityResult.Success));
+               mockUM.Setup(mock => mock.AddToRoleAsync(It.IsAny<IdentityUser>(), It.IsAny<string>())).Returns(Task.FromResult(IdentityResult.Success));
                mockUM.Setup(mock => mock.RemoveClaimAsync(It.IsAny<IdentityUser>(), It.IsAny<Claim>())).Returns(Task.FromResult(IdentityResult.Success));
+               mockUM.Setup(mock => mock.RemoveFromRoleAsync(It.IsAny<IdentityUser>(), It.IsAny<string>())).Returns(Task.FromResult(IdentityResult.Success));
                mockUM.Setup(mock => mock.ResetPasswordAsync(It.IsAny<IdentityUser>(), It.IsAny<string>(), It.IsAny<string>())).Returns(Task.FromResult(IdentityResult.Success));
                mockUM.Setup(mock => mock.DeleteAsync(It.IsAny<IdentityUser>())).Returns(Task.FromResult(IdentityResult.Success));
 
@@ -137,11 +139,19 @@ namespace pla5Tests
                mockRepo.Setup(repo => repo.GetAccountAsync(It.Is<int>(x => x >= 0))).Returns(Task.FromResult(new Account()));
                mockRepo.Setup(repo => repo.GetAccountsAsync()).Returns(Task.FromResult(new Account[0]));
                mockRepo.Setup(repo => repo.UpdateAccountAsync(It.IsAny<Account>())).Returns(Task.FromResult(new Account()));
+
                mockRepo.Setup(repo => repo.AddCategoryAsync(It.IsAny<Category>())).Returns(Task.FromResult(new Category()));
                mockRepo.Setup(repo => repo.DeleteCategoryAsync(It.Is<int>(x => x >= 0))).Returns(Task.FromResult(new Category()));
                mockRepo.Setup(repo => repo.GetCategoriesAsync()).Returns(Task.FromResult(new Category[0]));
                mockRepo.Setup(repo => repo.GetCategoryAsync(It.Is<int>(x => x >= 0))).Returns(Task.FromResult(new Category()));
                mockRepo.Setup(repo => repo.UpdateCategoryAsync(It.IsAny<Category>())).Returns(Task.FromResult(new Category()));
+
+               mockRepo.Setup(repo => repo.AddPayeeAsync(It.IsAny<Payee>())).Returns(Task.FromResult(new Payee()));
+               mockRepo.Setup(repo => repo.DeletePayeeAsync(It.Is<int>(x => x >= 0))).Returns(Task.FromResult(new Payee()));
+               mockRepo.Setup(repo => repo.GetPayeeAsync(It.Is<int>(x => x >= 0))).Returns(Task.FromResult(new Payee()));
+               mockRepo.Setup(repo => repo.GetPayeesAsync()).Returns(Task.FromResult(new Payee[0]));
+               mockRepo.Setup(repo => repo.UpdatePayeeAsync(It.IsAny<Payee>())).Returns(Task.FromResult(new Payee()));
+
                mockRepo.Setup(repo => repo.AddTransactionAsync(It.IsAny<Transaction>())).Returns(Task.FromResult(new Transaction()));
                mockRepo.Setup(repo => repo.DeleteTransactionAsync(It.Is<int>(x => x >= 0))).Returns(Task.FromResult(new Transaction()));
                mockRepo.Setup(repo => repo.GetTransactionAsync(It.Is<int>(x => x >= 0))).Returns(Task.FromResult(new Transaction()));
