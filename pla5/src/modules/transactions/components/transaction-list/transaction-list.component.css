@@ -139,3 +139,13 @@
     color: forestgreen;
     font-size: 18px;
 }
+
+form{
+    font-size:12px;
+}
+
+.filters{
+    padding:5px;
+    margin-bottom:20px;
+    background:mintcream;
+}

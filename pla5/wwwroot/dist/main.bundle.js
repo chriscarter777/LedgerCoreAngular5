@@ -2621,7 +2621,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "\r\n.scrollContainer {\r\n    overflow: auto;\r\n    width: 100%;\r\n    margin-bottom: 20px;\r\n}\r\n.tablecontainer {\r\n    display:block;\r\n    font-size: 12px;\r\n    min-width:2000px;\r\n    margin-bottom:20px;\r\n}\r\n.tablehead {\r\n    display:table-row;\r\n}\r\n.tablehead > div {\r\n        float:left;\r\n        height: 34px;\r\n        line-height: 12px;\r\n        padding: 5px 10px 5px 10px;\r\n        background: khaki;\r\n        color: darkgreen;\r\n        font-family: Garamond;\r\n        text-align: center;\r\n        border: 1px solid darkgreen;\r\n        vertical-align: top;\r\n    }\r\n.tablehead > div:hover {\r\n        color: green;\r\n        text-shadow: 0 0 2px mintcream;\r\n    }\r\n.tablehead > div.active {\r\n        background: darkkhaki;\r\n        color: darkgreen;\r\n    }\r\n.tablehead > div.active:hover {\r\n        color: green;\r\n        text-shadow: 0 0 2px mintcream;\r\n    }\r\n.tablebody {\r\n    height: 60%;\r\n}\r\n.tablerow {\r\n    display: table-row;\r\n}\r\n.tablerow > div {\r\n        float: left;\r\n        border-top: 1px solid gainsboro;\r\n        border-bottom: 1px solid gainsboro;\r\n        border-left: 1px solid whitesmoke;\r\n        border-right: 1px solid whitesmoke;\r\n        text-align: center;\r\n        min-height: 28px;\r\n        padding: 5px;\r\n        line-height: 12px;\r\n        vertical-align: top;\r\n    }\r\n.account-name {\r\n    font-weight: bold;\r\n    color: darkblue;\r\n}\r\n.actionCell {\r\n    background: floralwhite;\r\n    padding: 0 !important;\r\n}\r\n.balanceCell {\r\n    background: mintcream;\r\n    color: darkgreen;\r\n}\r\n.commentcell {\r\n    text-align: left !important;\r\n}\r\n.money{\r\n    text-align:right !important;\r\n}\r\n.toggler {\r\n    cursor: pointer;\r\n}\r\n.toggler:hover{\r\n    text-decoration:none;\r\n}\r\n.flag0-true {\r\n    color: red;\r\n    font-size: 18px;\r\n}\r\n.flag0-false {\r\n    color: pink;\r\n    font-size: 18px;\r\n}\r\n.flag1-true {\r\n    color: limegreen;\r\n    font-size: 18px;\r\n}\r\n.flag1-false {\r\n    color: palegreen;\r\n    font-size: 18px;\r\n}\r\n.flag2-true {\r\n    color: blue;\r\n    font-size: 18px;\r\n}\r\n.flag2-false {\r\n    color: paleturquoise;\r\n    font-size: 18px;\r\n}\r\n.flag3-true {\r\n    color: gold;\r\n    font-size: 18px;\r\n}\r\n.flag3-false {\r\n    color: lightgoldenrodyellow;\r\n    font-size: 18px;\r\n}\r\n.reconciled {\r\n    color: forestgreen;\r\n    font-size: 18px;\r\n}\r\n", ""]);
+exports.push([module.i, "\r\n.scrollContainer {\r\n    overflow: auto;\r\n    width: 100%;\r\n    margin-bottom: 20px;\r\n}\r\n.tablecontainer {\r\n    display:block;\r\n    font-size: 12px;\r\n    min-width:2000px;\r\n    margin-bottom:20px;\r\n}\r\n.tablehead {\r\n    display:table-row;\r\n}\r\n.tablehead > div {\r\n        float:left;\r\n        height: 34px;\r\n        line-height: 12px;\r\n        padding: 5px 10px 5px 10px;\r\n        background: khaki;\r\n        color: darkgreen;\r\n        font-family: Garamond;\r\n        text-align: center;\r\n        border: 1px solid darkgreen;\r\n        vertical-align: top;\r\n    }\r\n.tablehead > div:hover {\r\n        color: green;\r\n        text-shadow: 0 0 2px mintcream;\r\n    }\r\n.tablehead > div.active {\r\n        background: darkkhaki;\r\n        color: darkgreen;\r\n    }\r\n.tablehead > div.active:hover {\r\n        color: green;\r\n        text-shadow: 0 0 2px mintcream;\r\n    }\r\n.tablebody {\r\n    height: 60%;\r\n}\r\n.tablerow {\r\n    display: table-row;\r\n}\r\n.tablerow > div {\r\n        float: left;\r\n        border-top: 1px solid gainsboro;\r\n        border-bottom: 1px solid gainsboro;\r\n        border-left: 1px solid whitesmoke;\r\n        border-right: 1px solid whitesmoke;\r\n        text-align: center;\r\n        min-height: 28px;\r\n        padding: 5px;\r\n        line-height: 12px;\r\n        vertical-align: top;\r\n    }\r\n.account-name {\r\n    font-weight: bold;\r\n    color: darkblue;\r\n}\r\n.actionCell {\r\n    background: floralwhite;\r\n    padding: 0 !important;\r\n}\r\n.balanceCell {\r\n    background: mintcream;\r\n    color: darkgreen;\r\n}\r\n.commentcell {\r\n    text-align: left !important;\r\n}\r\n.money{\r\n    text-align:right !important;\r\n}\r\n.toggler {\r\n    cursor: pointer;\r\n}\r\n.toggler:hover{\r\n    text-decoration:none;\r\n}\r\n.flag0-true {\r\n    color: red;\r\n    font-size: 18px;\r\n}\r\n.flag0-false {\r\n    color: pink;\r\n    font-size: 18px;\r\n}\r\n.flag1-true {\r\n    color: limegreen;\r\n    font-size: 18px;\r\n}\r\n.flag1-false {\r\n    color: palegreen;\r\n    font-size: 18px;\r\n}\r\n.flag2-true {\r\n    color: blue;\r\n    font-size: 18px;\r\n}\r\n.flag2-false {\r\n    color: paleturquoise;\r\n    font-size: 18px;\r\n}\r\n.flag3-true {\r\n    color: gold;\r\n    font-size: 18px;\r\n}\r\n.flag3-false {\r\n    color: lightgoldenrodyellow;\r\n    font-size: 18px;\r\n}\r\n.reconciled {\r\n    color: forestgreen;\r\n    font-size: 18px;\r\n}\r\nform{\r\n    font-size:12px;\r\n}\r\n.filters{\r\n    padding:5px;\r\n    margin-bottom:20px;\r\n    background:mintcream;\r\n}\r\n", ""]);
 
 // exports
 
@@ -2634,7 +2634,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-list/transaction-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n<div class=\"captionlike\">Transactions</div>\r\n<div class=\"scrollContainer\">\r\n    <div *ngIf=\"transactions && payees && categories && accounts\" class=\"tablecontainer\">\r\n        <div class=\"tablehead\">\r\n            <div class=\"w80\">Flags</div>\r\n            <div class=\"w30\">Re</div>\r\n            <div class=\"w90\">Date</div>\r\n            <div class=\"w50\">Check</div>\r\n            <div class=\"w120\">To</div>\r\n            <div class=\"w120\">From</div>\r\n            <div class=\"w80\">Amount</div>\r\n            <div class=\"w160\">Category</div>\r\n            <div class=\"w40\">Tax?</div>\r\n            <div class=\"w200\">Comment</div>\r\n            <div class=\"w120\">&nbsp;</div>\r\n            <div *ngFor=\"let account of accounts\" class=\"w90\">{{account.name}}</div>\r\n            <div class=\"w80\">Assets</div>\r\n            <div class=\"w80\">Liabilities</div>\r\n            <div class=\"w80\">Net</div>\r\n        </div>\r\n        <div class=\"tablebody\">\r\n            <div *ngFor=\"let transaction of transactions; let tidx = index\" class=\"tablerow\">\r\n                <div class=\"w80\">\r\n                    <a *ngIf=\"transaction.flag0\" class=\"toggler flag0-true\" (click)=\"onFlag0Toggle(transaction.id)\">&#9873;</a>\r\n                    <a *ngIf=\"!transaction.flag0\" class=\"toggler flag0-false\" (click)=\"onFlag0Toggle(transaction.id)\">&#9872;</a>\r\n                    <a *ngIf=\"transaction.flag1\" class=\"toggler flag1-true\" (click)=\"onFlag1Toggle(transaction.id)\">&#9873;</a>\r\n                    <a *ngIf=\"!transaction.flag1\" class=\"toggler flag1-false\" (click)=\"onFlag1Toggle(transaction.id)\">&#9872;</a>\r\n                    <a *ngIf=\"transaction.flag2\" class=\"toggler flag2-true\" (click)=\"onFlag2Toggle(transaction.id)\">&#9873;</a>\r\n                    <a *ngIf=\"!transaction.flag2\" class=\"toggler flag2-false\" (click)=\"onFlag2Toggle(transaction.id)\">&#9872;</a>\r\n                    <a *ngIf=\"transaction.flag3\" class=\"toggler flag3-true\" (click)=\"onFlag3Toggle(transaction.id)\">&#9873;</a>\r\n                    <a *ngIf=\"!transaction.flag3\" class=\"toggler flag3-false\" (click)=\"onFlag3Toggle(transaction.id)\">&#9872;</a>\r\n                </div>\r\n                <div class=\"w30\">\r\n                    <a *ngIf=\"transaction.reconciled\" class=\"toggler reconciled\" (click)=\"onReconciledToggle(transaction.id)\">&#10004;</a>\r\n                    <button *ngIf=\"!transaction.reconciled\" class=\"btn-clear reconciled\" (click)=\"onReconciledToggle(transaction.id)\">&nbsp;</button>\r\n                </div>\r\n                <div class=\"w90\">{{transaction.date | date}}</div>\r\n                <div class=\"w50\">{{transaction.check}}</div>\r\n\r\n                <div *ngIf=\"transaction.payeeTo\" class=\"w120\">{{transaction.payeeTo}}</div>\r\n                <div *ngIf=\"transaction.acctTo\" class=\"account-name w120\">{{accountName(transaction.acctTo)}}</div>\r\n                <div *ngIf=\"!transaction.payeeTo && !transaction.acctTo\" class=\"w120\">&nbsp;</div>\r\n\r\n                <div *ngIf=\"transaction.payeeFrom\" class=\"w120\">{{transaction.payeeFrom}}</div>\r\n                <div *ngIf=\"transaction.acctFrom\" class=\"account-name w120\">{{accountName(transaction.acctFrom)}}</div>\r\n                <div *ngIf=\"!transaction.payeeFrom && !transaction.acctFrom\" class=\"w120\">&nbsp;</div>\r\n\r\n                <div class='money w80'>{{displayAsDollar(transaction.amount)}}</div>\r\n                <div class=\"w160\">{{categoryName(transaction.category)}}</div>\r\n                <div class=\"w40\">&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></div>\r\n                <div class=\"commentcell w200\">{{transaction.comments}}</div>\r\n                <div class=\"actionCell w60\"><a class=\"btn btn-xs editlink\" routerLink=\"./transaction-edit/{{transaction.id}}\">Edit</a></div>\r\n                <div class=\"actionCell w60\"><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(transaction.id);\">Delete</a></div>\r\n                <div *ngFor=\"let account of accounts; let aidx = index\" class=\"money balanceCell w90\">{{displayAsDollar(balances[tidx][aidx])}}</div>\r\n                <div class=\"money balanceCell w80\">{{displayAsDollar(assets[tidx])}}</div>\r\n                <div class=\"money balanceCell w80\">{{displayAsDollar(liabilities[tidx])}}</div>\r\n                <div class=\"money balanceCell w80\">{{displayAsDollar(nets[tidx])}}</div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<a id=\"addlink\" routerLink=\"./transaction-add\">Add New Transaction</a>\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n<div class=\"captionlike\">Transactions</div>\r\n<div class=\"filters\">\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">\r\n                <label>Account:</label>\r\n                <select name=\"acctFilter\" formControlName=\"acctFilter\" >\r\n                    <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                    <option disabled>──────────</option>\r\n                    <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Payee:</label>\r\n                <select name=\"payeeFilter\" formControlName=\"payeeFilter\" >\r\n                    <option *ngFor=\"let payee of payees\" value=\"{{payee.name}}\">{{payee.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <label>Categorys:</label>\r\n                <select name=\"catFilter\" formControlName=\"catFilter\" >\r\n                    <option *ngFor=\"let category of categories\" value=\"{{category.id}}\">{{category.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Date :</label>\r\n                <input type='date' name=\"dateMin\" formControlName=\"dateMin\" />\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>to :</label>\r\n                <input type='date' name=\"dateMax\" formControlName=\"dateMax\" />\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2 col-md-offset-7\">\r\n                <label>Chk #</label>\r\n                <input type='number' name=\"checkMin\" formControlName=\"checkMin\" />\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>to #</label>\r\n                <input type='number' name=\"checkMax\" formControlName=\"checkMax\" />\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-md-4\">\r\n                <input type='submit' value=\"Apply Filter\" />\r\n                <button (click)=\"onResetFilter\">Reset Filter</button>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Tax</label>\r\n                <input type='checkbox' name=\"taxFilter\" value=\"true\" formControlName=\"taxFilter\" />\r\n            </div>\r\n            <div class=\"col-md-2 col-md-offset-1\">\r\n                <label>Amt $</label>\r\n                <input type='number' name=\"amountMin\" formControlName=\"amountMin\" />\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>to $</label>\r\n                <input type='number' name=\"amountMax\" formControlName=\"amountMax\" />\r\n            </div>\r\n        </div>\r\n</form>\r\n</div>\r\n    <div class=\"scrollContainer\">\r\n        <div *ngIf=\"transactions && payees && categories && accounts\" class=\"tablecontainer\">\r\n            <div class=\"tablehead\">\r\n                <div class=\"w80\">Flags</div>\r\n                <div class=\"w30\">Re</div>\r\n                <div class=\"w90\">Date</div>\r\n                <div class=\"w50\">Check</div>\r\n                <div class=\"w120\">To</div>\r\n                <div class=\"w120\">From</div>\r\n                <div class=\"w80\">Amount</div>\r\n                <div class=\"w160\">Category</div>\r\n                <div class=\"w40\">Tax?</div>\r\n                <div class=\"w200\">Comment</div>\r\n                <div class=\"w120\">&nbsp;</div>\r\n                <div *ngFor=\"let account of accounts\" class=\"w90\">{{account.name}}</div>\r\n                <div class=\"w80\">Assets</div>\r\n                <div class=\"w80\">Liabilities</div>\r\n                <div class=\"w80\">Net</div>\r\n            </div>\r\n            <div class=\"tablebody\">\r\n                <div *ngFor=\"let line of displayLines; let tidx = index\" class=\"tablerow\">\r\n                    <div class=\"w80\">\r\n                        <a *ngIf=\"line.transaction.flag0\" class=\"toggler flag0-true\" (click)=\"onFlag0Toggle(line.transaction.id)\">&#9873;</a>\r\n                        <a *ngIf=\"!line.transaction.flag0\" class=\"toggler flag0-false\" (click)=\"onFlag0Toggle(line.transaction.id)\">&#9872;</a>\r\n                        <a *ngIf=\"line.transaction.flag1\" class=\"toggler flag1-true\" (click)=\"onFlag1Toggle(line.transaction.id)\">&#9873;</a>\r\n                        <a *ngIf=\"!line.transaction.flag1\" class=\"toggler flag1-false\" (click)=\"onFlag1Toggle(line.transaction.id)\">&#9872;</a>\r\n                        <a *ngIf=\"line.transaction.flag2\" class=\"toggler flag2-true\" (click)=\"onFlag2Toggle(line.transaction.id)\">&#9873;</a>\r\n                        <a *ngIf=\"!line.transaction.flag2\" class=\"toggler flag2-false\" (click)=\"onFlag2Toggle(line.transaction.id)\">&#9872;</a>\r\n                        <a *ngIf=\"line.transaction.flag3\" class=\"toggler flag3-true\" (click)=\"onFlag3Toggle(line.transaction.id)\">&#9873;</a>\r\n                        <a *ngIf=\"!line.transaction.flag3\" class=\"toggler flag3-false\" (click)=\"onFlag3Toggle(line.transaction.id)\">&#9872;</a>\r\n                    </div>\r\n                    <div class=\"w30\">\r\n                        <a *ngIf=\"line.transaction.reconciled\" class=\"toggler reconciled\" (click)=\"onReconciledToggle(line.transaction.id)\">&#10004;</a>\r\n                        <button *ngIf=\"!line.transaction.reconciled\" class=\"btn-clear reconciled\" (click)=\"onReconciledToggle(line.transaction.id)\">&nbsp;</button>\r\n                    </div>\r\n                    <div class=\"w90\">{{line.transaction.date | date}}</div>\r\n                    <div class=\"w50\">{{line.transaction.check}}</div>\r\n\r\n                    <div *ngIf=\"line.transaction.payeeTo\" class=\"w120\">{{line.transaction.payeeTo}}</div>\r\n                    <div *ngIf=\"line.transaction.acctTo\" class=\"account-name w120\">{{accountName(line.transaction.acctTo)}}</div>\r\n                    <div *ngIf=\"!line.transaction.payeeTo && !line.transaction.acctTo\" class=\"w120\">&nbsp;</div>\r\n\r\n                    <div *ngIf=\"line.transaction.payeeFrom\" class=\"w120\">{{line.transaction.payeeFrom}}</div>\r\n                    <div *ngIf=\"line.transaction.acctFrom\" class=\"account-name w120\">{{accountName(line.transaction.acctFrom)}}</div>\r\n                    <div *ngIf=\"!line.transaction.payeeFrom && !line.transaction.acctFrom\" class=\"w120\">&nbsp;</div>\r\n\r\n                    <div class='money w80'>{{displayAsDollar(line.transaction.amount)}}</div>\r\n                    <div class=\"w160\">{{categoryName(line.transaction.category)}}</div>\r\n                    <div class=\"w40\">&nbsp;<span *ngIf=\"line.transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></div>\r\n                    <div class=\"commentcell w200\">{{line.transaction.comments}}</div>\r\n                    <div class=\"actionCell w60\"><a class=\"btn btn-xs editlink\" routerLink=\"./transaction-edit/{{line.transaction.id}}\">Edit</a></div>\r\n                    <div class=\"actionCell w60\"><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(line.transaction.id);\">Delete</a></div>\r\n                    <div *ngFor=\"let account of accounts; let aidx = index\" class=\"money balanceCell w90\">{{displayAsDollar(line.balances[aidx])}}</div>\r\n                    <div class=\"money balanceCell w80\">{{displayAsDollar(line.assets)}}</div>\r\n                    <div class=\"money balanceCell w80\">{{displayAsDollar(line.liabilities)}}</div>\r\n                    <div class=\"money balanceCell w80\">{{displayAsDollar(line.net)}}</div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n<a id=\"addlink\" routerLink=\"./transaction-add\">Add New Transaction</a>\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -2655,61 +2655,78 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var TransactionListComponent = /** @class */ (function () {
     function TransactionListComponent(dataService) {
         this.dataService = dataService;
+        this.acctFilter = new forms_1.FormControl();
+        this.amountMax = new forms_1.FormControl();
+        this.amountMin = new forms_1.FormControl();
+        this.catFilter = new forms_1.FormControl();
+        this.checkMax = new forms_1.FormControl();
+        this.checkMin = new forms_1.FormControl();
+        this.dateMax = new forms_1.FormControl();
+        this.dateMin = new forms_1.FormControl();
+        this.payeeFilter = new forms_1.FormControl();
+        this.taxFilter = new forms_1.FormControl();
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
     } //ctor
     TransactionListComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.dataService.accounts.subscribe(function (accounts) { return _this.accounts = accounts; });
+        this.dataService.accounts.subscribe(function (accounts) {
+            _this.accounts = accounts;
+            _this.acctAsset = _this.dataService.AssetAccounts();
+            _this.acctLiability = _this.dataService.LiabilityAccounts();
+        });
+        this.acctAsset = this.dataService.AssetAccounts();
+        this.acctLiability = this.dataService.LiabilityAccounts();
         this.dataService.categories.subscribe(function (categories) { return _this.categories = categories; });
         this.dataService.payees.subscribe(function (payees) { return _this.payees = payees; });
         this.dataService.transactions.subscribe(function (transactions) {
             _this.transactions = transactions;
-            _this.assets = [];
-            _this.balances = [];
-            _this.liabilities = [];
-            _this.nets = [];
-            _this.transactions.forEach(function (transaction, tidx) {
-                _this.assets[tidx] = 0;
-                _this.balances[tidx] = [];
-                _this.liabilities[tidx] = 0;
-                _this.nets[tidx] = 0;
-                _this.accounts.forEach(function (account, aidx) {
-                    if (tidx === 0) {
-                        if (transaction.acctFrom === account.id) {
-                            _this.balances[tidx][aidx] = (-1) * transaction.amount;
-                        }
-                        else if (transaction.acctTo === account.id) {
-                            _this.balances[tidx][aidx] = transaction.amount;
-                        }
-                        else {
-                            _this.balances[tidx][aidx] = 0;
-                        }
-                    }
-                    else {
-                        if (transaction.acctFrom === account.id) {
-                            _this.balances[tidx][aidx] = _this.balances[tidx - 1][aidx] - transaction.amount;
-                        }
-                        else if (transaction.acctTo === account.id) {
-                            _this.balances[tidx][aidx] = _this.balances[tidx - 1][aidx] + transaction.amount;
-                        }
-                        else {
-                            _this.balances[tidx][aidx] = _this.balances[tidx - 1][aidx];
-                        }
-                    }
-                    _this.assets[tidx] = _this.assets[tidx] + _this.balances[tidx][aidx];
-                    _this.nets[tidx] = _this.nets[tidx] + _this.balances[tidx][aidx];
-                });
-            });
+            _this.constructLines();
         });
+        this.instantiateForm(this.acctFilter, this.amountMax, this.amountMin, this.catFilter, this.checkMax, this.checkMin, this.dateMax, this.dateMin, this.payeeFilter, this.taxFilter);
     };
     TransactionListComponent.prototype.accountName = function (accountId) {
         return this.accounts.find(function (element) { return element.id === accountId; }).name;
     };
     TransactionListComponent.prototype.categoryName = function (categoryId) {
         return this.categories.find(function (element) { return element.id === categoryId; }).name;
+    };
+    TransactionListComponent.prototype.constructLines = function () {
+        var _this = this;
+        this.lines = [];
+        this.transactions.forEach(function (transaction, tidx) {
+            _this.lines.push({ assets: 0, balances: [], liabilities: 0, net: 0, transaction: transaction });
+            _this.accounts.forEach(function (account, aidx) {
+                if (tidx === 0) {
+                    if (transaction.acctFrom === account.id) {
+                        _this.lines[tidx].balances[aidx] = (-1) * transaction.amount;
+                    }
+                    else if (transaction.acctTo === account.id) {
+                        _this.lines[tidx].balances[aidx] = transaction.amount;
+                    }
+                    else {
+                        _this.lines[tidx].balances[aidx] = 0;
+                    }
+                }
+                else {
+                    if (transaction.acctFrom === account.id) {
+                        _this.lines[tidx].balances[aidx] = _this.lines[tidx - 1].balances[aidx] - transaction.amount;
+                    }
+                    else if (transaction.acctTo === account.id) {
+                        _this.lines[tidx].balances[aidx] = _this.lines[tidx - 1].balances[aidx] + transaction.amount;
+                    }
+                    else {
+                        _this.lines[tidx].balances[aidx] = _this.lines[tidx - 1].balances[aidx];
+                    }
+                }
+                _this.lines[tidx].assets = _this.lines[tidx].assets + _this.lines[tidx].balances[aidx];
+                _this.lines[tidx].net = _this.lines[tidx].net + _this.lines[tidx].balances[aidx];
+            });
+        });
+        this.displayLines = this.lines;
     };
     TransactionListComponent.prototype.onDelete = function (id) {
         var result;
@@ -2770,6 +2787,71 @@ var TransactionListComponent = /** @class */ (function () {
             this.transactions[targetIdx].reconciled = true;
         }
         this.dataService.updateTransaction(this.transactions[targetIdx]);
+    };
+    TransactionListComponent.prototype.instantiateForm = function (acctFilter, amountMax, amountMin, catFilter, checkMax, checkMin, dateMax, dateMin, payeeFilter, taxFilter) {
+        this.form = new forms_1.FormGroup({
+            acctFilter: acctFilter,
+            amountMax: amountMax,
+            amountMin: amountMin,
+            catFilter: catFilter,
+            checkMax: checkMax,
+            checkMin: checkMin,
+            dateMax: dateMax,
+            dateMin: dateMin,
+            payeeFilter: payeeFilter,
+            taxFilter: taxFilter,
+        });
+    };
+    TransactionListComponent.prototype.onSubmit = function () {
+        var _this = this;
+        this.displayLines = this.lines;
+        if (this.form.get('acctFilter').value !== null) {
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.acctFrom === _this.form.get('acctFilter').value || line.transaction.acctTo === _this.form.get('acctFilter').value; });
+        }
+        if (this.form.get('amountMax').value !== null) {
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.amount <= _this.form.get('amountMax').value; });
+        }
+        if (this.form.get('amountMin').value !== null) {
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.amount >= _this.form.get('amountMin').value; });
+        }
+        if (this.form.get('catFilter').value !== null) {
+            var catArray = this.form.get('catFilter').value;
+            this.displayLines = this.displayLines.filter(function (line) { return catArray.some(function (element) { return element === line.transaction.category; }); });
+        }
+        if (this.form.get('checkMax').value !== null) {
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.check !== null; });
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.check <= _this.form.get('checkMax').value; });
+        }
+        if (this.form.get('checkMin').value !== null) {
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.check !== null; });
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.check >= _this.form.get('checkMin').value; });
+        }
+        if (this.form.get('dateMax').value !== null) {
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.date <= _this.form.get('dateMax').value; });
+        }
+        if (this.form.get('dateMin').value !== null) {
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.date >= _this.form.get('dateMin').value; });
+        }
+        if (this.form.get('payeeFilter').value !== null) {
+            var payArray = this.form.get('payeeFilter').value;
+            this.displayLines = this.displayLines.filter(function (line) { return payArray.some(function (element) { return element === line.transaction.payeeFrom || element === line.transaction.payeeTo; }); });
+        }
+        if (this.form.get('taxFilter').value === null) {
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.tax === true; });
+        }
+    };
+    TransactionListComponent.prototype.onResetFilter = function () {
+        this.acctFilter.setValue(null);
+        this.amountMax.setValue(null);
+        this.amountMin.setValue(null);
+        this.catFilter.setValue(null);
+        this.checkMax.setValue(null);
+        this.checkMin.setValue(null);
+        this.dateMax.setValue(null);
+        this.dateMin.setValue(null);
+        this.payeeFilter.setValue(null);
+        this.taxFilter.setValue(null);
+        this.onSubmit();
     };
     TransactionListComponent = __decorate([
         core_1.Component({

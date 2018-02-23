@@ -17,6 +17,14 @@ export interface Category {
     type: string;
 }
 
+export interface LedgerLine {
+    assets: number;
+    balances: number[];
+    liabilities: number;
+    net: number;
+    transaction: Transaction;
+}
+
 export interface Payee {
     id: number;
     balance: number;
