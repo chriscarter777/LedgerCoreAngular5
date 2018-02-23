@@ -1,22 +1,141 @@
-body {
+
+.scrollContainer {
+    overflow: auto;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.tablecontainer {
+    display:block;
+    font-size: 12px;
+    min-width:2000px;
+    margin-bottom:20px;
 }
 
-.account-name{
+.tablehead {
+    display:table-row;
+}
+
+    .tablehead > div {
+        float:left;
+        height: 34px;
+        line-height: 12px;
+        padding: 5px 10px 5px 10px;
+        background: khaki;
+        color: darkgreen;
+        font-family: Garamond;
+        text-align: center;
+        border: 1px solid darkgreen;
+        vertical-align: top;
+    }
+
+    .tablehead > div:hover {
+        color: green;
+        text-shadow: 0 0 2px mintcream;
+    }
+
+    .tablehead > div.active {
+        background: darkkhaki;
+        color: darkgreen;
+    }
+
+    .tablehead > div.active:hover {
+        color: green;
+        text-shadow: 0 0 2px mintcream;
+    }
+
+.tablebody {
+    height: 60%;
+}
+
+.tablerow {
+    display: table-row;
+}
+
+    .tablerow > div {
+        float: left;
+        border-top: 1px solid gainsboro;
+        border-bottom: 1px solid gainsboro;
+        border-left: 1px solid whitesmoke;
+        border-right: 1px solid whitesmoke;
+        text-align: center;
+        min-height: 28px;
+        padding: 5px;
+        line-height: 12px;
+        vertical-align: top;
+    }
+
+.account-name {
     font-weight: bold;
-    color:darkblue;
+    color: darkblue;
 }
 
 .actionCell {
     background: floralwhite;
+    padding: 0 !important;
 }
 
-.balanceCell{
-    background:mintcream;
-    color:darkgreen;
-    text-align:right;
+.balanceCell {
+    background: mintcream;
+    color: darkgreen;
 }
 
-table {
-    display: block;
-    font-size:12px;
+.commentcell {
+    text-align: left !important;
+}
+
+.money{
+    text-align:right !important;
+}
+
+.toggler {
+    cursor: pointer;
+}
+
+.toggler:hover{
+    text-decoration:none;
+}
+
+.flag0-true {
+    color: red;
+    font-size: 18px;
+}
+
+.flag0-false {
+    color: pink;
+    font-size: 18px;
+}
+
+.flag1-true {
+    color: limegreen;
+    font-size: 18px;
+}
+
+.flag1-false {
+    color: palegreen;
+    font-size: 18px;
+}
+
+.flag2-true {
+    color: blue;
+    font-size: 18px;
+}
+
+.flag2-false {
+    color: paleturquoise;
+    font-size: 18px;
+}
+
+.flag3-true {
+    color: gold;
+    font-size: 18px;
+}
+
+.flag3-false {
+    color: lightgoldenrodyellow;
+    font-size: 18px;
+}
+
+.reconciled {
+    color: forestgreen;
+    font-size: 18px;
 }

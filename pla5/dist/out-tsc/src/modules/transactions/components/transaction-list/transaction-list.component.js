@@ -23,9 +23,15 @@ var TransactionListComponent = /** @class */ (function () {
         this.dataService.payees.subscribe(function (payees) { return _this.payees = payees; });
         this.dataService.transactions.subscribe(function (transactions) {
             _this.transactions = transactions;
+            _this.assets = [];
             _this.balances = [];
+            _this.liabilities = [];
+            _this.nets = [];
             _this.transactions.forEach(function (transaction, tidx) {
+                _this.assets[tidx] = 0;
                 _this.balances[tidx] = [];
+                _this.liabilities[tidx] = 0;
+                _this.nets[tidx] = 0;
                 _this.accounts.forEach(function (account, aidx) {
                     if (tidx === 0) {
                         if (transaction.acctFrom === account.id) {
@@ -49,6 +55,8 @@ var TransactionListComponent = /** @class */ (function () {
                             _this.balances[tidx][aidx] = _this.balances[tidx - 1][aidx];
                         }
                     }
+                    _this.assets[tidx] = _this.assets[tidx] + _this.balances[tidx][aidx];
+                    _this.nets[tidx] = _this.nets[tidx] + _this.balances[tidx][aidx];
                 });
             });
         });
@@ -68,6 +76,56 @@ var TransactionListComponent = /** @class */ (function () {
             this.dataService.deleteAccount(id);
         }
         ;
+    };
+    TransactionListComponent.prototype.onFlag0Toggle = function (id) {
+        var targetIdx = this.transactions.findIndex(function (t) { return t.id === id; });
+        if (this.transactions[targetIdx].flag0) {
+            this.transactions[targetIdx].flag0 = false;
+        }
+        else {
+            this.transactions[targetIdx].flag0 = true;
+        }
+        this.dataService.updateTransaction(this.transactions[targetIdx]);
+    };
+    TransactionListComponent.prototype.onFlag1Toggle = function (id) {
+        var targetIdx = this.transactions.findIndex(function (t) { return t.id === id; });
+        if (this.transactions[targetIdx].flag1) {
+            this.transactions[targetIdx].flag1 = false;
+        }
+        else {
+            this.transactions[targetIdx].flag1 = true;
+        }
+        this.dataService.updateTransaction(this.transactions[targetIdx]);
+    };
+    TransactionListComponent.prototype.onFlag2Toggle = function (id) {
+        var targetIdx = this.transactions.findIndex(function (t) { return t.id === id; });
+        if (this.transactions[targetIdx].flag2) {
+            this.transactions[targetIdx].flag2 = false;
+        }
+        else {
+            this.transactions[targetIdx].flag2 = true;
+        }
+        this.dataService.updateTransaction(this.transactions[targetIdx]);
+    };
+    TransactionListComponent.prototype.onFlag3Toggle = function (id) {
+        var targetIdx = this.transactions.findIndex(function (t) { return t.id === id; });
+        if (this.transactions[targetIdx].flag3) {
+            this.transactions[targetIdx].flag3 = false;
+        }
+        else {
+            this.transactions[targetIdx].flag3 = true;
+        }
+        this.dataService.updateTransaction(this.transactions[targetIdx]);
+    };
+    TransactionListComponent.prototype.onReconciledToggle = function (id) {
+        var targetIdx = this.transactions.findIndex(function (t) { return t.id === id; });
+        if (this.transactions[targetIdx].reconciled) {
+            this.transactions[targetIdx].reconciled = false;
+        }
+        else {
+            this.transactions[targetIdx].reconciled = true;
+        }
+        this.dataService.updateTransaction(this.transactions[targetIdx]);
     };
     TransactionListComponent = __decorate([
         core_1.Component({

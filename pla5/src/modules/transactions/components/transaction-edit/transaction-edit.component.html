@@ -3,7 +3,10 @@
 
   <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
       <label>Date</label>
-      <input type='date' name="date" formControlName="date" />
+      <input type='date' required name="date" formControlName="date" />
+      <br />
+      <label>Check</label>
+      <input type='number' min="1" name="check" formControlName="check" />
       <br />
       <div class="payeeSelector">
           <label>To Payee</label>
@@ -42,11 +45,11 @@
       </div>
       <br />
       <label>Amount<span class="pull-right">$</span></label>
-      <input type='number' name="amount" formControlName="amount" />
+      <input type='number' required name="amount" formControlName="amount" />
       <br />
       <label>Category</label>
       <mat-form-field>
-          <input id="catField" type="text" matInput formControlName="category" [matAutocomplete]="autoC" (change)="onCChange($event.target.value)" />
+          <input id="catField" type="text" required matInput formControlName="category" [matAutocomplete]="autoC" (change)="onCChange($event.target.value)" />
           <mat-autocomplete #autoC="matAutocomplete">
               <mat-option *ngFor="let categoryName of filteredCategoryNames | async" value="{{categoryName}}" (onSelectionChange)="onCChange(categoryName)">
                   {{ categoryName }}

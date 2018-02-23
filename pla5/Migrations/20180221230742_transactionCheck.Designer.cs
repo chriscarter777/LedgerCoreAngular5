@@ -11,9 +11,10 @@ using System;
 namespace pla5.Migrations
 {
     [DbContext(typeof(LedgerDbContext))]
-    partial class LedgerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180221230742_transactionCheck")]
+    partial class transactionCheck
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -292,19 +293,9 @@ namespace pla5.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<bool>("Flag0");
-
-                    b.Property<bool>("Flag1");
-
-                    b.Property<bool>("Flag2");
-
-                    b.Property<bool>("Flag3");
-
                     b.Property<string>("PayeeFrom");
 
                     b.Property<string>("PayeeTo");
-
-                    b.Property<bool>("Reconciled");
 
                     b.Property<bool>("Tax");
 

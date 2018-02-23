@@ -32,10 +32,16 @@ export interface Transaction {
     acctTo: number;
     amount: number;
     category: number;
+    check: number;
     comments: string;
     date: string;
+    flag0: boolean;
+    flag1: boolean;
+    flag2: boolean;
+    flag3: boolean;
     payeeFrom: string;
     payeeTo: string;
+    reconciled: boolean;
     tax: boolean;
 }
 

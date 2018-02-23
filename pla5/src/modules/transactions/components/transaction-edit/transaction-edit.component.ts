@@ -30,6 +30,7 @@ export class TransactionEditComponent {
     acctTo: FormControl;
     amount: FormControl;
     category: FormControl;
+    check: FormControl;
     comments: FormControl;
     date: FormControl;
     payeeFrom: FormControl;
@@ -58,7 +59,7 @@ export class TransactionEditComponent {
         this.categories = this.dataService.Categories();
         this.payees = this.dataService.Payees();
         this.editTransaction = this.dataService.Transaction(id);
-        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.comments, this.date, this.payeeFrom, this.payeeTo, this.tax);
+        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.check, this.comments, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith(''), map(val => this.categoryFilter(val)));
         this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith(''), map(val => this.payeeFilter(val)));
         this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith(''), map(val => this.payeeFilter(val)));
@@ -104,6 +105,7 @@ export class TransactionEditComponent {
         this.acctTo = new FormControl(this.editTransaction.acctTo);
         this.amount = new FormControl(this.editTransaction.amount);
         this.category = new FormControl(this.categoryName(this.editTransaction.category));
+        this.check = new FormControl(this.editTransaction.check);
         this.comments = new FormControl(this.editTransaction.comments);
         this.date = new FormControl(this.editTransaction.date);
         this.payeeFrom = new FormControl(this.editTransaction.payeeFrom);
@@ -111,12 +113,13 @@ export class TransactionEditComponent {
         this.tax = new FormControl(this.editTransaction.tax);
     }
 
-    instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, comments: FormControl, date: FormControl, payeeFrom: FormControl, payeeTo: FormControl, tax: FormControl) {
+    instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, check: FormControl, comments: FormControl, date: FormControl, payeeFrom: FormControl, payeeTo: FormControl, tax: FormControl) {
         this.form = new FormGroup({
             acctFrom,
             acctTo,
             amount,
             category,
+            check,
             comments,
             date,
             payeeFrom,
@@ -177,7 +180,7 @@ export class TransactionEditComponent {
         this.editTransaction.acctTo = this.form.get('acctTo').value;
         this.editTransaction.amount = this.form.get('amount').value;
         this.editTransaction.category = this.categoryId(this.form.get('category').value);
-        this.editTransaction.amount = this.form.get('amount').value;
+        this.editTransaction.check = this.form.get('check').value;
         this.editTransaction.comments = this.form.get('comments').value;
         this.editTransaction.payeeFrom = this.form.get('payeeFrom').value;
         this.editTransaction.payeeTo = this.form.get('payeeTo').value;

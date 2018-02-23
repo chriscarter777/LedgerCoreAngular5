@@ -13,7 +13,11 @@ export class TransactionListComponent {
     categories: Category[];
     payees: Payee[];
     transactions: Transaction[];
+
+    assets: number[];
     balances: number[][];
+    liabilities: number[];
+    nets: number[];
 
 
     constructor(private dataService: DataService) {
@@ -26,9 +30,15 @@ export class TransactionListComponent {
         this.dataService.payees.subscribe((payees) => this.payees = payees);
         this.dataService.transactions.subscribe((transactions) => {
             this.transactions = transactions;
+            this.assets = [];
             this.balances = [];
+            this.liabilities = [];
+            this.nets = [];
             this.transactions.forEach((transaction: Transaction, tidx) => {
+                this.assets[tidx] = 0;
                 this.balances[tidx] = [];
+                this.liabilities[tidx] = 0;
+                this.nets[tidx] = 0;
                 this.accounts.forEach((account: Account, aidx) => {
                     if (tidx === 0) {
                         if (transaction.acctFrom === account.id) {
@@ -37,7 +47,6 @@ export class TransactionListComponent {
                             this.balances[tidx][aidx] = transaction.amount;
                         } else {
                             this.balances[tidx][aidx] = 0;
-
                         }
                     } else {
                         if (transaction.acctFrom === account.id) {
@@ -48,6 +57,8 @@ export class TransactionListComponent {
                             this.balances[tidx][aidx] = this.balances[tidx - 1][aidx];
                         }
                     }
+                    this.assets[tidx] = this.assets[tidx] + this.balances[tidx][aidx]
+                    this.nets[tidx] = this.nets[tidx] + this.balances[tidx][aidx]
                 });
             });
         });
@@ -70,4 +81,55 @@ export class TransactionListComponent {
         var confirmation = confirm('Are you sure you want to delete transaction on ' + dateToDelete + '?');
         if (confirmation) { this.dataService.deleteAccount(id); };
     }
+
+    onFlag0Toggle(id: number) {
+        var targetIdx: number = this.transactions.findIndex((t) => t.id === id);
+        if (this.transactions[targetIdx].flag0) {
+            this.transactions[targetIdx].flag0 = false;
+        } else {
+            this.transactions[targetIdx].flag0 = true;
+        }
+        this.dataService.updateTransaction(this.transactions[targetIdx]);
+    }
+
+    onFlag1Toggle(id: number) {
+        var targetIdx: number = this.transactions.findIndex((t) => t.id === id);
+        if (this.transactions[targetIdx].flag1) {
+            this.transactions[targetIdx].flag1 = false;
+        } else {
+            this.transactions[targetIdx].flag1 = true;
+        }
+        this.dataService.updateTransaction(this.transactions[targetIdx]);
+    }
+
+    onFlag2Toggle(id: number) {
+        var targetIdx: number = this.transactions.findIndex((t) => t.id === id);
+        if (this.transactions[targetIdx].flag2) {
+            this.transactions[targetIdx].flag2 = false;
+        } else {
+            this.transactions[targetIdx].flag2 = true;
+        }
+        this.dataService.updateTransaction(this.transactions[targetIdx]);
+    }
+
+    onFlag3Toggle(id: number) {
+        var targetIdx: number = this.transactions.findIndex((t) => t.id === id);
+        if (this.transactions[targetIdx].flag3) {
+            this.transactions[targetIdx].flag3 = false;
+        } else {
+            this.transactions[targetIdx].flag3 = true;
+        }
+        this.dataService.updateTransaction(this.transactions[targetIdx]);
+    }
+
+    onReconciledToggle(id: number) {
+        var targetIdx: number = this.transactions.findIndex((t) => t.id === id);
+        if (this.transactions[targetIdx].reconciled) {
+            this.transactions[targetIdx].reconciled = false;
+        } else {
+            this.transactions[targetIdx].reconciled = true;
+        }
+        this.dataService.updateTransaction(this.transactions[targetIdx]);
+    }
+
 }

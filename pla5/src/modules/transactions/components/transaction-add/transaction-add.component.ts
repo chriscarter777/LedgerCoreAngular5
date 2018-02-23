@@ -29,6 +29,7 @@ export class TransactionAddComponent {
     acctTo: FormControl = new FormControl();
     amount: FormControl = new FormControl();
     category: FormControl = new FormControl();
+    check: FormControl = new FormControl();
     comments: FormControl = new FormControl();
     date: FormControl = new FormControl(this.newTransaction.date);
     payeeFrom: FormControl = new FormControl();
@@ -54,7 +55,7 @@ export class TransactionAddComponent {
         this.acctLiability = this.dataService.LiabilityAccounts();
         this.categories = this.dataService.Categories();
         this.payees = this.dataService.Payees();
-        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.comments, this.date, this.payeeFrom, this.payeeTo, this.tax);
+        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.check, this.comments, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith(''), map(val => this.categoryFilter(val)));
         this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith(''), map(val => this.payeeFilter(val)));
         this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith(''), map(val => this.payeeFilter(val)));
@@ -94,19 +95,20 @@ export class TransactionAddComponent {
     displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);
 
     freshNewTransaction() {
-        return { id: null, acctFrom: 0, acctTo: 0, amount: 0, category: 0, comments: '', date: new Date().toLocaleDateString(), payeeFrom: '', payeeTo: '', tax: false }
+        return { id: null, acctFrom: 0, acctTo: 0, amount: 0, category: 0, check: null, comments: '', date: new Date().toLocaleDateString(), flag0: false, flag1: false, flag2: false, flag3: false , payeeFrom: '', payeeTo: '', reconciled: false, tax: false }
     }
 
     goBack(): void {
         this.location.back();
     }
 
-    instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, comments: FormControl, date: FormControl, payeeFrom: FormControl, payeeTo: FormControl, tax: FormControl) {
+    instantiateForm(acctFrom: FormControl, acctTo: FormControl, amount: FormControl, category: FormControl, check: FormControl, comments: FormControl, date: FormControl, payeeFrom: FormControl, payeeTo: FormControl, tax: FormControl) {
         this.form = new FormGroup({
             acctFrom,
             acctTo,
             amount,
             category,
+            check,
             comments,
             date,
             payeeFrom,
@@ -155,6 +157,7 @@ export class TransactionAddComponent {
         this.newTransaction.acctTo = this.form.get('acctTo').value;
         this.newTransaction.amount = this.form.get('amount').value;
         this.newTransaction.category = this.categoryId(this.form.get('category').value);
+        this.newTransaction.check = this.form.get('check').value;
         this.newTransaction.comments = this.form.get('comments').value;
         this.newTransaction.date = this.form.get('date').value;
         this.newTransaction.payeeFrom = this.form.get('payeeFrom').value;

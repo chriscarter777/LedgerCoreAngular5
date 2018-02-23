@@ -401,7 +401,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/accounts/components/account-list/account-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"accounts\">\r\n  <p *ngIf=\"!accounts\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Accounts</caption>\r\n    <thead>\r\n        <tr>\r\n            <th>Active</th>\r\n            <th>ID</th>\r\n            <th>Type</th>\r\n            <th>Name</th>\r\n            <th>Institution</th>\r\n            <th>Number</th>\r\n            <th>Interest</th>\r\n            <th>Limit</th>\r\n            <th>Balance</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let account of accounts\">\r\n            <td *ngIf=\"account.active\"><span class=\"green\">Active</span></td>\r\n            <td *ngIf=\"!account.active\"><span class=\"red\">Closed</span></td>\r\n            <td>{{account.id}}</td>\r\n            <td>{{account.acctType}}</td>\r\n            <td>{{account.name}}</td>\r\n            <td>{{account.institution}}</td>\r\n            <td>{{account.number}}</td>\r\n            <td class='right'>{{displayAsPercent(account.interest)}}</td>\r\n            <td class='right'>{{account.limit ? displayAsDollar(account.limit) : '--'}}</td>\r\n            <td class='right'>{{displayAsDollar(account.balance)}}</td>\r\n            <td><a class=\"btn btn-xs editlink\" routerLink=\"./account-edit/{{account.id}}\">Edit</a></td>\r\n            <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(account.id);\">Delete</a></td>\r\n        </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./account-add\">Add New Account</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
+module.exports = "<div class=\"accounts\">\r\n  <p *ngIf=\"!accounts\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Accounts</caption>\r\n    <thead>\r\n        <tr>\r\n            <th>Active</th>\r\n            <th>ID</th>\r\n            <th>Type</th>\r\n            <th>Name</th>\r\n            <th>Institution</th>\r\n            <th>Number</th>\r\n            <th>Interest</th>\r\n            <th>Limit</th>\r\n            <th>Balance</th>\r\n            <th colspan=\"2\">&nbsp;</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let account of accounts\">\r\n            <td *ngIf=\"account.active\"><span class=\"green\">Active</span></td>\r\n            <td *ngIf=\"!account.active\"><span class=\"red\">Closed</span></td>\r\n            <td>{{account.id}}</td>\r\n            <td>{{account.acctType}}</td>\r\n            <td>{{account.name}}</td>\r\n            <td>{{account.institution}}</td>\r\n            <td>{{account.number}}</td>\r\n            <td class='right'>{{displayAsPercent(account.interest)}}</td>\r\n            <td class='right'>{{account.limit ? displayAsDollar(account.limit) : '--'}}</td>\r\n            <td class='right'>{{displayAsDollar(account.balance)}}</td>\r\n            <td><a class=\"btn btn-xs editlink\" routerLink=\"./account-edit/{{account.id}}\">Edit</a></td>\r\n            <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(account.id);\">Delete</a></td>\r\n        </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./account-add\">Add New Account</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -594,7 +594,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body {\r\n}\r\n", ""]);
+exports.push([module.i, "body {\r\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -607,7 +607,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/app/components/app-home/app-home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"mainTitle\">\r\n    <p class=\"mainTitle-sub\">Chris Carter's</p>\r\n    <p class=\"mainTitle-main\">PersonalLedger</p>\r\n</div>\r\n<div class=\"center lime\">\r\n    <p>A home bookkeeping application, using traditional debit-credit methodology, built as a hybrid MVC/SPA using:</p>\r\n    <ul class=\"unstyledList left indented35\">\r\n        <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>\r\n        <li><a>IdentityCore</a> for authentication and security</li>\r\n        <li><a>EntityFrameworkCore</a> for relational object mapping</li>\r\n        <li><a>XUnit</a>, <a>Karma</a> and <a>Protractor</a> for testing</li>\r\n        <li><a href='https://angular.io/'>Angular 5</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>\r\n        <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>\r\n    </ul>\r\n</div>\r\n"
+module.exports = "<div class=\"centeredCol\">\r\n    <div class=\"mainTitle\">\r\n        <p class=\"mainTitle-sub\">Chris Carter's</p>\r\n        <p class=\"mainTitle-main\">PersonalLedger</p>\r\n    </div>\r\n    <div class=\"features lime\">\r\n        <p>A home bookkeeping application, using traditional debit-credit methodology, built as a hybrid MVC/SPA using:</p>\r\n        <ul class=\"unstyledList\">\r\n            <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>\r\n            <li><a>IdentityCore</a> for authentication and security</li>\r\n            <li><a>EntityFrameworkCore</a> for relational object mapping</li>\r\n            <li><a>XUnit</a>, <a>Karma</a> and <a>Protractor</a> for testing</li>\r\n            <li><a href='https://angular.io/'>Angular 5</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>\r\n            <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>\r\n        </ul>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1143,7 +1143,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/categories/components/category-list/category-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"categories\">\r\n  <p *ngIf=\"!categories\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Categories</caption>\r\n    <thead>\r\n      <tr>\r\n        <th>ID</th>\r\n        <th>Name</th>\r\n        <th>Tax?</th>\r\n        <th>Type</th>\r\n      </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let category of categories\">\r\n        <td>{{category.id}}</td>\r\n        <td>{{category.name}}</td>\r\n        <td>&nbsp;<span *ngIf=\"category.tax\" class='glyphicon glyphicon-record' style='color:green;'></span></td>\r\n        <td>{{category.type}}</td>\r\n        <td><a class=\"btn btn-xs editlink\" routerLink=\"./category-edit/{{category.id}}\">Edit</a></td>\r\n        <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(category.id);\">Delete</a></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./category-add\">Add New Category</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
+module.exports = "<div class=\"categories\">\r\n  <p *ngIf=\"!categories\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Categories</caption>\r\n    <thead>\r\n        <tr>\r\n            <th>ID</th>\r\n            <th>Name</th>\r\n            <th>Tax?</th>\r\n            <th>Type</th>\r\n            <th colspan=\"2\">&nbsp;</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let category of categories\">\r\n        <td>{{category.id}}</td>\r\n        <td>{{category.name}}</td>\r\n        <td>&nbsp;<span *ngIf=\"category.tax\" class='glyphicon glyphicon-record' style='color:green;'></span></td>\r\n        <td>{{category.type}}</td>\r\n        <td><a class=\"btn btn-xs editlink\" routerLink=\"./category-edit/{{category.id}}\">Edit</a></td>\r\n        <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(category.id);\">Delete</a></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./category-add\">Add New Category</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1218,7 +1218,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/payees/components/payee-list/payee-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"payees\">\r\n    <p *ngIf=\"!payees\"><em>Loading...</em></p>\r\n\r\n    <table>\r\n        <caption>Payees</caption>\r\n        <thead>\r\n            <tr>\r\n                <th>ID</th>\r\n                <th>Name</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr *ngFor=\"let payee of payees\">\r\n                <td>{{payee.id}}</td>\r\n                <td>{{payee.name}}</td>\r\n                <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(payee.id);\">Delete</a></td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\r\n"
+module.exports = "<div class=\"payees\">\r\n    <p *ngIf=\"!payees\"><em>Loading...</em></p>\r\n\r\n    <table>\r\n        <caption>Payees</caption>\r\n        <thead>\r\n            <tr>\r\n                <th>ID</th>\r\n                <th>Name</th>\r\n                <th>&nbsp;</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr *ngFor=\"let payee of payees\">\r\n                <td>{{payee.id}}</td>\r\n                <td>{{payee.name}}</td>\r\n                <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(payee.id);\">Delete</a></td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2094,7 +2094,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-add/transaction-add.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionAdd\">\r\n    <h4>Add</h4>\r\n    <p *ngIf=\"!form\">Loading...</p>\r\n\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n        <label>Date</label>\r\n        <input type='date' name=\"date\" formControlName=\"date\" autofocus />\r\n        <br />\r\n        <div class=\"payeeSelector\">\r\n            <span id=\"payeeToControl\">\r\n                <label id=\"tpLabel\">To Payee</label>\r\n                <mat-form-field>\r\n                    <input type=\"text\" matInput formControlName=\"payeeTo\" [matAutocomplete]=\"autoPT\" (input)=\"onTPInput($event.target.value)\" (change)=\"onTPChange($event.target.value)\" />\r\n                    <mat-autocomplete #autoPT=\"matAutocomplete\">\r\n                        <mat-option *ngFor=\"let payeeName of filteredPayeeToNames | async\" value=\"{{payeeName}}\" (onSelectionChange)=\"onTPSelection(payeeName)\">\r\n                            {{ payeeName }}\r\n                        </mat-option>\r\n                    </mat-autocomplete>\r\n                </mat-form-field>\r\n            </span>\r\n            <span id=\"payeeFromControl\">\r\n                <label id=\"fpLabel\">From Payee</label>\r\n                <mat-form-field>\r\n                    <input type=\"text\" matInput formControlName=\"payeeFrom\" [matAutocomplete]=\"autoPF\" (input)=\"onFPInput($event.target.value)\" (change)=\"onFPChange($event.target.value)\" id=\"fpField\" />\r\n                    <mat-autocomplete #autoPF=\"matAutocomplete\">\r\n                        <mat-option *ngFor=\"let payeeName of filteredPayeeFromNames | async\" value=\"{{payeeName}}\" (onSelectionChange)=\"onTPSelection(payeeName)\">\r\n                            {{ payeeName }}\r\n                        </mat-option>\r\n                    </mat-autocomplete>\r\n                </mat-form-field>\r\n            </span>\r\n        </div>\r\n        <br />\r\n        <div class=\"accountSelector\">\r\n            <span id=\"accountFromControl\">\r\n                <label id=\"faLabel\">From Acct</label>\r\n                <select id=\"faField\" name=\"acctFrom\" formControlName=\"acctFrom\">\r\n                    <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                    <option disabled>──────────</option>\r\n                    <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                </select>\r\n            </span>\r\n            <span id=\"accountToControl\">\r\n                <label id=\"taLabel\">To Acct</label>\r\n                <select id=\"taField\" name=\"acctTo\" formControlName=\"acctTo\">\r\n                    <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                    <option disabled>──────────</option>\r\n                    <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                </select>\r\n            </span>\r\n        </div>\r\n        <br />\r\n        <label>Amount<span class=\"pull-right\">$</span></label>\r\n        <input id=\"amtField\" type='number' name=\"amount\" formControlName=\"amount\" />\r\n        <br />\r\n        <label>Category</label>\r\n        <mat-form-field>\r\n            <input id=\"catField\" type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"autoC\" (change)=\"onCChange($event.target.value)\" />\r\n            <mat-autocomplete #autoC=\"matAutocomplete\">\r\n                <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\" (onSelectionChange)=\"onCChange(categoryName)\">\r\n                    {{ categoryName }}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n        </mat-form-field>\r\n        <br />\r\n        <label>Tax</label>\r\n        <input id=\"taxField\" type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n        <br />\r\n        <label>Comments</label>\r\n        <input type='text' class=\"comments\" name=\"comments\" formControlName=\"comments\" />\r\n        <br />\r\n        <input type='submit' value=\"Add\" />\r\n        <button routerLink=\"/transactions\">Cancel</button>\r\n    </form>\r\n</div>\r\n"
+module.exports = "<div class=\"transactionAdd\">\r\n    <h4>Add</h4>\r\n    <p *ngIf=\"!form\">Loading...</p>\r\n\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n        <label>Date</label>\r\n        <input type='date' required name=\"date\" formControlName=\"date\" autofocus />\r\n        <br />\r\n        <label>Check</label>\r\n        <input type='number' min=\"1\" name=\"check\" formControlName=\"check\" />\r\n        <br />\r\n        <div class=\"payeeSelector\">\r\n            <span id=\"payeeToControl\">\r\n                <label id=\"tpLabel\">To Payee</label>\r\n                <mat-form-field>\r\n                    <input type=\"text\" matInput formControlName=\"payeeTo\" [matAutocomplete]=\"autoPT\" (input)=\"onTPInput($event.target.value)\" (change)=\"onTPChange($event.target.value)\" />\r\n                    <mat-autocomplete #autoPT=\"matAutocomplete\">\r\n                        <mat-option *ngFor=\"let payeeName of filteredPayeeToNames | async\" value=\"{{payeeName}}\" (onSelectionChange)=\"onTPSelection(payeeName)\">\r\n                            {{ payeeName }}\r\n                        </mat-option>\r\n                    </mat-autocomplete>\r\n                </mat-form-field>\r\n            </span>\r\n            <span id=\"payeeFromControl\">\r\n                <label id=\"fpLabel\">From Payee</label>\r\n                <mat-form-field>\r\n                    <input type=\"text\" matInput formControlName=\"payeeFrom\" [matAutocomplete]=\"autoPF\" (input)=\"onFPInput($event.target.value)\" (change)=\"onFPChange($event.target.value)\" id=\"fpField\" />\r\n                    <mat-autocomplete #autoPF=\"matAutocomplete\">\r\n                        <mat-option *ngFor=\"let payeeName of filteredPayeeFromNames | async\" value=\"{{payeeName}}\" (onSelectionChange)=\"onTPSelection(payeeName)\">\r\n                            {{ payeeName }}\r\n                        </mat-option>\r\n                    </mat-autocomplete>\r\n                </mat-form-field>\r\n            </span>\r\n        </div>\r\n        <br />\r\n        <div class=\"accountSelector\">\r\n            <span id=\"accountFromControl\">\r\n                <label id=\"faLabel\">From Acct</label>\r\n                <select id=\"faField\" name=\"acctFrom\" formControlName=\"acctFrom\">\r\n                    <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                    <option disabled>──────────</option>\r\n                    <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                </select>\r\n            </span>\r\n            <span id=\"accountToControl\">\r\n                <label id=\"taLabel\">To Acct</label>\r\n                <select id=\"taField\" name=\"acctTo\" formControlName=\"acctTo\">\r\n                    <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                    <option disabled>──────────</option>\r\n                    <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                </select>\r\n            </span>\r\n        </div>\r\n        <br />\r\n        <label>Amount<span class=\"pull-right\">$</span></label>\r\n        <input id=\"amtField\" type='number' required name=\"amount\" formControlName=\"amount\" />\r\n        <br />\r\n        <label>Category</label>\r\n        <mat-form-field>\r\n            <input id=\"catField\" type=\"text\" required matInput formControlName=\"category\" [matAutocomplete]=\"autoC\" (change)=\"onCChange($event.target.value)\" />\r\n            <mat-autocomplete #autoC=\"matAutocomplete\">\r\n                <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\" (onSelectionChange)=\"onCChange(categoryName)\">\r\n                    {{ categoryName }}\r\n                </mat-option>\r\n            </mat-autocomplete>\r\n        </mat-form-field>\r\n        <br />\r\n        <label>Tax</label>\r\n        <input id=\"taxField\" type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n        <br />\r\n        <label>Comments</label>\r\n        <input type='text' class=\"comments\" name=\"comments\" formControlName=\"comments\" />\r\n        <br />\r\n        <input type='submit' value=\"Add\" />\r\n        <button routerLink=\"/transactions\">Cancel</button>\r\n    </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2130,6 +2130,7 @@ var TransactionAddComponent = /** @class */ (function () {
         this.acctTo = new forms_1.FormControl();
         this.amount = new forms_1.FormControl();
         this.category = new forms_1.FormControl();
+        this.check = new forms_1.FormControl();
         this.comments = new forms_1.FormControl();
         this.date = new forms_1.FormControl(this.newTransaction.date);
         this.payeeFrom = new forms_1.FormControl();
@@ -2150,7 +2151,7 @@ var TransactionAddComponent = /** @class */ (function () {
         this.acctLiability = this.dataService.LiabilityAccounts();
         this.categories = this.dataService.Categories();
         this.payees = this.dataService.Payees();
-        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.comments, this.date, this.payeeFrom, this.payeeTo, this.tax);
+        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.check, this.comments, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); }));
         this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
         this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
@@ -2184,17 +2185,18 @@ var TransactionAddComponent = /** @class */ (function () {
         return this.categories.find(function (element) { return element.id === categoryId; }).name;
     };
     TransactionAddComponent.prototype.freshNewTransaction = function () {
-        return { id: null, acctFrom: 0, acctTo: 0, amount: 0, category: 0, comments: '', date: new Date().toLocaleDateString(), payeeFrom: '', payeeTo: '', tax: false };
+        return { id: null, acctFrom: 0, acctTo: 0, amount: 0, category: 0, check: null, comments: '', date: new Date().toLocaleDateString(), flag0: false, flag1: false, flag2: false, flag3: false, payeeFrom: '', payeeTo: '', reconciled: false, tax: false };
     };
     TransactionAddComponent.prototype.goBack = function () {
         this.location.back();
     };
-    TransactionAddComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, comments, date, payeeFrom, payeeTo, tax) {
+    TransactionAddComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, check, comments, date, payeeFrom, payeeTo, tax) {
         this.form = new forms_1.FormGroup({
             acctFrom: acctFrom,
             acctTo: acctTo,
             amount: amount,
             category: category,
+            check: check,
             comments: comments,
             date: date,
             payeeFrom: payeeFrom,
@@ -2245,6 +2247,7 @@ var TransactionAddComponent = /** @class */ (function () {
         this.newTransaction.acctTo = this.form.get('acctTo').value;
         this.newTransaction.amount = this.form.get('amount').value;
         this.newTransaction.category = this.categoryId(this.form.get('category').value);
+        this.newTransaction.check = this.form.get('check').value;
         this.newTransaction.comments = this.form.get('comments').value;
         this.newTransaction.date = this.form.get('date').value;
         this.newTransaction.payeeFrom = this.form.get('payeeFrom').value;
@@ -2409,7 +2412,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-edit/transaction-edit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactionEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n      <label>Date</label>\r\n      <input type='date' name=\"date\" formControlName=\"date\" />\r\n      <br />\r\n      <div class=\"payeeSelector\">\r\n          <label>To Payee</label>\r\n          <mat-form-field>\r\n              <input type=\"text\" matInput formControlName=\"payeeTo\" [matAutocomplete]=\"autoPT\" />\r\n              <mat-autocomplete #autoPT=\"matAutocomplete\">\r\n                  <mat-option *ngFor=\"let payeeName of filteredPayeeToNames | async\" value=\"{{payeeName}}\">\r\n                      {{ payeeName }}\r\n                  </mat-option>\r\n              </mat-autocomplete>\r\n          </mat-form-field>\r\n          <label>From Payee</label>\r\n          <mat-form-field>\r\n              <input type=\"text\" matInput formControlName=\"payeeFrom\" [matAutocomplete]=\"autoPF\" />\r\n              <mat-autocomplete #autoPF=\"matAutocomplete\">\r\n                  <mat-option *ngFor=\"let payeeName of filteredPayeeFromNames | async\" value=\"{{payeeName}}\">\r\n                      {{ payeeName }}\r\n                  </mat-option>\r\n              </mat-autocomplete>\r\n          </mat-form-field>\r\n      </div>\r\n      <br />\r\n      <div class=\"accountSelector\">\r\n          <label>From Acct</label>\r\n          <select name=\"acctFrom\" formControlName=\"acctFrom\">\r\n              <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n              <option disabled>──────────</option>\r\n              <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          </select>\r\n          <label>To Acct</label>\r\n          <select name=\"acctTo\" formControlName=\"acctTo\">\r\n              <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n              <option disabled>──────────</option>\r\n              <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          </select>\r\n      </div>\r\n      <br />\r\n      <label>Amount<span class=\"pull-right\">$</span></label>\r\n      <input type='number' name=\"amount\" formControlName=\"amount\" />\r\n      <br />\r\n      <label>Category</label>\r\n      <mat-form-field>\r\n          <input id=\"catField\" type=\"text\" matInput formControlName=\"category\" [matAutocomplete]=\"autoC\" (change)=\"onCChange($event.target.value)\" />\r\n          <mat-autocomplete #autoC=\"matAutocomplete\">\r\n              <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\" (onSelectionChange)=\"onCChange(categoryName)\">\r\n                  {{ categoryName }}\r\n              </mat-option>\r\n          </mat-autocomplete>\r\n      </mat-form-field>\r\n      <br />\r\n      <label>Tax</label>\r\n      <input id=\"taxField\" type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n      <br />\r\n      <label>Comments</label>\r\n      <input type='text' class=\"comments\" name=\"comments\" formControlName=\"comments\" />\r\n      <br />\r\n      <input type='submit' value=\"Update\" />\r\n      <button routerLink=\"/transactions\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div class=\"transactionEdit\">\r\n  <h4>Edit</h4>\r\n\r\n  <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n      <label>Date</label>\r\n      <input type='date' required name=\"date\" formControlName=\"date\" />\r\n      <br />\r\n      <label>Check</label>\r\n      <input type='number' min=\"1\" name=\"check\" formControlName=\"check\" />\r\n      <br />\r\n      <div class=\"payeeSelector\">\r\n          <label>To Payee</label>\r\n          <mat-form-field>\r\n              <input type=\"text\" matInput formControlName=\"payeeTo\" [matAutocomplete]=\"autoPT\" />\r\n              <mat-autocomplete #autoPT=\"matAutocomplete\">\r\n                  <mat-option *ngFor=\"let payeeName of filteredPayeeToNames | async\" value=\"{{payeeName}}\">\r\n                      {{ payeeName }}\r\n                  </mat-option>\r\n              </mat-autocomplete>\r\n          </mat-form-field>\r\n          <label>From Payee</label>\r\n          <mat-form-field>\r\n              <input type=\"text\" matInput formControlName=\"payeeFrom\" [matAutocomplete]=\"autoPF\" />\r\n              <mat-autocomplete #autoPF=\"matAutocomplete\">\r\n                  <mat-option *ngFor=\"let payeeName of filteredPayeeFromNames | async\" value=\"{{payeeName}}\">\r\n                      {{ payeeName }}\r\n                  </mat-option>\r\n              </mat-autocomplete>\r\n          </mat-form-field>\r\n      </div>\r\n      <br />\r\n      <div class=\"accountSelector\">\r\n          <label>From Acct</label>\r\n          <select name=\"acctFrom\" formControlName=\"acctFrom\">\r\n              <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n              <option disabled>──────────</option>\r\n              <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          </select>\r\n          <label>To Acct</label>\r\n          <select name=\"acctTo\" formControlName=\"acctTo\">\r\n              <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n              <option disabled>──────────</option>\r\n              <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n          </select>\r\n      </div>\r\n      <br />\r\n      <label>Amount<span class=\"pull-right\">$</span></label>\r\n      <input type='number' required name=\"amount\" formControlName=\"amount\" />\r\n      <br />\r\n      <label>Category</label>\r\n      <mat-form-field>\r\n          <input id=\"catField\" type=\"text\" required matInput formControlName=\"category\" [matAutocomplete]=\"autoC\" (change)=\"onCChange($event.target.value)\" />\r\n          <mat-autocomplete #autoC=\"matAutocomplete\">\r\n              <mat-option *ngFor=\"let categoryName of filteredCategoryNames | async\" value=\"{{categoryName}}\" (onSelectionChange)=\"onCChange(categoryName)\">\r\n                  {{ categoryName }}\r\n              </mat-option>\r\n          </mat-autocomplete>\r\n      </mat-form-field>\r\n      <br />\r\n      <label>Tax</label>\r\n      <input id=\"taxField\" type='checkbox' name=\"tax\" value=\"true\" formControlName=\"tax\" />\r\n      <br />\r\n      <label>Comments</label>\r\n      <input type='text' class=\"comments\" name=\"comments\" formControlName=\"comments\" />\r\n      <br />\r\n      <input type='submit' value=\"Update\" />\r\n      <button routerLink=\"/transactions\">Cancel</button>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2458,7 +2461,7 @@ var TransactionEditComponent = /** @class */ (function () {
         this.categories = this.dataService.Categories();
         this.payees = this.dataService.Payees();
         this.editTransaction = this.dataService.Transaction(id);
-        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.comments, this.date, this.payeeFrom, this.payeeTo, this.tax);
+        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.check, this.comments, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); }));
         this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
         this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
@@ -2498,18 +2501,20 @@ var TransactionEditComponent = /** @class */ (function () {
         this.acctTo = new forms_1.FormControl(this.editTransaction.acctTo);
         this.amount = new forms_1.FormControl(this.editTransaction.amount);
         this.category = new forms_1.FormControl(this.categoryName(this.editTransaction.category));
+        this.check = new forms_1.FormControl(this.editTransaction.check);
         this.comments = new forms_1.FormControl(this.editTransaction.comments);
         this.date = new forms_1.FormControl(this.editTransaction.date);
         this.payeeFrom = new forms_1.FormControl(this.editTransaction.payeeFrom);
         this.payeeTo = new forms_1.FormControl(this.editTransaction.payeeTo);
         this.tax = new forms_1.FormControl(this.editTransaction.tax);
     };
-    TransactionEditComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, comments, date, payeeFrom, payeeTo, tax) {
+    TransactionEditComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, check, comments, date, payeeFrom, payeeTo, tax) {
         this.form = new forms_1.FormGroup({
             acctFrom: acctFrom,
             acctTo: acctTo,
             amount: amount,
             category: category,
+            check: check,
             comments: comments,
             date: date,
             payeeFrom: payeeFrom,
@@ -2571,7 +2576,7 @@ var TransactionEditComponent = /** @class */ (function () {
         this.editTransaction.acctTo = this.form.get('acctTo').value;
         this.editTransaction.amount = this.form.get('amount').value;
         this.editTransaction.category = this.categoryId(this.form.get('category').value);
-        this.editTransaction.amount = this.form.get('amount').value;
+        this.editTransaction.check = this.form.get('check').value;
         this.editTransaction.comments = this.form.get('comments').value;
         this.editTransaction.payeeFrom = this.form.get('payeeFrom').value;
         this.editTransaction.payeeTo = this.form.get('payeeTo').value;
@@ -2616,7 +2621,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body {\r\n}\r\n\r\n.account-name{\r\n    font-weight: bold;\r\n    color:darkblue;\r\n}\r\n\r\n.actionCell {\r\n    background: floralwhite;\r\n}\r\n\r\n.balanceCell{\r\n    background:mintcream;\r\n    color:darkgreen;\r\n    text-align:right;\r\n}\r\n\r\ntable {\r\n    display: block;\r\n    font-size:12px;\r\n}\r\n", ""]);
+exports.push([module.i, "\r\n.scrollContainer {\r\n    overflow: auto;\r\n    width: 100%;\r\n    margin-bottom: 20px;\r\n}\r\n.tablecontainer {\r\n    display:block;\r\n    font-size: 12px;\r\n    min-width:2000px;\r\n    margin-bottom:20px;\r\n}\r\n.tablehead {\r\n    display:table-row;\r\n}\r\n.tablehead > div {\r\n        float:left;\r\n        height: 34px;\r\n        line-height: 12px;\r\n        padding: 5px 10px 5px 10px;\r\n        background: khaki;\r\n        color: darkgreen;\r\n        font-family: Garamond;\r\n        text-align: center;\r\n        border: 1px solid darkgreen;\r\n        vertical-align: top;\r\n    }\r\n.tablehead > div:hover {\r\n        color: green;\r\n        text-shadow: 0 0 2px mintcream;\r\n    }\r\n.tablehead > div.active {\r\n        background: darkkhaki;\r\n        color: darkgreen;\r\n    }\r\n.tablehead > div.active:hover {\r\n        color: green;\r\n        text-shadow: 0 0 2px mintcream;\r\n    }\r\n.tablebody {\r\n    height: 60%;\r\n}\r\n.tablerow {\r\n    display: table-row;\r\n}\r\n.tablerow > div {\r\n        float: left;\r\n        border-top: 1px solid gainsboro;\r\n        border-bottom: 1px solid gainsboro;\r\n        border-left: 1px solid whitesmoke;\r\n        border-right: 1px solid whitesmoke;\r\n        text-align: center;\r\n        min-height: 28px;\r\n        padding: 5px;\r\n        line-height: 12px;\r\n        vertical-align: top;\r\n    }\r\n.account-name {\r\n    font-weight: bold;\r\n    color: darkblue;\r\n}\r\n.actionCell {\r\n    background: floralwhite;\r\n    padding: 0 !important;\r\n}\r\n.balanceCell {\r\n    background: mintcream;\r\n    color: darkgreen;\r\n}\r\n.commentcell {\r\n    text-align: left !important;\r\n}\r\n.money{\r\n    text-align:right !important;\r\n}\r\n.toggler {\r\n    cursor: pointer;\r\n}\r\n.toggler:hover{\r\n    text-decoration:none;\r\n}\r\n.flag0-true {\r\n    color: red;\r\n    font-size: 18px;\r\n}\r\n.flag0-false {\r\n    color: pink;\r\n    font-size: 18px;\r\n}\r\n.flag1-true {\r\n    color: limegreen;\r\n    font-size: 18px;\r\n}\r\n.flag1-false {\r\n    color: palegreen;\r\n    font-size: 18px;\r\n}\r\n.flag2-true {\r\n    color: blue;\r\n    font-size: 18px;\r\n}\r\n.flag2-false {\r\n    color: paleturquoise;\r\n    font-size: 18px;\r\n}\r\n.flag3-true {\r\n    color: gold;\r\n    font-size: 18px;\r\n}\r\n.flag3-false {\r\n    color: lightgoldenrodyellow;\r\n    font-size: 18px;\r\n}\r\n.reconciled {\r\n    color: forestgreen;\r\n    font-size: 18px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -2629,7 +2634,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-list/transaction-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"transactions\">\r\n    <p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n\r\n    <table *ngIf=\"transactions && payees && categories && accounts\">\r\n        <caption>Transactions</caption>\r\n        <thead>\r\n            <tr>\r\n                <th>ID</th>\r\n                <th>Date</th>\r\n                <th>To</th>\r\n                <th>From</th>\r\n                <th>Amount</th>\r\n                <th>Category</th>\r\n                <th>Tax?</th>\r\n                <th>Comment</th>\r\n                <th colspan=\"2\">Actions</th>\r\n                <th *ngFor=\"let account of accounts\">{{account.name}}</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr *ngFor=\"let transaction of transactions; let tidx = index\">\r\n                <td>{{transaction.id}}</td>\r\n                <td>{{transaction.date | date}}</td>\r\n\r\n                <td *ngIf=\"transaction.payeeTo\">{{transaction.payeeTo}}</td>\r\n                <td *ngIf=\"transaction.acctTo\" class=\"account-name\">{{accountName(transaction.acctTo)}}</td>\r\n                <td *ngIf=\"!transaction.payeeTo && !transaction.acctTo\">&nbsp;</td> <!--occurs for (-) adjustment-type transactions-->\r\n\r\n                <td *ngIf=\"transaction.payeeFrom\">{{transaction.payeeFrom}}</td>\r\n                <td *ngIf=\"transaction.acctFrom\" class=\"account-name\">{{accountName(transaction.acctFrom)}}</td>\r\n                <td *ngIf=\"!transaction.payeeFrom && !transaction.acctFrom\">&nbsp;</td> <!--occurs for (+) adjustment-type transactions-->\r\n\r\n                <td class='right'>{{displayAsDollar(transaction.amount)}}</td>\r\n                <td>{{categoryName(transaction.category)}}</td>\r\n                <td>&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></td>\r\n                <td>{{transaction.comments}}</td>\r\n                <td class=\"actionCell\"><a class=\"btn btn-xs editlink\" routerLink=\"./transaction-edit/{{transaction.id}}\">Edit</a></td>\r\n                <td class=\"actionCell\"><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(transaction.id);\">Delete</a></td>\r\n                <td *ngFor=\"let account of accounts; let aidx = index\" class=\"balanceCell\">{{displayAsDollar(balances[tidx][aidx])}}</td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n    <a class=\"btn\" id=\"addlink\" routerLink=\"./transaction-add\">Add New Transaction</a>\r\n    <br />\r\n    <router-outlet></router-outlet>\r\n</div>\r\n"
+module.exports = "<p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n<div class=\"captionlike\">Transactions</div>\r\n<div class=\"scrollContainer\">\r\n    <div *ngIf=\"transactions && payees && categories && accounts\" class=\"tablecontainer\">\r\n        <div class=\"tablehead\">\r\n            <div class=\"w80\">Flags</div>\r\n            <div class=\"w30\">Re</div>\r\n            <div class=\"w90\">Date</div>\r\n            <div class=\"w50\">Check</div>\r\n            <div class=\"w120\">To</div>\r\n            <div class=\"w120\">From</div>\r\n            <div class=\"w80\">Amount</div>\r\n            <div class=\"w160\">Category</div>\r\n            <div class=\"w40\">Tax?</div>\r\n            <div class=\"w200\">Comment</div>\r\n            <div class=\"w120\">&nbsp;</div>\r\n            <div *ngFor=\"let account of accounts\" class=\"w90\">{{account.name}}</div>\r\n            <div class=\"w80\">Assets</div>\r\n            <div class=\"w80\">Liabilities</div>\r\n            <div class=\"w80\">Net</div>\r\n        </div>\r\n        <div class=\"tablebody\">\r\n            <div *ngFor=\"let transaction of transactions; let tidx = index\" class=\"tablerow\">\r\n                <div class=\"w80\">\r\n                    <a *ngIf=\"transaction.flag0\" class=\"toggler flag0-true\" (click)=\"onFlag0Toggle(transaction.id)\">&#9873;</a>\r\n                    <a *ngIf=\"!transaction.flag0\" class=\"toggler flag0-false\" (click)=\"onFlag0Toggle(transaction.id)\">&#9872;</a>\r\n                    <a *ngIf=\"transaction.flag1\" class=\"toggler flag1-true\" (click)=\"onFlag1Toggle(transaction.id)\">&#9873;</a>\r\n                    <a *ngIf=\"!transaction.flag1\" class=\"toggler flag1-false\" (click)=\"onFlag1Toggle(transaction.id)\">&#9872;</a>\r\n                    <a *ngIf=\"transaction.flag2\" class=\"toggler flag2-true\" (click)=\"onFlag2Toggle(transaction.id)\">&#9873;</a>\r\n                    <a *ngIf=\"!transaction.flag2\" class=\"toggler flag2-false\" (click)=\"onFlag2Toggle(transaction.id)\">&#9872;</a>\r\n                    <a *ngIf=\"transaction.flag3\" class=\"toggler flag3-true\" (click)=\"onFlag3Toggle(transaction.id)\">&#9873;</a>\r\n                    <a *ngIf=\"!transaction.flag3\" class=\"toggler flag3-false\" (click)=\"onFlag3Toggle(transaction.id)\">&#9872;</a>\r\n                </div>\r\n                <div class=\"w30\">\r\n                    <a *ngIf=\"transaction.reconciled\" class=\"toggler reconciled\" (click)=\"onReconciledToggle(transaction.id)\">&#10004;</a>\r\n                    <button *ngIf=\"!transaction.reconciled\" class=\"btn-clear reconciled\" (click)=\"onReconciledToggle(transaction.id)\">&nbsp;</button>\r\n                </div>\r\n                <div class=\"w90\">{{transaction.date | date}}</div>\r\n                <div class=\"w50\">{{transaction.check}}</div>\r\n\r\n                <div *ngIf=\"transaction.payeeTo\" class=\"w120\">{{transaction.payeeTo}}</div>\r\n                <div *ngIf=\"transaction.acctTo\" class=\"account-name w120\">{{accountName(transaction.acctTo)}}</div>\r\n                <div *ngIf=\"!transaction.payeeTo && !transaction.acctTo\" class=\"w120\">&nbsp;</div>\r\n\r\n                <div *ngIf=\"transaction.payeeFrom\" class=\"w120\">{{transaction.payeeFrom}}</div>\r\n                <div *ngIf=\"transaction.acctFrom\" class=\"account-name w120\">{{accountName(transaction.acctFrom)}}</div>\r\n                <div *ngIf=\"!transaction.payeeFrom && !transaction.acctFrom\" class=\"w120\">&nbsp;</div>\r\n\r\n                <div class='money w80'>{{displayAsDollar(transaction.amount)}}</div>\r\n                <div class=\"w160\">{{categoryName(transaction.category)}}</div>\r\n                <div class=\"w40\">&nbsp;<span *ngIf=\"transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></div>\r\n                <div class=\"commentcell w200\">{{transaction.comments}}</div>\r\n                <div class=\"actionCell w60\"><a class=\"btn btn-xs editlink\" routerLink=\"./transaction-edit/{{transaction.id}}\">Edit</a></div>\r\n                <div class=\"actionCell w60\"><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(transaction.id);\">Delete</a></div>\r\n                <div *ngFor=\"let account of accounts; let aidx = index\" class=\"money balanceCell w90\">{{displayAsDollar(balances[tidx][aidx])}}</div>\r\n                <div class=\"money balanceCell w80\">{{displayAsDollar(assets[tidx])}}</div>\r\n                <div class=\"money balanceCell w80\">{{displayAsDollar(liabilities[tidx])}}</div>\r\n                <div class=\"money balanceCell w80\">{{displayAsDollar(nets[tidx])}}</div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<a id=\"addlink\" routerLink=\"./transaction-add\">Add New Transaction</a>\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -2662,9 +2667,15 @@ var TransactionListComponent = /** @class */ (function () {
         this.dataService.payees.subscribe(function (payees) { return _this.payees = payees; });
         this.dataService.transactions.subscribe(function (transactions) {
             _this.transactions = transactions;
+            _this.assets = [];
             _this.balances = [];
+            _this.liabilities = [];
+            _this.nets = [];
             _this.transactions.forEach(function (transaction, tidx) {
+                _this.assets[tidx] = 0;
                 _this.balances[tidx] = [];
+                _this.liabilities[tidx] = 0;
+                _this.nets[tidx] = 0;
                 _this.accounts.forEach(function (account, aidx) {
                     if (tidx === 0) {
                         if (transaction.acctFrom === account.id) {
@@ -2688,6 +2699,8 @@ var TransactionListComponent = /** @class */ (function () {
                             _this.balances[tidx][aidx] = _this.balances[tidx - 1][aidx];
                         }
                     }
+                    _this.assets[tidx] = _this.assets[tidx] + _this.balances[tidx][aidx];
+                    _this.nets[tidx] = _this.nets[tidx] + _this.balances[tidx][aidx];
                 });
             });
         });
@@ -2707,6 +2720,56 @@ var TransactionListComponent = /** @class */ (function () {
             this.dataService.deleteAccount(id);
         }
         ;
+    };
+    TransactionListComponent.prototype.onFlag0Toggle = function (id) {
+        var targetIdx = this.transactions.findIndex(function (t) { return t.id === id; });
+        if (this.transactions[targetIdx].flag0) {
+            this.transactions[targetIdx].flag0 = false;
+        }
+        else {
+            this.transactions[targetIdx].flag0 = true;
+        }
+        this.dataService.updateTransaction(this.transactions[targetIdx]);
+    };
+    TransactionListComponent.prototype.onFlag1Toggle = function (id) {
+        var targetIdx = this.transactions.findIndex(function (t) { return t.id === id; });
+        if (this.transactions[targetIdx].flag1) {
+            this.transactions[targetIdx].flag1 = false;
+        }
+        else {
+            this.transactions[targetIdx].flag1 = true;
+        }
+        this.dataService.updateTransaction(this.transactions[targetIdx]);
+    };
+    TransactionListComponent.prototype.onFlag2Toggle = function (id) {
+        var targetIdx = this.transactions.findIndex(function (t) { return t.id === id; });
+        if (this.transactions[targetIdx].flag2) {
+            this.transactions[targetIdx].flag2 = false;
+        }
+        else {
+            this.transactions[targetIdx].flag2 = true;
+        }
+        this.dataService.updateTransaction(this.transactions[targetIdx]);
+    };
+    TransactionListComponent.prototype.onFlag3Toggle = function (id) {
+        var targetIdx = this.transactions.findIndex(function (t) { return t.id === id; });
+        if (this.transactions[targetIdx].flag3) {
+            this.transactions[targetIdx].flag3 = false;
+        }
+        else {
+            this.transactions[targetIdx].flag3 = true;
+        }
+        this.dataService.updateTransaction(this.transactions[targetIdx]);
+    };
+    TransactionListComponent.prototype.onReconciledToggle = function (id) {
+        var targetIdx = this.transactions.findIndex(function (t) { return t.id === id; });
+        if (this.transactions[targetIdx].reconciled) {
+            this.transactions[targetIdx].reconciled = false;
+        }
+        else {
+            this.transactions[targetIdx].reconciled = true;
+        }
+        this.dataService.updateTransaction(this.transactions[targetIdx]);
     };
     TransactionListComponent = __decorate([
         core_1.Component({
@@ -2841,7 +2904,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/users/components/user-list/user-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"users\">\r\n    <p *ngIf=\"!users\"><em>Loading...</em></p>\r\n\r\n    <table>\r\n        <caption>Users</caption>\r\n        <thead>\r\n            <tr>\r\n                <th>ID</th>\r\n                <th>Username</th>\r\n                <th>Admin</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr *ngFor=\"let user of users\">\r\n                <td>{{user.id}}</td>\r\n                <td>{{user.userName}}</td>\r\n                <td><input #cb1 type=\"checkbox\" value=\"true\" [checked]=\"user.admin\" (change)=\"onToggleAdmin(user.id)\"></td>\r\n                <td><a (click)=\"onReset(user.id);\">Reset Password</a></td>\r\n                <td><a (click)=\"onDelete(user.id);\">Delete</a></td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\r\n"
+module.exports = "<div class=\"users\">\r\n    <p *ngIf=\"!users\"><em>Loading...</em></p>\r\n\r\n    <table>\r\n        <caption>Users</caption>\r\n        <thead>\r\n            <tr>\r\n                <th>ID</th>\r\n                <th>Username</th>\r\n                <th>Admin</th>\r\n                <th colspan=\"2\">&nbsp;</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr *ngFor=\"let user of users\">\r\n                <td>{{user.id}}</td>\r\n                <td>{{user.userName}}</td>\r\n                <td><input #cb1 type=\"checkbox\" value=\"true\" [checked]=\"user.admin\" (change)=\"onToggleAdmin(user.id)\"></td>\r\n                <td><a (click)=\"onReset(user.id);\">Reset Password</a></td>\r\n                <td><a (click)=\"onDelete(user.id);\">Delete</a></td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\r\n"
 
 /***/ }),
 

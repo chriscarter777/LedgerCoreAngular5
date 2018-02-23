@@ -26,6 +26,7 @@ var TransactionAddComponent = /** @class */ (function () {
         this.acctTo = new forms_1.FormControl();
         this.amount = new forms_1.FormControl();
         this.category = new forms_1.FormControl();
+        this.check = new forms_1.FormControl();
         this.comments = new forms_1.FormControl();
         this.date = new forms_1.FormControl(this.newTransaction.date);
         this.payeeFrom = new forms_1.FormControl();
@@ -46,7 +47,7 @@ var TransactionAddComponent = /** @class */ (function () {
         this.acctLiability = this.dataService.LiabilityAccounts();
         this.categories = this.dataService.Categories();
         this.payees = this.dataService.Payees();
-        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.comments, this.date, this.payeeFrom, this.payeeTo, this.tax);
+        this.instantiateForm(this.acctFrom, this.acctTo, this.amount, this.category, this.check, this.comments, this.date, this.payeeFrom, this.payeeTo, this.tax);
         this.filteredCategoryNames = this.category.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.categoryFilter(val); }));
         this.filteredPayeeFromNames = this.payeeFrom.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
         this.filteredPayeeToNames = this.payeeTo.valueChanges.pipe(startWith_1.startWith(''), map_1.map(function (val) { return _this.payeeFilter(val); }));
@@ -80,17 +81,18 @@ var TransactionAddComponent = /** @class */ (function () {
         return this.categories.find(function (element) { return element.id === categoryId; }).name;
     };
     TransactionAddComponent.prototype.freshNewTransaction = function () {
-        return { id: null, acctFrom: 0, acctTo: 0, amount: 0, category: 0, comments: '', date: new Date().toLocaleDateString(), payeeFrom: '', payeeTo: '', tax: false };
+        return { id: null, acctFrom: 0, acctTo: 0, amount: 0, category: 0, check: null, comments: '', date: new Date().toLocaleDateString(), flag0: false, flag1: false, flag2: false, flag3: false, payeeFrom: '', payeeTo: '', reconciled: false, tax: false };
     };
     TransactionAddComponent.prototype.goBack = function () {
         this.location.back();
     };
-    TransactionAddComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, comments, date, payeeFrom, payeeTo, tax) {
+    TransactionAddComponent.prototype.instantiateForm = function (acctFrom, acctTo, amount, category, check, comments, date, payeeFrom, payeeTo, tax) {
         this.form = new forms_1.FormGroup({
             acctFrom: acctFrom,
             acctTo: acctTo,
             amount: amount,
             category: category,
+            check: check,
             comments: comments,
             date: date,
             payeeFrom: payeeFrom,
@@ -141,6 +143,7 @@ var TransactionAddComponent = /** @class */ (function () {
         this.newTransaction.acctTo = this.form.get('acctTo').value;
         this.newTransaction.amount = this.form.get('amount').value;
         this.newTransaction.category = this.categoryId(this.form.get('category').value);
+        this.newTransaction.check = this.form.get('check').value;
         this.newTransaction.comments = this.form.get('comments').value;
         this.newTransaction.date = this.form.get('date').value;
         this.newTransaction.payeeFrom = this.form.get('payeeFrom').value;
