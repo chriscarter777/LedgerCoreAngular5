@@ -1,3 +1,17 @@
-<div class="reports">
-    <h2 style="margin-top:100px;" class="lemonlime">This feature not yet supported.</h2>
+<p *ngIf="!transactions"><em>Loading...</em></p>
+<div class="captionlike">Reports</div>
+
+<div class="reportSelector">
+    <a routerLink="./report-payee">Payee Report</a>
+    <br />
+    <a routerLink="./report-category">Category Report</a>
+    <br />
+    <a routerLink="./report-expense">Expense Report</a>
+    <br />
+    <a routerLink="./report-income">Income Report</a>
+    <br />
+    <a routerLink="./report-cashflow">Cashflow and Net Worth Report</a>
+    <br />
+    <a routerLink="./report-account">Account Balance Report</a>
 </div>
+<router-outlet></router-outlet>

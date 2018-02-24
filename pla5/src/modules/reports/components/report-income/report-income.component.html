@@ -1,0 +1,49 @@
+<p *ngIf="!transactions"><em>Loading...</em></p>
+<div class="captionlike">Income Report</div>
+
+<div class="filters">
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="onFilterSubmit(form.value)">
+        <div class="row">
+            <div class="col-md-2">
+                <label>Account:</label>
+                <select name="acctFilter" formControlName="acctFilter">
+                    <option *ngFor="let account of acctAsset" [class]="account.active? '' : 'greyed'" value="{{account.id}}">{{account.name}}</option>
+                    <option disabled>──────────</option>
+                    <option *ngFor="let account of acctLiability" [class]="account.active? '' : 'greyed'" value="{{account.id}}">{{account.name}}</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label>Payee:</label>
+                <select name="payeeFilter" formControlName="payeeFilter">
+                    <option *ngFor="let payee of payees" value="{{payee.name}}">{{payee.name}}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>Category:</label>
+                <select name="catFilter" formControlName="catFilter">
+                    <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label>Dates:</label>
+                <input type='date' name="dateMin" formControlName="dateMin" />
+                <label>to:</label>
+                <input type='date' name="dateMax" formControlName="dateMax" />
+            </div>
+            <div class="col-md-2">
+                <label>Tax</label>
+                <input type='checkbox' name="taxFilter" value="true" formControlName="taxFilter" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <input type='submit' class="btn btn-sm btn-success" value="Run Report" />
+                <button class="btn btn-sm btn-warning" (click)="onResetFilter()">Reset Filter</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="reportFrame">
+
+</div>

@@ -14,12 +14,13 @@ export class TransactionListComponent {
     acctAsset: Account[];
     acctLiability: Account[];
     categories: Category[];
-    displayLines: LedgerLine[];
+    displayAcctIndices: number[];
+    displayLineIndices: number[];
     lines: LedgerLine[];
     payees: Payee[];
     transactions: Transaction[];
 
-    form: FormGroup;
+    filterForm: FormGroup;
     acctFilter: FormControl = new FormControl();
     amountMax: FormControl = new FormControl();
     amountMin: FormControl = new FormControl();
@@ -28,9 +29,14 @@ export class TransactionListComponent {
     checkMin: FormControl = new FormControl();
     dateMax: FormControl = new FormControl();
     dateMin: FormControl = new FormControl();
+    f0Filter: FormControl = new FormControl();
+    f1Filter: FormControl = new FormControl();
+    f2Filter: FormControl = new FormControl();
+    f3Filter: FormControl = new FormControl();
     payeeFilter: FormControl = new FormControl();
     taxFilter: FormControl = new FormControl();
 
+    showFilter: boolean = false;
 
 
     constructor(private dataService: DataService) {
@@ -51,7 +57,10 @@ export class TransactionListComponent {
             this.transactions = transactions;
             this.constructLines();
         });
-        this.instantiateForm(this.acctFilter, this.amountMax, this.amountMin, this.catFilter, this.checkMax, this.checkMin, this.dateMax, this.dateMin, this.payeeFilter, this.taxFilter);
+        //on initialization, every index in the reference arrays is displayed
+        this.displayAcctIndices = Array.from(new Array(this.accounts.length), (x, i) => i);
+        this.displayLineIndices = Array.from(new Array(this.lines.length), (x, i) => i);
+        this.instantiateForm(this.acctFilter, this.amountMax, this.amountMin, this.catFilter, this.checkMax, this.checkMin, this.dateMax, this.dateMin, this.f0Filter, this.f1Filter, this.f2Filter, this.f3Filter, this.payeeFilter, this.taxFilter);
     }
 
     accountName(accountId: number) {
@@ -84,11 +93,15 @@ export class TransactionListComponent {
                         this.lines[tidx].balances[aidx] = this.lines[tidx - 1].balances[aidx];
                     }
                 }
-                this.lines[tidx].assets = this.lines[tidx].assets + this.lines[tidx].balances[aidx];
+                if (account.acctType === "Asset") {
+                    this.lines[tidx].assets = this.lines[tidx].assets + this.lines[tidx].balances[aidx];
+                }
+                if (account.acctType === "Liability") {
+                    this.lines[tidx].liabilities = this.lines[tidx].liabilities - this.lines[tidx].balances[aidx];
+                }
                 this.lines[tidx].net = this.lines[tidx].net + this.lines[tidx].balances[aidx];
             });
         });
-        this.displayLines = this.lines;
     }
 
     displayAsDollar = (amt: number) => '$ ' + amt.toFixed(2);
@@ -151,8 +164,8 @@ export class TransactionListComponent {
         this.dataService.updateTransaction(this.transactions[targetIdx]);
     }
 
-    instantiateForm(acctFilter: FormControl, amountMax: FormControl, amountMin: FormControl, catFilter: FormControl, checkMax: FormControl, checkMin: FormControl, dateMax: FormControl, dateMin: FormControl, payeeFilter: FormControl, taxFilter: FormControl) {
-        this.form = new FormGroup({
+    instantiateForm(acctFilter: FormControl, amountMax: FormControl, amountMin: FormControl, catFilter: FormControl, checkMax: FormControl, checkMin: FormControl, dateMax: FormControl, dateMin: FormControl, f0Filter: FormControl, f1Filter: FormControl, f2Filter: FormControl, f3Filter: FormControl, payeeFilter: FormControl, taxFilter: FormControl) {
+        this.filterForm = new FormGroup({
             acctFilter,
             amountMax,
             amountMin,
@@ -161,46 +174,68 @@ export class TransactionListComponent {
             checkMin,
             dateMax,
             dateMin,
+            f0Filter,
+            f1Filter,
+            f2Filter,
+            f3Filter,
             payeeFilter,
             taxFilter,
         });
     }
 
-    onSubmit() {
-        this.displayLines = this.lines;
-        if (this.form.get('acctFilter').value !== null) {
-            this.displayLines = this.displayLines.filter((line) => line.transaction.acctFrom === this.form.get('acctFilter').value || line.transaction.acctTo === this.form.get('acctFilter').value);
+    onFilterSubmit() {
+        //start with display arrays which point to every index in their reference arrays
+        this.displayAcctIndices = Array.from(new Array(this.accounts.length), (x, i) => i);
+        this.displayLineIndices = Array.from(new Array(this.lines.length), (x, i) => i);
+        //and repetitively filter from there
+        if (this.filterForm.get('acctFilter').value !== null) {
+            var selectedAccountId: number = this.filterForm.get('acctFilter').value;
+            var selectedAccountIndex: number = this.accounts.findIndex((account) => account.id == selectedAccountId);
+            this.displayAcctIndices = [selectedAccountIndex];
+            this.displayLineIndices = this.displayLineIndices.filter((idx) => this.lines[idx].transaction.acctFrom == selectedAccountId || this.lines[idx].transaction.acctTo == selectedAccountId);
         }
-        if (this.form.get('amountMax').value !== null) {
-            this.displayLines = this.displayLines.filter((line) => line.transaction.amount <= this.form.get('amountMax').value);
+        if (this.filterForm.get('amountMax').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter((idx) => this.lines[idx].transaction.amount <= this.filterForm.get('amountMax').value);
         }
-        if (this.form.get('amountMin').value !== null) {
-            this.displayLines = this.displayLines.filter((line) => line.transaction.amount >= this.form.get('amountMin').value);
+        if (this.filterForm.get('amountMin').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter((idx) => this.lines[idx].transaction.amount >= this.filterForm.get('amountMin').value);
         }
-        if (this.form.get('catFilter').value !== null) {
-            var catArray: number[] = this.form.get('catFilter').value;
-            this.displayLines = this.displayLines.filter((line) => catArray.some((element) => element === line.transaction.category));
+        if (this.filterForm.get('catFilter').value !== null) {
+            var catArray: number[] = [this.filterForm.get('catFilter').value];
+            this.displayLineIndices = this.displayLineIndices.filter((idx) => catArray.some((element) => element == this.lines[idx].transaction.category));
         }
-        if (this.form.get('checkMax').value !== null) {
-            this.displayLines = this.displayLines.filter((line) => line.transaction.check !== null);
-            this.displayLines = this.displayLines.filter((line) => line.transaction.check <= this.form.get('checkMax').value);
+        if (this.filterForm.get('checkMax').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter((idx) => this.lines[idx].transaction.check !== null);
+            this.displayLineIndices = this.displayLineIndices.filter((idx) => this.lines[idx].transaction.check <= this.filterForm.get('checkMax').value);
         }
-        if (this.form.get('checkMin').value !== null) {
-            this.displayLines = this.displayLines.filter((line) => line.transaction.check !== null);
-            this.displayLines = this.displayLines.filter((line) => line.transaction.check >= this.form.get('checkMin').value);
+        if (this.filterForm.get('checkMin').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter((idx) => this.lines[idx].transaction.check !== null);
+            this.displayLineIndices = this.displayLineIndices.filter((idx) => this.lines[idx].transaction.check >= this.filterForm.get('checkMin').value);
         }
-        if (this.form.get('dateMax').value !== null) {
-            this.displayLines = this.displayLines.filter((line) => line.transaction.date <= this.form.get('dateMax').value);
+        if (this.filterForm.get('dateMax').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter((idx) => this.lines[idx].transaction.date <= this.filterForm.get('dateMax').value);
         }
-        if (this.form.get('dateMin').value !== null) {
-            this.displayLines = this.displayLines.filter((line) => line.transaction.date >= this.form.get('dateMin').value);
+        if (this.filterForm.get('dateMin').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter((idx) => this.lines[idx].transaction.date >= this.filterForm.get('dateMin').value);
         }
-        if (this.form.get('payeeFilter').value !== null) {
-            var payArray: string[] = this.form.get('payeeFilter').value;
-            this.displayLines = this.displayLines.filter((line) => payArray.some((element) => element === line.transaction.payeeFrom || element === line.transaction.payeeTo));
+        if (this.filterForm.get('f0Filter').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter((idx) => this.lines[idx].transaction.flag0 === true);
         }
-        if (this.form.get('taxFilter').value === null) {
-            this.displayLines = this.displayLines.filter((line) => line.transaction.tax === true);
+        if (this.filterForm.get('f1Filter').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter((idx) => this.lines[idx].transaction.flag1 === true);
+        }
+        if (this.filterForm.get('f2Filter').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter((idx) => this.lines[idx].transaction.flag2 === true);
+        }
+        if (this.filterForm.get('f3Filter').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter((idx) => this.lines[idx].transaction.flag3 === true);
+        }
+        if (this.filterForm.get('payeeFilter').value !== null) {
+            var payArray: string[] = [this.filterForm.get('payeeFilter').value];
+            this.displayLineIndices = this.displayLineIndices.filter((idx) => payArray.some((element) => element == this.lines[idx].transaction.payeeFrom || element == this.lines[idx].transaction.payeeTo));
+        }
+        if (this.filterForm.get('taxFilter').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter((idx) => this.lines[idx].transaction.tax === true);
         }
     }
 
@@ -213,8 +248,20 @@ export class TransactionListComponent {
         this.checkMin.setValue(null);
         this.dateMax.setValue(null);
         this.dateMin.setValue(null);
+        this.f0Filter.setValue(null);
+        this.f1Filter.setValue(null);
+        this.f2Filter.setValue(null);
+        this.f3Filter.setValue(null);
         this.payeeFilter.setValue(null);
         this.taxFilter.setValue(null);
-        this.onSubmit();
     }
+
+    onHideFilter() {
+        this.showFilter = false;
+    }
+
+    onShowFilter() {
+        this.showFilter = true;
+    }
+
 }

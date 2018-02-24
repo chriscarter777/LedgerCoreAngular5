@@ -14,7 +14,7 @@
             <tr *ngFor="let payee of payees">
                 <td>{{payee.id}}</td>
                 <td>{{payee.name}}</td>
-                <td><a class="btn btn-xs deletelink" (click)="onDelete(payee.id);">Delete</a></td>
+                <td><a class="btn btn-xs deletelink glyphicon glyphicon-remove darkred" (click)="onDelete(payee.id);"></a></td>
             </tr>
         </tbody>
     </table>

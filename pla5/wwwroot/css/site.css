@@ -60,6 +60,18 @@ footer {
     text-align: right;
 }
 
+.red{
+    color:red !important;
+}
+
+.darkred {
+    color: darkred !important;
+}
+
+.green {
+    color: green;
+}
+
 .w30 {
     width: 30px;
 }

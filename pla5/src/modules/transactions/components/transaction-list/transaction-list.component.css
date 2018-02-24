@@ -149,3 +149,14 @@ form{
     margin-bottom:20px;
     background:mintcream;
 }
+
+.cbSpan {
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+}
+
+.cbSpan > label{
+    position:relative;
+    top:12px;
+}

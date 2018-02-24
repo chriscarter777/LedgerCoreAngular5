@@ -401,7 +401,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/accounts/components/account-list/account-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"accounts\">\r\n  <p *ngIf=\"!accounts\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Accounts</caption>\r\n    <thead>\r\n        <tr>\r\n            <th>Active</th>\r\n            <th>ID</th>\r\n            <th>Type</th>\r\n            <th>Name</th>\r\n            <th>Institution</th>\r\n            <th>Number</th>\r\n            <th>Interest</th>\r\n            <th>Limit</th>\r\n            <th>Balance</th>\r\n            <th colspan=\"2\">&nbsp;</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let account of accounts\">\r\n            <td *ngIf=\"account.active\"><span class=\"green\">Active</span></td>\r\n            <td *ngIf=\"!account.active\"><span class=\"red\">Closed</span></td>\r\n            <td>{{account.id}}</td>\r\n            <td>{{account.acctType}}</td>\r\n            <td>{{account.name}}</td>\r\n            <td>{{account.institution}}</td>\r\n            <td>{{account.number}}</td>\r\n            <td class='right'>{{displayAsPercent(account.interest)}}</td>\r\n            <td class='right'>{{account.limit ? displayAsDollar(account.limit) : '--'}}</td>\r\n            <td class='right'>{{displayAsDollar(account.balance)}}</td>\r\n            <td><a class=\"btn btn-xs editlink\" routerLink=\"./account-edit/{{account.id}}\">Edit</a></td>\r\n            <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(account.id);\">Delete</a></td>\r\n        </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./account-add\">Add New Account</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
+module.exports = "<div class=\"accounts\">\r\n  <p *ngIf=\"!accounts\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Accounts</caption>\r\n    <thead>\r\n        <tr>\r\n            <th>Active</th>\r\n            <th>ID</th>\r\n            <th>Type</th>\r\n            <th>Name</th>\r\n            <th>Institution</th>\r\n            <th>Number</th>\r\n            <th>Interest</th>\r\n            <th>Limit</th>\r\n            <th>Balance</th>\r\n            <th colspan=\"2\">&nbsp;</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let account of accounts\">\r\n            <td *ngIf=\"account.active\"><span class=\"green\">Active</span></td>\r\n            <td *ngIf=\"!account.active\"><span class=\"red\">Closed</span></td>\r\n            <td>{{account.id}}</td>\r\n            <td>{{account.acctType}}</td>\r\n            <td>{{account.name}}</td>\r\n            <td>{{account.institution}}</td>\r\n            <td>{{account.number}}</td>\r\n            <td class='right'>{{displayAsPercent(account.interest)}}</td>\r\n            <td class='right'>{{account.limit ? displayAsDollar(account.limit) : '--'}}</td>\r\n            <td class='right'>{{displayAsDollar(account.balance)}}</td>\r\n            <td><a class=\"btn btn-xs editlink glyphicon glyphicon-pencil\" routerLink=\"./account-edit/{{account.id}}\"></a></td>\r\n            <td><a class=\"btn btn-xs deletelink glyphicon glyphicon-remove darkred\" (click)=\"onDelete(account.id);\"></a></td>\r\n        </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./account-add\">Add New Account</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1143,7 +1143,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/categories/components/category-list/category-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"categories\">\r\n  <p *ngIf=\"!categories\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Categories</caption>\r\n    <thead>\r\n        <tr>\r\n            <th>ID</th>\r\n            <th>Name</th>\r\n            <th>Tax?</th>\r\n            <th>Type</th>\r\n            <th colspan=\"2\">&nbsp;</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let category of categories\">\r\n        <td>{{category.id}}</td>\r\n        <td>{{category.name}}</td>\r\n        <td>&nbsp;<span *ngIf=\"category.tax\" class='glyphicon glyphicon-record' style='color:green;'></span></td>\r\n        <td>{{category.type}}</td>\r\n        <td><a class=\"btn btn-xs editlink\" routerLink=\"./category-edit/{{category.id}}\">Edit</a></td>\r\n        <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(category.id);\">Delete</a></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./category-add\">Add New Category</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
+module.exports = "<div class=\"categories\">\r\n  <p *ngIf=\"!categories\"><em>Loading...</em></p>\r\n\r\n  <table>\r\n    <caption>Categories</caption>\r\n    <thead>\r\n        <tr>\r\n            <th>ID</th>\r\n            <th>Name</th>\r\n            <th>Tax?</th>\r\n            <th>Type</th>\r\n            <th colspan=\"2\">&nbsp;</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n      <tr *ngFor=\"let category of categories\">\r\n        <td>{{category.id}}</td>\r\n        <td>{{category.name}}</td>\r\n        <td>&nbsp;<span *ngIf=\"category.tax\" class='glyphicon glyphicon-record' style='color:green;'></span></td>\r\n        <td>{{category.type}}</td>\r\n        <td><a class=\"btn btn-xs editlink glyphicon glyphicon-pencil\" routerLink=\"./category-edit/{{category.id}}\"></a></td>\r\n        <td><a class=\"btn btn-xs deletelink glyphicon glyphicon-remove darkred\" (click)=\"onDelete(category.id);\"></a></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>\r\n  <a class=\"btn\" id=\"addlink\" routerLink=\"./category-add\">Add New Category</a>\r\n  <br />\r\n  <router-outlet></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1218,7 +1218,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/payees/components/payee-list/payee-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"payees\">\r\n    <p *ngIf=\"!payees\"><em>Loading...</em></p>\r\n\r\n    <table>\r\n        <caption>Payees</caption>\r\n        <thead>\r\n            <tr>\r\n                <th>ID</th>\r\n                <th>Name</th>\r\n                <th>&nbsp;</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr *ngFor=\"let payee of payees\">\r\n                <td>{{payee.id}}</td>\r\n                <td>{{payee.name}}</td>\r\n                <td><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(payee.id);\">Delete</a></td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\r\n"
+module.exports = "<div class=\"payees\">\r\n    <p *ngIf=\"!payees\"><em>Loading...</em></p>\r\n\r\n    <table>\r\n        <caption>Payees</caption>\r\n        <thead>\r\n            <tr>\r\n                <th>ID</th>\r\n                <th>Name</th>\r\n                <th>&nbsp;</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr *ngFor=\"let payee of payees\">\r\n                <td>{{payee.id}}</td>\r\n                <td>{{payee.name}}</td>\r\n                <td><a class=\"btn btn-xs deletelink glyphicon glyphicon-remove darkred\" (click)=\"onDelete(payee.id);\"></a></td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1354,6 +1354,631 @@ exports.PayeeRoutingModule = PayeeRoutingModule;
 
 /***/ }),
 
+/***/ "../../../../../src/modules/reports/components/report-account/report-account.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".flag0-true {\r\n    color: red;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag0-false {\r\n    color: pink;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag1-true {\r\n    color: limegreen;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag1-false {\r\n    color: palegreen;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag2-true {\r\n    color: blue;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag2-false {\r\n    color: paleturquoise;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag3-true {\r\n    color: gold;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag3-false {\r\n    color: lightgoldenrodyellow;\r\n    font-size: 18px;\r\n}\r\n\r\n.reconciled {\r\n    color: forestgreen;\r\n    font-size: 18px;\r\n}\r\n\r\nform {\r\n    font-size: 12px;\r\n}\r\n\r\n.filters {\r\n    padding: 5px;\r\n    margin-bottom: 20px;\r\n    background: mintcream;\r\n}\r\n\r\n.cbSpan {\r\n    display: inline-block;\r\n    width: 30px;\r\n    text-align: center;\r\n}\r\n\r\n.cbSpan > label {\r\n        position: relative;\r\n        top: 12px;\r\n    }\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/modules/reports/components/report-account/report-account.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n<div class=\"captionlike\">Account Balance Report</div>\r\n\r\n<div class=\"filters\">\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onFilterSubmit(form.value)\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">\r\n                <label>Account:</label>\r\n                <select name=\"acctFilter\" formControlName=\"acctFilter\">\r\n                    <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                    <option disabled>──────────</option>\r\n                    <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Payee:</label>\r\n                <select name=\"payeeFilter\" formControlName=\"payeeFilter\">\r\n                    <option *ngFor=\"let payee of payees\" value=\"{{payee.name}}\">{{payee.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <label>Category:</label>\r\n                <select name=\"catFilter\" formControlName=\"catFilter\">\r\n                    <option *ngFor=\"let category of categories\" value=\"{{category.id}}\">{{category.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <label>Dates:</label>\r\n                <input type='date' name=\"dateMin\" formControlName=\"dateMin\" />\r\n                <label>to:</label>\r\n                <input type='date' name=\"dateMax\" formControlName=\"dateMax\" />\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Tax</label>\r\n                <input type='checkbox' name=\"taxFilter\" value=\"true\" formControlName=\"taxFilter\" />\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-md-4\">\r\n                <input type='submit' class=\"btn btn-sm btn-success\" value=\"Run Report\" />\r\n                <button class=\"btn btn-sm btn-warning\" (click)=\"onResetFilter()\">Reset Filter</button>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n\r\n<div class=\"reportFrame\">\r\n\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/modules/reports/components/report-account/report-account.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
+var ReportAccountComponent = /** @class */ (function () {
+    function ReportAccountComponent(dataService) {
+        this.dataService = dataService;
+        this.acctFilter = new forms_1.FormControl();
+        this.amountMax = new forms_1.FormControl();
+        this.amountMin = new forms_1.FormControl();
+        this.catFilter = new forms_1.FormControl();
+        this.checkMax = new forms_1.FormControl();
+        this.checkMin = new forms_1.FormControl();
+        this.dateMax = new forms_1.FormControl();
+        this.dateMin = new forms_1.FormControl();
+        this.payeeFilter = new forms_1.FormControl();
+        this.taxFilter = new forms_1.FormControl();
+        this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
+    } //ctor
+    ReportAccountComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.dataService.accounts.subscribe(function (accounts) {
+            _this.accounts = accounts;
+            _this.acctAsset = _this.dataService.AssetAccounts();
+            _this.acctLiability = _this.dataService.LiabilityAccounts();
+        });
+        this.acctAsset = this.dataService.AssetAccounts();
+        this.acctLiability = this.dataService.LiabilityAccounts();
+        this.dataService.categories.subscribe(function (categories) { return _this.categories = categories; });
+        this.dataService.payees.subscribe(function (payees) { return _this.payees = payees; });
+        this.dataService.transactions.subscribe(function (transactions) {
+            _this.transactions = transactions;
+        });
+        this.instantiateForm(this.acctFilter, this.amountMax, this.amountMin, this.catFilter, this.checkMax, this.checkMin, this.dateMax, this.dateMin, this.payeeFilter, this.taxFilter);
+    };
+    ReportAccountComponent.prototype.accountName = function (accountId) {
+        return this.accounts.find(function (element) { return element.id === accountId; }).name;
+    };
+    ReportAccountComponent.prototype.categoryName = function (categoryId) {
+        return this.categories.find(function (element) { return element.id === categoryId; }).name;
+    };
+    ReportAccountComponent.prototype.onSubmit = function () {
+        alert('submit');
+    };
+    ReportAccountComponent.prototype.onResetFilter = function () {
+        this.acctFilter.setValue(null);
+        this.amountMax.setValue(null);
+        this.amountMin.setValue(null);
+        this.catFilter.setValue(null);
+        this.checkMax.setValue(null);
+        this.checkMin.setValue(null);
+        this.dateMax.setValue(null);
+        this.dateMin.setValue(null);
+        this.payeeFilter.setValue(null);
+        this.taxFilter.setValue(null);
+        this.onSubmit();
+    };
+    ReportAccountComponent.prototype.instantiateForm = function (acctFilter, amountMax, amountMin, catFilter, checkMax, checkMin, dateMax, dateMin, payeeFilter, taxFilter) {
+        this.form = new forms_1.FormGroup({
+            acctFilter: acctFilter,
+            amountMax: amountMax,
+            amountMin: amountMin,
+            catFilter: catFilter,
+            checkMax: checkMax,
+            checkMin: checkMin,
+            dateMax: dateMax,
+            dateMin: dateMin,
+            payeeFilter: payeeFilter,
+            taxFilter: taxFilter,
+        });
+    };
+    ReportAccountComponent = __decorate([
+        core_1.Component({
+            selector: 'report-account',
+            template: __webpack_require__("../../../../../src/modules/reports/components/report-account/report-account.component.html"),
+            styles: [__webpack_require__("../../../../../src/modules/reports/components/report-account/report-account.component.css")]
+        }),
+        __metadata("design:paramtypes", [data_service_1.DataService])
+    ], ReportAccountComponent);
+    return ReportAccountComponent;
+}());
+exports.ReportAccountComponent = ReportAccountComponent;
+
+
+/***/ }),
+
+/***/ "../../../../../src/modules/reports/components/report-cashflow/report-cashflow.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".flag0-true {\r\n    color: red;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag0-false {\r\n    color: pink;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag1-true {\r\n    color: limegreen;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag1-false {\r\n    color: palegreen;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag2-true {\r\n    color: blue;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag2-false {\r\n    color: paleturquoise;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag3-true {\r\n    color: gold;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag3-false {\r\n    color: lightgoldenrodyellow;\r\n    font-size: 18px;\r\n}\r\n\r\n.reconciled {\r\n    color: forestgreen;\r\n    font-size: 18px;\r\n}\r\n\r\nform {\r\n    font-size: 12px;\r\n}\r\n\r\n.filters {\r\n    padding: 5px;\r\n    margin-bottom: 20px;\r\n    background: mintcream;\r\n}\r\n\r\n.cbSpan {\r\n    display: inline-block;\r\n    width: 30px;\r\n    text-align: center;\r\n}\r\n\r\n.cbSpan > label {\r\n        position: relative;\r\n        top: 12px;\r\n    }\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/modules/reports/components/report-cashflow/report-cashflow.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n<div class=\"captionlike\">Cashflow and Net Worth Report</div>\r\n\r\n<div class=\"filters\">\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onFilterSubmit(form.value)\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">\r\n                <label>Account:</label>\r\n                <select name=\"acctFilter\" formControlName=\"acctFilter\">\r\n                    <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                    <option disabled>──────────</option>\r\n                    <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Payee:</label>\r\n                <select name=\"payeeFilter\" formControlName=\"payeeFilter\">\r\n                    <option *ngFor=\"let payee of payees\" value=\"{{payee.name}}\">{{payee.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <label>Category:</label>\r\n                <select name=\"catFilter\" formControlName=\"catFilter\">\r\n                    <option *ngFor=\"let category of categories\" value=\"{{category.id}}\">{{category.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <label>Dates:</label>\r\n                <input type='date' name=\"dateMin\" formControlName=\"dateMin\" />\r\n                <label>to:</label>\r\n                <input type='date' name=\"dateMax\" formControlName=\"dateMax\" />\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Tax</label>\r\n                <input type='checkbox' name=\"taxFilter\" value=\"true\" formControlName=\"taxFilter\" />\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-md-4\">\r\n                <input type='submit' class=\"btn btn-sm btn-success\" value=\"Run Report\" />\r\n                <button class=\"btn btn-sm btn-warning\" (click)=\"onResetFilter()\">Reset Filter</button>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n\r\n<div class=\"reportFrame\">\r\n\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/modules/reports/components/report-cashflow/report-cashflow.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
+var ReportCashflowComponent = /** @class */ (function () {
+    function ReportCashflowComponent(dataService) {
+        this.dataService = dataService;
+        this.acctFilter = new forms_1.FormControl();
+        this.amountMax = new forms_1.FormControl();
+        this.amountMin = new forms_1.FormControl();
+        this.catFilter = new forms_1.FormControl();
+        this.checkMax = new forms_1.FormControl();
+        this.checkMin = new forms_1.FormControl();
+        this.dateMax = new forms_1.FormControl();
+        this.dateMin = new forms_1.FormControl();
+        this.payeeFilter = new forms_1.FormControl();
+        this.taxFilter = new forms_1.FormControl();
+        this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
+    } //ctor
+    ReportCashflowComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.dataService.accounts.subscribe(function (accounts) {
+            _this.accounts = accounts;
+            _this.acctAsset = _this.dataService.AssetAccounts();
+            _this.acctLiability = _this.dataService.LiabilityAccounts();
+        });
+        this.acctAsset = this.dataService.AssetAccounts();
+        this.acctLiability = this.dataService.LiabilityAccounts();
+        this.dataService.categories.subscribe(function (categories) { return _this.categories = categories; });
+        this.dataService.payees.subscribe(function (payees) { return _this.payees = payees; });
+        this.dataService.transactions.subscribe(function (transactions) {
+            _this.transactions = transactions;
+        });
+        this.instantiateForm(this.acctFilter, this.amountMax, this.amountMin, this.catFilter, this.checkMax, this.checkMin, this.dateMax, this.dateMin, this.payeeFilter, this.taxFilter);
+    };
+    ReportCashflowComponent.prototype.accountName = function (accountId) {
+        return this.accounts.find(function (element) { return element.id === accountId; }).name;
+    };
+    ReportCashflowComponent.prototype.categoryName = function (categoryId) {
+        return this.categories.find(function (element) { return element.id === categoryId; }).name;
+    };
+    ReportCashflowComponent.prototype.onSubmit = function () {
+        alert('submit');
+    };
+    ReportCashflowComponent.prototype.onResetFilter = function () {
+        this.acctFilter.setValue(null);
+        this.amountMax.setValue(null);
+        this.amountMin.setValue(null);
+        this.catFilter.setValue(null);
+        this.checkMax.setValue(null);
+        this.checkMin.setValue(null);
+        this.dateMax.setValue(null);
+        this.dateMin.setValue(null);
+        this.payeeFilter.setValue(null);
+        this.taxFilter.setValue(null);
+        this.onSubmit();
+    };
+    ReportCashflowComponent.prototype.instantiateForm = function (acctFilter, amountMax, amountMin, catFilter, checkMax, checkMin, dateMax, dateMin, payeeFilter, taxFilter) {
+        this.form = new forms_1.FormGroup({
+            acctFilter: acctFilter,
+            amountMax: amountMax,
+            amountMin: amountMin,
+            catFilter: catFilter,
+            checkMax: checkMax,
+            checkMin: checkMin,
+            dateMax: dateMax,
+            dateMin: dateMin,
+            payeeFilter: payeeFilter,
+            taxFilter: taxFilter,
+        });
+    };
+    ReportCashflowComponent = __decorate([
+        core_1.Component({
+            selector: 'report-cashflow',
+            template: __webpack_require__("../../../../../src/modules/reports/components/report-cashflow/report-cashflow.component.html"),
+            styles: [__webpack_require__("../../../../../src/modules/reports/components/report-cashflow/report-cashflow.component.css")]
+        }),
+        __metadata("design:paramtypes", [data_service_1.DataService])
+    ], ReportCashflowComponent);
+    return ReportCashflowComponent;
+}());
+exports.ReportCashflowComponent = ReportCashflowComponent;
+
+
+/***/ }),
+
+/***/ "../../../../../src/modules/reports/components/report-category/report-category.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".flag0-true {\r\n    color: red;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag0-false {\r\n    color: pink;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag1-true {\r\n    color: limegreen;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag1-false {\r\n    color: palegreen;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag2-true {\r\n    color: blue;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag2-false {\r\n    color: paleturquoise;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag3-true {\r\n    color: gold;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag3-false {\r\n    color: lightgoldenrodyellow;\r\n    font-size: 18px;\r\n}\r\n\r\n.reconciled {\r\n    color: forestgreen;\r\n    font-size: 18px;\r\n}\r\n\r\nform {\r\n    font-size: 12px;\r\n}\r\n\r\n.filters {\r\n    padding: 5px;\r\n    margin-bottom: 20px;\r\n    background: mintcream;\r\n}\r\n\r\n.cbSpan {\r\n    display: inline-block;\r\n    width: 30px;\r\n    text-align: center;\r\n}\r\n\r\n.cbSpan > label {\r\n        position: relative;\r\n        top: 12px;\r\n    }\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/modules/reports/components/report-category/report-category.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n<div class=\"captionlike\">Category Report</div>\r\n\r\n<div class=\"filters\">\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onFilterSubmit(form.value)\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">\r\n                <label>Account:</label>\r\n                <select name=\"acctFilter\" formControlName=\"acctFilter\">\r\n                    <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                    <option disabled>──────────</option>\r\n                    <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Payee:</label>\r\n                <select name=\"payeeFilter\" formControlName=\"payeeFilter\">\r\n                    <option *ngFor=\"let payee of payees\" value=\"{{payee.name}}\">{{payee.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <label>Category:</label>\r\n                <select name=\"catFilter\" formControlName=\"catFilter\">\r\n                    <option *ngFor=\"let category of categories\" value=\"{{category.id}}\">{{category.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <label>Dates:</label>\r\n                <input type='date' name=\"dateMin\" formControlName=\"dateMin\" />\r\n                <label>to:</label>\r\n                <input type='date' name=\"dateMax\" formControlName=\"dateMax\" />\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Tax</label>\r\n                <input type='checkbox' name=\"taxFilter\" value=\"true\" formControlName=\"taxFilter\" />\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-md-4\">\r\n                <input type='submit' class=\"btn btn-sm btn-success\" value=\"Run Report\" />\r\n                <button class=\"btn btn-sm btn-warning\" (click)=\"onResetFilter()\">Reset Filter</button>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n\r\n<div class=\"reportFrame\">\r\n\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/modules/reports/components/report-category/report-category.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
+var ReportCategoryComponent = /** @class */ (function () {
+    function ReportCategoryComponent(dataService) {
+        this.dataService = dataService;
+        this.acctFilter = new forms_1.FormControl();
+        this.amountMax = new forms_1.FormControl();
+        this.amountMin = new forms_1.FormControl();
+        this.catFilter = new forms_1.FormControl();
+        this.checkMax = new forms_1.FormControl();
+        this.checkMin = new forms_1.FormControl();
+        this.dateMax = new forms_1.FormControl();
+        this.dateMin = new forms_1.FormControl();
+        this.payeeFilter = new forms_1.FormControl();
+        this.taxFilter = new forms_1.FormControl();
+        this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
+    } //ctor
+    ReportCategoryComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.dataService.accounts.subscribe(function (accounts) {
+            _this.accounts = accounts;
+            _this.acctAsset = _this.dataService.AssetAccounts();
+            _this.acctLiability = _this.dataService.LiabilityAccounts();
+        });
+        this.acctAsset = this.dataService.AssetAccounts();
+        this.acctLiability = this.dataService.LiabilityAccounts();
+        this.dataService.categories.subscribe(function (categories) { return _this.categories = categories; });
+        this.dataService.payees.subscribe(function (payees) { return _this.payees = payees; });
+        this.dataService.transactions.subscribe(function (transactions) {
+            _this.transactions = transactions;
+        });
+        this.instantiateForm(this.acctFilter, this.amountMax, this.amountMin, this.catFilter, this.checkMax, this.checkMin, this.dateMax, this.dateMin, this.payeeFilter, this.taxFilter);
+    };
+    ReportCategoryComponent.prototype.accountName = function (accountId) {
+        return this.accounts.find(function (element) { return element.id === accountId; }).name;
+    };
+    ReportCategoryComponent.prototype.categoryName = function (categoryId) {
+        return this.categories.find(function (element) { return element.id === categoryId; }).name;
+    };
+    ReportCategoryComponent.prototype.onSubmit = function () {
+        alert('submit');
+    };
+    ReportCategoryComponent.prototype.onResetFilter = function () {
+        this.acctFilter.setValue(null);
+        this.amountMax.setValue(null);
+        this.amountMin.setValue(null);
+        this.catFilter.setValue(null);
+        this.checkMax.setValue(null);
+        this.checkMin.setValue(null);
+        this.dateMax.setValue(null);
+        this.dateMin.setValue(null);
+        this.payeeFilter.setValue(null);
+        this.taxFilter.setValue(null);
+        this.onSubmit();
+    };
+    ReportCategoryComponent.prototype.instantiateForm = function (acctFilter, amountMax, amountMin, catFilter, checkMax, checkMin, dateMax, dateMin, payeeFilter, taxFilter) {
+        this.form = new forms_1.FormGroup({
+            acctFilter: acctFilter,
+            amountMax: amountMax,
+            amountMin: amountMin,
+            catFilter: catFilter,
+            checkMax: checkMax,
+            checkMin: checkMin,
+            dateMax: dateMax,
+            dateMin: dateMin,
+            payeeFilter: payeeFilter,
+            taxFilter: taxFilter,
+        });
+    };
+    ReportCategoryComponent = __decorate([
+        core_1.Component({
+            selector: 'report-category',
+            template: __webpack_require__("../../../../../src/modules/reports/components/report-category/report-category.component.html"),
+            styles: [__webpack_require__("../../../../../src/modules/reports/components/report-category/report-category.component.css")]
+        }),
+        __metadata("design:paramtypes", [data_service_1.DataService])
+    ], ReportCategoryComponent);
+    return ReportCategoryComponent;
+}());
+exports.ReportCategoryComponent = ReportCategoryComponent;
+
+
+/***/ }),
+
+/***/ "../../../../../src/modules/reports/components/report-expense/report-expense.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".flag0-true {\r\n    color: red;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag0-false {\r\n    color: pink;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag1-true {\r\n    color: limegreen;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag1-false {\r\n    color: palegreen;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag2-true {\r\n    color: blue;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag2-false {\r\n    color: paleturquoise;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag3-true {\r\n    color: gold;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag3-false {\r\n    color: lightgoldenrodyellow;\r\n    font-size: 18px;\r\n}\r\n\r\n.reconciled {\r\n    color: forestgreen;\r\n    font-size: 18px;\r\n}\r\n\r\nform {\r\n    font-size: 12px;\r\n}\r\n\r\n.filters {\r\n    padding: 5px;\r\n    margin-bottom: 20px;\r\n    background: mintcream;\r\n}\r\n\r\n.cbSpan {\r\n    display: inline-block;\r\n    width: 30px;\r\n    text-align: center;\r\n}\r\n\r\n.cbSpan > label {\r\n        position: relative;\r\n        top: 12px;\r\n    }\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/modules/reports/components/report-expense/report-expense.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n<div class=\"captionlike\">Expense Report</div>\r\n\r\n<div class=\"filters\">\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onFilterSubmit(form.value)\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">\r\n                <label>Account:</label>\r\n                <select name=\"acctFilter\" formControlName=\"acctFilter\">\r\n                    <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                    <option disabled>──────────</option>\r\n                    <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Payee:</label>\r\n                <select name=\"payeeFilter\" formControlName=\"payeeFilter\">\r\n                    <option *ngFor=\"let payee of payees\" value=\"{{payee.name}}\">{{payee.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <label>Category:</label>\r\n                <select name=\"catFilter\" formControlName=\"catFilter\">\r\n                    <option *ngFor=\"let category of categories\" value=\"{{category.id}}\">{{category.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <label>Dates:</label>\r\n                <input type='date' name=\"dateMin\" formControlName=\"dateMin\" />\r\n                <label>to:</label>\r\n                <input type='date' name=\"dateMax\" formControlName=\"dateMax\" />\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Tax</label>\r\n                <input type='checkbox' name=\"taxFilter\" value=\"true\" formControlName=\"taxFilter\" />\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-md-4\">\r\n                <input type='submit' class=\"btn btn-sm btn-success\" value=\"Run Report\" />\r\n                <button class=\"btn btn-sm btn-warning\" (click)=\"onResetFilter()\">Reset Filter</button>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n<div class=\"reportFrame\">\r\n\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/modules/reports/components/report-expense/report-expense.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
+var ReportExpenseComponent = /** @class */ (function () {
+    function ReportExpenseComponent(dataService) {
+        this.dataService = dataService;
+        this.acctFilter = new forms_1.FormControl();
+        this.amountMax = new forms_1.FormControl();
+        this.amountMin = new forms_1.FormControl();
+        this.catFilter = new forms_1.FormControl();
+        this.checkMax = new forms_1.FormControl();
+        this.checkMin = new forms_1.FormControl();
+        this.dateMax = new forms_1.FormControl();
+        this.dateMin = new forms_1.FormControl();
+        this.payeeFilter = new forms_1.FormControl();
+        this.taxFilter = new forms_1.FormControl();
+        this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
+    } //ctor
+    ReportExpenseComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.dataService.accounts.subscribe(function (accounts) {
+            _this.accounts = accounts;
+            _this.acctAsset = _this.dataService.AssetAccounts();
+            _this.acctLiability = _this.dataService.LiabilityAccounts();
+        });
+        this.acctAsset = this.dataService.AssetAccounts();
+        this.acctLiability = this.dataService.LiabilityAccounts();
+        this.dataService.categories.subscribe(function (categories) { return _this.categories = categories; });
+        this.dataService.payees.subscribe(function (payees) { return _this.payees = payees; });
+        this.dataService.transactions.subscribe(function (transactions) {
+            _this.transactions = transactions;
+        });
+        this.instantiateForm(this.acctFilter, this.amountMax, this.amountMin, this.catFilter, this.checkMax, this.checkMin, this.dateMax, this.dateMin, this.payeeFilter, this.taxFilter);
+    };
+    ReportExpenseComponent.prototype.accountName = function (accountId) {
+        return this.accounts.find(function (element) { return element.id === accountId; }).name;
+    };
+    ReportExpenseComponent.prototype.categoryName = function (categoryId) {
+        return this.categories.find(function (element) { return element.id === categoryId; }).name;
+    };
+    ReportExpenseComponent.prototype.onSubmit = function () {
+        alert('submit');
+    };
+    ReportExpenseComponent.prototype.onResetFilter = function () {
+        this.acctFilter.setValue(null);
+        this.amountMax.setValue(null);
+        this.amountMin.setValue(null);
+        this.catFilter.setValue(null);
+        this.checkMax.setValue(null);
+        this.checkMin.setValue(null);
+        this.dateMax.setValue(null);
+        this.dateMin.setValue(null);
+        this.payeeFilter.setValue(null);
+        this.taxFilter.setValue(null);
+        this.onSubmit();
+    };
+    ReportExpenseComponent.prototype.instantiateForm = function (acctFilter, amountMax, amountMin, catFilter, checkMax, checkMin, dateMax, dateMin, payeeFilter, taxFilter) {
+        this.form = new forms_1.FormGroup({
+            acctFilter: acctFilter,
+            amountMax: amountMax,
+            amountMin: amountMin,
+            catFilter: catFilter,
+            checkMax: checkMax,
+            checkMin: checkMin,
+            dateMax: dateMax,
+            dateMin: dateMin,
+            payeeFilter: payeeFilter,
+            taxFilter: taxFilter,
+        });
+    };
+    ReportExpenseComponent = __decorate([
+        core_1.Component({
+            selector: 'report-expense',
+            template: __webpack_require__("../../../../../src/modules/reports/components/report-expense/report-expense.component.html"),
+            styles: [__webpack_require__("../../../../../src/modules/reports/components/report-expense/report-expense.component.css")]
+        }),
+        __metadata("design:paramtypes", [data_service_1.DataService])
+    ], ReportExpenseComponent);
+    return ReportExpenseComponent;
+}());
+exports.ReportExpenseComponent = ReportExpenseComponent;
+
+
+/***/ }),
+
+/***/ "../../../../../src/modules/reports/components/report-income/report-income.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".flag0-true {\r\n    color: red;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag0-false {\r\n    color: pink;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag1-true {\r\n    color: limegreen;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag1-false {\r\n    color: palegreen;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag2-true {\r\n    color: blue;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag2-false {\r\n    color: paleturquoise;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag3-true {\r\n    color: gold;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag3-false {\r\n    color: lightgoldenrodyellow;\r\n    font-size: 18px;\r\n}\r\n\r\n.reconciled {\r\n    color: forestgreen;\r\n    font-size: 18px;\r\n}\r\n\r\nform {\r\n    font-size: 12px;\r\n}\r\n\r\n.filters {\r\n    padding: 5px;\r\n    margin-bottom: 20px;\r\n    background: mintcream;\r\n}\r\n\r\n.cbSpan {\r\n    display: inline-block;\r\n    width: 30px;\r\n    text-align: center;\r\n}\r\n\r\n.cbSpan > label {\r\n        position: relative;\r\n        top: 12px;\r\n    }\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/modules/reports/components/report-income/report-income.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n<div class=\"captionlike\">Income Report</div>\r\n\r\n<div class=\"filters\">\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onFilterSubmit(form.value)\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">\r\n                <label>Account:</label>\r\n                <select name=\"acctFilter\" formControlName=\"acctFilter\">\r\n                    <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                    <option disabled>──────────</option>\r\n                    <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Payee:</label>\r\n                <select name=\"payeeFilter\" formControlName=\"payeeFilter\">\r\n                    <option *ngFor=\"let payee of payees\" value=\"{{payee.name}}\">{{payee.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <label>Category:</label>\r\n                <select name=\"catFilter\" formControlName=\"catFilter\">\r\n                    <option *ngFor=\"let category of categories\" value=\"{{category.id}}\">{{category.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <label>Dates:</label>\r\n                <input type='date' name=\"dateMin\" formControlName=\"dateMin\" />\r\n                <label>to:</label>\r\n                <input type='date' name=\"dateMax\" formControlName=\"dateMax\" />\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Tax</label>\r\n                <input type='checkbox' name=\"taxFilter\" value=\"true\" formControlName=\"taxFilter\" />\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-md-4\">\r\n                <input type='submit' class=\"btn btn-sm btn-success\" value=\"Run Report\" />\r\n                <button class=\"btn btn-sm btn-warning\" (click)=\"onResetFilter()\">Reset Filter</button>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n\r\n<div class=\"reportFrame\">\r\n\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/modules/reports/components/report-income/report-income.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
+var ReportIncomeComponent = /** @class */ (function () {
+    function ReportIncomeComponent(dataService) {
+        this.dataService = dataService;
+        this.acctFilter = new forms_1.FormControl();
+        this.amountMax = new forms_1.FormControl();
+        this.amountMin = new forms_1.FormControl();
+        this.catFilter = new forms_1.FormControl();
+        this.checkMax = new forms_1.FormControl();
+        this.checkMin = new forms_1.FormControl();
+        this.dateMax = new forms_1.FormControl();
+        this.dateMin = new forms_1.FormControl();
+        this.payeeFilter = new forms_1.FormControl();
+        this.taxFilter = new forms_1.FormControl();
+        this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
+    } //ctor
+    ReportIncomeComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.dataService.accounts.subscribe(function (accounts) {
+            _this.accounts = accounts;
+            _this.acctAsset = _this.dataService.AssetAccounts();
+            _this.acctLiability = _this.dataService.LiabilityAccounts();
+        });
+        this.acctAsset = this.dataService.AssetAccounts();
+        this.acctLiability = this.dataService.LiabilityAccounts();
+        this.dataService.categories.subscribe(function (categories) { return _this.categories = categories; });
+        this.dataService.payees.subscribe(function (payees) { return _this.payees = payees; });
+        this.dataService.transactions.subscribe(function (transactions) {
+            _this.transactions = transactions;
+        });
+        this.instantiateForm(this.acctFilter, this.amountMax, this.amountMin, this.catFilter, this.checkMax, this.checkMin, this.dateMax, this.dateMin, this.payeeFilter, this.taxFilter);
+    };
+    ReportIncomeComponent.prototype.accountName = function (accountId) {
+        return this.accounts.find(function (element) { return element.id === accountId; }).name;
+    };
+    ReportIncomeComponent.prototype.categoryName = function (categoryId) {
+        return this.categories.find(function (element) { return element.id === categoryId; }).name;
+    };
+    ReportIncomeComponent.prototype.onSubmit = function () {
+        alert('submit');
+    };
+    ReportIncomeComponent.prototype.onResetFilter = function () {
+        this.acctFilter.setValue(null);
+        this.amountMax.setValue(null);
+        this.amountMin.setValue(null);
+        this.catFilter.setValue(null);
+        this.checkMax.setValue(null);
+        this.checkMin.setValue(null);
+        this.dateMax.setValue(null);
+        this.dateMin.setValue(null);
+        this.payeeFilter.setValue(null);
+        this.taxFilter.setValue(null);
+        this.onSubmit();
+    };
+    ReportIncomeComponent.prototype.instantiateForm = function (acctFilter, amountMax, amountMin, catFilter, checkMax, checkMin, dateMax, dateMin, payeeFilter, taxFilter) {
+        this.form = new forms_1.FormGroup({
+            acctFilter: acctFilter,
+            amountMax: amountMax,
+            amountMin: amountMin,
+            catFilter: catFilter,
+            checkMax: checkMax,
+            checkMin: checkMin,
+            dateMax: dateMax,
+            dateMin: dateMin,
+            payeeFilter: payeeFilter,
+            taxFilter: taxFilter,
+        });
+    };
+    ReportIncomeComponent = __decorate([
+        core_1.Component({
+            selector: 'report-income',
+            template: __webpack_require__("../../../../../src/modules/reports/components/report-income/report-income.component.html"),
+            styles: [__webpack_require__("../../../../../src/modules/reports/components/report-income/report-income.component.css")]
+        }),
+        __metadata("design:paramtypes", [data_service_1.DataService])
+    ], ReportIncomeComponent);
+    return ReportIncomeComponent;
+}());
+exports.ReportIncomeComponent = ReportIncomeComponent;
+
+
+/***/ }),
+
 /***/ "../../../../../src/modules/reports/components/report-list/report-list.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1362,7 +1987,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "body {\r\n}\r\n", ""]);
+exports.push([module.i, "body {\r\n}\r\n\r\n\r\n.scrollContainer {\r\n    overflow: auto;\r\n    width: 100%;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n\r\n.tablecontainer {\r\n    display: block;\r\n    font-size: 12px;\r\n    min-width: 2000px;\r\n    margin-bottom: 20px;\r\n}\r\n\r\n\r\n.tablehead {\r\n    display: table-row;\r\n}\r\n\r\n\r\n.tablehead > div {\r\n        float: left;\r\n        height: 34px;\r\n        line-height: 12px;\r\n        padding: 5px 10px 5px 10px;\r\n        background: khaki;\r\n        color: darkgreen;\r\n        font-family: Garamond;\r\n        text-align: center;\r\n        border: 1px solid darkgreen;\r\n        vertical-align: top;\r\n    }\r\n\r\n\r\n.tablehead > div:hover {\r\n            color: green;\r\n            text-shadow: 0 0 2px mintcream;\r\n        }\r\n\r\n\r\n.tablehead > div.active {\r\n            background: darkkhaki;\r\n            color: darkgreen;\r\n        }\r\n\r\n\r\n.tablehead > div.active:hover {\r\n                color: green;\r\n                text-shadow: 0 0 2px mintcream;\r\n            }\r\n\r\n\r\n.tablebody {\r\n    height: 60%;\r\n}\r\n\r\n\r\n.tablerow {\r\n    display: table-row;\r\n}\r\n\r\n\r\n.tablerow > div {\r\n        float: left;\r\n        border-top: 1px solid gainsboro;\r\n        border-bottom: 1px solid gainsboro;\r\n        border-left: 1px solid whitesmoke;\r\n        border-right: 1px solid whitesmoke;\r\n        text-align: center;\r\n        min-height: 28px;\r\n        padding: 5px;\r\n        line-height: 12px;\r\n        vertical-align: top;\r\n    }\r\n\r\n\r\n.account-name {\r\n    font-weight: bold;\r\n    color: darkblue;\r\n}\r\n\r\n\r\n.actionCell {\r\n    background: floralwhite;\r\n    padding: 0 !important;\r\n}\r\n\r\n\r\n.balanceCell {\r\n    background: mintcream;\r\n    color: darkgreen;\r\n}\r\n\r\n\r\n.commentcell {\r\n    text-align: left !important;\r\n}\r\n\r\n\r\n.money {\r\n    text-align: right !important;\r\n}\r\n\r\n\r\n.toggler {\r\n    cursor: pointer;\r\n}\r\n\r\n\r\n.toggler:hover {\r\n        text-decoration: none;\r\n    }\r\n\r\n\r\n.flag0-true {\r\n    color: red;\r\n    font-size: 18px;\r\n}\r\n\r\n\r\n.flag0-false {\r\n    color: pink;\r\n    font-size: 18px;\r\n}\r\n\r\n\r\n.flag1-true {\r\n    color: limegreen;\r\n    font-size: 18px;\r\n}\r\n\r\n\r\n.flag1-false {\r\n    color: palegreen;\r\n    font-size: 18px;\r\n}\r\n\r\n\r\n.flag2-true {\r\n    color: blue;\r\n    font-size: 18px;\r\n}\r\n\r\n\r\n.flag2-false {\r\n    color: paleturquoise;\r\n    font-size: 18px;\r\n}\r\n\r\n\r\n.flag3-true {\r\n    color: gold;\r\n    font-size: 18px;\r\n}\r\n\r\n\r\n.flag3-false {\r\n    color: lightgoldenrodyellow;\r\n    font-size: 18px;\r\n}\r\n\r\n\r\n.reconciled {\r\n    color: forestgreen;\r\n    font-size: 18px;\r\n}\r\n\r\n\r\nform {\r\n    font-size: 12px;\r\n}\r\n\r\n\r\n.filters {\r\n    padding: 5px;\r\n    margin-bottom: 20px;\r\n    background: mintcream;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1375,7 +2000,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/reports/components/report-list/report-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"reports\">\r\n    <h2 style=\"margin-top:100px;\" class=\"lemonlime\">This feature not yet supported.</h2>\r\n</div>\r\n"
+module.exports = "<p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n<div class=\"captionlike\">Reports</div>\r\n\r\n<div class=\"reportSelector\">\r\n    <a routerLink=\"./report-payee\">Payee Report</a>\r\n    <br />\r\n    <a routerLink=\"./report-category\">Category Report</a>\r\n    <br />\r\n    <a routerLink=\"./report-expense\">Expense Report</a>\r\n    <br />\r\n    <a routerLink=\"./report-income\">Income Report</a>\r\n    <br />\r\n    <a routerLink=\"./report-cashflow\">Cashflow and Net Worth Report</a>\r\n    <br />\r\n    <a routerLink=\"./report-account\">Account Balance Report</a>\r\n</div>\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -1396,11 +2021,117 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var ReportListComponent = /** @class */ (function () {
     function ReportListComponent(dataService) {
         this.dataService = dataService;
+        this.acctFilter = new forms_1.FormControl();
+        this.amountMax = new forms_1.FormControl();
+        this.amountMin = new forms_1.FormControl();
+        this.catFilter = new forms_1.FormControl();
+        this.checkMax = new forms_1.FormControl();
+        this.checkMin = new forms_1.FormControl();
+        this.dateMax = new forms_1.FormControl();
+        this.dateMin = new forms_1.FormControl();
+        this.payeeFilter = new forms_1.FormControl();
+        this.taxFilter = new forms_1.FormControl();
+        this.showFilter = true;
+        this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
     } //ctor
     ReportListComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.dataService.accounts.subscribe(function (accounts) {
+            _this.accounts = accounts;
+            _this.acctAsset = _this.dataService.AssetAccounts();
+            _this.acctLiability = _this.dataService.LiabilityAccounts();
+        });
+        this.acctAsset = this.dataService.AssetAccounts();
+        this.acctLiability = this.dataService.LiabilityAccounts();
+        this.dataService.categories.subscribe(function (categories) { return _this.categories = categories; });
+        this.dataService.payees.subscribe(function (payees) { return _this.payees = payees; });
+        this.dataService.transactions.subscribe(function (transactions) {
+            _this.transactions = transactions;
+        });
+        this.instantiateForm(this.acctFilter, this.amountMax, this.amountMin, this.catFilter, this.checkMax, this.checkMin, this.dateMax, this.dateMin, this.payeeFilter, this.taxFilter);
+    };
+    ReportListComponent.prototype.accountName = function (accountId) {
+        return this.accounts.find(function (element) { return element.id === accountId; }).name;
+    };
+    ReportListComponent.prototype.categoryName = function (categoryId) {
+        return this.categories.find(function (element) { return element.id === categoryId; }).name;
+    };
+    ReportListComponent.prototype.onSubmit = function () {
+        var _this = this;
+        alert('submit');
+        this.displayLines = this.lines;
+        if (this.form.get('acctFilter').value !== null) {
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.acctFrom === _this.form.get('acctFilter').value || line.transaction.acctTo === _this.form.get('acctFilter').value; });
+        }
+        if (this.form.get('amountMax').value !== null) {
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.amount <= _this.form.get('amountMax').value; });
+        }
+        if (this.form.get('amountMin').value !== null) {
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.amount >= _this.form.get('amountMin').value; });
+        }
+        if (this.form.get('catFilter').value !== null) {
+            var catArray = this.form.get('catFilter').value;
+            this.displayLines = this.displayLines.filter(function (line) { return catArray.some(function (element) { return element === line.transaction.category; }); });
+        }
+        if (this.form.get('checkMax').value !== null) {
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.check !== null; });
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.check <= _this.form.get('checkMax').value; });
+        }
+        if (this.form.get('checkMin').value !== null) {
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.check !== null; });
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.check >= _this.form.get('checkMin').value; });
+        }
+        if (this.form.get('dateMax').value !== null) {
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.date <= _this.form.get('dateMax').value; });
+        }
+        if (this.form.get('dateMin').value !== null) {
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.date >= _this.form.get('dateMin').value; });
+        }
+        if (this.form.get('payeeFilter').value !== null) {
+            var payArray = this.form.get('payeeFilter').value;
+            this.displayLines = this.displayLines.filter(function (line) { return payArray.some(function (element) { return element === line.transaction.payeeFrom || element === line.transaction.payeeTo; }); });
+        }
+        if (this.form.get('taxFilter').value === null) {
+            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.tax === true; });
+        }
+    };
+    ReportListComponent.prototype.onResetFilter = function () {
+        alert('reset');
+        this.acctFilter.setValue(null);
+        this.amountMax.setValue(null);
+        this.amountMin.setValue(null);
+        this.catFilter.setValue(null);
+        this.checkMax.setValue(null);
+        this.checkMin.setValue(null);
+        this.dateMax.setValue(null);
+        this.dateMin.setValue(null);
+        this.payeeFilter.setValue(null);
+        this.taxFilter.setValue(null);
+        this.onSubmit();
+    };
+    ReportListComponent.prototype.onHideFilter = function () {
+        this.showFilter = false;
+    };
+    ReportListComponent.prototype.onShowFilter = function () {
+        this.showFilter = true;
+    };
+    ReportListComponent.prototype.instantiateForm = function (acctFilter, amountMax, amountMin, catFilter, checkMax, checkMin, dateMax, dateMin, payeeFilter, taxFilter) {
+        this.form = new forms_1.FormGroup({
+            acctFilter: acctFilter,
+            amountMax: amountMax,
+            amountMin: amountMin,
+            catFilter: catFilter,
+            checkMax: checkMax,
+            checkMin: checkMin,
+            dateMax: dateMax,
+            dateMin: dateMin,
+            payeeFilter: payeeFilter,
+            taxFilter: taxFilter,
+        });
     };
     ReportListComponent = __decorate([
         core_1.Component({
@@ -1413,6 +2144,131 @@ var ReportListComponent = /** @class */ (function () {
     return ReportListComponent;
 }());
 exports.ReportListComponent = ReportListComponent;
+
+
+/***/ }),
+
+/***/ "../../../../../src/modules/reports/components/report-payee/report-payee.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".flag0-true {\r\n    color: red;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag0-false {\r\n    color: pink;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag1-true {\r\n    color: limegreen;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag1-false {\r\n    color: palegreen;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag2-true {\r\n    color: blue;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag2-false {\r\n    color: paleturquoise;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag3-true {\r\n    color: gold;\r\n    font-size: 18px;\r\n}\r\n\r\n.flag3-false {\r\n    color: lightgoldenrodyellow;\r\n    font-size: 18px;\r\n}\r\n\r\n.reconciled {\r\n    color: forestgreen;\r\n    font-size: 18px;\r\n}\r\n\r\nform {\r\n    font-size: 12px;\r\n}\r\n\r\n.filters {\r\n    padding: 5px;\r\n    margin-bottom: 20px;\r\n    background: mintcream;\r\n}\r\n\r\n.cbSpan {\r\n    display: inline-block;\r\n    width: 30px;\r\n    text-align: center;\r\n}\r\n\r\n.cbSpan > label {\r\n        position: relative;\r\n        top: 12px;\r\n    }\r\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/modules/reports/components/report-payee/report-payee.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n<div class=\"captionlike\">Payee Report</div>\r\n\r\n<div class=\"filters\">\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onFilterSubmit(form.value)\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">\r\n                <label>Account:</label>\r\n                <select name=\"acctFilter\" formControlName=\"acctFilter\">\r\n                    <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                    <option disabled>──────────</option>\r\n                    <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Payee:</label>\r\n                <select name=\"payeeFilter\" formControlName=\"payeeFilter\">\r\n                    <option *ngFor=\"let payee of payees\" value=\"{{payee.name}}\">{{payee.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <label>Category:</label>\r\n                <select name=\"catFilter\" formControlName=\"catFilter\">\r\n                    <option *ngFor=\"let category of categories\" value=\"{{category.id}}\">{{category.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <label>Dates:</label>\r\n                <input type='date' name=\"dateMin\" formControlName=\"dateMin\" />\r\n                <label>to:</label>\r\n                <input type='date' name=\"dateMax\" formControlName=\"dateMax\" />\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Tax</label>\r\n                <input type='checkbox' name=\"taxFilter\" value=\"true\" formControlName=\"taxFilter\" />\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-md-4\">\r\n                <input type='submit' class=\"btn btn-sm btn-success\" value=\"Run Report\" />\r\n                <button class=\"btn btn-sm btn-warning\" (click)=\"onResetFilter()\">Reset Filter</button>\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n\r\n<div class=\"reportFrame\">\r\n\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/modules/reports/components/report-payee/report-payee.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
+var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
+var ReportPayeeComponent = /** @class */ (function () {
+    function ReportPayeeComponent(dataService) {
+        this.dataService = dataService;
+        this.acctFilter = new forms_1.FormControl();
+        this.amountMax = new forms_1.FormControl();
+        this.amountMin = new forms_1.FormControl();
+        this.catFilter = new forms_1.FormControl();
+        this.checkMax = new forms_1.FormControl();
+        this.checkMin = new forms_1.FormControl();
+        this.dateMax = new forms_1.FormControl();
+        this.dateMin = new forms_1.FormControl();
+        this.payeeFilter = new forms_1.FormControl();
+        this.taxFilter = new forms_1.FormControl();
+        this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
+    } //ctor
+    ReportPayeeComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.dataService.accounts.subscribe(function (accounts) {
+            _this.accounts = accounts;
+            _this.acctAsset = _this.dataService.AssetAccounts();
+            _this.acctLiability = _this.dataService.LiabilityAccounts();
+        });
+        this.acctAsset = this.dataService.AssetAccounts();
+        this.acctLiability = this.dataService.LiabilityAccounts();
+        this.dataService.categories.subscribe(function (categories) { return _this.categories = categories; });
+        this.dataService.payees.subscribe(function (payees) { return _this.payees = payees; });
+        this.dataService.transactions.subscribe(function (transactions) {
+            _this.transactions = transactions;
+        });
+        this.instantiateForm(this.acctFilter, this.amountMax, this.amountMin, this.catFilter, this.checkMax, this.checkMin, this.dateMax, this.dateMin, this.payeeFilter, this.taxFilter);
+    };
+    ReportPayeeComponent.prototype.accountName = function (accountId) {
+        return this.accounts.find(function (element) { return element.id === accountId; }).name;
+    };
+    ReportPayeeComponent.prototype.categoryName = function (categoryId) {
+        return this.categories.find(function (element) { return element.id === categoryId; }).name;
+    };
+    ReportPayeeComponent.prototype.onSubmit = function () {
+        alert('submit');
+    };
+    ReportPayeeComponent.prototype.onResetFilter = function () {
+        this.acctFilter.setValue(null);
+        this.amountMax.setValue(null);
+        this.amountMin.setValue(null);
+        this.catFilter.setValue(null);
+        this.checkMax.setValue(null);
+        this.checkMin.setValue(null);
+        this.dateMax.setValue(null);
+        this.dateMin.setValue(null);
+        this.payeeFilter.setValue(null);
+        this.taxFilter.setValue(null);
+        this.onSubmit();
+    };
+    ReportPayeeComponent.prototype.instantiateForm = function (acctFilter, amountMax, amountMin, catFilter, checkMax, checkMin, dateMax, dateMin, payeeFilter, taxFilter) {
+        this.form = new forms_1.FormGroup({
+            acctFilter: acctFilter,
+            amountMax: amountMax,
+            amountMin: amountMin,
+            catFilter: catFilter,
+            checkMax: checkMax,
+            checkMin: checkMin,
+            dateMax: dateMax,
+            dateMin: dateMin,
+            payeeFilter: payeeFilter,
+            taxFilter: taxFilter,
+        });
+    };
+    ReportPayeeComponent = __decorate([
+        core_1.Component({
+            selector: 'report-payee',
+            template: __webpack_require__("../../../../../src/modules/reports/components/report-payee/report-payee.component.html"),
+            styles: [__webpack_require__("../../../../../src/modules/reports/components/report-payee/report-payee.component.css")]
+        }),
+        __metadata("design:paramtypes", [data_service_1.DataService])
+    ], ReportPayeeComponent);
+    return ReportPayeeComponent;
+}());
+exports.ReportPayeeComponent = ReportPayeeComponent;
 
 
 /***/ }),
@@ -1432,7 +2288,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var common_1 = __webpack_require__("../../../common/esm5/common.js");
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
+var report_account_component_1 = __webpack_require__("../../../../../src/modules/reports/components/report-account/report-account.component.ts");
+var report_cashflow_component_1 = __webpack_require__("../../../../../src/modules/reports/components/report-cashflow/report-cashflow.component.ts");
+var report_category_component_1 = __webpack_require__("../../../../../src/modules/reports/components/report-category/report-category.component.ts");
+var report_expense_component_1 = __webpack_require__("../../../../../src/modules/reports/components/report-expense/report-expense.component.ts");
+var report_income_component_1 = __webpack_require__("../../../../../src/modules/reports/components/report-income/report-income.component.ts");
 var report_list_component_1 = __webpack_require__("../../../../../src/modules/reports/components/report-list/report-list.component.ts");
+var report_payee_component_1 = __webpack_require__("../../../../../src/modules/reports/components/report-payee/report-payee.component.ts");
 var data_service_1 = __webpack_require__("../../../../../src/modules/shared/data.service.ts");
 var reports_routing_module_1 = __webpack_require__("../../../../../src/modules/reports/reports.routing.module.ts");
 var ReportsModule = /** @class */ (function () {
@@ -1446,7 +2308,13 @@ var ReportsModule = /** @class */ (function () {
                 reports_routing_module_1.ReportRoutingModule
             ],
             declarations: [
-                report_list_component_1.ReportListComponent
+                report_account_component_1.ReportAccountComponent,
+                report_cashflow_component_1.ReportCashflowComponent,
+                report_category_component_1.ReportCategoryComponent,
+                report_expense_component_1.ReportExpenseComponent,
+                report_income_component_1.ReportIncomeComponent,
+                report_list_component_1.ReportListComponent,
+                report_payee_component_1.ReportPayeeComponent
             ],
             providers: [data_service_1.DataService]
         })
@@ -1472,11 +2340,43 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
+var report_account_component_1 = __webpack_require__("../../../../../src/modules/reports/components/report-account/report-account.component.ts");
+var report_cashflow_component_1 = __webpack_require__("../../../../../src/modules/reports/components/report-cashflow/report-cashflow.component.ts");
+var report_category_component_1 = __webpack_require__("../../../../../src/modules/reports/components/report-category/report-category.component.ts");
+var report_expense_component_1 = __webpack_require__("../../../../../src/modules/reports/components/report-expense/report-expense.component.ts");
+var report_income_component_1 = __webpack_require__("../../../../../src/modules/reports/components/report-income/report-income.component.ts");
 var report_list_component_1 = __webpack_require__("../../../../../src/modules/reports/components/report-list/report-list.component.ts");
+var report_payee_component_1 = __webpack_require__("../../../../../src/modules/reports/components/report-payee/report-payee.component.ts");
 var reportsRoutes = [
     {
         path: 'reports',
-        component: report_list_component_1.ReportListComponent
+        component: report_list_component_1.ReportListComponent,
+        children: [
+            {
+                path: 'report-account',
+                component: report_account_component_1.ReportAccountComponent,
+            },
+            {
+                path: 'report-cashflow',
+                component: report_cashflow_component_1.ReportCashflowComponent
+            },
+            {
+                path: 'report-category',
+                component: report_category_component_1.ReportCategoryComponent
+            },
+            {
+                path: 'report-expense',
+                component: report_expense_component_1.ReportExpenseComponent
+            },
+            {
+                path: 'report-income',
+                component: report_income_component_1.ReportIncomeComponent
+            },
+            {
+                path: 'report-payee',
+                component: report_payee_component_1.ReportPayeeComponent
+            }
+        ]
     }
 ];
 var ReportRoutingModule = /** @class */ (function () {
@@ -2621,7 +3521,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "\r\n.scrollContainer {\r\n    overflow: auto;\r\n    width: 100%;\r\n    margin-bottom: 20px;\r\n}\r\n.tablecontainer {\r\n    display:block;\r\n    font-size: 12px;\r\n    min-width:2000px;\r\n    margin-bottom:20px;\r\n}\r\n.tablehead {\r\n    display:table-row;\r\n}\r\n.tablehead > div {\r\n        float:left;\r\n        height: 34px;\r\n        line-height: 12px;\r\n        padding: 5px 10px 5px 10px;\r\n        background: khaki;\r\n        color: darkgreen;\r\n        font-family: Garamond;\r\n        text-align: center;\r\n        border: 1px solid darkgreen;\r\n        vertical-align: top;\r\n    }\r\n.tablehead > div:hover {\r\n        color: green;\r\n        text-shadow: 0 0 2px mintcream;\r\n    }\r\n.tablehead > div.active {\r\n        background: darkkhaki;\r\n        color: darkgreen;\r\n    }\r\n.tablehead > div.active:hover {\r\n        color: green;\r\n        text-shadow: 0 0 2px mintcream;\r\n    }\r\n.tablebody {\r\n    height: 60%;\r\n}\r\n.tablerow {\r\n    display: table-row;\r\n}\r\n.tablerow > div {\r\n        float: left;\r\n        border-top: 1px solid gainsboro;\r\n        border-bottom: 1px solid gainsboro;\r\n        border-left: 1px solid whitesmoke;\r\n        border-right: 1px solid whitesmoke;\r\n        text-align: center;\r\n        min-height: 28px;\r\n        padding: 5px;\r\n        line-height: 12px;\r\n        vertical-align: top;\r\n    }\r\n.account-name {\r\n    font-weight: bold;\r\n    color: darkblue;\r\n}\r\n.actionCell {\r\n    background: floralwhite;\r\n    padding: 0 !important;\r\n}\r\n.balanceCell {\r\n    background: mintcream;\r\n    color: darkgreen;\r\n}\r\n.commentcell {\r\n    text-align: left !important;\r\n}\r\n.money{\r\n    text-align:right !important;\r\n}\r\n.toggler {\r\n    cursor: pointer;\r\n}\r\n.toggler:hover{\r\n    text-decoration:none;\r\n}\r\n.flag0-true {\r\n    color: red;\r\n    font-size: 18px;\r\n}\r\n.flag0-false {\r\n    color: pink;\r\n    font-size: 18px;\r\n}\r\n.flag1-true {\r\n    color: limegreen;\r\n    font-size: 18px;\r\n}\r\n.flag1-false {\r\n    color: palegreen;\r\n    font-size: 18px;\r\n}\r\n.flag2-true {\r\n    color: blue;\r\n    font-size: 18px;\r\n}\r\n.flag2-false {\r\n    color: paleturquoise;\r\n    font-size: 18px;\r\n}\r\n.flag3-true {\r\n    color: gold;\r\n    font-size: 18px;\r\n}\r\n.flag3-false {\r\n    color: lightgoldenrodyellow;\r\n    font-size: 18px;\r\n}\r\n.reconciled {\r\n    color: forestgreen;\r\n    font-size: 18px;\r\n}\r\nform{\r\n    font-size:12px;\r\n}\r\n.filters{\r\n    padding:5px;\r\n    margin-bottom:20px;\r\n    background:mintcream;\r\n}\r\n", ""]);
+exports.push([module.i, "\r\n.scrollContainer {\r\n    overflow: auto;\r\n    width: 100%;\r\n    margin-bottom: 20px;\r\n}\r\n.tablecontainer {\r\n    display:block;\r\n    font-size: 12px;\r\n    min-width:2000px;\r\n    margin-bottom:20px;\r\n}\r\n.tablehead {\r\n    display:table-row;\r\n}\r\n.tablehead > div {\r\n        float:left;\r\n        height: 34px;\r\n        line-height: 12px;\r\n        padding: 5px 10px 5px 10px;\r\n        background: khaki;\r\n        color: darkgreen;\r\n        font-family: Garamond;\r\n        text-align: center;\r\n        border: 1px solid darkgreen;\r\n        vertical-align: top;\r\n    }\r\n.tablehead > div:hover {\r\n        color: green;\r\n        text-shadow: 0 0 2px mintcream;\r\n    }\r\n.tablehead > div.active {\r\n        background: darkkhaki;\r\n        color: darkgreen;\r\n    }\r\n.tablehead > div.active:hover {\r\n        color: green;\r\n        text-shadow: 0 0 2px mintcream;\r\n    }\r\n.tablebody {\r\n    height: 60%;\r\n}\r\n.tablerow {\r\n    display: table-row;\r\n}\r\n.tablerow > div {\r\n        float: left;\r\n        border-top: 1px solid gainsboro;\r\n        border-bottom: 1px solid gainsboro;\r\n        border-left: 1px solid whitesmoke;\r\n        border-right: 1px solid whitesmoke;\r\n        text-align: center;\r\n        min-height: 28px;\r\n        padding: 5px;\r\n        line-height: 12px;\r\n        vertical-align: top;\r\n    }\r\n.account-name {\r\n    font-weight: bold;\r\n    color: darkblue;\r\n}\r\n.actionCell {\r\n    background: floralwhite;\r\n    padding: 0 !important;\r\n}\r\n.balanceCell {\r\n    background: mintcream;\r\n    color: darkgreen;\r\n}\r\n.commentcell {\r\n    text-align: left !important;\r\n}\r\n.money{\r\n    text-align:right !important;\r\n}\r\n.toggler {\r\n    cursor: pointer;\r\n}\r\n.toggler:hover{\r\n    text-decoration:none;\r\n}\r\n.flag0-true {\r\n    color: red;\r\n    font-size: 18px;\r\n}\r\n.flag0-false {\r\n    color: pink;\r\n    font-size: 18px;\r\n}\r\n.flag1-true {\r\n    color: limegreen;\r\n    font-size: 18px;\r\n}\r\n.flag1-false {\r\n    color: palegreen;\r\n    font-size: 18px;\r\n}\r\n.flag2-true {\r\n    color: blue;\r\n    font-size: 18px;\r\n}\r\n.flag2-false {\r\n    color: paleturquoise;\r\n    font-size: 18px;\r\n}\r\n.flag3-true {\r\n    color: gold;\r\n    font-size: 18px;\r\n}\r\n.flag3-false {\r\n    color: lightgoldenrodyellow;\r\n    font-size: 18px;\r\n}\r\n.reconciled {\r\n    color: forestgreen;\r\n    font-size: 18px;\r\n}\r\nform{\r\n    font-size:12px;\r\n}\r\n.filters{\r\n    padding:5px;\r\n    margin-bottom:20px;\r\n    background:mintcream;\r\n}\r\n.cbSpan {\r\n    display: inline-block;\r\n    width: 30px;\r\n    text-align: center;\r\n}\r\n.cbSpan > label{\r\n    position:relative;\r\n    top:12px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -2634,7 +3534,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/transactions/components/transaction-list/transaction-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n<div class=\"captionlike\">Transactions</div>\r\n<div class=\"filters\">\r\n    <form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"onSubmit(form.value)\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">\r\n                <label>Account:</label>\r\n                <select name=\"acctFilter\" formControlName=\"acctFilter\" >\r\n                    <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                    <option disabled>──────────</option>\r\n                    <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Payee:</label>\r\n                <select name=\"payeeFilter\" formControlName=\"payeeFilter\" >\r\n                    <option *ngFor=\"let payee of payees\" value=\"{{payee.name}}\">{{payee.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <label>Categorys:</label>\r\n                <select name=\"catFilter\" formControlName=\"catFilter\" >\r\n                    <option *ngFor=\"let category of categories\" value=\"{{category.id}}\">{{category.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Date :</label>\r\n                <input type='date' name=\"dateMin\" formControlName=\"dateMin\" />\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>to :</label>\r\n                <input type='date' name=\"dateMax\" formControlName=\"dateMax\" />\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2 col-md-offset-7\">\r\n                <label>Chk #</label>\r\n                <input type='number' name=\"checkMin\" formControlName=\"checkMin\" />\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>to #</label>\r\n                <input type='number' name=\"checkMax\" formControlName=\"checkMax\" />\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-md-4\">\r\n                <input type='submit' value=\"Apply Filter\" />\r\n                <button (click)=\"onResetFilter\">Reset Filter</button>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Tax</label>\r\n                <input type='checkbox' name=\"taxFilter\" value=\"true\" formControlName=\"taxFilter\" />\r\n            </div>\r\n            <div class=\"col-md-2 col-md-offset-1\">\r\n                <label>Amt $</label>\r\n                <input type='number' name=\"amountMin\" formControlName=\"amountMin\" />\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>to $</label>\r\n                <input type='number' name=\"amountMax\" formControlName=\"amountMax\" />\r\n            </div>\r\n        </div>\r\n</form>\r\n</div>\r\n    <div class=\"scrollContainer\">\r\n        <div *ngIf=\"transactions && payees && categories && accounts\" class=\"tablecontainer\">\r\n            <div class=\"tablehead\">\r\n                <div class=\"w80\">Flags</div>\r\n                <div class=\"w30\">Re</div>\r\n                <div class=\"w90\">Date</div>\r\n                <div class=\"w50\">Check</div>\r\n                <div class=\"w120\">To</div>\r\n                <div class=\"w120\">From</div>\r\n                <div class=\"w80\">Amount</div>\r\n                <div class=\"w160\">Category</div>\r\n                <div class=\"w40\">Tax?</div>\r\n                <div class=\"w200\">Comment</div>\r\n                <div class=\"w120\">&nbsp;</div>\r\n                <div *ngFor=\"let account of accounts\" class=\"w90\">{{account.name}}</div>\r\n                <div class=\"w80\">Assets</div>\r\n                <div class=\"w80\">Liabilities</div>\r\n                <div class=\"w80\">Net</div>\r\n            </div>\r\n            <div class=\"tablebody\">\r\n                <div *ngFor=\"let line of displayLines; let tidx = index\" class=\"tablerow\">\r\n                    <div class=\"w80\">\r\n                        <a *ngIf=\"line.transaction.flag0\" class=\"toggler flag0-true\" (click)=\"onFlag0Toggle(line.transaction.id)\">&#9873;</a>\r\n                        <a *ngIf=\"!line.transaction.flag0\" class=\"toggler flag0-false\" (click)=\"onFlag0Toggle(line.transaction.id)\">&#9872;</a>\r\n                        <a *ngIf=\"line.transaction.flag1\" class=\"toggler flag1-true\" (click)=\"onFlag1Toggle(line.transaction.id)\">&#9873;</a>\r\n                        <a *ngIf=\"!line.transaction.flag1\" class=\"toggler flag1-false\" (click)=\"onFlag1Toggle(line.transaction.id)\">&#9872;</a>\r\n                        <a *ngIf=\"line.transaction.flag2\" class=\"toggler flag2-true\" (click)=\"onFlag2Toggle(line.transaction.id)\">&#9873;</a>\r\n                        <a *ngIf=\"!line.transaction.flag2\" class=\"toggler flag2-false\" (click)=\"onFlag2Toggle(line.transaction.id)\">&#9872;</a>\r\n                        <a *ngIf=\"line.transaction.flag3\" class=\"toggler flag3-true\" (click)=\"onFlag3Toggle(line.transaction.id)\">&#9873;</a>\r\n                        <a *ngIf=\"!line.transaction.flag3\" class=\"toggler flag3-false\" (click)=\"onFlag3Toggle(line.transaction.id)\">&#9872;</a>\r\n                    </div>\r\n                    <div class=\"w30\">\r\n                        <a *ngIf=\"line.transaction.reconciled\" class=\"toggler reconciled\" (click)=\"onReconciledToggle(line.transaction.id)\">&#10004;</a>\r\n                        <button *ngIf=\"!line.transaction.reconciled\" class=\"btn-clear reconciled\" (click)=\"onReconciledToggle(line.transaction.id)\">&nbsp;</button>\r\n                    </div>\r\n                    <div class=\"w90\">{{line.transaction.date | date}}</div>\r\n                    <div class=\"w50\">{{line.transaction.check}}</div>\r\n\r\n                    <div *ngIf=\"line.transaction.payeeTo\" class=\"w120\">{{line.transaction.payeeTo}}</div>\r\n                    <div *ngIf=\"line.transaction.acctTo\" class=\"account-name w120\">{{accountName(line.transaction.acctTo)}}</div>\r\n                    <div *ngIf=\"!line.transaction.payeeTo && !line.transaction.acctTo\" class=\"w120\">&nbsp;</div>\r\n\r\n                    <div *ngIf=\"line.transaction.payeeFrom\" class=\"w120\">{{line.transaction.payeeFrom}}</div>\r\n                    <div *ngIf=\"line.transaction.acctFrom\" class=\"account-name w120\">{{accountName(line.transaction.acctFrom)}}</div>\r\n                    <div *ngIf=\"!line.transaction.payeeFrom && !line.transaction.acctFrom\" class=\"w120\">&nbsp;</div>\r\n\r\n                    <div class='money w80'>{{displayAsDollar(line.transaction.amount)}}</div>\r\n                    <div class=\"w160\">{{categoryName(line.transaction.category)}}</div>\r\n                    <div class=\"w40\">&nbsp;<span *ngIf=\"line.transaction.tax\" class='glyphicon glyphicon-copy' style='color:green;'></span></div>\r\n                    <div class=\"commentcell w200\">{{line.transaction.comments}}</div>\r\n                    <div class=\"actionCell w60\"><a class=\"btn btn-xs editlink\" routerLink=\"./transaction-edit/{{line.transaction.id}}\">Edit</a></div>\r\n                    <div class=\"actionCell w60\"><a class=\"btn btn-xs deletelink\" (click)=\"onDelete(line.transaction.id);\">Delete</a></div>\r\n                    <div *ngFor=\"let account of accounts; let aidx = index\" class=\"money balanceCell w90\">{{displayAsDollar(line.balances[aidx])}}</div>\r\n                    <div class=\"money balanceCell w80\">{{displayAsDollar(line.assets)}}</div>\r\n                    <div class=\"money balanceCell w80\">{{displayAsDollar(line.liabilities)}}</div>\r\n                    <div class=\"money balanceCell w80\">{{displayAsDollar(line.net)}}</div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n<a id=\"addlink\" routerLink=\"./transaction-add\">Add New Transaction</a>\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<p *ngIf=\"!transactions\"><em>Loading...</em></p>\r\n<div class=\"captionlike\">Transactions</div>\r\n<button *ngIf=\"!showFilter\" class=\"btn btn-sm btn-success\" (click)=\"onShowFilter()\">Show Filter</button>\r\n<button *ngIf=\"showFilter\" class=\"btn btn-sm btn-default\" (click)=\"onHideFilter()\">Hide Filter</button>\r\n<div *ngIf=\"showFilter\" class=\"filters\">\r\n    <form *ngIf=\"filterForm\" [formGroup]=\"filterForm\" (ngSubmit)=\"onFilterSubmit(filterForm.value)\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-2\">\r\n                <label>Account:</label>\r\n                <select name=\"acctFilter\" formControlName=\"acctFilter\">\r\n                    <option *ngFor=\"let account of acctAsset\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                    <option disabled>──────────</option>\r\n                    <option *ngFor=\"let account of acctLiability\" [class]=\"account.active? '' : 'greyed'\" value=\"{{account.id}}\">{{account.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n                <label>Payee:</label>\r\n                <select name=\"payeeFilter\" formControlName=\"payeeFilter\">\r\n                    <option *ngFor=\"let payee of payees\" value=\"{{payee.name}}\">{{payee.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <label>Category:</label>\r\n                <select name=\"catFilter\" formControlName=\"catFilter\">\r\n                    <option *ngFor=\"let category of categories\" value=\"{{category.id}}\">{{category.name}}</option>\r\n                </select>\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <label>Dates:</label>\r\n                <input type='date' name=\"dateMin\" formControlName=\"dateMin\" />\r\n                <label>to:</label>\r\n                <input type='date' name=\"dateMax\" formControlName=\"dateMax\" />\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-md-3 col-md-offset-4\">\r\n                <span class=\"cbSpan\"><label class=\"flag0-true\">&#9873;</label></span>\r\n                <span class=\"cbSpan\"><label class=\"flag1-true\">&#9873;</label></span>\r\n                <span class=\"cbSpan\"><label class=\"flag2-true\">&#9873;</label></span>\r\n                <span class=\"cbSpan\"><label class=\"flag3-true\">&#9873;</label></span>\r\n                <span class=\"cbSpan\"><label>Tax</label></span>\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <label>Checks #</label>\r\n                <input type='number' name=\"checkMin\" formControlName=\"checkMin\" />\r\n                <label>to #</label>\r\n                <input type='number' name=\"checkMax\" formControlName=\"checkMax\" />\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-md-4\">\r\n                <input type='submit' class=\"btn btn-sm btn-success\"value=\"Apply Filter\" />\r\n                <button  class=\"btn btn-sm btn-warning\" (click)=\"onResetFilter()\">Reset Filter</button>\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <span class=\"cbSpan\"><input type='checkbox' name=\"f0Filter\" value=\"true\" formControlName=\"f0Filter\" /></span>\r\n                <span class=\"cbSpan\"><input type='checkbox' name=\"f1Filter\" value=\"true\" formControlName=\"f1Filter\" /></span>\r\n                <span class=\"cbSpan\"><input type='checkbox' name=\"f2Filter\" value=\"true\" formControlName=\"f2Filter\" /></span>\r\n                <span class=\"cbSpan\"><input type='checkbox' name=\"f3Filter\" value=\"true\" formControlName=\"f3Filter\" /></span>\r\n                <span class=\"cbSpan\"><input type='checkbox' name=\"taxFilter\" value=\"true\" formControlName=\"taxFilter\" /></span>\r\n            </div>\r\n            <div class=\"col-md-4\">\r\n                <label>Amounts $</label>\r\n                <input type='number' name=\"amountMin\" formControlName=\"amountMin\" />\r\n                <label>to $</label>\r\n                <input type='number' name=\"amountMax\" formControlName=\"amountMax\" />\r\n            </div>\r\n        </div>\r\n    </form>\r\n</div>\r\n<div class=\"scrollContainer\">\r\n    <div *ngIf=\"transactions && payees && categories && accounts\" class=\"tablecontainer\">\r\n        <div class=\"tablehead\">\r\n            <div class=\"w80\">Flags</div>\r\n            <div class=\"w30\">R</div>\r\n            <div class=\"w90\">Date</div>\r\n            <div class=\"w50\">Check</div>\r\n            <div class=\"w120\">To</div>\r\n            <div class=\"w120\">From</div>\r\n            <div class=\"w80\">Amount</div>\r\n            <div class=\"w160\">Category</div>\r\n            <div class=\"w40\">Tax?</div>\r\n            <div class=\"w200\">Comment</div>\r\n            <div class=\"w80\">&nbsp;</div>\r\n            <div *ngFor=\"let acctIdx of displayAcctIndices\" class=\"w90\">{{accounts[acctIdx].name}}</div>\r\n            <div class=\"w80\">Assets</div>\r\n            <div class=\"w80\">Liabilities</div>\r\n            <div class=\"w80\">Net</div>\r\n        </div>\r\n        <div class=\"tablebody\">\r\n            <div *ngFor=\"let lineIdx of displayLineIndices\" class=\"tablerow\">\r\n                <div class=\"w80\">\r\n                    <a *ngIf=\"lines[lineIdx].transaction.flag0\" class=\"toggler flag0-true\" (click)=\"onFlag0Toggle(lines[lineIdx].transaction.id)\">&#9873;</a>\r\n                    <a *ngIf=\"!lines[lineIdx].transaction.flag0\" class=\"toggler flag0-false\" (click)=\"onFlag0Toggle(lines[lineIdx].transaction.id)\">&#9872;</a>\r\n                    <a *ngIf=\"lines[lineIdx].transaction.flag1\" class=\"toggler flag1-true\" (click)=\"onFlag1Toggle(lines[lineIdx].transaction.id)\">&#9873;</a>\r\n                    <a *ngIf=\"!lines[lineIdx].transaction.flag1\" class=\"toggler flag1-false\" (click)=\"onFlag1Toggle(lines[lineIdx].transaction.id)\">&#9872;</a>\r\n                    <a *ngIf=\"lines[lineIdx].transaction.flag2\" class=\"toggler flag2-true\" (click)=\"onFlag2Toggle(lines[lineIdx].transaction.id)\">&#9873;</a>\r\n                    <a *ngIf=\"!lines[lineIdx].transaction.flag2\" class=\"toggler flag2-false\" (click)=\"onFlag2Toggle(lines[lineIdx].transaction.id)\">&#9872;</a>\r\n                    <a *ngIf=\"lines[lineIdx].transaction.flag3\" class=\"toggler flag3-true\" (click)=\"onFlag3Toggle(lines[lineIdx].transaction.id)\">&#9873;</a>\r\n                    <a *ngIf=\"!lines[lineIdx].transaction.flag3\" class=\"toggler flag3-false\" (click)=\"onFlag3Toggle(lines[lineIdx].transaction.id)\">&#9872;</a>\r\n                </div>\r\n                <div class=\"w30\">\r\n                    <a *ngIf=\"lines[lineIdx].transaction.reconciled\" class=\"toggler reconciled\" (click)=\"onReconciledToggle(lines[lineIdx].transaction.id)\">&#10004;</a>\r\n                    <button *ngIf=\"!lines[lineIdx].transaction.reconciled\" class=\"btn-clear reconciled\" (click)=\"onReconciledToggle(lines[lineIdx].transaction.id)\">&nbsp;</button>\r\n                </div>\r\n                <div class=\"w90\">{{lines[lineIdx].transaction.date | date}}</div>\r\n                <div class=\"w50\">{{lines[lineIdx].transaction.check}}</div>\r\n\r\n                <div *ngIf=\"lines[lineIdx].transaction.payeeTo\" class=\"w120\">{{lines[lineIdx].transaction.payeeTo}}</div>\r\n                <div *ngIf=\"lines[lineIdx].transaction.acctTo\" class=\"account-name w120\">{{accountName(lines[lineIdx].transaction.acctTo)}}</div>\r\n                <div *ngIf=\"!lines[lineIdx].transaction.payeeTo && !lines[lineIdx].transaction.acctTo\" class=\"w120\">&nbsp;</div>\r\n\r\n                <div *ngIf=\"lines[lineIdx].transaction.payeeFrom\" class=\"w120\">{{lines[lineIdx].transaction.payeeFrom}}</div>\r\n                <div *ngIf=\"lines[lineIdx].transaction.acctFrom\" class=\"account-name w120\">{{accountName(lines[lineIdx].transaction.acctFrom)}}</div>\r\n                <div *ngIf=\"!lines[lineIdx].transaction.payeeFrom && !lines[lineIdx].transaction.acctFrom\" class=\"w120\">&nbsp;</div>\r\n\r\n                <div class='money w80'>{{displayAsDollar(lines[lineIdx].transaction.amount)}}</div>\r\n                <div class=\"w160\">{{categoryName(lines[lineIdx].transaction.category)}}</div>\r\n                <div class=\"w40\">&nbsp;<span *ngIf=\"lines[lineIdx].transaction.tax\" style=\"color:green;\">&#10004;</span></div>\r\n                <div class=\"commentcell w200\">{{lines[lineIdx].transaction.comments}}</div>\r\n                <div class=\"actionCell w40\"><a class=\"btn btn-xs editlink glyphicon glyphicon-pencil\" routerLink=\"./transaction-edit/{{lines[lineIdx].transaction.id}}\"></a></div>\r\n                <div class=\"actionCell w40\"><a class=\"btn btn-xs deletelink glyphicon glyphicon-remove darkred\" (click)=\"onDelete(lines[lineIdx].transaction.id);\"></a></div>\r\n                <div *ngFor=\"let acctIdx of displayAcctIndices\" class=\"money balanceCell w90\">{{displayAsDollar(lines[lineIdx].balances[acctIdx])}}</div>\r\n                <div class=\"money balanceCell w80\">{{displayAsDollar(lines[lineIdx].assets)}}</div>\r\n                <div class=\"money balanceCell w80\">{{displayAsDollar(lines[lineIdx].liabilities)}}</div>\r\n                <div class=\"money balanceCell w80\">{{displayAsDollar(lines[lineIdx].net)}}</div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<a id=\"addlink\" routerLink=\"./transaction-add\">Add New Transaction</a>\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -2667,8 +3567,13 @@ var TransactionListComponent = /** @class */ (function () {
         this.checkMin = new forms_1.FormControl();
         this.dateMax = new forms_1.FormControl();
         this.dateMin = new forms_1.FormControl();
+        this.f0Filter = new forms_1.FormControl();
+        this.f1Filter = new forms_1.FormControl();
+        this.f2Filter = new forms_1.FormControl();
+        this.f3Filter = new forms_1.FormControl();
         this.payeeFilter = new forms_1.FormControl();
         this.taxFilter = new forms_1.FormControl();
+        this.showFilter = false;
         this.displayAsDollar = function (amt) { return '$ ' + amt.toFixed(2); };
     } //ctor
     TransactionListComponent.prototype.ngOnInit = function () {
@@ -2686,7 +3591,10 @@ var TransactionListComponent = /** @class */ (function () {
             _this.transactions = transactions;
             _this.constructLines();
         });
-        this.instantiateForm(this.acctFilter, this.amountMax, this.amountMin, this.catFilter, this.checkMax, this.checkMin, this.dateMax, this.dateMin, this.payeeFilter, this.taxFilter);
+        //on initialization, every index in the reference arrays is displayed
+        this.displayAcctIndices = Array.from(new Array(this.accounts.length), function (x, i) { return i; });
+        this.displayLineIndices = Array.from(new Array(this.lines.length), function (x, i) { return i; });
+        this.instantiateForm(this.acctFilter, this.amountMax, this.amountMin, this.catFilter, this.checkMax, this.checkMin, this.dateMax, this.dateMin, this.f0Filter, this.f1Filter, this.f2Filter, this.f3Filter, this.payeeFilter, this.taxFilter);
     };
     TransactionListComponent.prototype.accountName = function (accountId) {
         return this.accounts.find(function (element) { return element.id === accountId; }).name;
@@ -2722,11 +3630,15 @@ var TransactionListComponent = /** @class */ (function () {
                         _this.lines[tidx].balances[aidx] = _this.lines[tidx - 1].balances[aidx];
                     }
                 }
-                _this.lines[tidx].assets = _this.lines[tidx].assets + _this.lines[tidx].balances[aidx];
+                if (account.acctType === "Asset") {
+                    _this.lines[tidx].assets = _this.lines[tidx].assets + _this.lines[tidx].balances[aidx];
+                }
+                if (account.acctType === "Liability") {
+                    _this.lines[tidx].liabilities = _this.lines[tidx].liabilities - _this.lines[tidx].balances[aidx];
+                }
                 _this.lines[tidx].net = _this.lines[tidx].net + _this.lines[tidx].balances[aidx];
             });
         });
-        this.displayLines = this.lines;
     };
     TransactionListComponent.prototype.onDelete = function (id) {
         var result;
@@ -2788,8 +3700,8 @@ var TransactionListComponent = /** @class */ (function () {
         }
         this.dataService.updateTransaction(this.transactions[targetIdx]);
     };
-    TransactionListComponent.prototype.instantiateForm = function (acctFilter, amountMax, amountMin, catFilter, checkMax, checkMin, dateMax, dateMin, payeeFilter, taxFilter) {
-        this.form = new forms_1.FormGroup({
+    TransactionListComponent.prototype.instantiateForm = function (acctFilter, amountMax, amountMin, catFilter, checkMax, checkMin, dateMax, dateMin, f0Filter, f1Filter, f2Filter, f3Filter, payeeFilter, taxFilter) {
+        this.filterForm = new forms_1.FormGroup({
             acctFilter: acctFilter,
             amountMax: amountMax,
             amountMin: amountMin,
@@ -2798,46 +3710,68 @@ var TransactionListComponent = /** @class */ (function () {
             checkMin: checkMin,
             dateMax: dateMax,
             dateMin: dateMin,
+            f0Filter: f0Filter,
+            f1Filter: f1Filter,
+            f2Filter: f2Filter,
+            f3Filter: f3Filter,
             payeeFilter: payeeFilter,
             taxFilter: taxFilter,
         });
     };
-    TransactionListComponent.prototype.onSubmit = function () {
+    TransactionListComponent.prototype.onFilterSubmit = function () {
         var _this = this;
-        this.displayLines = this.lines;
-        if (this.form.get('acctFilter').value !== null) {
-            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.acctFrom === _this.form.get('acctFilter').value || line.transaction.acctTo === _this.form.get('acctFilter').value; });
+        //start with display arrays which point to every index in their reference arrays
+        this.displayAcctIndices = Array.from(new Array(this.accounts.length), function (x, i) { return i; });
+        this.displayLineIndices = Array.from(new Array(this.lines.length), function (x, i) { return i; });
+        //and repetitively filter from there
+        if (this.filterForm.get('acctFilter').value !== null) {
+            var selectedAccountId = this.filterForm.get('acctFilter').value;
+            var selectedAccountIndex = this.accounts.findIndex(function (account) { return account.id == selectedAccountId; });
+            this.displayAcctIndices = [selectedAccountIndex];
+            this.displayLineIndices = this.displayLineIndices.filter(function (idx) { return _this.lines[idx].transaction.acctFrom == selectedAccountId || _this.lines[idx].transaction.acctTo == selectedAccountId; });
         }
-        if (this.form.get('amountMax').value !== null) {
-            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.amount <= _this.form.get('amountMax').value; });
+        if (this.filterForm.get('amountMax').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter(function (idx) { return _this.lines[idx].transaction.amount <= _this.filterForm.get('amountMax').value; });
         }
-        if (this.form.get('amountMin').value !== null) {
-            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.amount >= _this.form.get('amountMin').value; });
+        if (this.filterForm.get('amountMin').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter(function (idx) { return _this.lines[idx].transaction.amount >= _this.filterForm.get('amountMin').value; });
         }
-        if (this.form.get('catFilter').value !== null) {
-            var catArray = this.form.get('catFilter').value;
-            this.displayLines = this.displayLines.filter(function (line) { return catArray.some(function (element) { return element === line.transaction.category; }); });
+        if (this.filterForm.get('catFilter').value !== null) {
+            var catArray = [this.filterForm.get('catFilter').value];
+            this.displayLineIndices = this.displayLineIndices.filter(function (idx) { return catArray.some(function (element) { return element == _this.lines[idx].transaction.category; }); });
         }
-        if (this.form.get('checkMax').value !== null) {
-            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.check !== null; });
-            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.check <= _this.form.get('checkMax').value; });
+        if (this.filterForm.get('checkMax').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter(function (idx) { return _this.lines[idx].transaction.check !== null; });
+            this.displayLineIndices = this.displayLineIndices.filter(function (idx) { return _this.lines[idx].transaction.check <= _this.filterForm.get('checkMax').value; });
         }
-        if (this.form.get('checkMin').value !== null) {
-            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.check !== null; });
-            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.check >= _this.form.get('checkMin').value; });
+        if (this.filterForm.get('checkMin').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter(function (idx) { return _this.lines[idx].transaction.check !== null; });
+            this.displayLineIndices = this.displayLineIndices.filter(function (idx) { return _this.lines[idx].transaction.check >= _this.filterForm.get('checkMin').value; });
         }
-        if (this.form.get('dateMax').value !== null) {
-            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.date <= _this.form.get('dateMax').value; });
+        if (this.filterForm.get('dateMax').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter(function (idx) { return _this.lines[idx].transaction.date <= _this.filterForm.get('dateMax').value; });
         }
-        if (this.form.get('dateMin').value !== null) {
-            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.date >= _this.form.get('dateMin').value; });
+        if (this.filterForm.get('dateMin').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter(function (idx) { return _this.lines[idx].transaction.date >= _this.filterForm.get('dateMin').value; });
         }
-        if (this.form.get('payeeFilter').value !== null) {
-            var payArray = this.form.get('payeeFilter').value;
-            this.displayLines = this.displayLines.filter(function (line) { return payArray.some(function (element) { return element === line.transaction.payeeFrom || element === line.transaction.payeeTo; }); });
+        if (this.filterForm.get('f0Filter').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter(function (idx) { return _this.lines[idx].transaction.flag0 === true; });
         }
-        if (this.form.get('taxFilter').value === null) {
-            this.displayLines = this.displayLines.filter(function (line) { return line.transaction.tax === true; });
+        if (this.filterForm.get('f1Filter').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter(function (idx) { return _this.lines[idx].transaction.flag1 === true; });
+        }
+        if (this.filterForm.get('f2Filter').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter(function (idx) { return _this.lines[idx].transaction.flag2 === true; });
+        }
+        if (this.filterForm.get('f3Filter').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter(function (idx) { return _this.lines[idx].transaction.flag3 === true; });
+        }
+        if (this.filterForm.get('payeeFilter').value !== null) {
+            var payArray = [this.filterForm.get('payeeFilter').value];
+            this.displayLineIndices = this.displayLineIndices.filter(function (idx) { return payArray.some(function (element) { return element == _this.lines[idx].transaction.payeeFrom || element == _this.lines[idx].transaction.payeeTo; }); });
+        }
+        if (this.filterForm.get('taxFilter').value !== null) {
+            this.displayLineIndices = this.displayLineIndices.filter(function (idx) { return _this.lines[idx].transaction.tax === true; });
         }
     };
     TransactionListComponent.prototype.onResetFilter = function () {
@@ -2849,9 +3783,18 @@ var TransactionListComponent = /** @class */ (function () {
         this.checkMin.setValue(null);
         this.dateMax.setValue(null);
         this.dateMin.setValue(null);
+        this.f0Filter.setValue(null);
+        this.f1Filter.setValue(null);
+        this.f2Filter.setValue(null);
+        this.f3Filter.setValue(null);
         this.payeeFilter.setValue(null);
         this.taxFilter.setValue(null);
-        this.onSubmit();
+    };
+    TransactionListComponent.prototype.onHideFilter = function () {
+        this.showFilter = false;
+    };
+    TransactionListComponent.prototype.onShowFilter = function () {
+        this.showFilter = true;
     };
     TransactionListComponent = __decorate([
         core_1.Component({
@@ -2986,7 +3929,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/modules/users/components/user-list/user-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"users\">\r\n    <p *ngIf=\"!users\"><em>Loading...</em></p>\r\n\r\n    <table>\r\n        <caption>Users</caption>\r\n        <thead>\r\n            <tr>\r\n                <th>ID</th>\r\n                <th>Username</th>\r\n                <th>Admin</th>\r\n                <th colspan=\"2\">&nbsp;</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr *ngFor=\"let user of users\">\r\n                <td>{{user.id}}</td>\r\n                <td>{{user.userName}}</td>\r\n                <td><input #cb1 type=\"checkbox\" value=\"true\" [checked]=\"user.admin\" (change)=\"onToggleAdmin(user.id)\"></td>\r\n                <td><a (click)=\"onReset(user.id);\">Reset Password</a></td>\r\n                <td><a (click)=\"onDelete(user.id);\">Delete</a></td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\r\n"
+module.exports = "<div class=\"users\">\r\n    <p *ngIf=\"!users\"><em>Loading...</em></p>\r\n\r\n    <table>\r\n        <caption>Users</caption>\r\n        <thead>\r\n            <tr>\r\n                <th>ID</th>\r\n                <th>Username</th>\r\n                <th>Admin</th>\r\n                <th colspan=\"2\">&nbsp;</th>\r\n            </tr>\r\n        </thead>\r\n        <tbody>\r\n            <tr *ngFor=\"let user of users\">\r\n                <td>{{user.id}}</td>\r\n                <td>{{user.userName}}</td>\r\n                <td><input #cb1 type=\"checkbox\" value=\"true\" [checked]=\"user.admin\" (change)=\"onToggleAdmin(user.id)\"></td>\r\n                <td><a (click)=\"onReset(user.id);\">Reset Password</a></td>\r\n                <td><a class=\"glyphicon glyphicon-remove darkred\" (click)=\"onDelete(user.id);\"></a></td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n</div>\r\n"
 
 /***/ }),
 

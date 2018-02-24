@@ -1,11 +1,13 @@
 <p *ngIf="!transactions"><em>Loading...</em></p>
 <div class="captionlike">Transactions</div>
-<div class="filters">
-    <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+<button *ngIf="!showFilter" class="btn btn-sm btn-success" (click)="onShowFilter()">Show Filter</button>
+<button *ngIf="showFilter" class="btn btn-sm btn-default" (click)="onHideFilter()">Hide Filter</button>
+<div *ngIf="showFilter" class="filters">
+    <form *ngIf="filterForm" [formGroup]="filterForm" (ngSubmit)="onFilterSubmit(filterForm.value)">
         <div class="row">
             <div class="col-md-2">
                 <label>Account:</label>
-                <select name="acctFilter" formControlName="acctFilter" >
+                <select name="acctFilter" formControlName="acctFilter">
                     <option *ngFor="let account of acctAsset" [class]="account.active? '' : 'greyed'" value="{{account.id}}">{{account.name}}</option>
                     <option disabled>──────────</option>
                     <option *ngFor="let account of acctLiability" [class]="account.active? '' : 'greyed'" value="{{account.id}}">{{account.name}}</option>
@@ -13,114 +15,118 @@
             </div>
             <div class="col-md-2">
                 <label>Payee:</label>
-                <select name="payeeFilter" formControlName="payeeFilter" >
+                <select name="payeeFilter" formControlName="payeeFilter">
                     <option *ngFor="let payee of payees" value="{{payee.name}}">{{payee.name}}</option>
                 </select>
             </div>
             <div class="col-md-3">
-                <label>Categorys:</label>
-                <select name="catFilter" formControlName="catFilter" >
+                <label>Category:</label>
+                <select name="catFilter" formControlName="catFilter">
                     <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
                 </select>
             </div>
-            <div class="col-md-2">
-                <label>Date :</label>
+            <div class="col-md-4">
+                <label>Dates:</label>
                 <input type='date' name="dateMin" formControlName="dateMin" />
-            </div>
-            <div class="col-md-2">
-                <label>to :</label>
+                <label>to:</label>
                 <input type='date' name="dateMax" formControlName="dateMax" />
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2 col-md-offset-7">
-                <label>Chk #</label>
-                <input type='number' name="checkMin" formControlName="checkMin" />
+            <div class="col-md-3 col-md-offset-4">
+                <span class="cbSpan"><label class="flag0-true">&#9873;</label></span>
+                <span class="cbSpan"><label class="flag1-true">&#9873;</label></span>
+                <span class="cbSpan"><label class="flag2-true">&#9873;</label></span>
+                <span class="cbSpan"><label class="flag3-true">&#9873;</label></span>
+                <span class="cbSpan"><label>Tax</label></span>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
+                <label>Checks #</label>
+                <input type='number' name="checkMin" formControlName="checkMin" />
                 <label>to #</label>
                 <input type='number' name="checkMax" formControlName="checkMax" />
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
-                <input type='submit' value="Apply Filter" />
-                <button (click)="onResetFilter">Reset Filter</button>
+                <input type='submit' class="btn btn-sm btn-success"value="Apply Filter" />
+                <button  class="btn btn-sm btn-warning" (click)="onResetFilter()">Reset Filter</button>
             </div>
-            <div class="col-md-2">
-                <label>Tax</label>
-                <input type='checkbox' name="taxFilter" value="true" formControlName="taxFilter" />
+            <div class="col-md-3">
+                <span class="cbSpan"><input type='checkbox' name="f0Filter" value="true" formControlName="f0Filter" /></span>
+                <span class="cbSpan"><input type='checkbox' name="f1Filter" value="true" formControlName="f1Filter" /></span>
+                <span class="cbSpan"><input type='checkbox' name="f2Filter" value="true" formControlName="f2Filter" /></span>
+                <span class="cbSpan"><input type='checkbox' name="f3Filter" value="true" formControlName="f3Filter" /></span>
+                <span class="cbSpan"><input type='checkbox' name="taxFilter" value="true" formControlName="taxFilter" /></span>
             </div>
-            <div class="col-md-2 col-md-offset-1">
-                <label>Amt $</label>
+            <div class="col-md-4">
+                <label>Amounts $</label>
                 <input type='number' name="amountMin" formControlName="amountMin" />
-            </div>
-            <div class="col-md-2">
                 <label>to $</label>
                 <input type='number' name="amountMax" formControlName="amountMax" />
             </div>
         </div>
-</form>
+    </form>
 </div>
-    <div class="scrollContainer">
-        <div *ngIf="transactions && payees && categories && accounts" class="tablecontainer">
-            <div class="tablehead">
-                <div class="w80">Flags</div>
-                <div class="w30">Re</div>
-                <div class="w90">Date</div>
-                <div class="w50">Check</div>
-                <div class="w120">To</div>
-                <div class="w120">From</div>
-                <div class="w80">Amount</div>
-                <div class="w160">Category</div>
-                <div class="w40">Tax?</div>
-                <div class="w200">Comment</div>
-                <div class="w120">&nbsp;</div>
-                <div *ngFor="let account of accounts" class="w90">{{account.name}}</div>
-                <div class="w80">Assets</div>
-                <div class="w80">Liabilities</div>
-                <div class="w80">Net</div>
-            </div>
-            <div class="tablebody">
-                <div *ngFor="let line of displayLines; let tidx = index" class="tablerow">
-                    <div class="w80">
-                        <a *ngIf="line.transaction.flag0" class="toggler flag0-true" (click)="onFlag0Toggle(line.transaction.id)">&#9873;</a>
-                        <a *ngIf="!line.transaction.flag0" class="toggler flag0-false" (click)="onFlag0Toggle(line.transaction.id)">&#9872;</a>
-                        <a *ngIf="line.transaction.flag1" class="toggler flag1-true" (click)="onFlag1Toggle(line.transaction.id)">&#9873;</a>
-                        <a *ngIf="!line.transaction.flag1" class="toggler flag1-false" (click)="onFlag1Toggle(line.transaction.id)">&#9872;</a>
-                        <a *ngIf="line.transaction.flag2" class="toggler flag2-true" (click)="onFlag2Toggle(line.transaction.id)">&#9873;</a>
-                        <a *ngIf="!line.transaction.flag2" class="toggler flag2-false" (click)="onFlag2Toggle(line.transaction.id)">&#9872;</a>
-                        <a *ngIf="line.transaction.flag3" class="toggler flag3-true" (click)="onFlag3Toggle(line.transaction.id)">&#9873;</a>
-                        <a *ngIf="!line.transaction.flag3" class="toggler flag3-false" (click)="onFlag3Toggle(line.transaction.id)">&#9872;</a>
-                    </div>
-                    <div class="w30">
-                        <a *ngIf="line.transaction.reconciled" class="toggler reconciled" (click)="onReconciledToggle(line.transaction.id)">&#10004;</a>
-                        <button *ngIf="!line.transaction.reconciled" class="btn-clear reconciled" (click)="onReconciledToggle(line.transaction.id)">&nbsp;</button>
-                    </div>
-                    <div class="w90">{{line.transaction.date | date}}</div>
-                    <div class="w50">{{line.transaction.check}}</div>
-
-                    <div *ngIf="line.transaction.payeeTo" class="w120">{{line.transaction.payeeTo}}</div>
-                    <div *ngIf="line.transaction.acctTo" class="account-name w120">{{accountName(line.transaction.acctTo)}}</div>
-                    <div *ngIf="!line.transaction.payeeTo && !line.transaction.acctTo" class="w120">&nbsp;</div>
-
-                    <div *ngIf="line.transaction.payeeFrom" class="w120">{{line.transaction.payeeFrom}}</div>
-                    <div *ngIf="line.transaction.acctFrom" class="account-name w120">{{accountName(line.transaction.acctFrom)}}</div>
-                    <div *ngIf="!line.transaction.payeeFrom && !line.transaction.acctFrom" class="w120">&nbsp;</div>
-
-                    <div class='money w80'>{{displayAsDollar(line.transaction.amount)}}</div>
-                    <div class="w160">{{categoryName(line.transaction.category)}}</div>
-                    <div class="w40">&nbsp;<span *ngIf="line.transaction.tax" class='glyphicon glyphicon-copy' style='color:green;'></span></div>
-                    <div class="commentcell w200">{{line.transaction.comments}}</div>
-                    <div class="actionCell w60"><a class="btn btn-xs editlink" routerLink="./transaction-edit/{{line.transaction.id}}">Edit</a></div>
-                    <div class="actionCell w60"><a class="btn btn-xs deletelink" (click)="onDelete(line.transaction.id);">Delete</a></div>
-                    <div *ngFor="let account of accounts; let aidx = index" class="money balanceCell w90">{{displayAsDollar(line.balances[aidx])}}</div>
-                    <div class="money balanceCell w80">{{displayAsDollar(line.assets)}}</div>
-                    <div class="money balanceCell w80">{{displayAsDollar(line.liabilities)}}</div>
-                    <div class="money balanceCell w80">{{displayAsDollar(line.net)}}</div>
+<div class="scrollContainer">
+    <div *ngIf="transactions && payees && categories && accounts" class="tablecontainer">
+        <div class="tablehead">
+            <div class="w80">Flags</div>
+            <div class="w30">R</div>
+            <div class="w90">Date</div>
+            <div class="w50">Check</div>
+            <div class="w120">To</div>
+            <div class="w120">From</div>
+            <div class="w80">Amount</div>
+            <div class="w160">Category</div>
+            <div class="w40">Tax?</div>
+            <div class="w200">Comment</div>
+            <div class="w80">&nbsp;</div>
+            <div *ngFor="let acctIdx of displayAcctIndices" class="w90">{{accounts[acctIdx].name}}</div>
+            <div class="w80">Assets</div>
+            <div class="w80">Liabilities</div>
+            <div class="w80">Net</div>
+        </div>
+        <div class="tablebody">
+            <div *ngFor="let lineIdx of displayLineIndices" class="tablerow">
+                <div class="w80">
+                    <a *ngIf="lines[lineIdx].transaction.flag0" class="toggler flag0-true" (click)="onFlag0Toggle(lines[lineIdx].transaction.id)">&#9873;</a>
+                    <a *ngIf="!lines[lineIdx].transaction.flag0" class="toggler flag0-false" (click)="onFlag0Toggle(lines[lineIdx].transaction.id)">&#9872;</a>
+                    <a *ngIf="lines[lineIdx].transaction.flag1" class="toggler flag1-true" (click)="onFlag1Toggle(lines[lineIdx].transaction.id)">&#9873;</a>
+                    <a *ngIf="!lines[lineIdx].transaction.flag1" class="toggler flag1-false" (click)="onFlag1Toggle(lines[lineIdx].transaction.id)">&#9872;</a>
+                    <a *ngIf="lines[lineIdx].transaction.flag2" class="toggler flag2-true" (click)="onFlag2Toggle(lines[lineIdx].transaction.id)">&#9873;</a>
+                    <a *ngIf="!lines[lineIdx].transaction.flag2" class="toggler flag2-false" (click)="onFlag2Toggle(lines[lineIdx].transaction.id)">&#9872;</a>
+                    <a *ngIf="lines[lineIdx].transaction.flag3" class="toggler flag3-true" (click)="onFlag3Toggle(lines[lineIdx].transaction.id)">&#9873;</a>
+                    <a *ngIf="!lines[lineIdx].transaction.flag3" class="toggler flag3-false" (click)="onFlag3Toggle(lines[lineIdx].transaction.id)">&#9872;</a>
                 </div>
+                <div class="w30">
+                    <a *ngIf="lines[lineIdx].transaction.reconciled" class="toggler reconciled" (click)="onReconciledToggle(lines[lineIdx].transaction.id)">&#10004;</a>
+                    <button *ngIf="!lines[lineIdx].transaction.reconciled" class="btn-clear reconciled" (click)="onReconciledToggle(lines[lineIdx].transaction.id)">&nbsp;</button>
+                </div>
+                <div class="w90">{{lines[lineIdx].transaction.date | date}}</div>
+                <div class="w50">{{lines[lineIdx].transaction.check}}</div>
+
+                <div *ngIf="lines[lineIdx].transaction.payeeTo" class="w120">{{lines[lineIdx].transaction.payeeTo}}</div>
+                <div *ngIf="lines[lineIdx].transaction.acctTo" class="account-name w120">{{accountName(lines[lineIdx].transaction.acctTo)}}</div>
+                <div *ngIf="!lines[lineIdx].transaction.payeeTo && !lines[lineIdx].transaction.acctTo" class="w120">&nbsp;</div>
+
+                <div *ngIf="lines[lineIdx].transaction.payeeFrom" class="w120">{{lines[lineIdx].transaction.payeeFrom}}</div>
+                <div *ngIf="lines[lineIdx].transaction.acctFrom" class="account-name w120">{{accountName(lines[lineIdx].transaction.acctFrom)}}</div>
+                <div *ngIf="!lines[lineIdx].transaction.payeeFrom && !lines[lineIdx].transaction.acctFrom" class="w120">&nbsp;</div>
+
+                <div class='money w80'>{{displayAsDollar(lines[lineIdx].transaction.amount)}}</div>
+                <div class="w160">{{categoryName(lines[lineIdx].transaction.category)}}</div>
+                <div class="w40">&nbsp;<span *ngIf="lines[lineIdx].transaction.tax" style="color:green;">&#10004;</span></div>
+                <div class="commentcell w200">{{lines[lineIdx].transaction.comments}}</div>
+                <div class="actionCell w40"><a class="btn btn-xs editlink glyphicon glyphicon-pencil" routerLink="./transaction-edit/{{lines[lineIdx].transaction.id}}"></a></div>
+                <div class="actionCell w40"><a class="btn btn-xs deletelink glyphicon glyphicon-remove darkred" (click)="onDelete(lines[lineIdx].transaction.id);"></a></div>
+                <div *ngFor="let acctIdx of displayAcctIndices" class="money balanceCell w90">{{displayAsDollar(lines[lineIdx].balances[acctIdx])}}</div>
+                <div class="money balanceCell w80">{{displayAsDollar(lines[lineIdx].assets)}}</div>
+                <div class="money balanceCell w80">{{displayAsDollar(lines[lineIdx].liabilities)}}</div>
+                <div class="money balanceCell w80">{{displayAsDollar(lines[lineIdx].net)}}</div>
             </div>
         </div>
     </div>
+</div>
 <a id="addlink" routerLink="./transaction-add">Add New Transaction</a>
 <router-outlet></router-outlet>

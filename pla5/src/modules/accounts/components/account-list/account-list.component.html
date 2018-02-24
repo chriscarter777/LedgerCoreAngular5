@@ -29,8 +29,8 @@
             <td class='right'>{{displayAsPercent(account.interest)}}</td>
             <td class='right'>{{account.limit ? displayAsDollar(account.limit) : '--'}}</td>
             <td class='right'>{{displayAsDollar(account.balance)}}</td>
-            <td><a class="btn btn-xs editlink" routerLink="./account-edit/{{account.id}}">Edit</a></td>
-            <td><a class="btn btn-xs deletelink" (click)="onDelete(account.id);">Delete</a></td>
+            <td><a class="btn btn-xs editlink glyphicon glyphicon-pencil" routerLink="./account-edit/{{account.id}}"></a></td>
+            <td><a class="btn btn-xs deletelink glyphicon glyphicon-remove darkred" (click)="onDelete(account.id);"></a></td>
         </tr>
     </tbody>
   </table>

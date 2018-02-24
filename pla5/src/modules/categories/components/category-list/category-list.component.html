@@ -18,8 +18,8 @@
         <td>{{category.name}}</td>
         <td>&nbsp;<span *ngIf="category.tax" class='glyphicon glyphicon-record' style='color:green;'></span></td>
         <td>{{category.type}}</td>
-        <td><a class="btn btn-xs editlink" routerLink="./category-edit/{{category.id}}">Edit</a></td>
-        <td><a class="btn btn-xs deletelink" (click)="onDelete(category.id);">Delete</a></td>
+        <td><a class="btn btn-xs editlink glyphicon glyphicon-pencil" routerLink="./category-edit/{{category.id}}"></a></td>
+        <td><a class="btn btn-xs deletelink glyphicon glyphicon-remove darkred" (click)="onDelete(category.id);"></a></td>
       </tr>
     </tbody>
   </table>

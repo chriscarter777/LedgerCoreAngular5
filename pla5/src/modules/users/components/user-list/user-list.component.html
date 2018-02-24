@@ -17,7 +17,7 @@
                 <td>{{user.userName}}</td>
                 <td><input #cb1 type="checkbox" value="true" [checked]="user.admin" (change)="onToggleAdmin(user.id)"></td>
                 <td><a (click)="onReset(user.id);">Reset Password</a></td>
-                <td><a (click)="onDelete(user.id);">Delete</a></td>
+                <td><a class="glyphicon glyphicon-remove darkred" (click)="onDelete(user.id);"></a></td>
             </tr>
         </tbody>
     </table>

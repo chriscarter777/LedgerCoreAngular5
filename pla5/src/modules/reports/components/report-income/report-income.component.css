@@ -1,0 +1,65 @@
+.flag0-true {
+    color: red;
+    font-size: 18px;
+}
+
+.flag0-false {
+    color: pink;
+    font-size: 18px;
+}
+
+.flag1-true {
+    color: limegreen;
+    font-size: 18px;
+}
+
+.flag1-false {
+    color: palegreen;
+    font-size: 18px;
+}
+
+.flag2-true {
+    color: blue;
+    font-size: 18px;
+}
+
+.flag2-false {
+    color: paleturquoise;
+    font-size: 18px;
+}
+
+.flag3-true {
+    color: gold;
+    font-size: 18px;
+}
+
+.flag3-false {
+    color: lightgoldenrodyellow;
+    font-size: 18px;
+}
+
+.reconciled {
+    color: forestgreen;
+    font-size: 18px;
+}
+
+form {
+    font-size: 12px;
+}
+
+.filters {
+    padding: 5px;
+    margin-bottom: 20px;
+    background: mintcream;
+}
+
+.cbSpan {
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+}
+
+    .cbSpan > label {
+        position: relative;
+        top: 12px;
+    }

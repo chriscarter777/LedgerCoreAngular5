@@ -9,7 +9,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var common_1 = require("@angular/common");
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
+var report_account_component_1 = require("./components/report-account/report-account.component");
+var report_cashflow_component_1 = require("./components/report-cashflow/report-cashflow.component");
+var report_category_component_1 = require("./components/report-category/report-category.component");
+var report_expense_component_1 = require("./components/report-expense/report-expense.component");
+var report_income_component_1 = require("./components/report-income/report-income.component");
 var report_list_component_1 = require("./components/report-list/report-list.component");
+var report_payee_component_1 = require("./components/report-payee/report-payee.component");
 var data_service_1 = require("../shared/data.service");
 var reports_routing_module_1 = require("./reports.routing.module");
 var ReportsModule = /** @class */ (function () {
@@ -23,7 +29,13 @@ var ReportsModule = /** @class */ (function () {
                 reports_routing_module_1.ReportRoutingModule
             ],
             declarations: [
-                report_list_component_1.ReportListComponent
+                report_account_component_1.ReportAccountComponent,
+                report_cashflow_component_1.ReportCashflowComponent,
+                report_category_component_1.ReportCategoryComponent,
+                report_expense_component_1.ReportExpenseComponent,
+                report_income_component_1.ReportIncomeComponent,
+                report_list_component_1.ReportListComponent,
+                report_payee_component_1.ReportPayeeComponent
             ],
             providers: [data_service_1.DataService]
         })

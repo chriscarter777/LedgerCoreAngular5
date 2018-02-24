@@ -22,7 +22,13 @@
     <None Remove="src\modules\payees\components\payee-list\payee-list.component.ts" />
     <None Remove="src\modules\payees\payees.module.ts" />
     <None Remove="src\modules\payees\payees.routing.module.ts" />
+    <None Remove="src\modules\reports\components\report-account\report-account.component.ts" />
+    <None Remove="src\modules\reports\components\report-cashflow\report-cashflow.component.ts" />
+    <None Remove="src\modules\reports\components\report-category\report-category.component.ts" />
+    <None Remove="src\modules\reports\components\report-expense\report-expense.component.ts" />
+    <None Remove="src\modules\reports\components\report-income\report-income.component.ts" />
     <None Remove="src\modules\reports\components\report-list\report-list.component.ts" />
+    <None Remove="src\modules\reports\components\report-payee\report-payee.component.ts" />
     <None Remove="src\modules\reports\reports.module.ts" />
     <None Remove="src\modules\reports\reports.routing.module.ts" />
     <None Remove="src\modules\transactions\transactions.module.ts" />
@@ -62,7 +68,13 @@
     <TypeScriptCompile Include="src\modules\payees\components\payee-list\payee-list.component.ts" />
     <TypeScriptCompile Include="src\modules\payees\payees.module.ts" />
     <TypeScriptCompile Include="src\modules\payees\payees.routing.module.ts" />
+    <TypeScriptCompile Include="src\modules\reports\components\report-account\report-account.component.ts" />
+    <TypeScriptCompile Include="src\modules\reports\components\report-cashflow\report-cashflow.component.ts" />
+    <TypeScriptCompile Include="src\modules\reports\components\report-category\report-category.component.ts" />
+    <TypeScriptCompile Include="src\modules\reports\components\report-expense\report-expense.component.ts" />
+    <TypeScriptCompile Include="src\modules\reports\components\report-income\report-income.component.ts" />
     <TypeScriptCompile Include="src\modules\reports\components\report-list\report-list.component.ts" />
+    <TypeScriptCompile Include="src\modules\reports\components\report-payee\report-payee.component.ts" />
     <TypeScriptCompile Include="src\modules\reports\reports.module.ts" />
     <TypeScriptCompile Include="src\modules\reports\reports.routing.module.ts" />
     <TypeScriptCompile Include="src\modules\transactions\transactions.module.ts" />
